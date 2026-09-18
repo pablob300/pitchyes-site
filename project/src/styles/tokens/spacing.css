@@ -1,0 +1,44 @@
+/*
+  Layout & spacing tokens — read from bland.ai's :root custom properties directly.
+*/
+
+:root {
+  --content-width: 1280px;
+  --nav-height: 72px;
+  --card-gap: 16px;
+
+  --margin: 80px;          /* page side margin at desktop */
+  --margin-tablet: 40px;
+  --margin-mobile: 20px;
+
+  --section-lg: 80px;      /* spacing between major sections */
+  --section-md: 43px;
+  --section-sm: 34px;
+
+  --radius-sm: 6px;        /* buttons, inputs */
+  --radius-md: 12px;       /* cards */
+  --radius-lg: 20px;       /* large panels/hero widget */
+  --radius-pill: 999px;    /* filter pills */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+}
+
+.container {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+
+@media (max-width: 1024px) {
+  .container { padding-inline: var(--margin-tablet); }
+}
+@media (max-width: 640px) {
+  .container { padding-inline: var(--margin-mobile); }
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>FAQ Accordion — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); max-width: 720px; }
+  h2 { font-size: 32px; margin-bottom: var(--space-6); }
+
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-q {
+    width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+    padding: 18px 0; font-family: var(--font-sans); font-size: 16px; font-weight: 500;
+    color: var(--color-text);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-q .chev { transition: transform var(--duration-normal) var(--ease); }
+  .faq-item[open] .faq-q .chev { transform: rotate(180deg); }
+  .faq-a { padding: 0 0 18px; font-size: 14px; color: var(--color-text-secondary); line-height: 1.5; }
+</style>
+</head>
+<body>
+  <h2>Frequently asked questions</h2>
+
+  <details class="faq-item" open>
+    <summary class="faq-q">What is Bland AI?<span class="chev">⌄</span></summary>
+    <div class="faq-a">Bland is a platform for building and deploying phone-calling AI agents at enterprise scale.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">How does per-minute pricing work?<span class="chev">⌄</span></summary>
+    <div class="faq-a">You pay a flat per-minute talk-time rate with no token or model pass-through charges.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">How long does it take to deploy an agent?<span class="chev">⌄</span></summary>
+    <div class="faq-a">Most teams go from zero to a production agent in under a week.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">How does Bland handle HIPAA, PCI, and SOC 2?<span class="chev">⌄</span></summary>
+    <div class="faq-a">Bland is built self-hosted-first so regulated data never has to leave your infrastructure.</div>
+  </details>
+</body>
+</html>

@@ -1,0 +1,19 @@
+/*
+  Motion tokens — easing curves and durations read from bland.ai's :root.
+*/
+
+:root {
+  --ease: cubic-bezier(.4, 0, .2, 1);
+  --ease-out-soft: cubic-bezier(.22, .61, .36, 1);
+  --panel-ease: cubic-bezier(.22, 1, .36, 1);
+
+  --duration-fast: .15s;
+  --duration-normal: .3s;
+  --duration-slow: .6s;
+
+  --panel-open-dur: .4s;
+  --panel-close-dur: .35s;
+  --panel-blur: 2px;
+
+  --distance-medium: 12px;
+}

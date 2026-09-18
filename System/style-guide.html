@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Bland.ai — Design System clonado</title>
+<link rel="stylesheet" href="./tokens/tokens.css" />
+<style>
+  body { margin: 0; }
+  .page-header {
+    padding: var(--space-7) var(--margin) var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .page-header h1 { font-size: 32px; margin-bottom: var(--space-2); }
+  .page-header p { font-size: 14px; color: var(--color-text-secondary); max-width: 60ch; margin: 0; }
+
+  .toc {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: var(--space-4) var(--margin);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky; top: 0; background: var(--color-bg); z-index: 10;
+  }
+  .toc a {
+    font-size: 12px; text-decoration: none; color: var(--color-text-secondary);
+    border: 1px solid var(--color-border); border-radius: var(--radius-pill);
+    padding: 6px 12px;
+  }
+  .toc a:hover { border-color: var(--color-text); color: var(--color-text); }
+
+  section.block { padding: var(--space-7) var(--margin); border-bottom: 1px solid var(--color-border-subtle); }
+  section.block h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--color-text-muted); font-weight: 500; margin-bottom: var(--space-4); }
+  iframe { width: 100%; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: white; }
+
+  /* Token swatches, rendered directly (not iframed) */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-4); }
+  .swatch { border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); overflow: hidden; }
+  .swatch-color { height: 64px; }
+  .swatch-meta { padding: 8px 10px; font-size: 12px; }
+  .swatch-meta .name { font-weight: 500; }
+  .swatch-meta .value { color: var(--color-text-muted); font-family: monospace; font-size: 11px; }
+
+  .type-row { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border-subtle); display: flex; align-items: baseline; gap: var(--space-5); }
+  .type-row .sample { flex: 1; }
+  .type-row .meta { font-size: 12px; color: var(--color-text-muted); font-family: monospace; white-space: nowrap; }
+
+  .space-row { display: flex; align-items: center; gap: var(--space-4); padding: 6px 0; }
+  .space-bar { background: var(--color-accent-gold); height: 10px; }
+  .space-row .meta { font-size: 12px; color: var(--color-text-muted); font-family: monospace; width: 160px; }
+</style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Bland.ai — Design System clonado</h1>
+    <p>Biblioteca de referência visual: tokens e componentes extraídos diretamente do CSS computado de bland.ai (Set/2026), prontos para reaproveitar na estrutura de páginas do site próprio. Fontes reais (Söhne) carregadas localmente. Placeholders no lugar de fotos/logos proprietários.</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#cores">Cores</a>
+    <a href="#tipografia">Tipografia</a>
+    <a href="#espacamento">Espaçamento</a>
+    <a href="#navegacao">Navegação</a>
+    <a href="#botoes">Botões</a>
+    <a href="#hero">Hero</a>
+    <a href="#cards-feature">Feature cards</a>
+    <a href="#stat">Stat comparison</a>
+    <a href="#testemunhos">Testemunhos</a>
+    <a href="#testemunhos-slider">Testemunhos (slider vertical)</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#tabela">Tabela comparativa</a>
+    <a href="#tabs">Tabs / filtros</a>
+    <a href="#slider">Slider / carrossel</a>
+    <a href="#accordion">Accordion FAQ</a>
+    <a href="#forms">Formulários</a>
+    <a href="#footer">Footer</a>
+  </nav>
+
+  <section class="block" id="cores">
+    <h2>Cores</h2>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#151515"></div><div class="swatch-meta"><div class="name">Text</div><div class="value">#151515</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#ffffff;border-bottom:1px solid #eee"></div><div class="swatch-meta"><div class="name">Background</div><div class="value">#ffffff</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f9a900"></div><div class="swatch-meta"><div class="name">Accent Gold</div><div class="value">#f9a900</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#d8441f"></div><div class="swatch-meta"><div class="name">Accent Burnt</div><div class="value">#d8441f</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#e8efdf"></div><div class="swatch-meta"><div class="name">Pastel Green</div><div class="value">#e8efdf</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f6ecd9"></div><div class="swatch-meta"><div class="name">Pastel Peach</div><div class="value">#f6ecd9</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#e9e9e4"></div><div class="swatch-meta"><div class="name">Pastel Gray</div><div class="value">#e9e9e4</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f9f9f4"></div><div class="swatch-meta"><div class="name">Bg Subtle</div><div class="value">#f9f9f4</div></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="tipografia">
+    <h2>Tipografia (Söhne)</h2>
+    <div class="type-row"><div class="sample" style="font-size:54px;font-weight:600;letter-spacing:-1.08px;line-height:56px">H1 Heading</div><div class="meta">54/600/-1.08</div></div>
+    <div class="type-row"><div class="sample" style="font-size:32px;font-weight:600;letter-spacing:-.64px">H2 Heading</div><div class="meta">32/600/-0.64</div></div>
+    <div class="type-row"><div class="sample" style="font-size:20px;font-weight:600;letter-spacing:-.4px">H3 Heading</div><div class="meta">20/600/-0.4</div></div>
+    <div class="type-row"><div class="sample" style="font-size:16px;font-weight:400">Body text — the quick brown fox jumps over the lazy dog.</div><div class="meta">16/400/1.4</div></div>
+    <div class="type-row"><div class="sample" style="font-size:14px;font-weight:500">Button label</div><div class="meta">14/500</div></div>
+    <div class="type-row"><div class="sample" style="font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--color-text-muted)">Eyebrow label</div><div class="meta">11/500/caps</div></div>
+  </section>
+
+  <section class="block" id="espacamento">
+    <h2>Espaçamento &amp; layout</h2>
+    <div class="space-row"><div class="space-bar" style="width:80px"></div><div class="meta">--margin / --section-lg: 80px</div></div>
+    <div class="space-row"><div class="space-bar" style="width:43px"></div><div class="meta">--section-md: 43px</div></div>
+    <div class="space-row"><div class="space-bar" style="width:34px"></div><div class="meta">--section-sm: 34px</div></div>
+    <div class="space-row"><div class="space-bar" style="width:16px"></div><div class="meta">--card-gap: 16px</div></div>
+    <div class="space-row"><div class="space-bar" style="width:72px"></div><div class="meta">--nav-height: 72px</div></div>
+    <div class="space-row"><div class="space-bar" style="width:1280px;max-width:100%"></div><div class="meta">--content-width: 1280px</div></div>
+  </section>
+
+  <section class="block" id="navegacao"><h2>Navegação</h2><iframe src="./components/navigation.html" style="height:220px"></iframe></section>
+  <section class="block" id="botoes"><h2>Botões</h2><iframe src="./components/buttons.html" style="height:420px"></iframe></section>
+  <section class="block" id="hero"><h2>Hero</h2><iframe src="./components/hero.html" style="height:420px"></iframe></section>
+  <section class="block" id="cards-feature"><h2>Feature cards</h2><iframe src="./components/cards-feature.html" style="height:420px"></iframe></section>
+  <section class="block" id="stat"><h2>Stat comparison</h2><iframe src="./components/stat-comparison.html" style="height:280px"></iframe></section>
+  <section class="block" id="testemunhos"><h2>Testemunhos — vídeo em destaque + citações</h2><iframe src="./components/cards-testimonial.html" style="height:420px"></iframe></section>
+  <section class="block" id="testemunhos-slider"><h2>Testemunhos — slider vertical (estilo Shorts)</h2><iframe src="./components/cards-testimonial-video-slider.html" style="height:520px"></iframe></section>
+  <section class="block" id="pricing"><h2>Pricing cards</h2><iframe src="./components/cards-pricing.html" style="height:560px"></iframe></section>
+  <section class="block" id="tabela"><h2>Tabela comparativa</h2><iframe src="./components/table-comparison.html" style="height:420px"></iframe></section>
+  <section class="block" id="tabs"><h2>Tabs / filter pills</h2><iframe src="./components/tabs-filter.html" style="height:180px"></iframe></section>
+  <section class="block" id="slider"><h2>Slider / carrossel</h2><iframe src="./components/carousel-slider.html" style="height:380px"></iframe></section>
+  <section class="block" id="accordion"><h2>Accordion FAQ</h2><iframe src="./components/accordion-faq.html" style="height:420px"></iframe></section>
+  <section class="block" id="forms"><h2>Formulários</h2><iframe src="./components/forms-newsletter.html" style="height:320px"></iframe></section>
+  <section class="block" id="footer"><h2>Footer</h2><iframe src="./components/footer.html" style="height:420px"></iframe></section>
+</body>
+</html>

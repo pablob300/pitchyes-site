@@ -1,0 +1,17 @@
+/*
+  Single entry point — import this file to get the full bland.ai-derived token set.
+*/
+
+@import url("./colors.css");
+@import url("./typography.css");
+@import url("./spacing.css");
+@import url("./motion.css");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}

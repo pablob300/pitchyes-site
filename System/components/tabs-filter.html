@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Filter pills / tabs — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  h2 { font-size: 24px; margin-bottom: var(--space-5); }
+
+  .pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    font-family: var(--font-sans);
+    font-size: 13px; font-weight: 500;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+  }
+  .pill.active {
+    background: var(--color-text);
+    color: var(--color-text-inverse);
+    border-color: var(--color-text);
+  }
+</style>
+</head>
+<body>
+  <h2>A few of the calls we're automating.</h2>
+  <div class="pills">
+    <button class="pill active">All</button>
+    <button class="pill">Financial services</button>
+    <button class="pill">Healthcare</button>
+    <button class="pill">Insurance</button>
+    <button class="pill">Hospitality</button>
+  </div>
+</body>
+</html>

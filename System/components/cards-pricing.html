@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Pricing cards — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  h1 { font-size: 40px; margin-bottom: var(--space-2); }
+  .lede { font-size: 15px; color: var(--color-text-secondary); margin-bottom: var(--space-6); }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--card-gap); }
+  .plan {
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border-subtle);
+  }
+  .plan.tier-start { background: var(--color-pastel-green); }
+  .plan.tier-build { background: var(--color-pastel-peach); }
+  .plan.tier-enterprise { background: var(--color-pastel-gray); }
+
+  .plan .kicker { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--color-text-muted); margin-bottom: 4px; }
+  .plan .name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .plan .desc { font-size: 12px; color: var(--color-text-secondary); margin-bottom: var(--space-4); min-height: 32px; }
+  .plan .price { font-size: 34px; font-weight: 600; }
+  .plan .price small { font-size: 14px; font-weight: 400; color: var(--color-text-muted); }
+  .plan .price-note { font-size: 11px; color: var(--color-text-muted); margin-bottom: var(--space-4); }
+
+  .plan .cta {
+    display: block; text-align: center;
+    padding: 10px; border-radius: var(--radius-sm);
+    font-size: 14px; font-weight: 500;
+    text-decoration: none; margin-bottom: var(--space-4);
+  }
+  .plan.tier-start .cta, .plan.tier-build .cta { background: var(--color-text); color: var(--color-text-inverse); }
+  .plan.tier-enterprise .cta { background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border-strong); }
+
+  .plan ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .plan li { font-size: 13px; display: flex; gap: 6px; align-items: flex-start; }
+  .plan li::before { content: "✓"; color: var(--color-positive); font-weight: 700; }
+</style>
+</head>
+<body>
+  <h1>Clear pricing across every call</h1>
+  <p class="lede">No token charges. No model-provider pass-throughs. No surprise bills.</p>
+
+  <div class="grid">
+    <div class="plan tier-start">
+      <div class="kicker">For developers</div>
+      <div class="name">Start</div>
+      <div class="desc">2 credits + an inbound number ($15/mo value).</div>
+      <div class="price">$0.14<small>/min</small></div>
+      <div class="price-note">$0 platform fee. No card required.</div>
+      <a class="cta" href="#">Start building</a>
+      <ul>
+        <li>$0.05/transfer min</li>
+        <li>10 concurrent calls</li>
+        <li>100 calls/day</li>
+        <li>10 knowledge bases</li>
+      </ul>
+    </div>
+
+    <div class="plan tier-build">
+      <div class="kicker">For teams</div>
+      <div class="name">Build</div>
+      <div class="desc">Lower per-minute rates. Higher rate limits.</div>
+      <div class="price">$0.12<small>/min</small></div>
+      <div class="price-note">$299/month platform fee.</div>
+      <a class="cta" href="#">Start building</a>
+      <ul>
+        <li>$0.04/transfer min</li>
+        <li>50 concurrent calls</li>
+        <li>2,000 calls/day</li>
+        <li>50 knowledge bases</li>
+      </ul>
+    </div>
+
+    <div class="plan tier-enterprise">
+      <div class="kicker">For organizations</div>
+      <div class="name">Enterprise</div>
+      <div class="desc">Dedicated infrastructure with the controls regulated teams require.</div>
+      <div class="price">Custom</div>
+      <div class="price-note">Contracted to your volume.</div>
+      <a class="cta" href="#">Talk to our team</a>
+      <ul>
+        <li>Concurrency sized to your volume</li>
+        <li>On-prem / VPC available</li>
+        <li>Forward deployed engineer available</li>
+        <li>BAA, SSO, data residency</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

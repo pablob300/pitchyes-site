@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Feature cards — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-6); gap: var(--space-5); }
+  .section-head h2 { font-size: 32px; }
+  .section-head p { max-width: 32ch; font-size: 14px; color: var(--color-text-secondary); margin: 0; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--card-gap);
+  }
+  .card {
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+  }
+  .card .eyebrow { display: block; margin-bottom: var(--space-3); }
+  .card h3 { font-size: 18px; margin-bottom: var(--space-2); line-height: 1.2; }
+  .card p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.45; margin: 0; }
+  .card .visual {
+    margin-top: auto;
+    padding-top: var(--space-4);
+    height: 64px;
+    border-top: 1px dashed var(--color-border);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-gold); }
+  .dot:nth-child(2) { background: var(--color-accent-burnt); }
+  .dot:nth-child(3) { background: var(--color-pastel-green); border: 1px solid var(--color-border); }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="section-head">
+    <h2>One platform.<br />Every call.</h2>
+    <p>Bland automates the calls you thought required a human. Running entirely on your own infrastructure for maximum security.</p>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <span class="eyebrow">Infrastructure</span>
+      <h3>Reliability on every call.</h3>
+      <p>With every model custom-made for phone calls, your data never goes through third parties.</p>
+      <div class="visual"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Build</span>
+      <h3>Build production-ready agents with no experience.</h3>
+      <p>Tell Norm what you want to build. No voice AI experience needed.</p>
+      <div class="visual"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Test</span>
+      <h3>Test every scenario before going live.</h3>
+      <p>Run tests on every edge case before hitting production to ensure every call goes smoothly.</p>
+      <div class="visual"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    </div>
+  </div>
+</body>
+</html>

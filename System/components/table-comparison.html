@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Comparison table — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  h2 { font-size: 24px; margin-bottom: var(--space-5); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    text-align: left; font-weight: 600; padding: 10px 12px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  tbody td, tbody th { padding: 10px 12px; border-bottom: 1px solid var(--color-border-subtle); text-align: left; font-weight: 400; }
+  tr.group-row td { background: var(--color-bg-subtle); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--color-text-muted); font-weight: 500; }
+  .check { color: var(--color-positive); font-weight: 700; }
+  .dash { color: var(--color-neutral-mark); }
+</style>
+</head>
+<body>
+  <h2>Compare plans</h2>
+  <table>
+    <thead>
+      <tr><th></th><th>Start</th><th>Build</th><th>Enterprise</th></tr>
+    </thead>
+    <tbody>
+      <tr class="group-row"><td colspan="4">Usage &amp; scale</td></tr>
+      <tr><th>Talk time rate</th><td>$0.14/min</td><td>$0.12/min</td><td>Custom</td></tr>
+      <tr><th>Transfer time rate</th><td>$0.05/min</td><td>$0.04/min</td><td>Custom</td></tr>
+      <tr><th>Daily cap</th><td>100 calls</td><td>2,000 calls</td><td>Unlimited</td></tr>
+      <tr><th>Concurrent calls</th><td>10 calls</td><td>50 calls</td><td>Custom</td></tr>
+      <tr class="group-row"><td colspan="4">Infrastructure &amp; reliability</td></tr>
+      <tr><th>Version lock</th><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+      <tr><th>Uptime SLA</th><td>99.9%</td><td>99.9%</td><td>99.9%</td></tr>
+      <tr><th>On-prem / VPC deployment</th><td class="dash">—</td><td class="dash">—</td><td>Available</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "pitchyes-site",
+	"compatibility_date": "2026-09-17",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"observability": { "enabled": true },
+	"services": [
+		// Self-reference must match the worker name (https://opennext.js.org/cloudflare/caching)
+		{ "binding": "WORKER_SELF_REFERENCE", "service": "pitchyes-site" }
+	],
+	"r2_buckets": [
+		{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "pitchyes-site-opennext-cache" }
+	],
+	"images": { "binding": "IMAGES" },
+	"vars": { "SITE_ENV": "production" },
+
+	"env": {
+		"preview": {
+			"name": "pitchyes-site-preview",
+			"services": [
+				{ "binding": "WORKER_SELF_REFERENCE", "service": "pitchyes-site-preview" }
+			],
+			"r2_buckets": [
+				{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "pitchyes-site-preview-opennext-cache" }
+			],
+			"images": { "binding": "IMAGES" },
+			"vars": { "SITE_ENV": "preview" }
+		}
+	}
+}

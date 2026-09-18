@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Forms — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); display: flex; flex-direction: column; gap: var(--space-6); }
+  .label { font-size: 12px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: var(--space-2); }
+
+  .field {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-width: 260px;
+  }
+  .field::placeholder { color: var(--color-text-muted); }
+  .field:focus { outline: 2px solid var(--color-accent-gold); outline-offset: 1px; }
+
+  .newsletter { display: flex; gap: 8px; }
+  .newsletter .btn {
+    font-family: var(--font-sans); font-size: 14px; font-weight: 500;
+    padding: 10px 16px; border-radius: var(--radius-sm);
+    background: var(--color-text); color: var(--color-text-inverse); border: none; cursor: pointer;
+  }
+
+  .search-field { display: flex; align-items: center; gap: 8px; }
+  .search-btn {
+    width: 38px; height: 38px; border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-strong); background: var(--color-bg);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div>
+    <div class="label">Text input</div>
+    <input class="field" type="text" placeholder="Help me build an agent…" />
+  </div>
+
+  <div>
+    <div class="label">Newsletter subscribe</div>
+    <div class="newsletter">
+      <input class="field" type="email" placeholder="Email for product updates" />
+      <button class="btn">Subscribe</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="label">Search trigger</div>
+    <div class="search-field">
+      <button class="search-btn">🔍</button>
+    </div>
+  </div>
+</body>
+</html>

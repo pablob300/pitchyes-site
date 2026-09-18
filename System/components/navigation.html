@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Navigation — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; }
+  .demo-pad { padding: var(--space-8); color: var(--color-text-muted); font-size: 14px; }
+
+  .navbar {
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--margin);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+  .nav-logo { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--color-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-links a:hover { color: var(--color-text-secondary); }
+  .nav-actions { display: flex; align-items: center; gap: var(--space-2); }
+
+  .btn { font-family: var(--font-sans); font-size: 14px; font-weight: 500; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid transparent; text-decoration: none; }
+  .btn-ghost { color: var(--color-text); }
+  .btn-outline { color: var(--color-text); border-color: var(--color-border-strong); }
+  .btn-solid { color: var(--color-accent-gold-contrast); background: var(--color-accent-gold); border-color: var(--color-accent-gold); }
+
+  /* Dropdown */
+  .nav-item { position: relative; }
+  .chevron { width: 10px; height: 10px; display: inline-block; }
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 6px;
+    min-width: 160px;
+    box-shadow: 0 12px 24px -8px rgba(21,21,21,.12);
+    display: flex;
+    flex-direction: column;
+  }
+  .dropdown a {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  .dropdown a:hover { background: var(--color-bg-subtle); }
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-logo">bland.</div>
+    <ul class="nav-links">
+      <li><a href="#">Product</a></li>
+      <li><a href="#">Solutions</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Customers</a></li>
+      <li class="nav-item">
+        <a href="#">Resources
+          <svg class="chevron" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.2"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="#">Blog</a>
+          <a href="#">Documentation</a>
+          <a href="#">Changelog</a>
+          <a href="#">Integrations</a>
+          <a href="#">Careers</a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="#">Log in</a>
+      <a class="btn btn-outline" href="#">Try for free</a>
+      <a class="btn btn-solid" href="#">Book a call</a>
+    </div>
+  </nav>
+  <p class="demo-pad">Dropdown "Resources" fica sempre visível aqui como referência estática (no site real ele abre no hover/click).</p>
+</body>
+</html>

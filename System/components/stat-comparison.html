@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Stat comparison — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  h2 { font-size: 32px; margin-bottom: var(--space-6); }
+
+  .stat-row { display: flex; align-items: baseline; gap: var(--space-6); margin-bottom: var(--space-4); }
+  .stat-value { font-size: var(--text-stat-size); font-weight: var(--text-stat-weight); line-height: 1; letter-spacing: var(--text-stat-ls); color: var(--color-accent-burnt); }
+  .stat-value.dim { color: var(--color-text-muted); font-size: 40px; }
+  .stat-unit { font-size: 18px; color: var(--color-text-muted); margin-left: 4px; }
+
+  .bar-track { position: relative; height: 4px; background: var(--color-border-subtle); border-radius: 999px; overflow: hidden; }
+  .bar-fill { position: absolute; inset: 0; width: 32%; background: var(--color-accent-burnt); border-radius: 999px; }
+
+  .labels { display: flex; justify-content: space-between; margin-top: var(--space-2); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--color-text-muted); }
+</style>
+</head>
+<body>
+  <h2>And all this with latency<br />so low you might miss it.</h2>
+
+  <div class="stat-row">
+    <span class="stat-value">400<span class="stat-unit">ms</span></span>
+    <span class="stat-value dim">1,162<span class="stat-unit">ms</span></span>
+  </div>
+  <div class="bar-track"><div class="bar-fill"></div></div>
+  <div class="labels"><span>Bland</span><span>Industry average</span></div>
+</body>
+</html>

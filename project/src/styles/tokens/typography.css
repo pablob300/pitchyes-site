@@ -1,0 +1,77 @@
+/*
+  Typography tokens — mirror of System/tokens/typography.css.
+  @font-face lives in next/font (src/app/fonts.ts), not here: it exposes the loaded
+  family as --font-brand, consumed by --font-sans below.
+*/
+
+:root {
+  --font-sans: var(--font-brand), "Sohne", Inter, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+
+  --heading-ls: -0.04em;
+  --heading-lh: 1;
+  --body-ls: -0.02em;
+  --body-lh: 1.4;
+
+  --text-h1-size: 54px;
+  --text-h1-weight: 600;
+  --text-h1-lh: 56px;
+  --text-h1-ls: -1.08px;
+
+  --text-h2-size: 32px;
+  --text-h2-weight: 600;
+  --text-h2-lh: 34px;
+  --text-h2-ls: -0.64px;
+
+  --text-h3-size: 20px;
+  --text-h3-weight: 600;
+  --text-h3-lh: 24px;
+  --text-h3-ls: -0.4px;
+
+  --text-eyebrow-size: 11px;
+  --text-eyebrow-weight: 500;
+  --text-eyebrow-ls: 0.04em;
+
+  --text-body-size: 16px;
+  --text-body-weight: 400;
+  --text-body-lh: 1.4;
+
+  --text-body-sm-size: 14px;
+  --text-body-sm-weight: 400;
+  --text-body-sm-lh: 1.4;
+
+  --text-button-size: 14px;
+  --text-button-weight: 500;
+
+  --text-stat-size: 64px;
+  --text-stat-weight: 500;
+  --text-stat-lh: 1;
+  --text-stat-ls: -1.5px;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-size);
+  line-height: var(--body-lh);
+  letter-spacing: var(--body-ls);
+  color: var(--color-text);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  letter-spacing: var(--heading-ls);
+  line-height: var(--heading-lh);
+  margin: 0;
+}
+
+h1 { font-size: var(--text-h1-size); font-weight: var(--text-h1-weight); line-height: var(--text-h1-lh); letter-spacing: var(--text-h1-ls); }
+h2 { font-size: var(--text-h2-size); font-weight: var(--text-h2-weight); line-height: var(--text-h2-lh); letter-spacing: var(--text-h2-ls); }
+h3 { font-size: var(--text-h3-size); font-weight: var(--text-h3-weight); line-height: var(--text-h3-lh); letter-spacing: var(--text-h3-ls); }
+
+.eyebrow {
+  font-size: var(--text-eyebrow-size);
+  font-weight: var(--text-eyebrow-weight);
+  letter-spacing: var(--text-eyebrow-ls);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
