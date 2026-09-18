@@ -15,6 +15,7 @@ System/
 │   ├── spacing.css
 │   ├── motion.css
 │   └── tokens.css            ← importa os 4 acima, é o único arquivo que precisa linkar
+├── brand/                     ← logo oficial (escura, branca e símbolo)
 ├── components/                ← cada componente é um .html standalone (abre sozinho no navegador)
 ├── fonts/sohne/               ← pesos da Söhne (Test) usados, copiados de /sohne-font-family
 └── reference-screenshots/     ← screenshots reais das páginas, só para consulta (não redistribuir)
@@ -32,6 +33,16 @@ System/
 **Componentes em HTML/CSS puro**, sem framework — mais fácil de portar depois para qualquer stack (Next.js incluído) quando a estrutura de páginas do site final for definida.
 
 **Sem assets proprietários da Bland.** Cores, tipografia, espaçamento e o CSS/estrutura dos componentes foram clonados fielmente (são parâmetros de design, não conteúdo autoral). Fotos, logos de clientes e ilustrações reais da Bland **não** foram copiados — os componentes usam placeholders (iniciais, formas, gradientes) no lugar. Os screenshots em `reference-screenshots/` existem só como referência visual interna de consulta, não devem ser publicados no site final.
+
+## Marca
+
+`brand/` guarda a logo oficial (origem: `docs/pitchyes-logo-*.svg`, com o texto em branco):
+
+- `pitchyes-logo.svg`: texto em `#151515`, para fundos claros (header e footer do site)
+- `pitchyes-logo-white.svg`: original, para fundos escuros
+- `pitchyes-symbol.svg`: só o símbolo, usado como favicon (`project/src/app/icon.svg`)
+
+As mesmas cópias ficam em `project/public/brand/`. No site, use o componente `Logo` (`project/src/components/Logo.tsx`).
 
 ## Tokens principais
 

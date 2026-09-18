@@ -16,10 +16,12 @@
 }
 
 .logo {
-  font-weight: 700;
-  font-size: 19px;
-  letter-spacing: -0.03em;
-  text-decoration: none;
+  display: flex;
+}
+.logo img {
+  display: block;
+  height: 32px;
+  width: auto;
 }
 
 .newsletter {

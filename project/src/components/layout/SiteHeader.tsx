@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { mainNav, TALK_TO_AI_HREF } from "@/lib/routes";
+import { Logo } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import styles from "./SiteHeader.module.css";
 
@@ -46,7 +47,7 @@ export function SiteHeader() {
     <header className={styles.header}>
       <div className={`container ${styles.bar}`}>
         <Link href="/" className={styles.logo} aria-label="PitchYes — página inicial">
-          PitchYes
+          <Logo height={28} priority />
         </Link>
 
         <button

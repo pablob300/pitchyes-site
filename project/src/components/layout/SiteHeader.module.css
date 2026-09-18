@@ -17,10 +17,17 @@
 }
 
 .logo {
-  font-weight: 700;
-  font-size: 19px;
-  letter-spacing: -0.03em;
-  text-decoration: none;
+  display: flex;
+  flex: none;
+}
+.logo img {
+  display: block;
+  height: 28px;
+  width: auto;
+}
+
+@media (max-width: 640px) {
+  .logo img { height: 24px; }
 }
 
 .panel {

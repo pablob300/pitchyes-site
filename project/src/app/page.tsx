@@ -19,7 +19,13 @@ export const metadata: Metadata = {
 function StructuredData() {
   const url = getSiteUrl().origin;
   const data = [
-    { "@context": "https://schema.org", "@type": "Organization", name: "PitchYes", url },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "PitchYes",
+      url,
+      logo: `${url}/brand/pitchyes-logo.svg`,
+    },
     { "@context": "https://schema.org", "@type": "WebSite", name: "PitchYes", url, inLanguage: "pt-BR" },
     {
       "@context": "https://schema.org",

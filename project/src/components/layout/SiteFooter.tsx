@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { footerNav, legalNav } from "@/lib/routes";
+import { Logo } from "@/components/Logo";
 import { NewsletterForm } from "./NewsletterForm";
 import styles from "./SiteFooter.module.css";
 
@@ -27,8 +28,8 @@ export function SiteFooter() {
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.top}>
-          <Link href="/" className={styles.logo}>
-            PitchYes
+          <Link href="/" className={styles.logo} aria-label="PitchYes — página inicial">
+            <Logo height={32} />
           </Link>
           <NewsletterForm />
         </div>
