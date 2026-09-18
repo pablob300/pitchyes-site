@@ -18,6 +18,9 @@
 	],
 	"images": { "binding": "IMAGES" },
 	"vars": { "SITE_ENV": "production" },
+	// SITE_URL (the public domain) is managed in the Cloudflare dashboard, not here;
+	// keep_vars stops deploys from wiping dashboard-set variables.
+	"keep_vars": true,
 
 	"env": {
 		"preview": {

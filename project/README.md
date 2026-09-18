@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PitchYes — site
 
-## Getting Started
-
-First, run the development server:
+Next.js 16 servido pelo Cloudflare Workers via [OpenNext](https://opennext.js.org/cloudflare), com cache incremental em R2.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev       # desenvolvimento local
+npm run preview   # build OpenNext + runtime do Workers local (porta 8787)
+npm run deploy    # build + deploy para produção
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Domínio
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+O domínio público vem da variável `SITE_URL` (ver `src/lib/site.ts`). Sem ela, o site usa
+`https://pitchyes-site.borges-filho.workers.dev`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+A indexação por buscadores só é liberada quando `SITE_ENV=production` **e** o domínio não é
+`*.workers.dev` — antes disso, `robots.txt` e as meta tags bloqueiam tudo.
 
-## Learn More
+Para trocar para o domínio definitivo (ex.: `pitchyes.com.br`):
 
-To learn more about Next.js, take a look at the following resources:
+1. Workers & Pages → `pitchyes-site` → **Settings → Domains & Routes** → adicionar Custom Domain.
+2. **Settings → Variables and Secrets** → `SITE_URL = https://pitchyes.com.br` (vale na hora para `robots.txt`).
+3. **Settings → Build → Variables** → mesma `SITE_URL`, e disparar um novo build (as meta tags e
+   URLs canônicas das páginas estáticas são geradas no build).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`keep_vars: true` no `wrangler.jsonc` garante que o deploy não apague variáveis definidas no painel.
