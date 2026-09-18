@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Use-case cards — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--card-gap); }
+  .card { padding: var(--space-5) var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+  .card:hover { border-color: var(--color-border-strong); background: var(--color-bg-subtle); }
+  .card h3 { font-size: 16px; line-height: 1.25; margin: 0 0 var(--space-2); }
+  .card p { font-size: 13px; color: var(--color-text-secondary); margin: 0; }
+</style>
+</head>
+<body>
+  <p class="note">PitchYes · Grade compacta de casos de uso (5 colunas → 3 → 2). React: UseCases.tsx</p>
+  <ul class="grid">
+    <li class="card"><h3>Substituição de URA</h3><p>Troque o menu de teclado por conversa em linguagem natural.</p></li>
+    <li class="card"><h3>Atendimento receptivo</h3><p>Todo cliente atendido, qualificado e direcionado, 24 horas por dia.</p></li>
+    <li class="card"><h3>Prospecção ativa</h3><p>Qualifica leads, confirma reuniões e faz follow-up, em escala.</p></li>
+    <li class="card"><h3>Inteligência de chamadas</h3><p>Toda ligação transcrita, avaliada e pesquisável.</p></li>
+    <li class="card"><h3>IA de voz conversacional</h3><p>Lida com interrupção, sotaque e mudança de assunto.</p></li>
+  </ul>
+</body>
+</html>

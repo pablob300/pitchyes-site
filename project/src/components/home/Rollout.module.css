@@ -1,0 +1,88 @@
+/* PitchYes component — documented in System/components/timeline.html */
+.title {
+  max-width: 24ch;
+  margin-bottom: var(--space-7);
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+/* the rail */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+.step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding-inline: var(--space-3);
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--color-text);
+  border: 3px solid var(--color-bg);
+  box-shadow: 0 0 0 1px var(--color-text);
+  margin-bottom: var(--space-3);
+}
+.step[data-live="true"] .dot {
+  background: var(--color-accent-burnt);
+  box-shadow: 0 0 0 1px var(--color-accent-burnt), 0 0 0 6px rgba(216, 68, 31, 0.15);
+}
+
+.day {
+  font-size: var(--text-eyebrow-size);
+  font-weight: var(--text-eyebrow-weight);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.step[data-live="true"] .day { color: var(--color-accent-burnt); }
+
+.step h3 { font-size: 18px; }
+
+.text {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  max-width: 24ch;
+}
+
+@media (max-width: 768px) {
+  .timeline { grid-template-columns: 1fr; gap: var(--space-6); }
+  .timeline::before {
+    top: 0;
+    bottom: 0;
+    left: 7px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 15px 1fr;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    align-items: start;
+    text-align: left;
+    padding: 0;
+  }
+  .dot { grid-row: 1 / span 3; margin: 0; }
+  .text { max-width: none; }
+}

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { absoluteUrl } from "@/lib/sitemap";
 import { getSiteUrl, isIndexable } from "@/lib/site";
 
 // Rendered per request so a SITE_URL change in the dashboard applies without a rebuild.
@@ -10,6 +11,7 @@ export default function robots(): MetadataRoute.Robots {
   }
   return {
     rules: { userAgent: "*", allow: "/" },
+    sitemap: absoluteUrl("/sitemap.xml"),
     host: getSiteUrl().origin,
   };
 }

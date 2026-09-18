@@ -1,0 +1,18 @@
+.headline {
+  padding: 96px 0 var(--section-lg);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.headline :global(.container) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.headline h1 {
+  max-width: 18ch;
+}
+
+@media (max-width: 640px) {
+  .headline { padding-top: 64px; }
+}

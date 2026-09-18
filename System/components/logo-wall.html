@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logo wall — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
+  .title { font-size: 16px; font-weight: 400; letter-spacing: var(--body-ls); color: var(--color-text-secondary); text-align: center; margin: 0 0 var(--space-6); }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--color-border-subtle); border-left: 1px solid var(--color-border-subtle); }
+  .logo { display: grid; place-items: center; min-height: 88px; padding: var(--space-4); border-right: 1px solid var(--color-border-subtle); border-bottom: 1px solid var(--color-border-subtle); font-size: 15px; font-weight: 600; letter-spacing: -.03em; color: var(--color-text-muted); text-align: center; }
+  .logo:hover { color: var(--color-text); }
+  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+  <p class="note">PitchYes · Prova social. Nomes tipográficos até chegarem os arquivos de logo. React: ClientLogos.tsx</p>
+  <h2 class="title">Empresas que confiam na PitchYes.</h2>
+  <ul class="grid">
+    <li class="logo">Sofia Energia</li><li class="logo">Vantage Energia</li><li class="logo">MaxNet</li>
+    <li class="logo">Plaza</li><li class="logo">Grupo Hellu's Prime</li><li class="logo">OPEN Datacenter</li>
+  </ul>
+</body>
+</html>

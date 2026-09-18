@@ -54,4 +54,24 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 - `cards-testimonial.html`: 1 vídeo em destaque (formato horizontal) + citações em cards ao lado.
 - `cards-testimonial-video-slider.html`: slider horizontal de vídeos **verticais** (9:16, estilo YouTube Shorts/Reels), com setas de navegação, legenda curta explicando o vídeo, e nome + empresa da pessoa sobrepostos no vídeo. Usa scroll-snap nativo (arrasta ou usa as setas) e dots de progresso sincronizados via JS.
 
+**Componentes PitchYes** (criados para o site a partir de `docs/PitchYes — Wireframe Homepage (Desktop).pdf`, no mesmo padrão visual):
+
+| Arquivo | Uso | Espelho React (`project/src/components/…`) |
+|---|---|---|
+| `agent-widget.html` | Hero: "Fale com um agente", pills de setor + orb | `home/AgentWidget.tsx` |
+| `logo-wall.html` | Prova social: grade de logos (nomes tipográficos até chegarem os SVGs) | `home/ClientLogos.tsx` |
+| `platform-mocks.html` | Mocks estruturais dentro dos feature cards | `home/Platform.tsx` |
+| `bar-comparison.html` | Latência: barras proporcionais (variante do stat-comparison) | `home/Latency.tsx` |
+| `timeline.html` | Implantação em dias, último passo em destaque | `home/Rollout.tsx` |
+| `security-compliance.html` | Selos de certificação + controles | `home/Security.tsx` |
+| `cards-use-case.html` | Grade compacta de casos de uso | `home/UseCases.tsx` |
+| `cta-band.html` | Faixa de CTA final (pastel peach + botão escuro) | `home/FinalCta.tsx` |
+| `page-headline.html` | Topo das páginas internas | `PageHeadline.tsx` |
+
+`navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Preços · Recursos ▾ · Blog; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
+
+**Tokens adicionados (PitchYes):** `--color-text-inverse-muted`, `--color-bg-inverse-elevated`, `--color-border-inverse`, `--color-border-inverse-strong`, `--shadow-sm`, `--shadow-lg`.
+
+**Regra de manutenção:** `System/tokens/*.css` e `project/src/styles/tokens/*.css` devem ficar idênticos (exceto o `@font-face`, que no site vem do `next/font`). Todo componente novo criado no site ganha um `.html` de referência aqui e uma entrada no `style-guide.html`.
+
 `docs.bland.ai` usa um tema **escuro** separado (provavelmente Mintlify) — não foi replicado em componente próprio, só documentado em screenshot, por ser um sub-produto de menor prioridade.

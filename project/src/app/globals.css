@@ -29,3 +29,67 @@ video {
 a {
   color: inherit;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + var(--space-5));
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Page sections — vertical rhythm shared by every block */
+.section {
+  padding-block: var(--section-lg);
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-7);
+  max-width: 720px;
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.lead {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+}
+
+.accent {
+  color: var(--color-accent-burnt);
+}
+
+@media (max-width: 640px) {
+  :root {
+    --section-lg: 56px;
+    --text-h1-size: 36px;
+    --text-h1-lh: 40px;
+    --text-h1-ls: -0.72px;
+    --text-h2-size: 26px;
+    --text-h2-lh: 30px;
+    --text-stat-size: 48px;
+  }
+}

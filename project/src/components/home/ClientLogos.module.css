@@ -1,0 +1,50 @@
+/* PitchYes component — documented in System/components/logo-wall.html */
+.section {
+  padding-block: var(--section-md) var(--section-lg);
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: var(--body-ls);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid var(--color-border-subtle);
+  border-left: 1px solid var(--color-border-subtle);
+}
+
+/* Typographic wordmark placeholder until real logo files arrive */
+.logo {
+  display: grid;
+  place-items: center;
+  min-height: 88px;
+  padding: var(--space-4);
+  border-right: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease);
+}
+.logo:hover { color: var(--color-text); }
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .logo { min-height: 72px; font-size: 14px; }
+}

@@ -1,0 +1,59 @@
+/* Mirrors System/components/hero.html */
+.hero {
+  padding: 88px 0 var(--section-lg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.copy h1 {
+  font-size: 48px;
+  line-height: 52px;
+  letter-spacing: -0.96px;
+  max-width: 17ch;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.stat {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+.stat strong {
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; gap: var(--space-7); }
+  .copy h1 { max-width: 20ch; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding-top: 48px; }
+  .copy h1 {
+    font-size: var(--text-h1-size);
+    line-height: var(--text-h1-lh);
+    letter-spacing: var(--text-h1-ls);
+  }
+}

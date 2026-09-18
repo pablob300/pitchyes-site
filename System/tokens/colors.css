@@ -15,11 +15,21 @@
   --color-text-muted: #15151580;     /* ~50% alpha */
   --color-text-dim: #1515158c;       /* ~55% alpha */
   --color-text-inverse: #ffffff;
+  --color-text-inverse-muted: rgba(255, 255, 255, 0.6);
 
   /* Accents */
   --color-accent-gold: #f9a900;    /* solid CTA buttons ("Book a call") */
   --color-accent-gold-contrast: #151515;
   --color-accent-burnt: #d8441f;   /* headline highlight word, big stat numbers */
+
+  /* Inverse surfaces (PitchYes: hero "Fale com um agente" widget) */
+  --color-bg-inverse-elevated: #222222;
+  --color-border-inverse: rgba(255, 255, 255, 0.14);
+  --color-border-inverse-strong: rgba(255, 255, 255, 0.32);
+
+  /* Elevation (PitchYes) */
+  --shadow-sm: 0 12px 24px -8px rgba(21, 21, 21, 0.12);   /* dropdowns, menus */
+  --shadow-lg: 0 24px 48px -16px rgba(21, 21, 21, 0.15);  /* hero cards, widgets */
 
   /* Borders */
   --color-border: rgba(21, 21, 21, 0.12);

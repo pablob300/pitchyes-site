@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bar comparison — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
+  h2 { font-size: 32px; max-width: 30ch; margin: 0 0 var(--space-7); }
+  .rows { margin: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+  .row { display: grid; grid-template-columns: 180px 1fr; align-items: center; gap: var(--space-5); }
+  dt { font-size: 15px; font-weight: 500; }
+  .track { margin: 0; height: 48px; background: var(--color-bg-subtle); border-radius: var(--radius-sm); overflow: hidden; }
+  .bar { height: 100%; display: flex; align-items: center; padding-inline: var(--space-4); border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; background: var(--color-pastel-gray); color: var(--color-text-secondary); }
+  .bar.hl { background: var(--color-accent-burnt); color: #fff; }
+</style>
+</head>
+<body>
+  <p class="note">PitchYes · Variante em barras do stat-comparison (seção Latência). Largura = proporção entre os valores. React: Latency.tsx</p>
+  <h2>E tudo isso com uma latência tão baixa que você mal percebe.</h2>
+  <dl class="rows">
+    <div class="row"><dt>PitchYes</dt><dd class="track"><span class="bar hl" style="width:30%">[XXX]ms</span></dd></div>
+    <div class="row"><dt>Média do mercado</dt><dd class="track"><span class="bar" style="width:100%">[X.XXX]ms</span></dd></div>
+  </dl>
+</body>
+</html>

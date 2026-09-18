@@ -1,0 +1,114 @@
+/* PitchYes component — documented in System/components/agent-widget.html */
+.widget {
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  box-shadow: var(--shadow-lg);
+}
+
+.eyebrow {
+  font-size: var(--text-eyebrow-size);
+  font-weight: var(--text-eyebrow-weight);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-inverse-muted);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-inverse-strong);
+  background: transparent;
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease);
+}
+.pill:hover { border-color: var(--color-text-inverse); }
+.pill[aria-checked="true"] {
+  background: var(--color-text-inverse);
+  border-color: var(--color-text-inverse);
+  color: var(--color-text);
+}
+
+.stage {
+  border: 1px dashed var(--color-border-inverse-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-inverse-elevated);
+  min-height: 240px;
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+/* Gradient orb from System/components/hero.html (.hero-orb) */
+.orb {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: radial-gradient(circle at 30% 30%, var(--color-accent-gold), var(--color-accent-burnt));
+  display: grid;
+  place-items: center;
+  position: relative;
+  margin-bottom: var(--space-2);
+  transition: transform var(--duration-normal) var(--ease-out-soft);
+}
+.orb::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(249, 169, 0, 0.45);
+  animation: pulse 2.4s var(--ease) infinite;
+}
+.orb:hover { transform: scale(1.05); }
+
+.orbCore {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-text-inverse);
+}
+.orb[data-active="true"] .orbCore { border-radius: 3px; }
+
+.agentName {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--color-text-inverse-muted);
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.92); opacity: 1; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb::after { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .widget { padding: var(--space-5); }
+}

@@ -1,0 +1,27 @@
+/* PitchYes component — documented in System/components/cta-band.html */
+.band {
+  background: var(--color-pastel-peach);
+  padding-block: 112px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  text-align: center;
+}
+.inner h2 {
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: -0.8px;
+  max-width: 20ch;
+}
+
+@media (max-width: 640px) {
+  .band { padding-block: 72px; }
+  .inner h2 {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+  }
+}

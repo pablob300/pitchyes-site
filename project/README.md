@@ -8,6 +8,22 @@ npm run preview   # build OpenNext + runtime do Workers local (porta 8787)
 npm run deploy    # build + deploy para produção
 ```
 
+## Páginas
+
+- `src/lib/routes.ts` é a fonte única do mapa do site: menu, rodapé, páginas internas e `sitemap-paginas.xml` saem dali.
+- A home (`src/app/page.tsx`) segue o wireframe em `docs/`; os textos ficam em `src/components/home/content.ts`.
+- Páginas ainda sem conteúdo são geradas por `src/app/[...slug]/page.tsx` (header, footer e headline com o nome da página, `noindex`, fora do sitemap).
+  Para construir uma delas: crie `src/app/<caminho>/page.tsx` (tem prioridade sobre a rota coringa) e marque `placeholder: false` em `routes.ts`.
+- Visual: sempre pelos tokens e componentes de `../System`. Componente novo aqui → `.html` de referência em `System/components` + entrada no `style-guide.html`.
+
+## Blog (standby)
+
+WordPress headless, servido em `/blog`. As URLs já estão definidas em `src/lib/blog.ts`
+(`/blog`, `/blog/pagina/N`, `/blog/[slug]`, `/blog/categorias`, `/blog/categoria/[slug]`, `/blog/tag/[slug]`)
+e `sitemap-blog.xml` já monta listagens paginadas, artigos, categorias e tags — hoje vazio, até ligar a API do WordPress.
+
+`/sitemap.xml` é um índice que aponta para `sitemap-paginas.xml` e `sitemap-blog.xml`.
+
 ## Domínio
 
 O domínio público vem da variável `SITE_URL` (ver `src/lib/site.ts`). Sem ela, o site usa

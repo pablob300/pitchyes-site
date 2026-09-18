@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Platform mocks — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--card-gap); }
+  .card { background: var(--color-bg-subtle); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-muted); margin: 0; }
+  .card h3 { font-size: 19px; line-height: 1.2; margin: 0; }
+  .visual { margin-top: auto; height: 148px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+  .node { font-size: 11px; padding: 5px 10px; border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); }
+  .core { font-weight: 600; border-color: var(--color-accent-burnt); color: var(--color-accent-burnt); }
+  .link { width: 1px; height: 14px; background: var(--color-border-strong); }
+  .big { font-size: 44px; font-weight: 500; letter-spacing: -1.5px; line-height: 1; }
+  .meta { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-muted); display: flex; gap: 6px; align-items: center; margin-top: 8px; }
+  .ok { width: 7px; height: 7px; border-radius: 50%; background: var(--color-positive); }
+  .rings { flex-direction: row; }
+  .rings span { width: 74px; height: 74px; margin-inline: -6px; border-radius: 50%; border: 1px solid var(--color-border-strong); background: rgba(255,255,255,.7); display: grid; place-items: center; font-size: 11px; }
+  .rings span:first-child { border-color: var(--color-accent-burnt); color: var(--color-accent-burnt); font-weight: 600; }
+</style>
+</head>
+<body>
+  <p class="note">PitchYes · Mocks estruturais dentro dos feature cards (cards-feature.html). React: Platform.tsx</p>
+  <div class="grid">
+    <div class="card"><p class="eyebrow">Infraestrutura</p><h3>Diagrama</h3>
+      <div class="visual"><span class="node">Sua empresa</span><span class="link"></span><span class="node core">Infraestrutura PitchYes</span><span class="link"></span><span class="node">Telefonia</span></div></div>
+    <div class="card"><p class="eyebrow">Testar</p><h3>Contador</h3>
+      <div class="visual"><span class="big">1.003</span><span class="meta"><i class="ok"></i>Cenários · 0 falhando</span></div></div>
+    <div class="card"><p class="eyebrow">Omnichannel</p><h3>Canais</h3>
+      <div class="visual rings"><span>Voz</span><span>WhatsApp</span><span>SMS</span><span>Chat</span></div></div>
+  </div>
+</body>
+</html>

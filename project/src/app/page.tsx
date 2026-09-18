@@ -1,42 +1,59 @@
-import styles from "./page.module.css";
+import type { Metadata } from "next";
+import { ClientLogos } from "@/components/home/ClientLogos";
+import { faq } from "@/components/home/content";
+import { CustomerVideos } from "@/components/home/CustomerVideos";
+import { Faq } from "@/components/home/Faq";
+import { FinalCta } from "@/components/home/FinalCta";
+import { Hero } from "@/components/home/Hero";
+import { Latency } from "@/components/home/Latency";
+import { Platform } from "@/components/home/Platform";
+import { Rollout } from "@/components/home/Rollout";
+import { Security } from "@/components/home/Security";
+import { UseCases } from "@/components/home/UseCases";
+import { getSiteUrl } from "@/lib/site";
 
-const swatches = [
-  "--color-text",
-  "--color-accent-gold",
-  "--color-accent-burnt",
-  "--color-bg-subtle",
-  "--color-pastel-green",
-  "--color-pastel-peach",
-  "--color-pastel-gray",
-  "--color-pastel-cream",
-];
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
+function StructuredData() {
+  const url = getSiteUrl().origin;
+  const data = [
+    { "@context": "https://schema.org", "@type": "Organization", name: "PitchYes", url },
+    { "@context": "https://schema.org", "@type": "WebSite", name: "PitchYes", url, inLanguage: "pt-BR" },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
+  ];
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
+  );
+}
+
+// Section order follows docs/PitchYes — Wireframe Homepage (Desktop).pdf (01 → 10).
 export default function Home() {
   return (
-    <main className={`container ${styles.main}`}>
-      <p className="eyebrow">PitchYes · Fase 0</p>
-      <h1>
-        IA que liga, <span className={styles.accent}>conversa</span> e vende.
-      </h1>
-      <p className={styles.lead}>
-        Página de teste da Fase 0 — valida tokens do design system, tipografia e o deploy
-        automático na Cloudflare.
-      </p>
-      <div className={styles.row}>
-        <a className={`${styles.btn} ${styles.solid}`} href="#">Fale com nossa IA</a>
-        <a className={`${styles.btn} ${styles.outline}`} href="#">Ver soluções</a>
-      </div>
-      <h2>Cores</h2>
-      <div className={styles.swatches}>
-        {swatches.map((v) => (
-          <div key={v}>
-            <div className={styles.swatch} style={{ background: `var(${v})` }} />
-            <small>{v}</small>
-          </div>
-        ))}
-      </div>
-      <h3>Estatística</h3>
-      <div className={styles.stat}>3x</div>
-    </main>
+    <>
+      <StructuredData />
+      <Hero />
+      <ClientLogos />
+      <Platform />
+      <Latency />
+      <CustomerVideos />
+      <Rollout />
+      <Security />
+      <UseCases />
+      <Faq />
+      <FinalCta />
+    </>
   );
 }
