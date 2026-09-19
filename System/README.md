@@ -41,6 +41,7 @@ System/
 - `pitchyes-logo.svg`: texto em `#151515`, para fundos claros (header e footer do site)
 - `pitchyes-logo-white.svg`: original, para fundos escuros
 - `pitchyes-symbol.svg`: só o símbolo, usado como favicon (`project/src/app/icon.svg`)
+- `favicon.ico` (16–256px) e `pitchyes-symbol-256.png`: símbolo em bitmap, fundo transparente (`project/src/app/favicon.ico`)
 
 As mesmas cópias ficam em `project/public/brand/`. No site, use o componente `Logo` (`project/src/components/Logo.tsx`).
 
