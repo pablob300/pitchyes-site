@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-19: Seção de certificações no visual do bland.ai + FedRAMP
 
-Cloudflare `83cc49fa`
+Commit `d0e9461` · Cloudflare `83cc49fa`
 
 - **Visual da seção de segurança refeito** conforme a referência `docs/certificacoes-print.jpg`:
   - Título à esquerda e texto de apoio à direita.
