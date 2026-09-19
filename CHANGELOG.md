@@ -8,6 +8,32 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-19: Auditoria de SEO e indexação
+
+Commit `{HASH}` · Cloudflare `b539c76d`
+
+Revisão completa do site do ponto de vista de indexação (Google e mecanismos de IA), com as correções aplicadas. Regras permanentes em [SEO.md](SEO.md).
+
+**Corrigido**
+
+- **Conteúdo invisível para robôs:** a animação de entrada usava `visibility: hidden`, o que retirava o texto do conteúdo lido. Só 135 das 786 palavras da home eram vistas. Passou a usar opacidade.
+- **Título vazio:** um erro no novo gerador de metadados deixou a home sem `<title>` por uma versão. Corrigido e verificado em todas as páginas.
+- **Imagem social ausente** em todas as páginas, e ausente nas internas mesmo depois de criada (rotas que declaram Open Graph não herdam a imagem padrão).
+
+**Adicionado**
+
+- **Imagem de compartilhamento** (1200×630, 84 KB) com a marca sobre a textura da faixa de CTA, mais `twitter:card` grande. É o que aparece ao compartilhar o link no WhatsApp, LinkedIn e afins.
+- **`/llms.txt`**: resumo do site para mecanismos de IA, com os fatos citáveis e o mapa de páginas.
+- **`robots.txt` com liberação explícita dos robôs de IA** (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended, CCBot e outros), válida quando o site sair do workers.dev.
+- **Dados estruturados em grafo único**, com as entidades ligadas: `Organization`, `WebSite`, `WebPage`, `FAQPage` e `BreadcrumbList` nas páginas internas.
+- **Metadados centralizados** em `pageMetadata()` (`lib/seo.ts`): título, descrição, canonical, Open Graph e regra de indexação sempre consistentes.
+- **`manifest.webmanifest`**, `theme-color` e título próprio na página 404.
+- **Link "pular para o conteúdo"**, visível ao navegar por teclado.
+- **`<lastmod>` no sitemap**, a partir do campo `updated` de cada página.
+- **Cache longo** para `/brand/*` e `/images/*` (antes era revalidação a cada acesso) e cabeçalhos de segurança (HSTS, `nosniff`, `Referrer-Policy`, `Permissions-Policy`).
+
+**Medido no site publicado:** LCP ~1,3s, CLS 0, ~39 KB por página.
+
 ## 2026-09-19: Menu centralizado e página ativa em negrito
 
 Commit `2d4cdbe` · Cloudflare `04a050a1`
@@ -170,4 +196,6 @@ Commit `c25ca10`
 - [ ] Licença da fonte Söhne (hoje o site usa Inter temporariamente).
 - [ ] Conteúdo das páginas internas, uma a uma.
 - [ ] Blog: ligar a API do WordPress headless.
-- [ ] Último passo: apontar `pitchyes.com.br` e definir `SITE_URL` (ver `project/README.md`).
+- [ ] Cadastrar no Google Search Console e no Bing Webmaster Tools e enviar o sitemap (após o domínio).
+- [ ] Perfis sociais (LinkedIn, X) para o campo `sameAs` dos dados estruturados.
+- [ ] Último passo: apontar `pitchyes.com.br` e definir `SITE_URL` (ver `project/README.md` e a seção 6 do `SEO.md`).

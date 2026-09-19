@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/JsonLd";
 import { PageHeadline } from "@/components/PageHeadline";
 import { getPage, pages } from "@/lib/routes";
+import { breadcrumbSchema, pageMetadata, webPageSchema } from "@/lib/seo";
 import styles from "./page.module.css";
 
 // Placeholder for every inner page that doesn't have its own route file yet.
@@ -25,19 +27,30 @@ async function resolve(params: PageProps<"/[...slug]">["params"]) {
 
 export async function generateMetadata({ params }: PageProps<"/[...slug]">): Promise<Metadata> {
   const { page } = await resolve(params);
-  return {
+  return pageMetadata({
     title: page.title,
     description: page.description,
-    alternates: { canonical: page.path },
+    path: page.path,
     // Empty placeholder pages stay out of search results until they get content.
-    robots: { index: false, follow: true },
-  };
+    noindex: page.placeholder,
+  });
 }
 
 export default async function PlaceholderPage({ params }: PageProps<"/[...slug]">) {
   const { page, parent } = await resolve(params);
+  const trail = [
+    { name: "Início", path: "/" },
+    ...(parent ? [{ name: parent.title, path: parent.path }] : []),
+    { name: page.title, path: page.path },
+  ];
   return (
     <>
+      <JsonLd
+        graph={[
+          webPageSchema({ title: page.title, description: page.description, path: page.path }),
+          breadcrumbSchema(trail),
+        ]}
+      />
       <PageHeadline eyebrow={parent?.title} title={page.title} description={page.description} />
       <section className="section">
         <div className={`container ${styles.soon}`}>

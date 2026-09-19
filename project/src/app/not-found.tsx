@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { PageHeadline } from "@/components/PageHeadline";
 import { ButtonLink } from "@/components/ui/Button";
+
+export const metadata: Metadata = {
+  title: "Página não encontrada",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

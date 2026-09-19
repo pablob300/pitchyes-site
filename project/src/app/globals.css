@@ -101,3 +101,21 @@ p {
     --text-stat-size: 48px;
   }
 }
+
+/* Skip link: first tab stop, visible only when focused */
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--duration-fast) var(--ease);
+}
+.skip-link:focus-visible { transform: translateY(0); }

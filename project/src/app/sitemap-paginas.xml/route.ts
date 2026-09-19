@@ -9,6 +9,6 @@ export function GET() {
   return urlsetResponse(
     pages
       .filter((p) => !p.placeholder && !p.path.startsWith("/blog"))
-      .map((p) => ({ path: p.path })),
+      .map((p) => ({ path: p.path, lastModified: p.updated })),
   );
 }

@@ -5,6 +5,7 @@ Site da PitchYes (IA de voz para empresas), em Next.js 16, publicado no Cloudfla
 - **Homologação:** https://pitchyes-site.borges-filho.workers.dev (bloqueado para buscadores)
 - **Domínio definitivo:** `pitchyes.com.br` (último passo, via variável `SITE_URL`)
 - **Histórico de versões e pendências:** [CHANGELOG.md](CHANGELOG.md)
+- **Regras de SEO e indexação (ler antes de qualquer mudança):** [SEO.md](SEO.md)
 
 ## Estrutura
 

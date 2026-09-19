@@ -96,6 +96,8 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 
 **Tokens adicionados (PitchYes):** `--color-text-inverse-muted`, `--color-bg-inverse-elevated`, `--color-border-inverse`, `--color-border-inverse-strong`, `--shadow-sm`, `--shadow-lg`, `--color-badge`, `--color-badge-ink` (selos de certificação).
 
+**SEO:** mudanças de estrutura ou conteúdo seguem as regras de `../SEO.md` (conteúdo no HTML do servidor, hierarquia de títulos, animação por opacidade e nunca `visibility: hidden`).
+
 **Regra de manutenção:** `System/tokens/*.css` e `project/src/styles/tokens/*.css` devem ficar idênticos (exceto o `@font-face`, que no site vem do `next/font`). Todo componente novo criado no site ganha um `.html` de referência aqui e uma entrada no `style-guide.html`.
 
 `docs.bland.ai` usa um tema **escuro** separado (provavelmente Mintlify) — não foi replicado em componente próprio, só documentado em screenshot, por ser um sub-produto de menor prioridade.

@@ -24,7 +24,9 @@ export function RevealOnScroll() {
       mm.add(motion.noPreference, () => {
         const { y, duration, ease, stagger, rootMargin } = motion.reveal;
         const els = gsap.utils.toArray<HTMLElement>("[data-reveal]");
-        gsap.set(els, { autoAlpha: 0, y });
+        // opacity (not autoAlpha/visibility): text stays in the rendered DOM for
+        // crawlers and assistive tech even before the element animates in.
+        gsap.set(els, { opacity: 0, y });
         root.classList.add("reveal-ready");
 
         const io = new IntersectionObserver(
@@ -35,7 +37,7 @@ export function RevealOnScroll() {
               .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
             if (entering.length === 0) return;
             entering.forEach((el) => io.unobserve(el));
-            gsap.to(entering, { autoAlpha: 1, y: 0, duration, ease, stagger, overwrite: true });
+            gsap.to(entering, { opacity: 1, y: 0, duration, ease, stagger, overwrite: true });
           },
           { rootMargin },
         );

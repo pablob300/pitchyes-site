@@ -7,35 +7,37 @@ export type SitePage = {
   title: string;
   description: string;
   placeholder: boolean;
+  /** Content last reviewed (YYYY-MM-DD) — feeds <lastmod> in the sitemap. Bump it when the page's copy changes. */
+  updated: string;
 };
 
 export const pages = [
-  { path: "/", title: "Início", description: "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.", placeholder: false },
+  { path: "/", title: "Início", description: "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.", placeholder: false, updated: "2026-09-19" },
 
-  { path: "/solucoes", title: "Soluções", description: "Como a IA de voz da PitchYes atende ligações ativas e receptivas em escala.", placeholder: true },
-  { path: "/solucoes/ativo", title: "Ligações ativas", description: "Prospecção, qualificação de leads, confirmação de reuniões e follow-up com IA de voz.", placeholder: true },
-  { path: "/solucoes/receptivo", title: "Atendimento receptivo", description: "Todo cliente atendido, qualificado e direcionado, 24 horas por dia.", placeholder: true },
-  { path: "/solucoes/por-setor", title: "Soluções por setor", description: "IA de voz para saúde, seguros, serviços financeiros, imobiliário e mais.", placeholder: true },
-  { path: "/solucoes/por-funcao", title: "Soluções por função", description: "IA de voz para vendas, atendimento, cobrança e operações.", placeholder: true },
+  { path: "/solucoes", title: "Soluções", description: "Como a IA de voz da PitchYes atende ligações ativas e receptivas em escala.", placeholder: true, updated: "2026-09-19" },
+  { path: "/solucoes/ativo", title: "Ligações ativas", description: "Prospecção, qualificação de leads, confirmação de reuniões e follow-up com IA de voz.", placeholder: true, updated: "2026-09-19" },
+  { path: "/solucoes/receptivo", title: "Atendimento receptivo", description: "Todo cliente atendido, qualificado e direcionado, 24 horas por dia.", placeholder: true, updated: "2026-09-19" },
+  { path: "/solucoes/por-setor", title: "Soluções por setor", description: "IA de voz para saúde, seguros, serviços financeiros, imobiliário e mais.", placeholder: true, updated: "2026-09-19" },
+  { path: "/solucoes/por-funcao", title: "Soluções por função", description: "IA de voz para vendas, atendimento, cobrança e operações.", placeholder: true, updated: "2026-09-19" },
 
-  { path: "/clientes", title: "Clientes", description: "Empresas que automatizam ligações com a PitchYes.", placeholder: true },
-  { path: "/clientes/cases", title: "Cases", description: "Resultados reais de clientes que usam a IA de voz da PitchYes.", placeholder: true },
+  { path: "/clientes", title: "Clientes", description: "Empresas que automatizam ligações com a PitchYes.", placeholder: true, updated: "2026-09-19" },
+  { path: "/clientes/cases", title: "Cases", description: "Resultados reais de clientes que usam a IA de voz da PitchYes.", placeholder: true, updated: "2026-09-19" },
 
-  { path: "/precos", title: "Preços", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: true },
+  { path: "/precos", title: "Preços", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: true, updated: "2026-09-19" },
 
-  { path: "/recursos/integracoes", title: "Integrações", description: "A PitchYes conecta com sua telefonia, CRM e agenda atuais.", placeholder: true },
-  { path: "/recursos/novidades", title: "Novidades", description: "Lançamentos e atualizações da plataforma PitchYes.", placeholder: true },
+  { path: "/recursos/integracoes", title: "Integrações", description: "A PitchYes conecta com sua telefonia, CRM e agenda atuais.", placeholder: true, updated: "2026-09-19" },
+  { path: "/recursos/novidades", title: "Novidades", description: "Lançamentos e atualizações da plataforma PitchYes.", placeholder: true, updated: "2026-09-19" },
 
   // Blog: standby — will be served from the headless WordPress (see lib/blog.ts).
-  { path: "/blog", title: "Blog", description: "Artigos sobre IA de voz, vendas e atendimento.", placeholder: true },
-  { path: "/blog/categorias", title: "Categorias do blog", description: "Todas as categorias de artigos do blog da PitchYes.", placeholder: true },
+  { path: "/blog", title: "Blog", description: "Artigos sobre IA de voz, vendas e atendimento.", placeholder: true, updated: "2026-09-19" },
+  { path: "/blog/categorias", title: "Categorias do blog", description: "Todas as categorias de artigos do blog da PitchYes.", placeholder: true, updated: "2026-09-19" },
 
-  { path: "/sobre", title: "Sobre a PitchYes", description: "Quem somos e por que construímos IA de voz para empresas.", placeholder: true },
-  { path: "/carreiras", title: "Carreiras", description: "Trabalhe na PitchYes.", placeholder: true },
-  { path: "/contato", title: "Contato", description: "Fale com o time da PitchYes.", placeholder: true },
+  { path: "/sobre", title: "Sobre a PitchYes", description: "Quem somos e por que construímos IA de voz para empresas.", placeholder: true, updated: "2026-09-19" },
+  { path: "/carreiras", title: "Carreiras", description: "Trabalhe na PitchYes.", placeholder: true, updated: "2026-09-19" },
+  { path: "/contato", title: "Contato", description: "Fale com o time da PitchYes.", placeholder: true, updated: "2026-09-19" },
 
-  { path: "/privacidade", title: "Política de Privacidade", description: "Como a PitchYes coleta, usa e protege dados pessoais.", placeholder: true },
-  { path: "/termos", title: "Termos de Uso", description: "Termos de uso do site e da plataforma PitchYes.", placeholder: true },
+  { path: "/privacidade", title: "Política de Privacidade", description: "Como a PitchYes coleta, usa e protege dados pessoais.", placeholder: true, updated: "2026-09-19" },
+  { path: "/termos", title: "Termos de Uso", description: "Termos de uso do site e da plataforma PitchYes.", placeholder: true, updated: "2026-09-19" },
 ] as const satisfies readonly SitePage[];
 
 export type PagePath = (typeof pages)[number]["path"];

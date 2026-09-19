@@ -1,0 +1,101 @@
+import type { Metadata } from "next";
+import { getSiteUrl, isIndexable } from "./site";
+
+export const SITE_NAME = "PitchYes";
+export const SITE_TAGLINE = "IA de voz para empresas";
+export const SITE_DESCRIPTION =
+  "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.";
+
+/**
+ * Metadata for one page. Every page must go through here so canonical, Open Graph and
+ * robots stay consistent — see SEO.md ("Checklist para cada página").
+ *
+ * `noindex` is for pages with no real content yet (they stay crawlable via `follow`,
+ * so link equity still flows). The whole site is noindex until it runs on a real domain.
+ */
+export function pageMetadata({
+  title,
+  description,
+  path,
+  noindex = false,
+}: {
+  title?: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+}): Metadata {
+  const indexable = isIndexable() && !noindex;
+  const url = new URL(path, getSiteUrl()).toString();
+  return {
+    // Only set `title` when the page has one: passing undefined would blank out the
+    // layout's default title instead of falling back to it.
+    ...(title ? { title } : {}),
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      title: title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — ${SITE_TAGLINE}`,
+      description,
+      url,
+      siteName: SITE_NAME,
+      locale: "pt_BR",
+      type: "website",
+      // Explicit: a route that declares `openGraph` stops inheriting the
+      // app/opengraph-image.jpg file convention from the root segment.
+      images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: SITE_DESCRIPTION }],
+    },
+    twitter: { card: "summary_large_image", images: ["/twitter-image.jpg"] },
+    robots: { index: indexable, follow: isIndexable() },
+  };
+}
+
+type Thing = Record<string, unknown>;
+
+export function organizationSchema(): Thing {
+  const url = getSiteUrl().origin;
+  return {
+    "@type": "Organization",
+    "@id": `${url}/#organization`,
+    name: SITE_NAME,
+    url,
+    logo: `${url}/brand/pitchyes-logo.svg`,
+    description: SITE_DESCRIPTION,
+    // TODO(seo): add sameAs (LinkedIn, X) and contactPoint once the profiles exist.
+  };
+}
+
+export function webSiteSchema(): Thing {
+  const url = getSiteUrl().origin;
+  return {
+    "@type": "WebSite",
+    "@id": `${url}/#website`,
+    name: SITE_NAME,
+    url,
+    inLanguage: "pt-BR",
+    publisher: { "@id": `${url}/#organization` },
+  };
+}
+
+export function breadcrumbSchema(trail: { name: string; path: string }[]): Thing {
+  const base = getSiteUrl();
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: new URL(item.path, base).toString(),
+    })),
+  };
+}
+
+export function webPageSchema({ title, description, path }: { title: string; description: string; path: string }): Thing {
+  const url = getSiteUrl();
+  return {
+    "@type": "WebPage",
+    "@id": new URL(path, url).toString(),
+    name: title,
+    description,
+    inLanguage: "pt-BR",
+    isPartOf: { "@id": `${url.origin}/#website` },
+  };
+}
