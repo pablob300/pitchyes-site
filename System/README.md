@@ -93,7 +93,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 
 `navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Preços · Recursos ▾ · Blog; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
 
-**Tokens adicionados (PitchYes):** `--color-text-inverse-muted`, `--color-bg-inverse-elevated`, `--color-border-inverse`, `--color-border-inverse-strong`, `--shadow-sm`, `--shadow-lg`.
+**Tokens adicionados (PitchYes):** `--color-text-inverse-muted`, `--color-bg-inverse-elevated`, `--color-border-inverse`, `--color-border-inverse-strong`, `--shadow-sm`, `--shadow-lg`, `--color-badge`, `--color-badge-ink` (selos de certificação).
 
 **Regra de manutenção:** `System/tokens/*.css` e `project/src/styles/tokens/*.css` devem ficar idênticos (exceto o `@font-face`, que no site vem do `next/font`). Todo componente novo criado no site ganha um `.html` de referência aqui e uma entrada no `style-guide.html`.
 

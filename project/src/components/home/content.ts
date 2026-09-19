@@ -98,10 +98,12 @@ export const rollout = {
 export const security = {
   title: "Construída para setores complexos e regulados.",
   lead: "Criptografia, trilhas de auditoria e certificações que passam por segurança, procurement e jurídico. Seus dados continuam seus. Nenhum terceiro acessa uma única ligação.",
+  // One column per certification; controls[i] sits under certifications[i].
   certifications: [
-    { name: "SOC 2", detail: "Type II" },
-    { name: "HIPAA", detail: "BAA" },
-    { name: "PCI DSS", detail: "v4.0" },
+    { status: "Auditado", name: "SOC 2", detail: "Type II" },
+    { status: "Auditado", name: "HIPAA", detail: "BAA" },
+    { status: "Auditado", name: "PCI DSS", detail: "v4.0" },
+    { status: "Certificado", name: "FedRAMP", detail: "20x Class A" },
   ],
   controls: [
     { title: "Criptografia", text: "AES-256 em repouso. TLS 1.3 em trânsito. Chaves protegidas por HSM." },

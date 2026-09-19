@@ -42,6 +42,10 @@
   --color-pastel-gray: #e9e9e4;
   --color-pastel-cream: #f4f3ee;
 
+  /* Certification badges (PitchYes: security section shields) */
+  --color-badge: #dbc29a;
+  --color-badge-ink: #2b241a;
+
   /* Semantic status (inferred from check/x marks in comparison table) */
   --color-positive: #2f6b3a;
   --color-neutral-mark: #15151533;

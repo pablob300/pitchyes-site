@@ -8,31 +8,59 @@
 <style>
   body { margin: 0; padding: var(--space-8) var(--margin); }
   .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
-  body { background: var(--color-bg-subtle); }
-  .certs { list-style: none; margin: 0 0 var(--space-7); padding: 0; display: flex; flex-wrap: wrap; gap: var(--card-gap); }
-  .cert { width: 168px; padding: var(--space-4) var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg); display: flex; flex-direction: column; align-items: center; gap: 2px; }
-  .cert strong { font-size: 20px; font-weight: 600; }
-  .audited { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-positive); }
-  .audited::before { content: "● "; }
-  .detail { font-size: 12px; color: var(--color-text-muted); }
-  .controls { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); }
-  .controls li { border-top: 2px solid var(--color-text); padding-top: var(--space-4); }
-  .controls h3 { font-size: 16px; margin: 0 0 var(--space-2); }
-  .controls p { font-size: 14px; color: var(--color-text-secondary); margin: 0; }
+
+  .head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-7); margin-bottom: var(--space-7); }
+  .head h2 { font-size: 48px; line-height: 52px; letter-spacing: -.96px; max-width: 14ch; margin: 0; }
+  .head p { max-width: 36ch; font-size: 15px; line-height: 1.5; color: var(--color-text-secondary); margin: 0; }
+
+  /* column dividers are borders on the cells, so they fade in with each cell */
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+  .cell { display: flex; flex-direction: column; }
+  .cell + .cell { border-left: 1px solid var(--color-border); }
+  .badge-area { display: grid; place-items: center; padding: var(--space-6) var(--space-5); min-height: 206px; border-bottom: 1px solid var(--color-border-subtle); }
+  .badge { position: relative; width: 96px; height: 124px; }
+  .badge svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .badge path { fill: var(--color-badge); stroke: var(--color-badge-ink); stroke-width: 1.5; }
+  .badge-text { position: relative; height: 100%; padding-top: 18px; display: flex; flex-direction: column; align-items: center; color: var(--color-badge-ink); text-align: center; }
+  .status { font-size: 7.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  .status::after { content: ""; display: block; width: 34px; height: 1px; margin: 6px auto 12px; background: currentColor; opacity: .6; }
+  .badge-text strong { font-size: 16px; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
+  .detail { margin-top: 6px; font-size: 7.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+  .control { padding: var(--space-5); }
+  .control h3 { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 var(--space-2); }
+  .control p { font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); margin: 0; }
+  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } .cell:nth-child(odd) { border-left: 0; } .cell:nth-child(n + 3) { border-top: 1px solid var(--color-border); } .head { flex-direction: column; gap: var(--space-4); } }
 </style>
 </head>
 <body>
-  <p class="note">PitchYes · Selos de certificação + controles com fio superior, sobre --color-bg-subtle. React: Security.tsx</p>
-  <ul class="certs">
-    <li class="cert"><span class="audited">Auditado</span><strong>SOC 2</strong><span class="detail">Type II</span></li>
-    <li class="cert"><span class="audited">Auditado</span><strong>HIPAA</strong><span class="detail">BAA</span></li>
-    <li class="cert"><span class="audited">Auditado</span><strong>PCI DSS</strong><span class="detail">v4.0</span></li>
-  </ul>
-  <ul class="controls">
-    <li><h3>Criptografia</h3><p>AES-256 em repouso. TLS 1.3 em trânsito.</p></li>
-    <li><h3>Residência de dados</h3><p>Brasil e exterior, sob demanda.</p></li>
-    <li><h3>Controle de acesso</h3><p>Privilégio mínimo. MFA em produção.</p></li>
-    <li><h3>Resposta a incidentes</h3><p>Plantão 24/7. Notificação com SLA.</p></li>
+  <p class="note">PitchYes · Selos em escudo (--color-badge) sobre caixa de 4 colunas, controle de segurança abaixo de cada selo. Referência visual: docs/certificacoes-print.jpg (bland.ai). React: project/src/components/home/Security.tsx</p>
+
+  <div class="head">
+    <h2>Construída para setores complexos e regulados.</h2>
+    <p>Criptografia, trilhas de auditoria e certificações que passam por segurança, procurement e jurídico. Seus dados continuam seus. Nenhum terceiro acessa uma única ligação.</p>
+  </div>
+
+  <ul class="grid">
+    <li class="cell">
+      <div class="badge-area"><div class="badge"><svg viewBox="0 0 96 124"><path d="M8 1.5h80a6.5 6.5 0 0 1 6.5 6.5v71c0 16-19 30-46.5 43.5C20.5 109 1.5 95 1.5 79V8A6.5 6.5 0 0 1 8 1.5Z"/></svg>
+        <div class="badge-text"><span class="status">Auditado</span><strong>SOC 2</strong><span class="detail">Type II</span></div></div></div>
+      <div class="control"><h3>Criptografia</h3><p>AES-256 em repouso. TLS 1.3 em trânsito. Chaves protegidas por HSM.</p></div>
+    </li>
+    <li class="cell">
+      <div class="badge-area"><div class="badge"><svg viewBox="0 0 96 124"><path d="M8 1.5h80a6.5 6.5 0 0 1 6.5 6.5v71c0 16-19 30-46.5 43.5C20.5 109 1.5 95 1.5 79V8A6.5 6.5 0 0 1 8 1.5Z"/></svg>
+        <div class="badge-text"><span class="status">Auditado</span><strong>HIPAA</strong><span class="detail">BAA</span></div></div></div>
+      <div class="control"><h3>Residência de dados</h3><p>Opções de implantação no Brasil e no exterior, sob demanda.</p></div>
+    </li>
+    <li class="cell">
+      <div class="badge-area"><div class="badge"><svg viewBox="0 0 96 124"><path d="M8 1.5h80a6.5 6.5 0 0 1 6.5 6.5v71c0 16-19 30-46.5 43.5C20.5 109 1.5 95 1.5 79V8A6.5 6.5 0 0 1 8 1.5Z"/></svg>
+        <div class="badge-text"><span class="status">Auditado</span><strong>PCI DSS</strong><span class="detail">v4.0</span></div></div></div>
+      <div class="control"><h3>Controle de acesso</h3><p>Acesso por função com privilégio mínimo. MFA em todo sistema de produção.</p></div>
+    </li>
+    <li class="cell">
+      <div class="badge-area"><div class="badge"><svg viewBox="0 0 96 124"><path d="M8 1.5h80a6.5 6.5 0 0 1 6.5 6.5v71c0 16-19 30-46.5 43.5C20.5 109 1.5 95 1.5 79V8A6.5 6.5 0 0 1 8 1.5Z"/></svg>
+        <div class="badge-text"><span class="status">Certificado</span><strong>FedRAMP</strong><span class="detail">20x Class A</span></div></div></div>
+      <div class="control"><h3>Resposta a incidentes</h3><p>Engenharia de plantão 24/7. Runbooks documentados. Notificação com SLA.</p></div>
+    </li>
   </ul>
 </body>
 </html>

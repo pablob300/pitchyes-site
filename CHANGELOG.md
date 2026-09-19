@@ -8,6 +8,19 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-19: Seção de certificações no visual do bland.ai + FedRAMP
+
+Cloudflare `83cc49fa`
+
+- **Visual da seção de segurança refeito** conforme a referência `docs/certificacoes-print.jpg`:
+  - Título à esquerda e texto de apoio à direita.
+  - Caixa com borda arredondada e 4 colunas separadas por divisórias.
+  - Em cada coluna, um selo em escudo bege e, abaixo de uma linha, o controle de segurança correspondente, com título em caixa alta.
+  - Fundo branco.
+- **Novo selo FedRAMP** ("Certificado · 20x Class A"), como quarta coluna, abaixo de "Resposta a incidentes".
+- **Celular:** grade 2×2. As divisórias são bordas das próprias colunas, para não aparecer um fundo cinza durante a animação de entrada.
+- **Design system:** tokens `--color-badge` e `--color-badge-ink`, e o componente `security-compliance.html` atualizado.
+
 ## 2026-09-19: Páginas sempre abrem no topo
 
 Commit `9038108` · Cloudflare `c521a002`
@@ -115,7 +128,7 @@ Commit `c25ca10`
 
 ## Pendências antes de ir para o domínio definitivo
 
-- [ ] Validar com o jurídico as certificações (SOC 2, HIPAA, PCI DSS) e a menção à LGPD.
+- [ ] Validar com o jurídico as certificações (SOC 2, HIPAA, PCI DSS, FedRAMP) e a menção à LGPD.
 - [ ] Revisar as respostas adaptadas do FAQ: prazo de implantação e "mais de 40 idiomas".
 - [ ] Depoimentos: vídeos e citações de Guilherme Pacheco, Raphael Garcia e Claudio Riccioppo.
 - [ ] Arquivos de logo (SVG) dos clientes, para substituir os nomes escritos.
