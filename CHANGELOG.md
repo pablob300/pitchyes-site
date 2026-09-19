@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-19: Auditoria de SEO e indexação
 
-Commit `{HASH}` · Cloudflare `b539c76d`
+Commit `da7fdd5` · Cloudflare `b539c76d`
 
 Revisão completa do site do ponto de vista de indexação (Google e mecanismos de IA), com as correções aplicadas. Regras permanentes em [SEO.md](SEO.md).
 
