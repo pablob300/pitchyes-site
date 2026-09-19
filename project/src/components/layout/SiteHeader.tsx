@@ -25,6 +25,16 @@ export function SiteHeader() {
     setOpenDropdown(null);
   }
 
+  // Keep the page behind the open mobile menu from scrolling.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = overflow;
+    };
+  }, [menuOpen]);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
