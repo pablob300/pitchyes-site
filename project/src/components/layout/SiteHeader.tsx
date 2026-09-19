@@ -11,6 +11,16 @@ import styles from "./SiteHeader.module.css";
 const isActive = (pathname: string, href: string) =>
   pathname === href || pathname.startsWith(`${href}/`);
 
+// Label that can turn bold without shifting the centered menu: CSS reserves the bold
+// width up front via ::after { content: attr(data-text) } (SiteHeader.module.css).
+function Label({ text }: { text: string }) {
+  return (
+    <span className={styles.label} data-text={text}>
+      {text}
+    </span>
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -92,7 +102,7 @@ export function SiteHeader() {
                         setOpenDropdown((cur) => (cur === item.label ? null : item.label))
                       }
                     >
-                      {item.label}
+                      <Label text={item.label} />
                       <svg className={styles.chevron} viewBox="0 0 10 10" fill="none" aria-hidden="true">
                         <path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.2" />
                       </svg>
@@ -104,7 +114,7 @@ export function SiteHeader() {
                             href={child.href}
                             aria-current={isActive(pathname, child.href) ? "page" : undefined}
                           >
-                            {child.label}
+                            <Label text={child.label} />
                           </Link>
                         </li>
                       ))}
@@ -118,7 +128,7 @@ export function SiteHeader() {
                       data-active={isActive(pathname, item.href)}
                       aria-current={pathname === item.href ? "page" : undefined}
                     >
-                      {item.label}
+                      <Label text={item.label} />
                     </Link>
                   </li>
                 ),

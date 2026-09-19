@@ -8,6 +8,21 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-19: Menu centralizado e página ativa em negrito
+
+Commit `{HASH}` · Cloudflare `04a050a1`
+
+- **Menu no centro exato da página**, em desktop e tablet:
+  - O header virou uma grade de três colunas: logo, menu e botão, com as laterais de mesma largura.
+  - Antes, o centro do menu ficava 183px à esquerda do centro da tela em 1440px e 88px à esquerda em 1024px.
+  - Medido online em 1440, 1280, 1024, 820 e 768px: centralizado em todas.
+- **Tablet:** o menu completo agora aparece a partir de 768px (iPad em pé), com espaçamento um pouco menor entre os itens. O hambúrguer ficou só para celular (abaixo de 768px). Antes o limite era 900px.
+- **Página ativa em negrito** (peso 700), no lugar do antigo peso 500, que quase não se distinguia:
+  - Vale também para as páginas-filhas: "Soluções" em `/solucoes/ativo`, "Clientes" em `/clientes/cases`, "Blog" em `/blog/categorias`.
+  - "Recursos" fica em negrito em Integrações e Novidades, assim como o item ativo dentro do submenu.
+  - A largura do texto em negrito é reservada de antemão, então o menu não se desloca ao trocar de página. Ficou com 362px em todas as páginas.
+- **Design system:** `navigation.html` atualizado com a grade centralizada e o estado ativo.
+
 ## 2026-09-19: Faixa "Fale com nossa IA" com fundo texturizado, em todas as páginas
 
 Commit `143cda7` · Cloudflare `7e4a5afa` → `6ba8cde2`
