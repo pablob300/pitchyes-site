@@ -3,7 +3,6 @@ import { ClientLogos } from "@/components/home/ClientLogos";
 import { faq } from "@/components/home/content";
 import { CustomerVideos } from "@/components/home/CustomerVideos";
 import { Faq } from "@/components/home/Faq";
-import { FinalCta } from "@/components/home/FinalCta";
 import { Hero } from "@/components/home/Hero";
 import { Latency } from "@/components/home/Latency";
 import { Platform } from "@/components/home/Platform";
@@ -45,7 +44,8 @@ function StructuredData() {
   );
 }
 
-// Section order follows docs/PitchYes — Wireframe Homepage (Desktop).pdf (01 → 10).
+// Section order follows docs/PitchYes — Wireframe Homepage (Desktop).pdf (01 → 09);
+// section 10 (final CTA) is site-wide, rendered by the root layout.
 export default function Home() {
   return (
     <>
@@ -59,7 +59,6 @@ export default function Home() {
       <Security />
       <UseCases />
       <Faq />
-      <FinalCta />
     </>
   );
 }

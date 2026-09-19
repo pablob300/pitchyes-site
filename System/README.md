@@ -16,6 +16,7 @@ System/
 │   ├── motion.css
 │   └── tokens.css            ← importa os 4 acima, é o único arquivo que precisa linkar
 ├── brand/                     ← logo oficial (escura, branca e símbolo)
+├── textures/                  ← texturas originais (cta-texture.webp) e o script que as gera
 ├── components/                ← cada componente é um .html standalone (abre sozinho no navegador)
 ├── fonts/sohne/               ← pesos da Söhne (Test) usados, copiados de /sohne-font-family
 └── reference-screenshots/     ← screenshots reais das páginas, só para consulta (não redistribuir)
@@ -51,7 +52,7 @@ Toda animação do site usa **GSAP** (`gsap` + `@gsap/react`, instalação confo
 
 | Padrão | Como usar | Parâmetros |
 |---|---|---|
-| **Reveal** (fade + slide ao aparecer) | Adicione `data-reveal` ao elemento. Em grades, marque cada card: eles entram em sequência. | `y: 24 → 0`, opacidade `0 → 1`, `0.8s`, `power2.out`, stagger `0.08s`, dispara em `top 95%`, uma vez |
+| **Reveal** (fade + slide ao aparecer) | Adicione `data-reveal` ao elemento. Em grades, marque cada card: eles entram em sequência. | `y: 24 → 0`, opacidade `0 → 1`, `0.8s`, `power2.out`, stagger `0.08s`, dispara quando o elemento passa 5% acima da base da tela (IntersectionObserver, confiável em saltos de rolagem), uma vez |
 | **Contador + barra** (ex.: Latência) | `useGSAP` + timeline com ScrollTrigger; número e largura saem de 0 juntos | `power2.out`, dispara em `top 75%`, duração por item (PitchYes 1s, mercado 3s) |
 
 Regras: animar só `transform`/`opacity` (e `width` em barras); nada de animação em loop chamativa; respeitar `prefers-reduced-motion` (conteúdo aparece direto, sem movimento); o HTML do servidor sempre traz o estado final (sem JS o conteúdo aparece normalmente — fallback de 3s).
@@ -88,7 +89,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 | `timeline.html` | Implantação em dias, último passo em destaque | `home/Rollout.tsx` |
 | `security-compliance.html` | Selos de certificação + controles | `home/Security.tsx` |
 | `cards-use-case.html` | Grade compacta de casos de uso | `home/UseCases.tsx` |
-| `cta-band.html` | Faixa de CTA final (pastel peach + botão escuro) | `home/FinalCta.tsx` |
+| `cta-band.html` | Faixa "Fale com nossa IA" antes do footer, **em todas as páginas**: textura verde em movimento + véu preto 32%, título branco, botão dourado | `layout/FinalCta.tsx` |
 | `page-headline.html` | Topo das páginas internas | `PageHeadline.tsx` |
 
 `navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Preços · Recursos ▾ · Blog; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).

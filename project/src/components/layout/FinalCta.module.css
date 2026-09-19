@@ -1,0 +1,40 @@
+/* PitchYes component — documented in System/components/cta-band.html.
+   Background: original motion-blur texture (System/textures/make_cta_texture.py)
+   under a 32% black scrim, same treatment as the vapi.ai/customers pre-footer band. */
+.band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #000 url("/images/cta-texture.webp") center / cover no-repeat;
+  color: var(--color-text-inverse);
+  padding-block: 112px;
+}
+.band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  text-align: center;
+}
+.inner h2 {
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: -0.8px;
+  max-width: 20ch;
+}
+
+@media (max-width: 640px) {
+  .band { padding-block: 72px; }
+  .inner h2 {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+  }
+}

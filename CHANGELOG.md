@@ -8,6 +8,24 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-19: Faixa "Fale com nossa IA" com fundo texturizado, em todas as páginas
+
+Commit `{HASH}` · Cloudflare `7e4a5afa` → `6ba8cde2`
+
+- **Novo fundo da faixa antes do footer**, no mesmo tratamento da seção equivalente em vapi.ai/customers:
+  - Fundo preto com uma textura verde de desfoque em movimento cobrindo a área toda.
+  - Véu preto de 32% por cima, para dar contraste ao texto.
+- **A textura é original**, gerada por código (`System/textures/make_cta_texture.py`) com a mesma faixa de tons e o mesmo ângulo de movimento da referência. A foto da Vapi não foi copiada, por ser de propriedade deles. Arquivo: `project/public/images/cta-texture.webp`, com 37 KB.
+- **Conteúdo mantido** (textos e fontes). Dois ajustes de contraste obrigatórios sobre o fundo escuro:
+  - O título passou a branco.
+  - O botão passou a dourado, a cor de ação principal do design system.
+- **Em todas as páginas:** a faixa saiu da home e foi para o layout, logo antes do footer. O componente foi para `components/layout/FinalCta.tsx`.
+- **Correção nas animações de entrada:**
+  - **Problema:** em saltos longos de rolagem (âncora, tecla End, voltar restaurando a posição), os blocos do fim da página ficavam invisíveis.
+  - **Correção:** a detecção de "entrou na tela" passou do ScrollTrigger para o `IntersectionObserver` do navegador. A animação continua em GSAP, com os mesmos parâmetros.
+  - **Verificado online** em desktop e celular.
+- **Design system:** pasta `System/textures/` e referência `cta-band.html` atualizada.
+
 ## 2026-09-19: Seção de certificações no visual do bland.ai + FedRAMP
 
 Commit `d0e9461` · Cloudflare `83cc49fa`

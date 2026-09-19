@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FinalCta } from "@/components/layout/FinalCta";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
@@ -38,6 +39,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <SiteHeader />
         <main id="conteudo">{children}</main>
+        {/* "Fale com nossa IA" band: same on every page, right before the footer */}
+        <FinalCta />
         <SiteFooter />
         <ScrollReset />
         <RevealOnScroll />
