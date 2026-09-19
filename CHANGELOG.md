@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-19: Menu centralizado e página ativa em negrito
 
-Commit `{HASH}` · Cloudflare `04a050a1`
+Commit `2d4cdbe` · Cloudflare `04a050a1`
 
 - **Menu no centro exato da página**, em desktop e tablet:
   - O header virou uma grade de três colunas: logo, menu e botão, com as laterais de mesma largura.
