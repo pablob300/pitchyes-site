@@ -6,7 +6,7 @@ import { gsap, motion, ScrollTrigger, useGSAP } from "@/lib/gsap";
 // Fades + slides up every [data-reveal] element the first time it enters the viewport.
 // Mounted once in the root layout; re-scans the page on every route change.
 //
-// Flash-free handoff: an inline script in <head> adds `js` to <html>, and globals.css
+// Flash-free handoff: the inline <head> script (lib/bootstrap.ts) adds `js` to <html>, and globals.css
 // hides [data-reveal] until this component adds `reveal-ready` (after setting the
 // hidden state with GSAP). The same script adds `reveal-ready` after 3s as a fallback
 // so content never stays hidden if scripts fail.
