@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-19: Faixa "Fale com nossa IA" com fundo texturizado, em todas as páginas
 
-Commit `{HASH}` · Cloudflare `7e4a5afa` → `6ba8cde2`
+Commit `143cda7` · Cloudflare `7e4a5afa` → `6ba8cde2`
 
 - **Novo fundo da faixa antes do footer**, no mesmo tratamento da seção equivalente em vapi.ai/customers:
   - Fundo preto com uma textura verde de desfoque em movimento cobrindo a área toda.
