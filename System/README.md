@@ -45,6 +45,17 @@ System/
 
 As mesmas cópias ficam em `project/public/brand/`. No site, use o componente `Logo` (`project/src/components/Logo.tsx`).
 
+## Motion (animações)
+
+Toda animação do site usa **GSAP** (`gsap` + `@gsap/react`, instalação conforme https://gsap.com/docs/v3/Installation/). Plugins são registrados num só lugar: `project/src/lib/gsap.ts`, que também guarda os parâmetros abaixo (`motion`).
+
+| Padrão | Como usar | Parâmetros |
+|---|---|---|
+| **Reveal** (fade + slide ao aparecer) | Adicione `data-reveal` ao elemento. Em grades, marque cada card: eles entram em sequência. | `y: 24 → 0`, opacidade `0 → 1`, `0.8s`, `power2.out`, stagger `0.08s`, dispara em `top 95%`, uma vez |
+| **Contador + barra** (ex.: Latência) | `useGSAP` + timeline com ScrollTrigger; número e largura saem de 0 juntos | `power2.out`, dispara em `top 75%`, duração por item (PitchYes 1s, mercado 3s) |
+
+Regras: animar só `transform`/`opacity` (e `width` em barras); nada de animação em loop chamativa; respeitar `prefers-reduced-motion` (conteúdo aparece direto, sem movimento); o HTML do servidor sempre traz o estado final (sem JS o conteúdo aparece normalmente — fallback de 3s).
+
 ## Tokens principais
 
 | Token | Valor | Uso |

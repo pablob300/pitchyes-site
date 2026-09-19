@@ -9,13 +9,15 @@ export function Hero() {
     <section className={styles.hero}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.copy}>
-          <h1>
+          <h1 data-reveal>
             {hero.titleBefore}
             <span className="accent">{hero.titleAccent}</span>
             {hero.titleAfter}
           </h1>
-          <p className="lead">{hero.lead}</p>
-          <div className={styles.actions}>
+          <p className="lead" data-reveal>
+            {hero.lead}
+          </p>
+          <div className={styles.actions} data-reveal>
             <ButtonLink href={TALK_TO_AI_HREF} size="lg">
               {hero.cta}
             </ButtonLink>
@@ -24,7 +26,9 @@ export function Hero() {
             </p>
           </div>
         </div>
-        <AgentWidget />
+        <div data-reveal>
+          <AgentWidget />
+        </div>
       </div>
     </section>
   );

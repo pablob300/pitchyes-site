@@ -14,15 +14,24 @@
   dt { font-size: 15px; font-weight: 500; }
   .track { margin: 0; height: 48px; background: var(--color-bg-subtle); border-radius: var(--radius-sm); overflow: hidden; }
   .bar { height: 100%; display: flex; align-items: center; padding-inline: var(--space-4); border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; background: var(--color-pastel-gray); color: var(--color-text-secondary); }
+  .bar { overflow: hidden; white-space: nowrap; }
   .bar.hl { background: var(--color-accent-burnt); color: #fff; }
 </style>
 </head>
 <body>
-  <p class="note">PitchYes · Variante em barras do stat-comparison (seção Latência). Largura = proporção entre os valores. React: Latency.tsx</p>
+  <p class="note">PitchYes · Variante em barras do stat-comparison (seção Latência). Largura = proporção entre os valores. No site, barra e número crescem de 0 com GSAP ao aparecer (PitchYes 1s, mercado 3s) — recarregue para ver a prévia. React: Latency.tsx</p>
   <h2>E tudo isso com uma latência tão baixa que você mal percebe.</h2>
   <dl class="rows">
-    <div class="row"><dt>PitchYes</dt><dd class="track"><span class="bar hl" style="width:30%">[XXX]ms</span></dd></div>
-    <div class="row"><dt>Média do mercado</dt><dd class="track"><span class="bar" style="width:100%">[X.XXX]ms</span></dd></div>
+    <div class="row"><dt>PitchYes</dt><dd class="track"><span class="bar hl" data-w="32.26" data-v="400" data-d="1">400ms</span></dd></div>
+    <div class="row"><dt>Média do mercado</dt><dd class="track"><span class="bar" data-w="100" data-v="1240" data-d="3">1.240ms</span></dd></div>
   </dl>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script>
+    document.querySelectorAll(".bar").forEach(function (bar) {
+      var c = { v: 0 }, v = +bar.dataset.v, d = +bar.dataset.d;
+      gsap.fromTo(bar, { width: "0%" }, { width: bar.dataset.w + "%", duration: d, ease: "power2.out" });
+      gsap.to(c, { v: v, duration: d, ease: "power2.out", onUpdate: function () { bar.textContent = Math.round(c.v).toLocaleString("pt-BR") + "ms"; } });
+    });
+  </script>
 </body>
 </html>

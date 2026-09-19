@@ -26,13 +26,13 @@ export function CustomerVideos() {
   return (
     <section className="section" aria-labelledby="clientes-reais-title">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <p className="eyebrow">{eyebrow}</p>
           <h2 id="clientes-reais-title">{title}</h2>
           <p className="lead">{lead}</p>
         </div>
 
-        <div className={styles.slider}>
+        <div className={styles.slider} data-reveal>
           <button type="button" className={styles.arrow} onClick={() => select(active - 1)} aria-label="Depoimento anterior">
             ‹
           </button>
@@ -66,7 +66,7 @@ export function CustomerVideos() {
           ))}
         </div>
 
-        <figure className={styles.caption} aria-live="polite">
+        <figure className={styles.caption} aria-live="polite" data-reveal>
           {current.headline && <h3>{current.headline}</h3>}
           {current.quote ? (
             <blockquote>

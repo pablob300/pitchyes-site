@@ -72,14 +72,14 @@ export function Platform() {
   return (
     <section className="section" aria-labelledby="plataforma-title">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <p className="eyebrow">{platform.eyebrow}</p>
           <h2 id="plataforma-title">{platform.title}</h2>
           <p className="lead">{platform.lead}</p>
         </div>
         <div className={styles.grid}>
           {platform.pillars.map((p) => (
-            <article key={p.key} className={styles.card}>
+            <article key={p.key} className={styles.card} data-reveal>
               <p className="eyebrow">{p.eyebrow}</p>
               <h3>{p.title}</h3>
               <p className={styles.text}>{p.text}</p>

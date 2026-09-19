@@ -5,12 +5,12 @@ export function Rollout() {
   return (
     <section className="section" aria-labelledby="implantacao-title">
       <div className="container">
-        <h2 id="implantacao-title" className={styles.title}>
+        <h2 id="implantacao-title" className={styles.title} data-reveal>
           {rollout.title}
         </h2>
         <ol className={styles.timeline}>
           {rollout.steps.map((step) => (
-            <li key={step.day} className={styles.step} data-live={step.live ?? false}>
+            <li key={step.day} className={styles.step} data-live={step.live ?? false} data-reveal>
               <span className={styles.dot} aria-hidden="true" />
               <p className={styles.day}>{step.day}</p>
               <h3>{step.title}</h3>

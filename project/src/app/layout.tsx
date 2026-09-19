@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { revealBootstrap } from "@/lib/reveal";
 import { getSiteUrl, isIndexable } from "@/lib/site";
 import { brandFont } from "./fonts";
 import "./globals.css";
@@ -21,11 +23,15 @@ export function generateMetadata(): Metadata {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={brandFont.variable}>
+    <html lang="pt-BR" className={brandFont.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: revealBootstrap }} />
+      </head>
       <body>
         <SiteHeader />
         <main id="conteudo">{children}</main>
         <SiteFooter />
+        <RevealOnScroll />
       </body>
     </html>
   );

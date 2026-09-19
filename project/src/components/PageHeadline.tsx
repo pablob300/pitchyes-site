@@ -13,9 +13,17 @@ export function PageHeadline({ eyebrow, title, description, children }: Props) {
   return (
     <section className={styles.headline}>
       <div className="container">
-        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-        <h1>{title}</h1>
-        {description && <p className="lead">{description}</p>}
+        {eyebrow && (
+          <p className="eyebrow" data-reveal>
+            {eyebrow}
+          </p>
+        )}
+        <h1 data-reveal>{title}</h1>
+        {description && (
+          <p className="lead" data-reveal>
+            {description}
+          </p>
+        )}
         {children}
       </div>
     </section>

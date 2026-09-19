@@ -50,11 +50,12 @@ export const platform = {
 
 export const latency = {
   title: "E tudo isso com uma latência tão baixa que você mal percebe.",
-  // TODO: replace with the real production latency before publishing (wireframe note).
-  // Bar widths follow the wireframe: PitchYes at 30%, market average at 100%.
+  unit: "ms",
+  // Bars are proportional to the largest value; each bar and its number count up from
+  // zero over `duration` seconds when the section scrolls into view.
   rows: [
-    { label: "PitchYes", value: "[XXX]ms", width: 30, highlight: true },
-    { label: "Média do mercado", value: "[X.XXX]ms", width: 100, highlight: false },
+    { label: "PitchYes", value: 400, duration: 1, highlight: true },
+    { label: "Média do mercado", value: 1240, duration: 3, highlight: false },
   ],
 };
 

@@ -53,6 +53,14 @@ p {
   white-space: nowrap;
 }
 
+/* Scroll reveal: hidden until GSAP takes over (components/motion/RevealOnScroll.tsx) */
+.js:not(.reveal-ready) [data-reveal] {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js:not(.reveal-ready) [data-reveal] { opacity: 1; }
+}
+
 /* Page sections — vertical rhythm shared by every block */
 .section {
   padding-block: var(--section-lg);

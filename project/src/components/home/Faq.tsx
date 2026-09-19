@@ -6,10 +6,12 @@ export function Faq() {
   return (
     <section className="section" aria-labelledby="faq-title">
       <div className={`container ${styles.wrap}`}>
-        <h2 id="faq-title">{faq.title}</h2>
+        <h2 id="faq-title" data-reveal>
+          {faq.title}
+        </h2>
         <div className={styles.list}>
           {faq.items.map((item) => (
-            <details key={item.q} name="faq" className={styles.item}>
+            <details key={item.q} name="faq" className={styles.item} data-reveal>
               <summary className={styles.q}>
                 {item.q}
                 <span className={styles.icon} aria-hidden="true" />

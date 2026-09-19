@@ -41,7 +41,7 @@ export default async function PlaceholderPage({ params }: PageProps<"/[...slug]"
       <PageHeadline eyebrow={parent?.title} title={page.title} description={page.description} />
       <section className="section">
         <div className={`container ${styles.soon}`}>
-          <p>Conteúdo desta página em construção.</p>
+          <p data-reveal>Conteúdo desta página em construção.</p>
         </div>
       </section>
     </>
