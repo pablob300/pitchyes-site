@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-20: Formulário de contato, painel de leads e nova página Sobre
 
-Commit `PENDENTE` · Cloudflare `8b9529f3`
+Commit `1225a8d` · Cloudflare `8b9529f3`
 
 **Contato**
 
