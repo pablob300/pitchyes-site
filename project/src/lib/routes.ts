@@ -32,9 +32,9 @@ export const pages = [
   { path: "/blog", title: "Blog", description: "Artigos sobre IA de voz, vendas e atendimento.", placeholder: true, updated: "2026-09-19" },
   { path: "/blog/categorias", title: "Categorias do blog", description: "Todas as categorias de artigos do blog da PitchYes.", placeholder: true, updated: "2026-09-19" },
 
-  { path: "/sobre", title: "Sobre a PitchYes", description: "Quem somos e por que construímos IA de voz para empresas.", placeholder: false, updated: "2026-09-19" },
+  { path: "/sobre", title: "Sobre a PitchYes", description: "Empresa brasileira de voz conversacional com IA para contato, vendas, suporte e atendimento.", placeholder: false, updated: "2026-09-20" },
   { path: "/carreiras", title: "Carreiras", description: "Trabalhe na PitchYes.", placeholder: false, updated: "2026-09-19" },
-  { path: "/contato", title: "Contato", description: "Fale com o time da PitchYes.", placeholder: false, updated: "2026-09-19" },
+  { path: "/contato", title: "Contato", description: "Agende uma demonstração gratuita de 30 minutos com o time da PitchYes.", placeholder: false, updated: "2026-09-20" },
 
   { path: "/privacidade", title: "Política de Privacidade", description: "Como a PitchYes coleta, usa e protege dados pessoais.", placeholder: false, updated: "2026-09-20" },
   { path: "/termos", title: "Termos de Uso", description: "Termos de uso do site e da plataforma PitchYes.", placeholder: false, updated: "2026-09-19" },

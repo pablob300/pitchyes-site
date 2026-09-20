@@ -27,10 +27,12 @@ export default function robots(): MetadataRoute.Robots {
   if (!isIndexable()) {
     return { rules: { userAgent: "*", disallow: "/" } };
   }
+  // Área interna e endpoints não entram em buscador nenhum.
+  const off = ["/admin", "/api"];
   return {
     rules: [
-      { userAgent: "*", allow: "/" },
-      { userAgent: AI_AGENTS, allow: "/" },
+      { userAgent: "*", allow: "/", disallow: off },
+      { userAgent: AI_AGENTS, allow: "/", disallow: off },
     ],
     sitemap: absoluteUrl("/sitemap.xml"),
     host: getSiteUrl().origin,

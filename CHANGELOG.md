@@ -8,6 +8,52 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-20: Formulário de contato, painel de leads e nova página Sobre
+
+Commit `PENDENTE` · Cloudflare `8b9529f3`
+
+**Contato**
+
+- **A página /contato virou um formulário**, com os mesmos campos e os canais oficiais da
+  página de contato do pitchyes.com.br: nome, e-mail corporativo, empresa, telefone, tamanho
+  da empresa, interesse principal, faturamento mensal, tamanho do time de vendas, data
+  preferida para a demonstração e o desafio atual.
+- **Canais ao lado do formulário**: telefone +55 (11) 5196-9381 (Seg-Sex, 8h às 20h),
+  comercial@pitchyes.com.br (resposta em até 2 horas), o endereço da sede e o atendimento
+  por WhatsApp — mais o card com os números divulgados pela empresa (400+ empresas, 94% de
+  taxa de sucesso, 3x mais leads qualificados).
+- **Validação nos dois lados** (`src/lib/leads.ts`, o mesmo arquivo roda no navegador e no
+  servidor): nome com no mínimo 3 caracteres e só letras, e-mail com formato válido,
+  telefone brasileiro (DDD de 11 a 99, celular com 9 na frente), opção válida nos campos de
+  seleção e data que não esteja no passado. O telefone ganha máscara enquanto se digita.
+
+**Leads**
+
+- **Nova rota `/api/leads`** recebe qualquer formulário do site, revalida tudo no servidor e
+  grava o envio. O encaminhamento para CRM ou e-mail entra nessa rota depois, sem mexer no front.
+- **Banco D1 `pitchyes-leads`** (binding `LEADS_DB`, schema em `project/migrations/`). Cada
+  registro guarda data, formulário, nome, e-mail, telefone, empresa e o JSON com todos os campos —
+  campo novo no formulário não exige migração.
+- **Painel `/admin/leads`**: tabela com data, horário, nome e e-mail (fuso de Brasília); ao clicar
+  na linha, abre uma ficha à direita com todos os campos preenchidos e um atalho para responder
+  por e-mail.
+- **A área interna exige senha** (autenticação básica em `src/proxy.ts`, segredo `ADMIN_PASSWORD`
+  no Worker). Sem o segredo, a área fica fechada. São dados pessoais de leads: `/admin` e `/api`
+  também entraram no `Disallow` do robots.txt e a página é `noindex`.
+- **O site público ganhou um grupo de rotas `(site)`**: cabeçalho, faixa de CTA e rodapé passaram
+  para o layout desse grupo, então `/admin` renderiza sem a moldura do site.
+
+**Sobre**
+
+- **Página /sobre reescrita** como institucional de empresa de tecnologia: a fila de conversas que
+  não acontecem, as quatro frentes (contato, vendas, suporte e atendimento), por que voz e não
+  mais um chat, como uma operação entra no ar em quatro etapas, os compromissos assumidos e um
+  FAQ com o que é a empresa, quem usa e onde fica. Passou de 414 para 996 palavras.
+- A assinatura "Fale com todos. Converse com cada um." é a própria linha da PitchYes.
+- **`/llms.txt`** ganhou os dados da empresa (CNPJ, sede, canais) e os números divulgados.
+
+**Auditoria depois das mudanças:** 16/16 páginas sem problemas, 9.869 palavras (média de 617).
+
 ## 2026-09-20: Política de Privacidade com o texto oficial
 
 Commit `259e004` · Cloudflare `7a844731`

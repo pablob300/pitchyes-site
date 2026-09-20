@@ -1,0 +1,102 @@
+.wrap { position: relative; }
+
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th,
+.table td {
+  text-align: left;
+  padding: var(--space-3) var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  vertical-align: middle;
+}
+.table thead th {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.table tbody tr:hover { background: var(--color-bg-subtle); }
+.table tbody tr[data-open] { background: var(--color-bg-subtle); }
+.email { color: var(--color-text-secondary); }
+.actionCell { text-align: right; }
+
+.rowButton,
+.rowLink {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-text);
+  text-align: left;
+}
+.rowButton { font-weight: 500; }
+.rowButton:hover,
+.rowLink:hover { color: var(--color-accent-burnt); }
+.rowLink { font-size: 13px; color: var(--color-text-secondary); }
+
+.empty { font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; }
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(21, 21, 21, 0.35);
+  cursor: pointer;
+  z-index: 40;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(440px, 92vw);
+  background: var(--color-bg);
+  border-left: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
+  overflow-y: auto;
+  z-index: 50;
+  display: grid;
+  align-content: start;
+  gap: var(--space-5);
+}
+
+.sidebarHead { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); }
+.sidebarHead h2 { font-size: 22px; line-height: 1.2; }
+.sidebarEyebrow { font-size: 12px; color: var(--color-text-muted); margin-bottom: var(--space-1); }
+
+.close {
+  font-size: 24px;
+  line-height: 1;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  padding: 0 var(--space-1);
+}
+.close:hover { color: var(--color-text); }
+
+.fields { display: grid; gap: var(--space-4); }
+.fields dt {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+.fields dd { font-size: 15px; line-height: 1.5; white-space: pre-wrap; }
+
+.sidebarActions { border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-4); }
+.mail { font-size: 14px; }
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

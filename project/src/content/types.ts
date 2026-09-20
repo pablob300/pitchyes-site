@@ -45,6 +45,17 @@ export type Block =
       columns: string[];
       groups: { title: string; rows: { label: string; values: string[] }[] }[];
     }
+  | {
+      /** Formulário de contato com os canais oficiais ao lado (ver components/forms/LeadForm). */
+      kind: "contact";
+      /** Id do formulário em lib/leads.ts. */
+      form: string;
+      title: string;
+      benefits?: string[];
+      submitLabel: string;
+      channels: { label: string; value: string; hint?: string; href?: string }[];
+      highlight?: { title: string; text: string; stats?: { value: string; label: string }[] };
+    }
   | { kind: "faq"; title: string; items: { q: string; a: string }[] }
   | { kind: "image"; src: string; alt: string; caption?: string }
   | { kind: "links"; title: string; lead?: string; items: { title: string; text: string; href: string }[] };

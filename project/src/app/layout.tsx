@@ -1,7 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { FinalCta } from "@/components/layout/FinalCta";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteHeader } from "@/components/layout/SiteHeader";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { ScrollReset } from "@/components/motion/ScrollReset";
 import { headBootstrap } from "@/lib/bootstrap";
@@ -42,14 +39,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: headBootstrap }} />
       </head>
       <body>
-        <a className="skip-link" href="#conteudo">
-          Pular para o conteúdo
-        </a>
-        <SiteHeader />
-        <main id="conteudo">{children}</main>
-        {/* "Fale com nossa IA" band: same on every page, right before the footer */}
-        <FinalCta />
-        <SiteFooter />
+        {/* A moldura do site (cabeçalho, CTA, rodapé) fica no layout do grupo (site);
+            /admin renderiza só o conteúdo. */}
+        {children}
         <ScrollReset />
         <RevealOnScroll />
       </body>

@@ -32,6 +32,14 @@ Fatos que podem ser citados:
 - Implantação típica em cerca de 7 dias (descoberta, construção, testes, produção).
 - Atendimento nativo em mais de 40 idiomas, com tradução em tempo real em 23 deles.
 - Cobrança por minuto, cobrindo modelo de linguagem, transcrição, síntese de voz e telefonia.
+- Números divulgados pela empresa: mais de 400 empresas atendidas, 94% de taxa de sucesso e 3x mais leads qualificados.
+
+## Dados da empresa
+
+- Razão social: PitchYes — CNPJ 58.177.364/0001-21.
+- Sede: Rua 11, 250, 13º andar, Setor Central, Goiânia (GO), Brasil, CEP 74015-170. Atendimento em todo o Brasil.
+- Comercial: comercial@pitchyes.com.br e +55 (11) 5196-9381, de segunda a sexta, das 8h às 20h (horário de Brasília).
+- Privacidade e LGPD: privacidade@pitchyes.com.br.
 
 ## Planos (valores de referência, em reais)
 
@@ -51,7 +59,8 @@ Em construção. Será publicado em ${absoluteUrl("/blog")} com artigos, categor
 ## Contato
 
 - [Fale com nossa IA](${absoluteUrl("/#fale-com-a-ia")})
-- [Contato](${absoluteUrl("/contato")})
+- [Contato](${absoluteUrl("/contato")}): formulário para agendar uma demonstração gratuita de 30 minutos.
+- Telefone: +55 (11) 5196-9381 · E-mail: comercial@pitchyes.com.br
 
 ## Observações
 

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { LeadForm } from "@/components/forms/LeadForm";
 import { ButtonLink } from "@/components/ui/Button";
 import type { Block, PageContent } from "@/content/types";
+import { getLeadForm } from "@/lib/leads";
 import styles from "./blocks.module.css";
 
 function Blocks({ block }: { block: Block }) {
@@ -230,6 +232,61 @@ function Blocks({ block }: { block: Block }) {
           </div>
         </section>
       );
+
+    case "contact": {
+      const form = getLeadForm(block.form);
+      if (!form) return null;
+      return (
+        <section className="section" id="formulario">
+          <div className={`container ${styles.contact}`}>
+            <div data-reveal>
+              <LeadForm
+                form={form}
+                title={block.title}
+                benefits={block.benefits}
+                submitLabel={block.submitLabel}
+                note={
+                  <>
+                    Ao enviar este formulário, você concorda em receber comunicações da PitchYes.
+                    Tratamos os seus dados conforme a{" "}
+                    <Link href="/privacidade">Política de Privacidade</Link>.
+                  </>
+                }
+              />
+            </div>
+            <div className={styles.contactAside}>
+              <ul className={styles.channels}>
+                {block.channels.map((channel) => (
+                  <li key={channel.label} data-reveal>
+                    <p className={styles.channelLabel}>{channel.label}</p>
+                    <p className={styles.channelValue}>
+                      {channel.href ? <a href={channel.href}>{channel.value}</a> : channel.value}
+                    </p>
+                    {channel.hint && <p className={styles.channelHint}>{channel.hint}</p>}
+                  </li>
+                ))}
+              </ul>
+              {block.highlight && (
+                <div className={styles.highlight} data-reveal>
+                  <h3>{block.highlight.title}</h3>
+                  <p>{block.highlight.text}</p>
+                  {block.highlight.stats && (
+                    <dl className={styles.highlightStats}>
+                      {block.highlight.stats.map((stat) => (
+                        <div key={stat.label}>
+                          <dt>{stat.value}</dt>
+                          <dd>{stat.label}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    }
 
     case "faq":
       return (
