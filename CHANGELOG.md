@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-20: Política de Privacidade com o texto oficial
 
-Commit `PENDENTE` · Cloudflare `7a844731`
+Commit `259e004` · Cloudflare `7a844731`
 
 - **A página /privacidade passou a usar o texto oficial** já publicado em
   <https://www.pitchyes.com.br/privacidade> (última atualização declarada: janeiro de 2025),
