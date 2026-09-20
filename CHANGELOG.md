@@ -8,6 +8,21 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-19: Conteúdo das 15 páginas internas
+
+Commit `{HASH}` · Cloudflare `a0028be6`
+
+- **15 páginas internas com conteúdo real**, escritas do zero em português a partir da estrutura observada no bland.ai e do posicionamento da PitchYes ("Soluções de IA de Voz para Automação de Vendas"): Soluções (hub, ativo, receptivo, por setor, por função), Clientes, Cases, Preços, Integrações, Novidades, Sobre, Carreiras, Contato, Privacidade e Termos. Nenhum texto foi copiado.
+- **Preços** segue a mesma estrutura do bland.ai — três planos (Start, Build, Enterprise) e tabela comparativa em seis grupos — com valores em reais. **Os valores são de referência e precisam de validação comercial.**
+- **Sistema de blocos** (`components/blocks/`) alimentado por arquivos de conteúdo (`src/content/`): herói, prosa, grade de recursos, etapas, números, checklist, cases, logos, planos, tabela, FAQ e links. O texto fica separado do código, fácil de revisar.
+- **SEO de cada página**: título e descrição próprios, canonical, dados estruturados (`WebPage`, `BreadcrumbList`, `FAQPage` e `Service` nas páginas de solução) e pelo menos dois links internos.
+- **Indexação liberada** para essas páginas (saíram de `placeholder`): o sitemap passou de 1 para 16 endereços. O blog continua fora até ser construído.
+- **`/llms.txt`** passou a incluir os planos e os valores, uma das perguntas mais frequentes feitas a mecanismos de IA.
+
+**Auditoria após as mudanças (16 páginas, no site publicado):** nenhum problema. Títulos de 18 a 46 caracteres, descrições de 117 a 155, um `<h1>` por página, 7.604 palavras no total (média de 475 por página), 2 a 4 blocos de dados estruturados por página.
+
+**Pendências de conteúdo marcadas no código (`TODO`)**: valores dos planos, métricas e citações dos cases, lista de integrações nativas, dados da empresa em Sobre, canais de contato reais e revisão jurídica de Privacidade e Termos.
+
 ## 2026-09-19: Auditoria de SEO e indexação
 
 Commit `da7fdd5` · Cloudflare `b539c76d`
@@ -189,6 +204,10 @@ Commit `c25ca10`
 
 - [ ] Validar com o jurídico as certificações (SOC 2, HIPAA, PCI DSS, FedRAMP) e a menção à LGPD.
 - [ ] Revisar as respostas adaptadas do FAQ: prazo de implantação e "mais de 40 idiomas".
+- [ ] Validar os valores dos planos na página de Preços (hoje são referência, não tabela aprovada).
+- [ ] Publicar e-mail, telefone/WhatsApp e endereço na página de Contato.
+- [ ] Confirmar a lista de integrações nativas.
+- [ ] Revisão jurídica das páginas de Privacidade e Termos (hoje são rascunhos).
 - [ ] Depoimentos: vídeos e citações de Guilherme Pacheco, Raphael Garcia e Claudio Riccioppo.
 - [ ] Arquivos de logo (SVG) dos clientes, para substituir os nomes escritos.
 - [ ] URLs do LinkedIn e do X no rodapé.

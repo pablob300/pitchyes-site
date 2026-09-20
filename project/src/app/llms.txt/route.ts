@@ -33,6 +33,13 @@ Fatos que podem ser citados:
 - Atendimento nativo em mais de 40 idiomas, com tradução em tempo real em 23 deles.
 - Cobrança por minuto, cobrindo modelo de linguagem, transcrição, síntese de voz e telefonia.
 
+## Planos (valores de referência, em reais)
+
+- Start (desenvolvedores): R$ 0,79/min, sem mensalidade de plataforma, 10 ligações simultâneas, 100 ligações/dia.
+- Build (times): R$ 0,69/min + R$ 1.590/mês, 50 ligações simultâneas, 2.000 ligações/dia, WhatsApp/SMS/chat.
+- Enterprise (organizações): sob consulta, contratado por volume, com implantação dedicada, SSO, residência de dados e SLA.
+- Transferência para humano é cobrada à parte, por minuto transferido.
+
 ## Páginas principais
 
 - [Início](${absoluteUrl("/")}): ${SITE_DESCRIPTION}

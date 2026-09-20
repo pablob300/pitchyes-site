@@ -4,7 +4,7 @@ import { getSiteUrl, isIndexable } from "./site";
 export const SITE_NAME = "PitchYes";
 export const SITE_TAGLINE = "IA de voz para empresas";
 export const SITE_DESCRIPTION =
-  "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.";
+  "Agentes de voz com IA que fazem e recebem ligações em escala: prospecção, atendimento e agendamento para saúde, seguros e serviços financeiros.";
 
 /**
  * Metadata for one page. Every page must go through here so canonical, Open Graph and
@@ -72,6 +72,20 @@ export function webSiteSchema(): Thing {
     url,
     inLanguage: "pt-BR",
     publisher: { "@id": `${url}/#organization` },
+  };
+}
+
+export function serviceSchema({ name, description, path }: { name: string; description: string; path: string }): Thing {
+  const url = getSiteUrl();
+  return {
+    "@type": "Service",
+    "@id": `${new URL(path, url).toString()}#service`,
+    name,
+    description,
+    serviceType: "IA de voz para ligações ativas e receptivas",
+    areaServed: "BR",
+    inLanguage: "pt-BR",
+    provider: { "@id": `${url.origin}/#organization` },
   };
 }
 
