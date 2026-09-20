@@ -8,6 +8,25 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-20: Auditoria versionada e instruções de trabalho
+
+Commit `PENDENTE` · Cloudflare `eebdf4d6`
+
+- **Auditoria de SEO virou script no repositório** (`project/scripts/seo-audit.mjs`, Node puro,
+  sem dependências). Lê o `sitemap-paginas.xml` do site publicado e confere, página a página,
+  título, descrição, canonical, `robots`, `og:image`, `<h1>` único, saltos de hierarquia,
+  `WebPage`/`BreadcrumbList` no JSON-LD, imagem sem `alt` e contagem de palavras. Antes cada
+  revisão reescrevia a checagem do zero. Sai com código 1 quando encontra problema; em
+  `*.workers.dev` o `noindex` é esperado e não conta como erro.
+- **Descrição de `/privacidade` corrigida**: tinha 117 caracteres, fora da faixa de 120–160
+  exigida pelo SEO.md. Passou para 144. Era a única página com problema na auditoria.
+- **`CLAUDE.md` reescrito** com o mapa de "onde mexer em cada coisa" (routes, seo, content,
+  blocos, tokens), o caminho para criar uma página nova e as convenções do projeto.
+- **`SEO.md`**: a seção 8 passou a descrever o script real e como rodá-lo, e ganhou uma
+  seção 9 com os cinco erros que já aconteceram neste site, para não se repetirem.
+
+**Auditoria depois das mudanças:** 16/16 páginas sem problemas, 9.055 palavras (média de 566).
+
 ## 2026-09-19: Conteúdo das 15 páginas internas
 
 Commit `2fd514c` · Cloudflare `a0028be6`

@@ -40,6 +40,7 @@ Estado atual e histórico das versões: [CHANGELOG.md](CHANGELOG.md).
 - [ ] Conteúdo com substância: para páginas comerciais, mire 600+ palavras reais; páginas com 2 frases não competem.
 - [ ] Ao publicar conteúdo de verdade: `placeholder: false` (isso a coloca no sitemap e libera a indexação).
 - [ ] Atualize `/llms.txt` (`project/src/app/llms.txt/route.ts`) quando mudarem fatos, números ou a lista de páginas.
+- [ ] Depois de publicar, rode `node scripts/seo-audit.mjs` (seção 8) — ela confere todos os itens acima no site online.
 
 ## 3. Mecanismos de IA (ChatGPT, Gemini, Perplexity, Claude)
 
@@ -95,6 +96,35 @@ Orçamento por página, medido no site publicado:
 
 ## 8. Medição
 
-Scripts de auditoria usados nas revisões (rodam contra o site publicado, via Chrome headless):
-metadados, dados estruturados, hierarquia de títulos, links, Core Web Vitals. Ao fazer uma
-mudança grande, rode a auditoria antes e depois e registre o resultado no CHANGELOG.
+A auditoria está versionada em `project/scripts/seo-audit.mjs` — Node puro, sem dependências.
+Ela lê `/sitemap-paginas.xml` do site publicado e confere página a página: título, descrição,
+canonical, `robots`, `og:image`, um único `<h1>`, saltos na hierarquia de títulos, `WebPage` e
+`BreadcrumbList` no JSON-LD, imagem sem `alt` e contagem de palavras.
+
+```bash
+cd project
+node scripts/seo-audit.mjs                       # ambiente de homologação (workers.dev)
+node scripts/seo-audit.mjs https://pitchyes.com.br   # domínio definitivo
+```
+
+Sai com código 1 se alguma página tiver problema. Em `*.workers.dev` o `noindex` é esperado e
+não conta como erro; no domínio definitivo, conta.
+
+**Rode antes e depois de qualquer mudança grande** e registre o resultado no `CHANGELOG.md`.
+Ela olha só o HTML do servidor — é exatamente o que o robô lê. Peso, LCP e CLS continuam
+sendo medidos à parte (DevTools/PageSpeed), contra o site publicado.
+
+## 9. Erros que já aconteceram neste site
+
+Custaram tempo uma vez; a auditoria hoje pega cada um deles.
+
+1. **Animação de entrada com `visibility: hidden`** — 651 das 786 palavras da home ficaram
+   invisíveis para os robôs. Revelação é sempre por opacidade.
+2. **`<title>` vazio na home** — `pageMetadata()` recebia `title: undefined` e apagava o título
+   padrão do layout. Hoje o campo só é escrito quando existe.
+3. **Imagem social ausente nas páginas internas** — uma rota que declara `openGraph` deixa de
+   herdar `app/opengraph-image.jpg` do segmento raiz; a imagem precisa ser repetida (já está
+   dentro de `pageMetadata()`).
+4. **Descrição fora da faixa** (117 caracteres em `/privacidade`) — 120 a 160, sempre.
+5. **Página placeholder indexada** — página sem conteúdo real nasce `placeholder: true`,
+   fora do sitemap e `noindex`.

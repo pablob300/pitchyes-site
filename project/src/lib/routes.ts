@@ -36,7 +36,7 @@ export const pages = [
   { path: "/carreiras", title: "Carreiras", description: "Trabalhe na PitchYes.", placeholder: false, updated: "2026-09-19" },
   { path: "/contato", title: "Contato", description: "Fale com o time da PitchYes.", placeholder: false, updated: "2026-09-19" },
 
-  { path: "/privacidade", title: "Política de Privacidade", description: "Como a PitchYes coleta, usa e protege dados pessoais.", placeholder: false, updated: "2026-09-19" },
+  { path: "/privacidade", title: "Política de Privacidade", description: "Como a PitchYes coleta, usa e protege dados pessoais.", placeholder: false, updated: "2026-09-20" },
   { path: "/termos", title: "Termos de Uso", description: "Termos de uso do site e da plataforma PitchYes.", placeholder: false, updated: "2026-09-19" },
 ] as const satisfies readonly SitePage[];
 

@@ -5,7 +5,7 @@ import type { PageContent } from "./types";
 export const privacidade: PageContent = {
   seoTitle: "Política de Privacidade",
   seoDescription:
-    "Como a PitchYes coleta, usa, compartilha e protege dados pessoais, e como exercer os seus direitos previstos na LGPD.",
+    "Como a PitchYes coleta, usa, compartilha e protege dados pessoais no site e na plataforma de IA de voz, e como exercer os seus direitos na LGPD.",
   eyebrow: "Legal",
   h1: "Política de Privacidade",
   lead: "Esta política explica como a PitchYes trata dados pessoais no site e na plataforma de IA de voz, e como você exerce os direitos previstos na Lei Geral de Proteção de Dados (LGPD).",
