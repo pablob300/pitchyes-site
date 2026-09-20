@@ -1,82 +1,109 @@
 import type { PageContent } from "./types";
 
-// TODO(jurídico): RASCUNHO. Precisa de revisão jurídica antes da publicação no domínio
-// definitivo — inclusive razão social, CNPJ, endereço, canal do encarregado (DPO) e prazos.
+// Texto oficial, copiado da política publicada em https://www.pitchyes.com.br/privacidade
+// (última atualização declarada lá: janeiro de 2025). Não altere o conteúdo por conta própria:
+// qualquer mudança precisa sair do jurídico e valer para os dois sites.
+// TODO(jurídico): razão social completa e canal do encarregado (DPO) ainda não constam do texto.
 export const privacidade: PageContent = {
   seoTitle: "Política de Privacidade",
   seoDescription:
     "Como a PitchYes coleta, usa, compartilha e protege dados pessoais no site e na plataforma de IA de voz, e como exercer os seus direitos na LGPD.",
   eyebrow: "Legal",
   h1: "Política de Privacidade",
-  lead: "Esta política explica como a PitchYes trata dados pessoais no site e na plataforma de IA de voz, e como você exerce os direitos previstos na Lei Geral de Proteção de Dados (LGPD).",
+  lead: "Última atualização: Janeiro de 2025",
   blocks: [
     {
       kind: "prose",
+      title: "1. Informações Gerais",
       paragraphs: [
-        "Versão em revisão jurídica. Os dados de identificação da empresa e o canal do encarregado serão publicados na versão final.",
-      ],
-    },
-    {
-      kind: "prose",
-      title: "1. Quem trata os seus dados",
-      paragraphs: [
-        "A PitchYes atua de duas formas. No site, somos controladores dos dados de quem navega e entra em contato. Na plataforma, atuamos como operadores: tratamos os dados das ligações em nome do cliente contratante, que define a finalidade do tratamento.",
-      ],
-    },
-    {
-      kind: "prose",
-      title: "2. Dados que coletamos",
-      paragraphs: [
-        "No site: dados de contato que você informa (nome, e-mail, telefone, empresa) e dados técnicos de navegação necessários para segurança e funcionamento.",
-        "Na plataforma: gravações e transcrições das ligações, identificadores do contato, resultados do atendimento e registros técnicos da chamada. O escopo exato é definido no contrato com cada cliente.",
-      ],
-    },
-    {
-      kind: "prose",
-      title: "3. Para que usamos",
-      paragraphs: [
-        "Responder a solicitações de contato, prestar e operar o serviço contratado, garantir segurança e prevenir fraude, cumprir obrigações legais e regulatórias e melhorar a qualidade do atendimento, sempre dentro da finalidade informada.",
-      ],
-    },
-    {
-      kind: "prose",
-      title: "4. Compartilhamento",
-      paragraphs: [
-        "Não vendemos dados pessoais. Compartilhamos apenas com fornecedores necessários à operação (como infraestrutura e telefonia), sob contrato e com obrigação de confidencialidade, ou quando exigido por autoridade competente.",
-      ],
-    },
-    {
-      kind: "prose",
-      title: "5. Segurança e retenção",
-      paragraphs: [
-        "Aplicamos criptografia em repouso e em trânsito, acesso por função com privilégio mínimo, autenticação forte em sistemas de produção e trilha de auditoria. Os dados são mantidos pelo tempo necessário à finalidade e aos prazos legais, e depois eliminados ou anonimizados.",
+        "A PitchYes, pessoa jurídica de direito privado, com sede na Rua 11, 250, 13º andar - Setor Central, Goiânia (GO), Brasil - 74015-170, inscrita no CNPJ sob o nº 58.177.364/0001-21, leva a sua privacidade a sério e zela pela segurança e proteção de dados de todos os seus usuários.",
+        "Esta Política de Privacidade destina-se a informá-lo sobre como coletamos, usamos, comunicamos, divulgamos e fazemos uso de informações pessoais.",
       ],
     },
     {
       kind: "checklist",
-      title: "6. Seus direitos",
-      lead: "Conforme a LGPD, você pode solicitar a qualquer momento:",
+      title: "2. Informações que Coletamos",
+      lead: "Coletamos informações que você nos fornece diretamente, como:",
       items: [
-        "Confirmação da existência de tratamento e acesso aos dados",
+        "Nome e informações de contato (e-mail, telefone)",
+        "Informações da empresa (nome, setor, tamanho)",
+        "Dados de uso da plataforma",
+        "Informações de comunicação e feedback",
+      ],
+    },
+    {
+      kind: "checklist",
+      title: "3. Como Usamos suas Informações",
+      lead: "Utilizamos as informações coletadas para:",
+      items: [
+        "Fornecer e melhorar nossos serviços",
+        "Comunicar sobre atualizações e novidades",
+        "Oferecer suporte técnico",
+        "Personalizar sua experiência",
+        "Cumprir obrigações legais",
+      ],
+    },
+    {
+      kind: "checklist",
+      title: "4. Compartilhamento de Informações",
+      lead: "Não vendemos, alugamos ou compartilhamos suas informações pessoais com terceiros, exceto nas seguintes situações:",
+      items: [
+        "Com seu consentimento explícito",
+        "Para prestadores de serviços que nos auxiliam",
+        "Quando exigido por lei ou autoridades competentes",
+        "Para proteger nossos direitos legais",
+      ],
+    },
+    {
+      kind: "prose",
+      title: "5. Segurança dos Dados",
+      paragraphs: [
+        "Implementamos medidas de segurança técnicas e organizacionais adequadas para proteger suas informações contra acesso não autorizado, alteração, divulgação ou destruição. Utilizamos criptografia SSL, controles de acesso rigorosos e monitoramento contínuo de nossa infraestrutura.",
+      ],
+    },
+    {
+      kind: "checklist",
+      title: "6. Seus Direitos (LGPD)",
+      lead: "De acordo com a Lei Geral de Proteção de Dados (LGPD), você tem os seguintes direitos:",
+      items: [
+        "Confirmação da existência de tratamento de dados",
+        "Acesso aos seus dados pessoais",
         "Correção de dados incompletos, inexatos ou desatualizados",
-        "Anonimização, bloqueio ou eliminação de dados desnecessários",
-        "Portabilidade dos dados a outro fornecedor",
-        "Informação sobre com quem compartilhamos seus dados",
-        "Revogação do consentimento, quando o tratamento se basear nele",
+        "Anonimização, bloqueio ou eliminação de dados",
+        "Portabilidade dos dados",
+        "Eliminação dos dados tratados com consentimento",
+        "Revogação do consentimento",
       ],
     },
     {
       kind: "prose",
-      title: "7. Cookies",
+      title: "7. Retenção de Dados",
       paragraphs: [
-        "Usamos apenas o necessário para o funcionamento e a segurança do site. Se passarmos a usar cookies de análise ou publicidade, esta política será atualizada e o consentimento será solicitado antes da coleta.",
+        "Mantemos suas informações pessoais apenas pelo tempo necessário para cumprir as finalidades descritas nesta política, exceto quando a retenção por período mais longo for exigida ou permitida por lei.",
       ],
     },
     {
       kind: "prose",
-      title: "8. Como falar com a gente",
+      title: "8. Cookies e Tecnologias Similares",
       paragraphs: [
-        "Pedidos relacionados a dados pessoais podem ser feitos pela página de contato. Na versão final desta política será publicado o canal direto do encarregado pelo tratamento de dados (DPO).",
+        "Utilizamos cookies e tecnologias similares para melhorar sua experiência, analisar o uso do site e personalizar conteúdo. Você pode gerenciar suas preferências de cookies através das configurações do seu navegador.",
+      ],
+    },
+    {
+      kind: "prose",
+      title: "9. Alterações nesta Política",
+      paragraphs: [
+        "Podemos atualizar esta Política de Privacidade periodicamente. Notificaremos sobre mudanças significativas por e-mail ou através de aviso em nosso site. A data da última atualização será sempre indicada no topo desta página.",
+      ],
+    },
+    {
+      kind: "prose",
+      title: "10. Contato",
+      paragraphs: [
+        "Para exercer seus direitos ou esclarecer dúvidas sobre esta Política de Privacidade, entre em contato conosco:",
+        "E-mail: privacidade@pitchyes.com.br",
+        "Telefone: +55 (11) 5196-9381",
+        "Endereço: Rua 11, 250, 13º andar - Setor Central, Goiânia (GO), Brasil - 74015-170",
       ],
     },
     {
@@ -84,7 +111,7 @@ export const privacidade: PageContent = {
       title: "Documentos relacionados",
       items: [
         { title: "Termos de Uso", text: "Regras de uso do site e da plataforma.", href: "/termos" },
-        { title: "Contato", text: "Canal para exercer os seus direitos.", href: "/contato" },
+        { title: "Contato", text: "Canal para falar com o time da PitchYes.", href: "/contato" },
       ],
     },
   ],

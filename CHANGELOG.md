@@ -8,6 +8,23 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-20: Política de Privacidade com o texto oficial
+
+Commit `PENDENTE` · Cloudflare `7a844731`
+
+- **A página /privacidade passou a usar o texto oficial** já publicado em
+  <https://www.pitchyes.com.br/privacidade> (última atualização declarada: janeiro de 2025),
+  no lugar do rascunho que estava no ar. As 10 seções foram mantidas na mesma ordem e com a
+  mesma redação; só a forma mudou, para os blocos do site (prosa e listas).
+- **Dados da empresa agora no site:** CNPJ 58.177.364/0001-21, sede na Rua 11, 250, 13º andar -
+  Setor Central, Goiânia (GO) - 74015-170, e-mail privacidade@pitchyes.com.br e
+  telefone +55 (11) 5196-9381.
+- O texto é do jurídico: o arquivo (`src/content/privacidade.ts`) traz o aviso de que qualquer
+  mudança precisa sair de lá e valer para os dois sites. Continuam pendentes a razão social
+  completa e o canal do encarregado (DPO), que não constam do texto oficial.
+
+**Auditoria depois da mudança:** 16/16 páginas sem problemas; /privacidade com 528 palavras.
+
 ## 2026-09-20: Auditoria versionada e instruções de trabalho
 
 Commit `1295653` · Cloudflare `eebdf4d6`
