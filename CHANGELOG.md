@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-19: Conteúdo das 15 páginas internas
 
-Commit `{HASH}` · Cloudflare `a0028be6`
+Commit `2fd514c` · Cloudflare `a0028be6`
 
 - **15 páginas internas com conteúdo real**, escritas do zero em português a partir da estrutura observada no bland.ai e do posicionamento da PitchYes ("Soluções de IA de Voz para Automação de Vendas"): Soluções (hub, ativo, receptivo, por setor, por função), Clientes, Cases, Preços, Integrações, Novidades, Sobre, Carreiras, Contato, Privacidade e Termos. Nenhum texto foi copiado.
 - **Preços** segue a mesma estrutura do bland.ai — três planos (Start, Build, Enterprise) e tabela comparativa em seis grupos — com valores em reais. **Os valores são de referência e precisam de validação comercial.**
