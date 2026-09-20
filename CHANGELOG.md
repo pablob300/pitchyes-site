@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-20: Auditoria versionada e instruções de trabalho
 
-Commit `PENDENTE` · Cloudflare `eebdf4d6`
+Commit `1295653` · Cloudflare `eebdf4d6`
 
 - **Auditoria de SEO virou script no repositório** (`project/scripts/seo-audit.mjs`, Node puro,
   sem dependências). Lê o `sitemap-paginas.xml` do site publicado e confere, página a página,
