@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Painel — passo 3: Usuários
 
-Commit `PENDENTE` · Cloudflare `4612ba19`
+Commit `9801d04` · Cloudflare `4612ba19`
 
 - **Nova seção Usuários** (`/admin/usuarios`): quem tem acesso, com nome, e-mail, papel,
   situação, último acesso e quantos aparelhos reconhecidos.
