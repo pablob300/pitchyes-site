@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Texto alternativo em todas as imagens
 
-Commit `PENDENTE` · Cloudflare `90e1866d`
+Commit `8605839` · Cloudflare `90e1866d`
 
 - **As 73 imagens do site passaram a ter `alt` com texto.** Antes quatro lugares usavam
   `alt=""`: a parede de logos de /clientes, a cópia decorativa da faixa de logos da home, as
