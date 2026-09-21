@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { ClientLogos } from "@/components/home/ClientLogos";
-import { faq } from "@/components/home/content";
+import { faq, testimonials } from "@/components/home/content";
 import { CustomerVideos } from "@/components/home/CustomerVideos";
 import { Faq } from "@/components/home/Faq";
 import { Hero } from "@/components/home/Hero";
@@ -14,6 +14,7 @@ import {
   organizationSchema,
   pageMetadata,
   SITE_DESCRIPTION,
+  videoSchema,
   webPageSchema,
   webSiteSchema,
 } from "@/lib/seo";
@@ -44,6 +45,7 @@ export default function Home() {
               acceptedAnswer: { "@type": "Answer", text: item.a },
             })),
           },
+          ...testimonials.items.map(videoSchema),
         ]}
       />
       <Hero />

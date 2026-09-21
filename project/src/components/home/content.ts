@@ -53,30 +53,71 @@ export const latency = {
 };
 
 export type Testimonial = {
-  name: string;
-  role: string;
+  /** Empresa que aparece no depoimento — é o título do vídeo no canal da PitchYes. */
+  company: string;
+  /** Id do Short no YouTube. */
+  videoId: string;
+  /** Capa em 9:16, baixada do próprio vídeo (servida pelo site, não pelo YouTube). */
+  thumb: string;
+  /** Duração em segundos, para os dados estruturados. */
+  seconds: number;
+  /** Data de publicação no YouTube (ISO), para os dados estruturados. */
+  published: string;
+  /** TODO(conteúdo): nome e cargo de quem fala, quando o time confirmar. */
+  person?: string;
+  role?: string;
   headline?: string;
   quote?: string;
 };
 
+// Vídeos do canal da PitchYes no YouTube (Shorts).
+const testimonialItems: Testimonial[] = [
+    {
+      company: "Paybem",
+      videoId: "7bTaV1HrFYg",
+      thumb: "/images/depoimentos/paybem.webp",
+      seconds: 74,
+      published: "2025-11-28",
+    },
+    {
+      company: "Top Master",
+      videoId: "8-4ZIc3IP7c",
+      thumb: "/images/depoimentos/top-master.webp",
+      seconds: 103,
+      published: "2025-11-28",
+    },
+    {
+      company: "Grupo TGPM",
+      videoId: "DIWdzNoeD2U",
+      thumb: "/images/depoimentos/grupo-tgpm.webp",
+      seconds: 59,
+      published: "2025-11-28",
+    },
+    {
+      company: "Mais Vida",
+      videoId: "YUob3BDLV7A",
+      thumb: "/images/depoimentos/mais-vida.webp",
+      seconds: 119,
+      published: "2025-11-28",
+    },
+    {
+      company: "Sittax",
+      videoId: "Gifdfv2cbaM",
+      thumb: "/images/depoimentos/sittax.webp",
+      seconds: 57,
+      published: "2025-11-28",
+    },
+  ];
+
 export const testimonials = {
   eyebrow: "Clientes reais",
   title: "Clientes reais. Resultado real.",
-  lead: "Como empresas de energia, tecnologia e serviços estão automatizando ligações com a PitchYes.",
-  // TODO: add video files, plus headline/quote for each client (only Leandro's is in the wireframe).
-  items: [
-    {
-      name: "Leandro Vasconcelos",
-      role: "CEO, OPEN Datacenter",
-      headline: "De horas para minutos no volume de ligações.",
-      quote: "Equipe de mais de 40 vendedores. A IA da PitchYes fez o que levava horas, em minutos.",
-    },
-    { name: "Guilherme Pacheco", role: "Diretor, Alves Pacheco" },
-    { name: "Raphael Garcia", role: "Diretor Comercial, Plaza" },
-    { name: "Claudio Riccioppo", role: "CEO, Employability" },
-  ] satisfies Testimonial[],
-};
+  lead: "Empresas de pagamentos, saúde, educação e tecnologia contando, em vídeo, o que mudou depois de automatizar as ligações com a PitchYes.",
+  // Vídeos do canal da PitchYes no YouTube (Shorts). As capas em /images/depoimentos foram
+  // extraídas do próprio vídeo, para a página não depender de um pedido ao YouTube.
+  items: testimonialItems,
 
+};
 export const rollout = {
   title: "Sua operação com IA de voz, ao vivo em poucos dias.",
   steps: [

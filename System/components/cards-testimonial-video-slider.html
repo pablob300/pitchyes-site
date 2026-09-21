@@ -120,6 +120,15 @@
 <body>
   <h2>O que nossos clientes dizem.</h2>
 
+  <!-- Como isto vive no site (React: project/src/components/home/CustomerVideos.tsx):
+       os depoimentos são Shorts do canal da PitchYes no YouTube, exibidos em 9:16.
+       O card mostra a CAPA servida pelo próprio site (/images/depoimentos/*.webp, extraída
+       do vídeo) com um botão de play; só quando a pessoa clica é que o iframe do
+       youtube-nocookie entra na página — nada é pedido ao YouTube antes disso, e o peso
+       da home não muda. Abaixo do carrossel fica o link "Ver o depoimento da <empresa> no
+       YouTube", e cada vídeo tem VideoObject nos dados estruturados (lib/seo.ts).
+       Os cards abaixo são a maquete original, com nomes de exemplo. -->
+
   <div class="shorts-slider">
     <button class="arrow-btn" data-dir="-1" aria-label="Anterior">←</button>
 

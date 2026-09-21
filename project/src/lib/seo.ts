@@ -89,6 +89,37 @@ export function serviceSchema({ name, description, path }: { name: string; descr
   };
 }
 
+/** Depoimento em vídeo hospedado no YouTube (Shorts do canal da PitchYes). */
+export function videoSchema({
+  company,
+  videoId,
+  thumb,
+  seconds,
+  published,
+}: {
+  company: string;
+  videoId: string;
+  thumb: string;
+  seconds: number;
+  published: string;
+}): Thing {
+  const url = getSiteUrl();
+  const minutes = Math.floor(seconds / 60);
+  const rest = seconds % 60;
+  return {
+    "@type": "VideoObject",
+    name: `Depoimento da ${company} sobre a PitchYes`,
+    description: `${company} conta o que mudou na operação depois de automatizar ligações com a IA de voz da PitchYes.`,
+    thumbnailUrl: new URL(thumb, url).toString(),
+    uploadDate: published,
+    duration: `PT${minutes ? `${minutes}M` : ""}${rest}S`,
+    embedUrl: `https://www.youtube.com/embed/${videoId}`,
+    contentUrl: `https://www.youtube.com/shorts/${videoId}`,
+    inLanguage: "pt-BR",
+    publisher: { "@id": `${url.origin}/#organization` },
+  };
+}
+
 export function breadcrumbSchema(trail: { name: string; path: string }[]): Thing {
   const base = getSiteUrl();
   return {

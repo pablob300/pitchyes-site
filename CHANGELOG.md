@@ -8,6 +8,26 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Depoimentos em vídeo (Shorts do YouTube)
+
+Commit `PENDENTE` · Cloudflare `1ce3cd07`
+
+- **Os cinco depoimentos do canal da PitchYes entraram no carrossel da home**: Paybem,
+  Top Master, Grupo TGPM, Mais Vida e Sittax, no formato vertical (9:16) dos Shorts.
+  Os cards de espera com gradiente saíram.
+- **Play sem custo para a página**: o card mostra a capa do próprio vídeo, servida pelo site
+  (`/images/depoimentos/*.webp`, extraídas do vídeo e convertidas para WebP, 16 a 45 KB cada,
+  com carregamento adiado). Só quando a pessoa clica é que o iframe do **youtube-nocookie**
+  entra na página — antes disso, nenhum pedido vai para o YouTube.
+- **Legenda e link acompanham o vídeo ativo**, com o texto "Ver o depoimento da <empresa> no
+  YouTube" (link descritivo, como manda o SEO.md).
+- **Dados estruturados `VideoObject`** para cada depoimento (`videoSchema()` em `lib/seo.ts`),
+  com nome, descrição, capa, data de publicação e duração reais, lidas do YouTube.
+- **TODO(conteúdo)**: nome e cargo de quem fala em cada vídeo, além da frase de destaque —
+  hoje o card mostra só a empresa. Os campos já existem em `content.ts`.
+
+**Auditoria:** 16/16 páginas sem problemas.
+
 ## 2026-09-21: Amostras de voz no widget da home
 
 Commit `8f89b73` · Cloudflare `f260504e`
