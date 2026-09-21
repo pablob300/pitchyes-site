@@ -82,13 +82,26 @@
 }
 .orb:hover { transform: scale(1.05); }
 
-.orbCore {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--color-text-inverse);
+/* Play: triângulo deslocado 4px à direita, para parecer centrado no círculo */
+.playIcon {
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-left: 18px solid var(--color-text-inverse);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
 }
-.orb[data-active="true"] .orbCore { border-radius: 3px; }
+
+/* Pause: duas barras */
+.pauseIcon {
+  width: 16px;
+  height: 20px;
+  border-left: 5px solid var(--color-text-inverse);
+  border-right: 5px solid var(--color-text-inverse);
+}
+
+/* Tocando: o anel para de pulsar e fica fixo, sinalizando que já está no ar */
+.orb[data-playing]::after { animation: none; opacity: 0.9; transform: scale(1.08); }
 
 .agentName {
   font-size: 15px;

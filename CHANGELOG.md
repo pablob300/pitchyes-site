@@ -8,6 +8,26 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Amostras de voz no widget da home
+
+Commit `PENDENTE` · Cloudflare `f260504e`
+
+- **"Fale com um agente" virou "Ouça nossos agentes".** O círculo laranja passou a ser o
+  play/pause de uma amostra de voz: o círculo branco deu lugar a um **ícone de play**, e durante
+  a reprodução ele vira **pause**, para a pessoa parar com um segundo clique.
+- **Um áudio por setor** (PitchYes, Saúde, Seguros, Financeiro e Imobiliário). Trocar de aba
+  interrompe o que estava tocando e começa do zero.
+- **A linha de status mostra o tempo** ("Tocando · 0:12 de 1:14", "Pausado · …") e volta ao texto
+  de convite quando o áudio termina.
+- **Peso da página não mudou**: `preload="none"` — o MP3 só é baixado quando a pessoa dá play.
+  Os arquivos têm cache de 7 dias (`public/_headers`).
+- **Os cinco arquivos em `project/public/audio/` são a MESMA locução de exemplo**
+  (`docs/locucao-padrao-001.mp3`), só para montar a estrutura. **Substituir pela amostra real de
+  cada setor**, mantendo o nome do arquivo — a lista fica em `src/components/home/content.ts`.
+- Referência atualizada em `System/components/agent-widget.html`, com os dois estados.
+
+**Auditoria:** 16/16 páginas sem problemas.
+
 ## 2026-09-20: Logos dos clientes em faixa deslizante e em grade
 
 Commit `326b522` · Cloudflare `e2b56b15`

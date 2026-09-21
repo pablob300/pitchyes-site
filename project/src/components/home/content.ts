@@ -9,9 +9,17 @@ export const hero = {
   cta: "Fale com nossa IA",
   stat: { value: "20.000.000+", label: "ligações realizadas até hoje" },
   widget: {
-    eyebrow: "Fale com um agente",
-    agents: ["PitchYes", "Saúde", "Seguros", "Financeiro", "Imobiliário"],
-    hint: "Clique para falar com um agente",
+    eyebrow: "Ouça nossos agentes",
+    // TODO(produto): os cinco MP3 em /public/audio são a MESMA locução de exemplo, só para
+    // montar a estrutura. Substituir pela amostra real de cada setor, mesmo nome de arquivo.
+    agents: [
+      { name: "PitchYes", audio: "/audio/agente-pitchyes.mp3" },
+      { name: "Saúde", audio: "/audio/agente-saude.mp3" },
+      { name: "Seguros", audio: "/audio/agente-seguros.mp3" },
+      { name: "Financeiro", audio: "/audio/agente-financeiro.mp3" },
+      { name: "Imobiliário", audio: "/audio/agente-imobiliario.mp3" },
+    ],
+    hint: "Toque no play para ouvir uma ligação de exemplo",
   },
 };
 

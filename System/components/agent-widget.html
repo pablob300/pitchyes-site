@@ -18,16 +18,23 @@
   .stage p { margin: 0; }
   .orb { width: 88px; height: 88px; border-radius: 50%; border: 0; background: radial-gradient(circle at 30% 30%, var(--color-accent-gold), var(--color-accent-burnt)); display: grid; place-items: center; position: relative; margin-bottom: var(--space-2); cursor: pointer; }
   .orb::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(249,169,0,.45); animation: pulse 2.4s var(--ease) infinite; }
-  .core { width: 14px; height: 14px; border-radius: 50%; background: #fff; }
+  /* Play (estado parado) e pause (tocando) dentro do círculo */
+  .playIcon { width: 0; height: 0; margin-left: 4px; border-left: 18px solid #fff; border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+  .pauseIcon { width: 16px; height: 20px; border-left: 5px solid #fff; border-right: 5px solid #fff; }
+  .orb[data-playing]::after { animation: none; opacity: .9; transform: scale(1.08); }
   .name { font-size: 15px; font-weight: 600; }
   .hint { font-size: 13px; color: var(--color-text-inverse-muted); }
   @keyframes pulse { 0% { transform: scale(.92); opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
 </style>
 </head>
 <body>
-  <p class="note">PitchYes · Hero, bloco “Fale com um agente”. React: project/src/components/home/AgentWidget.tsx</p>
+  <p class="note">
+    PitchYes · Hero, bloco “Ouça nossos agentes”: o círculo laranja é o play/pause da amostra de voz
+    de cada setor (MP3 em <code>project/public/audio/</code>, carregado só no play).
+    React: project/src/components/home/AgentWidget.tsx
+  </p>
   <div class="widget">
-    <p class="eyebrow">Fale com um agente</p>
+    <p class="eyebrow">Ouça nossos agentes</p>
     <div class="pills" role="radiogroup">
       <button class="pill" role="radio" aria-checked="true">PitchYes</button>
       <button class="pill" role="radio" aria-checked="false">Saúde</button>
@@ -36,9 +43,26 @@
       <button class="pill" role="radio" aria-checked="false">Imobiliário</button>
     </div>
     <div class="stage">
-      <button class="orb" aria-label="Falar com o agente"><span class="core"></span></button>
+      <button class="orb" aria-label="Ouvir o agente PitchYes"><span class="playIcon"></span></button>
       <p class="name">Agente PitchYes</p>
-      <p class="hint">Clique para falar com um agente</p>
+      <p class="hint">Toque no play para ouvir uma ligação de exemplo</p>
+    </div>
+  </div>
+
+  <p class="note" style="margin-top:var(--space-6)">Estado tocando:</p>
+  <div class="widget">
+    <p class="eyebrow">Ouça nossos agentes</p>
+    <div class="pills" role="radiogroup">
+      <button class="pill" role="radio" aria-checked="false">PitchYes</button>
+      <button class="pill" role="radio" aria-checked="true">Saúde</button>
+      <button class="pill" role="radio" aria-checked="false">Seguros</button>
+      <button class="pill" role="radio" aria-checked="false">Financeiro</button>
+      <button class="pill" role="radio" aria-checked="false">Imobiliário</button>
+    </div>
+    <div class="stage">
+      <button class="orb" data-playing aria-label="Pausar a amostra do agente Saúde"><span class="pauseIcon"></span></button>
+      <p class="name">Agente Saúde</p>
+      <p class="hint">Tocando · 0:12 de 1:14</p>
     </div>
   </div>
 </body>
