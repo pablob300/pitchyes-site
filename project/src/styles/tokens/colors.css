@@ -50,6 +50,19 @@
   --color-positive: #2f6b3a;
   --color-neutral-mark: #15151533;
 
+  /* Semantic status — área interna (/admin). Danger is deliberately NOT
+     --color-accent-burnt: that one is a brand highlight and must not come to
+     mean "error" across the site. */
+  --color-danger: #a32915;
+  --color-danger-strong: #8b2211;
+  --color-danger-bg: #fbeae7;
+  --color-danger-border: rgba(163, 41, 21, 0.28);
+  --color-positive-bg: #ecf3ed;
+  --color-positive-border: rgba(47, 107, 58, 0.28);
+  --color-warning: #8a6100;
+  --color-warning-bg: #fdf3de;
+  --color-info-bg: #eef1f6;
+
   /* Docs sub-site (docs.bland.ai) — separate dark theme, lower priority */
   --color-docs-bg: #0b0b0c;
   --color-docs-bg-elevated: #17181a;

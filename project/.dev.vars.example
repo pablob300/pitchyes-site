@@ -1,3 +1,13 @@
 NEXTJS_ENV=development
 # Public URL of the site (defaults to the workers.dev address when unset)
 # SITE_URL=https://pitchyes.com.br
+
+# Área interna (/admin)
+# Segredo que assina cookies e códigos. Gere com: openssl rand -base64 32
+# ADMIN_SESSION_SECRET=
+# "session" usa o login por e-mail e senha; "basic" volta à senha única antiga.
+ADMIN_AUTH_MODE=session
+# "console" imprime o código no terminal em vez de enviar e-mail.
+ADMIN_MAIL_MODE=console
+# ADMIN_MAIL_FROM=nao-responda@pitchyes.com.br
+# RESEND_API_KEY=

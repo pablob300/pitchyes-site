@@ -8,6 +8,50 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Painel — passo 1: acesso por e-mail, senha e código
+
+Commit `PENDENTE` · Cloudflare `fce1c565`
+
+Primeiro passo do painel administrativo (plano completo aprovado: acesso, moldura, usuários,
+central de leads, minha conta e auditoria). A senha única de antes saiu.
+
+- **Entrar com e-mail e senha** em `/admin/entrar`. Aparelho novo recebe um **código de 6 dígitos
+  por e-mail** antes de liberar; aparelho já reconhecido entra direto e a sessão dura **7 dias**,
+  renovada em uso. A confiança do aparelho dura 180 dias — se fosse igual à sessão, seria um
+  código por semana.
+- **Aparelho** é o cookie `py_dispositivo` (nenhum navegador expõe identificador de máquina, e
+  impressão digital de navegador é frágil e invasiva). Janela anônima, outro navegador ou cookie
+  apagado contam como aparelho novo. Se o cookie aparecer em outro navegador, o código é pedido
+  de novo.
+- **Primeiro acesso e "esqueci minha senha"** por link enviado ao e-mail (`/admin/recuperar`),
+  com resposta sempre igual, exista ou não a conta — a tela não pode virar detector de e-mails.
+- **Superadmins** `pablo@b300.com.br` e `pablodavi@gmail.com` criados pela migração, sem senha
+  no repositório, protegidos por código **e** por gatilho no banco contra exclusão ou rebaixamento.
+- **Banco** (`migrations/0002_admin.sql`): usuários, aparelhos, sessões, códigos, limite de
+  tentativas e trilha de auditoria. Senha em PBKDF2-SHA256; token de sessão, de aparelho e código
+  guardados só como HMAC, com o segredo fora do banco.
+- **Limite de tentativas em D1**: 8 senhas erradas por e-mail a cada 15 minutos, 5 tentativas por
+  código, 1 reenvio por minuto.
+- **Cabeçalhos de segurança do painel passaram para o `proxy.ts`**: `public/_headers` só vale para
+  arquivo estático e nunca alcançava `/admin`. Agora toda resposta leva `no-store`, `noindex`,
+  `X-Frame-Options: DENY` e `frame-ancestors 'none'`.
+
+**Duas descobertas de plataforma, resolvidas:**
+
+- O Workers **recusa PBKDF2 acima de 100.000 iterações** ("iteration counts above 100000 are not
+  supported"), abaixo do recomendado hoje. A senha passou a usar **3 rodadas encadeadas de 100.000**
+  (a saída de uma alimenta a seguinte), com rodadas e iterações gravadas junto do hash para poder
+  aumentar depois sem invalidar senha nenhuma.
+- O domínio `pitchyes.com.br` está cadastrado na Resend mas com **DNS não verificado**, e o
+  remetente de teste só entrega para o dono da conta. Como `bmidias.b300.com.br` já está verificado,
+  os e-mails do painel saem provisoriamente de `nao-responda@bmidias.b300.com.br` e chegam a
+  qualquer caixa. Trocar para `nao-responda@pitchyes.com.br` será mudar uma variável.
+
+**Testado no ar:** `/admin/leads` sem sessão redireciona para `/admin/entrar`; `/api/admin/*` sem
+sessão devolve 401; POST de outra origem devolve 403; senha errada e e-mail inexistente devolvem a
+mesma mensagem, ambos gastando o mesmo tempo de verificação; os dois links de definição de senha
+foram entregues (`entregue: true` na auditoria).
+
 ## 2026-09-21: Depoimentos em vídeo (Shorts do YouTube)
 
 Commit `ce45828` · Cloudflare `1ce3cd07`

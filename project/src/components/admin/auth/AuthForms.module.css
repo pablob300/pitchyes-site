@@ -1,0 +1,52 @@
+/* Telas de entrada do painel — mesmos tokens dos formulários do site */
+.form { display: grid; gap: var(--space-4); }
+
+.head { display: grid; gap: var(--space-2); }
+.head h1 { font-size: 24px; line-height: 1.2; }
+.head p { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+
+.field { display: grid; gap: var(--space-2); }
+.field > span { font-size: 14px; }
+
+.field input {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg);
+  color: var(--color-text);
+  width: 100%;
+}
+.field input::placeholder { color: var(--color-text-muted); }
+.field input:focus-visible { outline: 2px solid var(--color-text); outline-offset: 1px; }
+.field input[aria-invalid="true"] { border-color: var(--color-danger); }
+
+.code {
+  font-size: 22px;
+  letter-spacing: 0.4em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.submit { width: 100%; justify-content: center; }
+.submit[disabled] { opacity: 0.6; cursor: progress; }
+
+.status { font-size: 13px; color: var(--color-danger); min-height: 1.4em; line-height: 1.4; }
+.fieldError { font-size: 13px; color: var(--color-danger); }
+.info { color: var(--color-positive); }
+
+.help { font-size: 13px; color: var(--color-text-secondary); }
+.help a { text-decoration: underline; }
+
+.linkButton {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.linkButton:hover:not([disabled]) { color: var(--color-text); }
+.linkButton[disabled] { cursor: default; text-decoration: none; }
