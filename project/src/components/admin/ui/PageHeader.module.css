@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+.eyebrow {
+  font-size: var(--text-eyebrow-size);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+.title { font-size: 28px; line-height: 1.2; }
+.description { font-size: 14px; color: var(--color-text-secondary); margin-top: var(--space-2); }
+.actions { display: flex; align-items: center; gap: var(--space-3); }

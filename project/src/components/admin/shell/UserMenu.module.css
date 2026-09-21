@@ -1,0 +1,89 @@
+.wrap { position: relative; }
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: none;
+  border: 0;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: var(--color-text);
+}
+.trigger:hover { background: var(--color-bg-subtle); }
+
+.avatar {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.who { display: grid; min-width: 0; }
+.name { font-size: 14px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.email { font-size: 12px; color: var(--color-text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.caret {
+  margin-left: auto;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--color-text-muted);
+}
+
+.menu {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2);
+  display: grid;
+  gap: 2px;
+  z-index: 20;
+}
+.menu button {
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 8px var(--space-3);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--color-text);
+}
+.menu button:hover:not([disabled]) { background: var(--color-bg-subtle); }
+.menu button[disabled] { opacity: 0.6; cursor: progress; }
+
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+  border-radius: var(--radius-sm);
+  padding: 4px var(--space-3);
+  margin-bottom: 2px;
+}
+
+@media (max-width: 900px) {
+  .menu { bottom: auto; top: calc(100% + 6px); left: auto; right: 0; min-width: 220px; }
+  .who { display: none; }
+  .caret { margin-left: 0; }
+}

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { LeadsBrowser, type LeadItem } from "@/components/admin/LeadsBrowser";
+import { PageHeader } from "@/components/admin/ui/PageHeader";
 import { leadForms } from "@/lib/leads";
 import { listLeads } from "@/lib/leads-db";
 import { pageMetadata } from "@/lib/seo";
-import styles from "./page.module.css";
 
 // Área interna: sempre renderizada na hora, nunca cacheada, nunca indexada
 // (ver src/proxy.ts, que exige senha, e app/robots.ts, que bloqueia /admin).
@@ -46,17 +46,17 @@ export default async function Page() {
   });
 
   return (
-    <main className={styles.page}>
-      <header className={styles.head}>
-        <p className={styles.eyebrow}>PitchYes · área interna</p>
-        <h1>Leads</h1>
-        <p className={styles.count}>
-          {items.length === 0
+    <>
+      <PageHeader
+        eyebrow="Central de leads"
+        title="Leads recebidos"
+        description={
+          items.length === 0
             ? "Nenhum lead recebido ainda."
-            : `${items.length} ${items.length === 1 ? "lead recebido" : "leads recebidos"} · fuso de Brasília`}
-        </p>
-      </header>
+            : `${items.length} ${items.length === 1 ? "lead" : "leads"} · horário de Brasília`
+        }
+      />
       <LeadsBrowser items={items} labels={labels} />
-    </main>
+    </>
   );
 }

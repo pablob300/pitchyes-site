@@ -8,6 +8,24 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Painel — passo 2: moldura com menu lateral
+
+Commit `PENDENTE` · Cloudflare `f60e8ded`
+
+- **Menu lateral claro** (branco com borda, item ativo em negrito e marca dourada à esquerda),
+  conteúdo sobre o fundo bege do site. Mesmos tokens de cor, tipografia e espaçamento das
+  páginas públicas — o painel não inventa visual próprio.
+- **Rodapé do menu com o usuário logado**: nome, e-mail, selo de superadmin e as ações
+  "Sair" e "Sair de todos os aparelhos".
+- **Registro de navegação** (`src/lib/admin/nav.ts`): a lista do menu vive num arquivo só.
+  Uma seção nova do CMS é uma entrada ali mais uma pasta em `app/admin/(painel)/` — é isso
+  que faz Páginas, Blog e Mídia custarem pouco mais adiante.
+- **Central de leads dentro da moldura**, com o cabeçalho padrão (`PageHeader`) no lugar do
+  cabeçalho solto que a página tinha.
+- **Em celular** o menu vira uma barra no topo, com os itens em linha.
+- Nenhum elemento do painel usa `data-reveal`: o `globals.css` esconde esses elementos até o
+  GSAP liberar, e o painel não tem essa orquestração.
+
 ## 2026-09-21: Painel — passo 1: acesso por e-mail, senha e código
 
 Commit `0f1c780` · Cloudflare `fce1c565`
