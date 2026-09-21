@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Depoimentos em vídeo (Shorts do YouTube)
 
-Commit `PENDENTE` · Cloudflare `1ce3cd07`
+Commit `ce45828` · Cloudflare `1ce3cd07`
 
 - **Os cinco depoimentos do canal da PitchYes entraram no carrossel da home**: Paybem,
   Top Master, Grupo TGPM, Mais Vida e Sittax, no formato vertical (9:16) dos Shorts.
