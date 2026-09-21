@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/sitemap";
-import { getSiteUrl, isIndexable } from "@/lib/site";
+import { getSiteUrl, isIndexable, isTestCrawlMode } from "@/lib/site";
 
 // Rendered per request so a SITE_URL change in the dashboard applies without a rebuild.
 export const dynamic = "force-dynamic";
@@ -23,8 +23,9 @@ const AI_AGENTS = [
 ];
 
 export default function robots(): MetadataRoute.Robots {
-  // Staging on workers.dev: nobody indexes anything.
-  if (!isIndexable()) {
+  // Staging on workers.dev: nobody indexes anything — a menos que ROBOTS_MODE=teste,
+  // liberado temporariamente para testar rastreamento antes do domínio definitivo.
+  if (!isIndexable() && !isTestCrawlMode()) {
     return { rules: { userAgent: "*", disallow: "/" } };
   }
   // Área interna e endpoints não entram em buscador nenhum.

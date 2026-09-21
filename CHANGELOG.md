@@ -8,6 +8,24 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Rastreamento liberado no endereço de homologação (TEMPORÁRIO)
+
+Commit `PENDENTE` · Cloudflare `5228f3aa`
+
+A pedido do time, para testar Search Console e os robôs de IA antes do domínio definitivo.
+
+- **`/robots.txt` passou a liberar tudo**, bloqueando só `/admin` e `/api`, e a publicar o
+  endereço do sitemap. As páginas perderam o `noindex`: as 16 servem `index, follow`.
+- **Controlado por uma variável**, `ROBOTS_MODE` (`teste` libera; qualquer outro valor volta ao
+  padrão, que bloqueia tudo fora do domínio definitivo). Trocar no painel da Cloudflare vale na
+  hora, sem deploy — ver o aviso em `src/lib/site.ts`.
+- **A área interna segue fechada**: `/admin` continua exigindo sessão, com `noindex` no cabeçalho
+  da resposta, e está no `Disallow`.
+
+**Risco assumido, registrado aqui de propósito:** um endereço `workers.dev` no índice do Google
+depois compete com `pitchyes.com.br` e dá trabalho para remover (ver SEO.md §6). **Voltar para
+`ROBOTS_MODE=padrao` na próxima atualização do site.**
+
 ## 2026-09-21: Page Editor preenchido, com cartão social de cada página
 
 Commit `010b29d` · Cloudflare `eb98ff31`
