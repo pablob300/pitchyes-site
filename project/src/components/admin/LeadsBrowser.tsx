@@ -32,7 +32,8 @@ export function LeadsBrowser({ items, labels }: { items: LeadItem[]; labels: Rec
   if (!items.length) {
     return (
       <p className={styles.empty}>
-        Assim que alguém enviar o formulário de contato, o registro aparece aqui com todos os campos preenchidos.
+        Nenhum lead para mostrar. Assim que alguém enviar um formulário do site, o registro aparece aqui
+        com todos os campos preenchidos.
       </p>
     );
   }
@@ -46,6 +47,8 @@ export function LeadsBrowser({ items, labels }: { items: LeadItem[]; labels: Rec
             <th scope="col">Horário</th>
             <th scope="col">Nome</th>
             <th scope="col">E-mail</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Formulário</th>
             <th scope="col">
               <span className={styles.srOnly}>Abrir ficha</span>
             </th>
@@ -62,6 +65,10 @@ export function LeadsBrowser({ items, labels }: { items: LeadItem[]; labels: Rec
                 </button>
               </td>
               <td className={styles.email}>{item.email}</td>
+              <td className={styles.email}>{item.company ?? "—"}</td>
+              <td>
+                <span className={styles.form}>{item.form}</span>
+              </td>
               <td className={styles.actionCell}>
                 <button type="button" className={styles.rowLink} onClick={() => setOpenId(item.id)}>
                   Ver ficha

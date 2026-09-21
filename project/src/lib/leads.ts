@@ -16,8 +16,10 @@ export type LeadField = {
 
 export type LeadFormDef = {
   id: string;
+  /** Rótulo do formulário no painel. */
+  label: string;
   /** Campo usado como nome, e-mail, telefone e empresa na listagem de /admin/leads. */
-  identity: { name: string; email: string; phone?: string; company?: string };
+  identity: { name?: string; email: string; phone?: string; company?: string };
   fields: LeadField[];
 };
 
@@ -25,6 +27,7 @@ export const MAX_TEXT = 2000;
 
 export const contatoForm: LeadFormDef = {
   id: "contato",
+  label: "Contato",
   identity: { name: "nome", email: "email", phone: "telefone", company: "empresa" },
   fields: [
     { name: "nome", label: "Nome Completo", type: "text", required: true, placeholder: "Seu nome completo", half: true, autoComplete: "name" },
@@ -78,7 +81,20 @@ export const contatoForm: LeadFormDef = {
   ],
 };
 
-export const leadForms: Record<string, LeadFormDef> = { [contatoForm.id]: contatoForm };
+/** Newsletter do rodapé: um campo só, mas alimenta o mesmo painel. */
+export const newsletterForm: LeadFormDef = {
+  id: "newsletter",
+  label: "Newsletter",
+  identity: { email: "email" },
+  fields: [
+    { name: "email", label: "E-mail", type: "email", required: true, autoComplete: "email" },
+  ],
+};
+
+export const leadForms: Record<string, LeadFormDef> = {
+  [contatoForm.id]: contatoForm,
+  [newsletterForm.id]: newsletterForm,
+};
 
 export function getLeadForm(id: string): LeadFormDef | undefined {
   return leadForms[id];
@@ -158,4 +174,17 @@ export function validateLead(form: LeadFormDef, values: LeadValues) {
     else if (raw.trim()) clean[field.name] = raw.trim();
   }
   return { ok: Object.keys(errors).length === 0, errors, values: clean };
+}
+
+/**
+ * Texto de busca: minúsculas e sem acento. O LIKE do SQLite não dobra acentuação,
+ * então quem grava e quem procura têm que usar a mesma dobra — por isso esta função
+ * vive aqui, do lado dos dois.
+ */
+export function foldForSearch(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim();
 }

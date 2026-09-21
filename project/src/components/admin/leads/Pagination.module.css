@@ -1,0 +1,12 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+  font-size: 14px;
+}
+.nav a { color: var(--color-text); text-decoration: none; }
+.nav a:hover { color: var(--color-accent-burnt); }
+.nav span[aria-hidden] { color: var(--color-text-muted); }
+.status { color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }

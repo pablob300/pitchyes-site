@@ -8,6 +8,30 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Painel — passo 4: Central de leads com filtros, busca e CSV
+
+Commit `PENDENTE` · Cloudflare `e0206409`
+
+- **Filtro por formulário e por período** e **busca por nome, e-mail ou empresa**, com
+  **paginação de 50 em 50** no lugar do limite fixo de 200.
+- **Os filtros vivem na URL** (`?formulario=contato&de=2026-09-01&busca=maria`), então a tela
+  continua sendo renderizada no servidor e um filtro vira um link que dá para salvar ou mandar
+  para alguém.
+- **Busca sem acento**: o `LIKE` do SQLite não dobra acentuação — procurar "jose" não acharia
+  "José". A coluna `search_text` (migração `0003_leads_busca.sql`) guarda nome, e-mail e empresa
+  já sem acento e em minúsculas, e a mesma função dobra o termo procurado. Testado no ar.
+- **Exportar CSV** respeitando o filtro atual, com uma coluna por campo que apareceu nos leads.
+  Abre certo no Excel brasileiro (BOM UTF-8 e ponto e vírgula) e **neutraliza injeção de fórmula**:
+  valor começando com `=`, `+`, `-` ou `@` recebe apóstrofo, senão um lead com nome
+  `=HYPERLINK(...)` viraria um clique perigoso na máquina de quem abrisse a planilha.
+  A exportação fica registrada na auditoria, com quantidade e filtro — é dado pessoal saindo do painel.
+- **A newsletter do rodapé passou a gravar lead** (formulário "newsletter"), com campo isca e
+  tempo mínimo de preenchimento contra robô. Agora **todo formulário do site alimenta o painel**,
+  e a lista ganhou as colunas Empresa e Formulário.
+
+**Testado no ar:** a newsletter gravou; um lead com nome acentuado é encontrado pela busca sem
+acento; `/api/admin/leads/exportar` sem sessão devolve 401; e o escape do CSV neutraliza a fórmula.
+
 ## 2026-09-21: Painel — passo 3: Usuários
 
 Commit `9801d04` · Cloudflare `4612ba19`
