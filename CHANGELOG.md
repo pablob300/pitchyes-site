@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Amostras de voz no widget da home
 
-Commit `PENDENTE` · Cloudflare `f260504e`
+Commit `8f89b73` · Cloudflare `f260504e`
 
 - **"Fale com um agente" virou "Ouça nossos agentes".** O círculo laranja passou a ser o
   play/pause de uma amostra de voz: o círculo branco deu lugar a um **ícone de play**, e durante
