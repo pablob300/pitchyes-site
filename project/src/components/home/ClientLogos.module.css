@@ -13,38 +13,60 @@
   margin-bottom: var(--space-6);
 }
 
-.grid {
+/* Faixa em toda a largura da tela, sem a margem do container */
+.viewport {
+  width: 100%;
+  overflow: hidden;
+  /* As pontas desaparecem no fundo, em vez de cortar a logo na metade */
+  mask-image: linear-gradient(to right, transparent, #000 80px, #000 calc(100% - 80px), transparent);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.row {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  border-top: 1px solid var(--color-border-subtle);
-  border-left: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
 }
 
-/* Typographic wordmark placeholder until real logo files arrive */
-.logo {
+.item {
+  flex: none;
   display: grid;
   place-items: center;
-  min-height: 88px;
-  padding: var(--space-4);
-  border-right: 1px solid var(--color-border-subtle);
-  border-bottom: 1px solid var(--color-border-subtle);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  text-align: center;
-  color: var(--color-text-muted);
-  transition: color var(--duration-fast) var(--ease);
+  padding-inline: var(--space-6);
+  min-height: 96px;
 }
-.logo:hover { color: var(--color-text); }
 
-@media (max-width: 1024px) {
-  .grid { grid-template-columns: repeat(4, 1fr); }
+/* Cinza por padrão, colorida ao passar o mouse */
+.logo {
+  width: auto;
+  height: 34px;
+  filter: grayscale(1);
+  opacity: 0.65;
+  transition: filter var(--duration-normal) var(--ease), opacity var(--duration-normal) var(--ease);
+}
+.item:hover .logo,
+.item:focus-within .logo {
+  filter: grayscale(0);
+  opacity: 1;
 }
 
 @media (max-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-  .logo { min-height: 72px; font-size: 14px; }
+  .item { padding-inline: var(--space-5); min-height: 80px; }
+  .logo { height: 28px; }
+  .viewport {
+    mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+  }
+}
+
+/* Sem movimento para quem pede menos movimento: a faixa vira uma lista rolável */
+@media (prefers-reduced-motion: reduce) {
+  .viewport { overflow-x: auto; }
+  .track { transform: none !important; }
 }

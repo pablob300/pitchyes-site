@@ -1,5 +1,5 @@
 import type { PageContent } from "./types";
-import { clientLogos } from "@/components/home/content";
+import { clients } from "./clients";
 
 // TODO(conteúdo): métricas e citações por cliente precisam ser fornecidas e autorizadas.
 // Só o depoimento do Leandro Vasconcelos (OPEN Datacenter) está confirmado (wireframe).
@@ -12,7 +12,7 @@ export const clientes: PageContent = {
   lead: "São operações de energia, tecnologia, serviços e educação que usam a PitchYes para atender, qualificar e acompanhar ligações todos os dias. Aqui estão elas e o tipo de conversa que a IA assumiu.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [
-    { kind: "logos", title: "Empresas que confiam na PitchYes.", names: [...clientLogos.names] },
+    { kind: "logos", title: "Empresas que confiam na PitchYes.", items: clients },
     {
       kind: "cases",
       title: "O que mudou na operação.",

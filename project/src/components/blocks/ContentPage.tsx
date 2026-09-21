@@ -142,9 +142,18 @@ function Blocks({ block }: { block: Block }) {
               {block.title}
             </h2>
             <ul className={styles.logos}>
-              {block.names.map((name) => (
-                <li key={name} data-reveal>
-                  {name}
+              {block.items.map((item) => (
+                <li key={item.name} data-reveal>
+                  <Image
+                    src={item.logo}
+                    alt=""
+                    width={item.width}
+                    height={item.height}
+                    className={styles.logoImage}
+                    // SVG é servido direto de /public, sem passar pelo otimizador
+                    unoptimized
+                  />
+                  <span>{item.name}</span>
                 </li>
               ))}
             </ul>

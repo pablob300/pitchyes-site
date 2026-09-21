@@ -8,6 +8,23 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-20: Logos dos clientes em faixa deslizante e em grade
+
+Commit `PENDENTE` · Cloudflare `e2b56b15`
+
+- **Home:** a lista de clientes virou uma **faixa deslizante em toda a largura da tela**, só com
+  as marcas. O movimento é contínuo (GSAP, animando apenas `transform`), pausa quando o ponteiro
+  entra e não acontece para quem pede menos movimento no sistema — nesse caso vira uma faixa
+  rolável. O HTML já traz as duas cópias da lista, então os nomes das empresas continuam no
+  conteúdo lido pelos robôs (a segunda cópia é decorativa, com `alt` vazio).
+- **/clientes:** a grade continua igual, mas cada célula ganhou a **logo acima do nome**.
+- **Regra de marca:** logo de cliente sempre entra em tons de cinza e ganha cor ao passar o mouse
+  (`grayscale(1)` → `grayscale(0)`), documentada em `System/components/logo-wall.html`.
+- **Imagens de marcação**: os 12 arquivos em `project/public/logos/` são SVGs gerados por código,
+  só para validar o comportamento. **Substituir pelos arquivos reais das marcas** — mesmo nome de
+  arquivo e proporção parecida; a lista fica em `src/content/clients.ts`, hoje a fonte única usada
+  pela home e por /clientes.
+
 ## 2026-09-20: Formulário de contato, painel de leads e nova página Sobre
 
 Commit `1225a8d` · Cloudflare `8b9529f3`

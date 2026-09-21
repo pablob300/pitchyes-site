@@ -139,16 +139,30 @@
 .logos li {
   display: grid;
   place-items: center;
-  min-height: 88px;
+  align-content: center;
+  gap: var(--space-3);
+  min-height: 132px;
   padding: var(--space-4);
   border-right: 1px solid var(--color-border-subtle);
   border-bottom: 1px solid var(--color-border-subtle);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.03em;
   text-align: center;
   color: var(--color-text-muted);
 }
+/* Logo em cima do nome: cinza por padrão, colorida ao passar o mouse */
+.logoImage {
+  width: auto;
+  max-width: 100%;
+  height: 30px;
+  filter: grayscale(1);
+  opacity: 0.65;
+  transition: filter var(--duration-normal) var(--ease), opacity var(--duration-normal) var(--ease);
+}
+.logos li:hover .logoImage,
+.logos li:focus-within .logoImage { filter: grayscale(0); opacity: 1; }
+.logos li:hover { color: var(--color-text); }
 
 /* Pricing — mirrors System/components/cards-pricing.html */
 .plans {

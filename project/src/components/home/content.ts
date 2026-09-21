@@ -17,21 +17,6 @@ export const hero = {
 
 export const clientLogos = {
   title: "Empresas que confiam na PitchYes.",
-  // TODO: swap names for the clients' logo files (SVG) when available.
-  names: [
-    "Sofia Energia",
-    "Vantage Energia",
-    "MaxNet",
-    "Plaza",
-    "Grupo Hellu's Prime",
-    "OPEN Datacenter",
-    "Employability",
-    "Senior Sistemas",
-    "Prospecta Global",
-    "Método 12P",
-    "MidHaus",
-    "Cooperativa",
-  ],
 };
 
 export const platform = {

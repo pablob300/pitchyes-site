@@ -21,7 +21,13 @@ export type Block =
       lead?: string;
       items: { company: string; sector: string; headline: string; quote?: string; person?: string; pending?: boolean }[];
     }
-  | { kind: "logos"; title: string; names: string[] }
+  | {
+      /** Parede de logos: a imagem da marca em cima, o nome embaixo. */
+      kind: "logos";
+      title: string;
+      lead?: string;
+      items: { name: string; logo: string; width: number; height: number }[];
+    }
   | {
       kind: "pricing";
       title: string;

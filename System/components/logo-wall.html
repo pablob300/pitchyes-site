@@ -6,22 +6,85 @@
 <title>Logo wall — Design System</title>
 <link rel="stylesheet" href="../tokens/tokens.css" />
 <style>
-  body { margin: 0; padding: var(--space-8) var(--margin); }
+  body { margin: 0; padding: var(--space-8) 0; }
+  .wrap { padding-inline: var(--margin); }
   .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
   .title { font-size: 16px; font-weight: 400; letter-spacing: var(--body-ls); color: var(--color-text-secondary); text-align: center; margin: 0 0 var(--space-6); }
+
+  /* Regra da marca: logo do cliente sempre em cinza, ganhando cor ao passar o mouse. */
+  .logo, .gridLogo {
+    filter: grayscale(1);
+    opacity: .65;
+    transition: filter var(--duration-normal) var(--ease), opacity var(--duration-normal) var(--ease);
+  }
+  .item:hover .logo, .grid li:hover .gridLogo { filter: grayscale(0); opacity: 1; }
+
+  /* 1) Faixa deslizante — home. Largura total da tela, rolando sem parar (GSAP, só transform).
+        Pausa quando o ponteiro entra; vira lista rolável em prefers-reduced-motion. */
+  .viewport { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent, #000 80px, #000 calc(100% - 80px), transparent); }
+  .track { display: flex; width: max-content; will-change: transform; animation: slide 40s linear infinite; }
+  .row { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
+  .item { flex: none; display: grid; place-items: center; padding-inline: var(--space-6); min-height: 96px; }
+  .logo { width: auto; height: 34px; }
+  .viewport:hover .track { animation-play-state: paused; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* 2) Grade — páginas internas (/clientes). Logo em cima, nome embaixo. */
   .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--color-border-subtle); border-left: 1px solid var(--color-border-subtle); }
-  .logo { display: grid; place-items: center; min-height: 88px; padding: var(--space-4); border-right: 1px solid var(--color-border-subtle); border-bottom: 1px solid var(--color-border-subtle); font-size: 15px; font-weight: 600; letter-spacing: -.03em; color: var(--color-text-muted); text-align: center; }
-  .logo:hover { color: var(--color-text); }
+  .grid li { display: grid; place-items: center; align-content: center; gap: var(--space-3); min-height: 132px; padding: var(--space-4); border-right: 1px solid var(--color-border-subtle); border-bottom: 1px solid var(--color-border-subtle); font-size: 14px; font-weight: 600; letter-spacing: -.03em; color: var(--color-text-muted); text-align: center; }
+  .grid li:hover { color: var(--color-text); }
+  .gridLogo { width: auto; max-width: 100%; height: 30px; }
+
   @media (max-width: 1024px) { .grid { grid-template-columns: repeat(4, 1fr); } }
-  @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .item { padding-inline: var(--space-5); min-height: 80px; }
+    .logo { height: 28px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .track { animation: none; } .viewport { overflow-x: auto; } }
 </style>
 </head>
 <body>
-  <p class="note">PitchYes · Prova social. Nomes tipográficos até chegarem os arquivos de logo. React: ClientLogos.tsx</p>
-  <h2 class="title">Empresas que confiam na PitchYes.</h2>
-  <ul class="grid">
-    <li class="logo">Sofia Energia</li><li class="logo">Vantage Energia</li><li class="logo">MaxNet</li>
-    <li class="logo">Plaza</li><li class="logo">Grupo Hellu's Prime</li><li class="logo">OPEN Datacenter</li>
-  </ul>
+  <div class="wrap">
+    <p class="note">
+      PitchYes · Prova social. A logo do cliente entra sempre em tons de cinza e ganha cor ao passar o mouse.
+      Arquivos em <code>project/public/logos/</code> (hoje são imagens de marcação).
+      React: <code>ClientLogos.tsx</code> (faixa) e o bloco <code>logos</code> de <code>ContentPage.tsx</code> (grade).
+      Aqui a faixa usa <code>@keyframes</code> só para demonstração: no site o movimento é feito com GSAP.
+    </p>
+    <h2 class="title">Empresas que confiam na PitchYes.</h2>
+  </div>
+
+  <div class="viewport">
+    <div class="track">
+      <ul class="row">
+        <li class="item"><img class="logo" src="../../project/public/logos/sofia-energia.svg" alt="Sofia Energia" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/vantage-energia.svg" alt="Vantage Energia" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/maxnet.svg" alt="MaxNet" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/plaza.svg" alt="Plaza" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/open-datacenter.svg" alt="OPEN Datacenter" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/employability.svg" alt="Employability" /></li>
+      </ul>
+      <ul class="row" aria-hidden="true">
+        <li class="item"><img class="logo" src="../../project/public/logos/sofia-energia.svg" alt="" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/vantage-energia.svg" alt="" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/maxnet.svg" alt="" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/plaza.svg" alt="" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/open-datacenter.svg" alt="" /></li>
+        <li class="item"><img class="logo" src="../../project/public/logos/employability.svg" alt="" /></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap" style="margin-top: var(--space-8)">
+    <ul class="grid">
+      <li><img class="gridLogo" src="../../project/public/logos/sofia-energia.svg" alt="" /><span>Sofia Energia</span></li>
+      <li><img class="gridLogo" src="../../project/public/logos/vantage-energia.svg" alt="" /><span>Vantage Energia</span></li>
+      <li><img class="gridLogo" src="../../project/public/logos/maxnet.svg" alt="" /><span>MaxNet</span></li>
+      <li><img class="gridLogo" src="../../project/public/logos/plaza.svg" alt="" /><span>Plaza</span></li>
+      <li><img class="gridLogo" src="../../project/public/logos/open-datacenter.svg" alt="" /><span>OPEN Datacenter</span></li>
+      <li><img class="gridLogo" src="../../project/public/logos/employability.svg" alt="" /><span>Employability</span></li>
+    </ul>
+  </div>
 </body>
 </html>
