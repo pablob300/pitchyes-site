@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Painel — passo 1: acesso por e-mail, senha e código
 
-Commit `PENDENTE` · Cloudflare `fce1c565`
+Commit `0f1c780` · Cloudflare `fce1c565`
 
 Primeiro passo do painel administrativo (plano completo aprovado: acesso, moldura, usuários,
 central de leads, minha conta e auditoria). A senha única de antes saiu.
