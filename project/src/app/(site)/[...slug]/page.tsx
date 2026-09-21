@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHeadline } from "@/components/PageHeadline";
 import { getPage, pages } from "@/lib/routes";
-import { breadcrumbSchema, pageMetadata, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, pageMetadataWithOverrides, webPageSchema } from "@/lib/seo";
 import styles from "./page.module.css";
 
 // Placeholder for every inner page that doesn't have its own route file yet.
@@ -27,7 +27,7 @@ async function resolve(params: PageProps<"/[...slug]">["params"]) {
 
 export async function generateMetadata({ params }: PageProps<"/[...slug]">): Promise<Metadata> {
   const { page } = await resolve(params);
-  return pageMetadata({
+  return pageMetadataWithOverrides({
     title: page.title,
     description: page.description,
     path: page.path,

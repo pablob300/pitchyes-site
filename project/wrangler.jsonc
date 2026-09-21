@@ -14,7 +14,9 @@
 		{ "binding": "WORKER_SELF_REFERENCE", "service": "pitchyes-site" }
 	],
 	"r2_buckets": [
-		{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "pitchyes-site-opennext-cache" }
+		{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "pitchyes-site-opennext-cache" },
+		// Imagens enviadas pelo painel (compartilhamento social). Servidas em /midia/*.
+		{ "binding": "MEDIA_BUCKET", "bucket_name": "pitchyes-site-midia" }
 	],
 	"images": { "binding": "IMAGES" },
 	// Leads submitted through the site forms (see src/lib/leads.ts and /admin/leads).
@@ -45,7 +47,8 @@
 				{ "binding": "WORKER_SELF_REFERENCE", "service": "pitchyes-site-preview" }
 			],
 			"r2_buckets": [
-				{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "pitchyes-site-preview-opennext-cache" }
+				{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "pitchyes-site-preview-opennext-cache" },
+				{ "binding": "MEDIA_BUCKET", "bucket_name": "pitchyes-site-midia" }
 			],
 			"images": { "binding": "IMAGES" },
 			// Same leads database as production — the preview worker is only used for smoke tests.

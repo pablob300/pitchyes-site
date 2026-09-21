@@ -8,6 +8,54 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Painel — Page Editor e menu reorganizado
+
+Commit `PENDENTE` · Cloudflare `d9168157`
+
+**Menu lateral em dois grupos.** "Page Editor" fica no topo, logo abaixo da marca (é o
+trabalho do dia a dia); "Central de leads" e "Usuários" encostam na base, acima do bloco do
+usuário. O registro `lib/admin/nav.ts` ganhou o campo `group` — seção nova do CMS continua
+custando uma linha.
+
+**Page Editor (`/admin/paginas`)**
+
+- Lista todas as páginas do site **em ordem alfabética pelo endereço**, com **campo de busca**
+  (sem acento: "solucoes" acha "/solucoes"). O blog fica de fora — é servido pelo WordPress
+  headless e os metadados de lá são editados lá.
+- Cada linha traz o endereço, o nome da página, o título e a descrição em vigor, e marca quando
+  a página foi editada aqui ou está fora do índice.
+- **Editar Meta** (ícone de código) abre a gaveta à direita, no mesmo formato da ficha de lead:
+  título com contador de 60, descrição com faixa de 120–160, **prévia do resultado de busca**,
+  imagem de compartilhamento com upload, texto alternativo, título e descrição próprios para
+  redes sociais, chave de `noindex` e data da última revisão (que vira o `<lastmod>` do sitemap).
+- **Editar Conteúdo** (ícone de blocos) aparece desabilitado, com aviso de que chega adiante.
+- **Campo em branco significa "usar o padrão do código"**: a gaveta mostra o valor padrão como
+  sugestão e tem "Restaurar padrão", que apaga a sobreposição.
+
+**Como a edição chega ao site**
+
+- Nova tabela `page_meta` (migração `0004_page_meta.sql`) guarda **apenas o que foi alterado**.
+  `lib/routes.ts` e os arquivos de conteúdo seguem sendo o padrão.
+- As páginas passaram a ler essa sobreposição em `pageMetadataWithOverrides()` e a se reconstruir
+  a cada minuto (`revalidate = 60`), então a mudança aparece **sem novo deploy**. Se o banco não
+  responder — inclusive durante o build, quando não existe binding —, a página usa o padrão e
+  nada quebra.
+- O `sitemap-paginas.xml` respeita a data revisada e tira do sitemap a página marcada como noindex.
+- **Imagens de compartilhamento** vão para um R2 novo (`pitchyes-site-midia`, binding `MEDIA_BUCKET`)
+  e são servidas em `/midia/*` com cache de 7 dias. O upload aceita só JPG, PNG e WebP, até 3 MB,
+  conferindo **a assinatura dos primeiros bytes** e não só o tipo declarado — extensão mente.
+  A imagem precisa ser do próprio site: apontar para outro domínio entregaria o compartilhamento
+  a quem hospeda o arquivo.
+
+**Testado no ar:** gravei uma sobreposição de título e descrição em `/carreiras` direto no banco,
+esperei a revalidação e o HTML publicado passou a servir o texto novo; apagando a linha, a página
+voltou ao padrão do código. TTFB entre 0,38s e 1,03s (orçamento: < 800ms; a primeira visita após a
+revalidação é a mais lenta). Auditoria: 16/16 páginas sem problemas. `/api/admin/paginas` e
+`/api/admin/midia` sem sessão devolvem 401.
+
+**Pendência:** a busca por texto passou a usar uma função única (`lib/fold.ts`), usada pela
+gravação de leads, pela consulta e pelo filtro do Page Editor.
+
 ## 2026-09-21: Painel — passo 4: Central de leads com filtros, busca e CSV
 
 Commit `7caff84` · Cloudflare `e0206409`

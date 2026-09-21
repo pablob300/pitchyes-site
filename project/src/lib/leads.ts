@@ -177,14 +177,7 @@ export function validateLead(form: LeadFormDef, values: LeadValues) {
 }
 
 /**
- * Texto de busca: minúsculas e sem acento. O LIKE do SQLite não dobra acentuação,
- * então quem grava e quem procura têm que usar a mesma dobra — por isso esta função
- * vive aqui, do lado dos dois.
+ * Texto de busca de um lead: mesma dobra usada na consulta (ver lib/fold.ts).
+ * Reexportado aqui porque é daqui que a gravação e a busca de leads a chamam.
  */
-export function foldForSearch(value: string): string {
-  return value
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .trim();
-}
+export { fold as foldForSearch } from "./fold";

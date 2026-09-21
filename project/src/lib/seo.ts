@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPageMeta } from "./page-meta";
 import { getSiteUrl, isIndexable } from "./site";
 
 export const SITE_NAME = "PitchYes";
@@ -45,6 +46,43 @@ export function pageMetadata({
     },
     twitter: { card: "summary_large_image", images: ["/twitter-image.jpg"] },
     robots: { index: indexable, follow: isIndexable() },
+  };
+}
+
+/**
+ * Metadados da página já com o que foi editado no Page Editor por cima. É esta a
+ * função que as páginas chamam: `pageMetadata()` continua existindo para quem não
+ * precisa do banco (404, área interna).
+ */
+export async function pageMetadataWithOverrides(args: {
+  title?: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+}): Promise<Metadata> {
+  const override = await getPageMeta(args.path);
+  const base = pageMetadata({
+    title: override?.title || args.title,
+    description: override?.description || args.description,
+    path: args.path,
+    noindex: args.noindex || override?.noindex === 1,
+  });
+
+  if (!override) return base;
+
+  const image = override.image_url
+    ? [{ url: override.image_url, width: 1200, height: 630, alt: override.image_alt || SITE_DESCRIPTION }]
+    : undefined;
+
+  return {
+    ...base,
+    openGraph: {
+      ...base.openGraph,
+      ...(override.og_title ? { title: override.og_title } : {}),
+      ...(override.og_description ? { description: override.og_description } : {}),
+      ...(image ? { images: image } : {}),
+    },
+    ...(override.image_url ? { twitter: { card: "summary_large_image", images: [override.image_url] } } : {}),
   };
 }
 

@@ -20,10 +20,14 @@ export function AdminShell({ user, children }: { user: SessionUser; children: Re
           <span className={styles.tag}>Painel</span>
         </div>
 
-        <AdminNav />
+        <AdminNav group="topo" />
 
+        {/* Administração encosta na base, logo acima do menu do usuário */}
         <div className={styles.foot}>
-          <UserMenu user={user} />
+          <AdminNav group="base" />
+          <div className={styles.user}>
+            <UserMenu user={user} />
+          </div>
         </div>
       </aside>
 

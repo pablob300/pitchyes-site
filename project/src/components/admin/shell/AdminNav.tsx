@@ -2,17 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { adminNav, isActive } from "@/lib/admin/nav";
+import { isActive, navGroup } from "@/lib/admin/nav";
 import styles from "./AdminNav.module.css";
 
 // Menu lateral. Cliente só por causa do `usePathname` — a lista vem do registro
 // em lib/admin/nav.ts, que é o único lugar a mexer para uma seção nova.
-export function AdminNav() {
+export function AdminNav({ group }: { group: "topo" | "base" }) {
   const pathname = usePathname();
-  const items = adminNav.filter((item) => !item.hidden);
+  const items = navGroup(group);
+  if (!items.length) return null;
 
   return (
-    <nav aria-label="Seções do painel">
+    <nav aria-label={group === "topo" ? "Seções do painel" : "Administração"}>
       <ul className={styles.list}>
         {items.map((item) => (
           <li key={item.href}>

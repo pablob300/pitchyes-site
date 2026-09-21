@@ -3,13 +3,17 @@ import { ContentPage } from "@/components/blocks/ContentPage";
 import { JsonLd } from "@/components/JsonLd";
 import { solucoesPorFuncao } from "@/content/solucoes-por-funcao";
 import { faqItems } from "@/content/types";
-import { breadcrumbSchema, pageMetadata, serviceSchema, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, pageMetadataWithOverrides, serviceSchema, webPageSchema } from "@/lib/seo";
 
 const content = solucoesPorFuncao;
 const path = "/solucoes/por-funcao";
 
-export function generateMetadata(): Metadata {
-  return pageMetadata({ title: content.seoTitle, description: content.seoDescription, path });
+// Os metadados podem ser editados no Page Editor: a página se reconstrói a cada
+// minuto para a mudança aparecer sem precisar de um novo deploy.
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadataWithOverrides({ title: content.seoTitle, description: content.seoDescription, path });
 }
 
 export default function Page() {

@@ -10,16 +10,26 @@ export type AdminNavItem = {
   capability?: string;
   /** Some do menu, mas a rota continua existindo — para seção em construção. */
   hidden?: boolean;
+  /**
+   * "topo" fica logo abaixo da marca (o trabalho do dia a dia);
+   * "base" encosta no rodapé, junto do menu do usuário.
+   */
+  group?: "topo" | "base";
 };
 
 export const adminNav: AdminNavItem[] = [
-  { href: "/admin/leads", label: "Central de leads", match: "prefix" },
-  { href: "/admin/usuarios", label: "Usuários", match: "prefix" },
-  // Próximas seções:
-  // { href: "/admin/paginas", label: "Páginas", match: "prefix" },
-  // { href: "/admin/blog", label: "Blog", match: "prefix" },
+  { href: "/admin/paginas", label: "Page Editor", match: "prefix", group: "topo" },
+  // Próximas seções do CMS entram aqui, no grupo "topo":
+  // { href: "/admin/midia", label: "Mídia", match: "prefix", group: "topo" },
+
+  { href: "/admin/leads", label: "Central de leads", match: "prefix", group: "base" },
+  { href: "/admin/usuarios", label: "Usuários", match: "prefix", group: "base" },
 ];
 
 export function isActive(item: AdminNavItem, pathname: string): boolean {
   return item.match === "prefix" ? pathname.startsWith(item.href) : pathname === item.href;
+}
+
+export function navGroup(group: "topo" | "base"): AdminNavItem[] {
+  return adminNav.filter((item) => !item.hidden && (item.group ?? "topo") === group);
 }

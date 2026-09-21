@@ -35,7 +35,8 @@
   padding: 2px 8px;
 }
 
-.foot { border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-4); }
+.foot { display: grid; gap: var(--space-3); align-self: end; }
+.user { border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-3); }
 
 .content {
   padding: var(--space-6) var(--space-7) var(--space-8);
@@ -55,7 +56,8 @@
     border-bottom: 1px solid var(--color-border);
     padding: var(--space-3) var(--margin-mobile);
   }
-  .foot { border-top: 0; padding-top: 0; }
+  .foot { grid-auto-flow: column; align-items: center; align-self: center; }
+  .user { border-top: 0; padding-top: 0; }
   .content { padding: var(--space-5) var(--margin-mobile) var(--space-7); }
 }
 

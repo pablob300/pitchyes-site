@@ -12,15 +12,19 @@ import { Security } from "@/components/home/Security";
 import { UseCases } from "@/components/home/UseCases";
 import {
   organizationSchema,
-  pageMetadata,
+  pageMetadataWithOverrides,
   SITE_DESCRIPTION,
   videoSchema,
   webPageSchema,
   webSiteSchema,
 } from "@/lib/seo";
 
-export function generateMetadata(): Metadata {
-  return pageMetadata({ description: SITE_DESCRIPTION, path: "/" });
+// Os metadados podem ser editados no Page Editor: a página se reconstrói a cada
+// minuto para a mudança aparecer sem precisar de um novo deploy.
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadataWithOverrides({ description: SITE_DESCRIPTION, path: "/" });
 }
 
 // Section order follows docs/PitchYes — Wireframe Homepage (Desktop).pdf (01 → 09);
