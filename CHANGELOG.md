@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Painel — passo 2: moldura com menu lateral
 
-Commit `PENDENTE` · Cloudflare `f60e8ded`
+Commit `27d5375` · Cloudflare `f60e8ded`
 
 - **Menu lateral claro** (branco com borda, item ativo em negrito e marca dourada à esquerda),
   conteúdo sobre o fundo bege do site. Mesmos tokens de cor, tipografia e espaçamento das
