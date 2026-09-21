@@ -65,7 +65,7 @@ export function CustomerVideos() {
                     <Image
                       className={styles.thumb}
                       src={item.thumb}
-                      alt=""
+                      alt={`Depoimento em vídeo da ${item.company} sobre a PitchYes`}
                       width={540}
                       height={960}
                       loading="lazy"

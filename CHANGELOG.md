@@ -8,6 +8,21 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Texto alternativo em todas as imagens
+
+Commit `PENDENTE` · Cloudflare `90e1866d`
+
+- **As 73 imagens do site passaram a ter `alt` com texto.** Antes quatro lugares usavam
+  `alt=""`: a parede de logos de /clientes, a cópia decorativa da faixa de logos da home, as
+  capas dos depoimentos em vídeo e a prévia da imagem social no painel.
+- **Logo de cliente leva o nome da empresa** ("Logo da Sittax"); capa de depoimento descreve o
+  vídeo ("Depoimento em vídeo da Paybem sobre a PitchYes").
+- **A regra mudou no `SEO.md` (item 7)**: `alt=""` não passa mais, nem em imagem decorativa —
+  ele some do leitor de tela e do buscador. **A auditoria passou a recusar** página com imagem
+  sem `alt` ou com `alt` vazio, então a regra se mantém sozinha daqui para frente.
+
+**Conferido no ar:** 73 imagens, nenhuma sem `alt` e nenhuma com `alt` vazio. Auditoria: 16/16.
+
 ## 2026-09-21: Rastreamento liberado no endereço de homologação (TEMPORÁRIO)
 
 Commit `5dd2db5` · Cloudflare `5228f3aa`

@@ -24,7 +24,10 @@ Estado atual e histórico das versões: [CHANGELOG.md](CHANGELOG.md).
    certificações precisam de validação antes de publicar. Texto errado citado por uma IA
    vira um problema difícil de desfazer.
 6. **Link interno é texto descritivo.** Nunca "clique aqui", nunca link sem texto.
-7. **Imagem sem `alt` não entra**, exceto quando é puramente decorativa (aí `alt=""`).
+7. **Toda imagem precisa de `alt` com texto** — inclusive as decorativas. `alt=""` não
+   passa mais: some do leitor de tela e do buscador. Logo de cliente leva o nome da empresa
+   ("Logo da Sittax"); foto e capa levam o que a imagem mostra. A auditoria (seção 8) recusa
+   página com imagem sem `alt` ou com `alt` vazio.
 8. **URL nova é para sempre.** Defina o endereço em `lib/routes.ts` pensando no longo prazo;
    se precisar mudar depois, crie um redirecionamento 301.
 

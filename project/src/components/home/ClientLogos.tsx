@@ -43,7 +43,7 @@ export function ClientLogos() {
       <li key={`${copy}-${client.name}`} className={styles.item}>
         <Image
           src={client.logo}
-          alt={copy === 0 ? client.name : ""}
+          alt={`Logo da ${client.name}`}
           width={client.width}
           height={client.height}
           className={styles.logo}

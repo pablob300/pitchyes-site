@@ -146,7 +146,7 @@ function Blocks({ block }: { block: Block }) {
                 <li key={item.name} data-reveal>
                   <Image
                     src={item.logo}
-                    alt=""
+                    alt={`Logo da ${item.name}`}
                     width={item.width}
                     height={item.height}
                     className={styles.logoImage}

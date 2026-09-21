@@ -189,7 +189,10 @@ export function MetaDrawer({
               <span>Imagem (1200 × 630)</span>
               <div className={styles.imagem}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={imagem || defaultImage} alt="" />
+                <img
+                  src={imagem || defaultImage}
+                  alt={`Prévia da imagem de compartilhamento de ${page.path}`}
+                />
                 <div className={styles.imagemAcoes}>
                   <input
                     ref={fileInput}

@@ -59,7 +59,12 @@ async function audit(path) {
     if (levels[i] - levels[i - 1] > 1) { problems.push(`salto h${levels[i - 1]} → h${levels[i]}`); break; }
   if (!schemas.includes("WebPage")) problems.push("sem WebPage em JSON-LD");
   if (path !== "/" && !schemas.includes("BreadcrumbList")) problems.push("sem BreadcrumbList");
-  for (const img of imgs) if (!/\salt=/i.test(img[0])) { problems.push("imagem sem alt"); break; }
+  // alt precisa existir E ter texto: alt="" some do leitor de tela e do buscador.
+  for (const img of imgs) {
+    const alt = img[0].match(/\salt="([^"]*)"/i);
+    if (!alt) { problems.push("imagem sem alt"); break; }
+    if (!alt[1].trim()) { problems.push("imagem com alt vazio"); break; }
+  }
   if (words < WORDS_MIN) problems.push(`${words} palavras (mín. ${WORDS_MIN})`);
 
   return { path, title, desc, h1: h1s[0] ?? "", words, schemas: [...new Set(schemas)], problems };
