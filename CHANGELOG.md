@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Rastreamento liberado no endereço de homologação (TEMPORÁRIO)
 
-Commit `PENDENTE` · Cloudflare `5228f3aa`
+Commit `5dd2db5` · Cloudflare `5228f3aa`
 
 A pedido do time, para testar Search Console e os robôs de IA antes do domínio definitivo.
 
