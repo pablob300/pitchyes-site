@@ -122,3 +122,66 @@ export async function markLogin(userId: string): Promise<void> {
   const db = await getDb();
   await db.prepare("UPDATE admin_users SET last_login_at = ? WHERE id = ?").bind(nowIso(), userId).run();
 }
+
+/**
+ * Edita nome, papel ou situação. Superadmin só pode ter o nome mudado: papel e
+ * situação ficam travados aqui e também por gatilho no banco (ver 0002_admin.sql),
+ * para que nem um erro de código nem um UPDATE manual tranquem o acesso.
+ */
+export async function updateUser(
+  id: string,
+  changes: { name?: string; role?: RoleId; status?: "ativo" | "suspenso" },
+): Promise<{ ok: true } | { ok: false; reason: "inexistente" | "protegido" }> {
+  const user = await getUser(id);
+  if (!user) return { ok: false, reason: "inexistente" };
+
+  const isSuper = user.is_superadmin === 1;
+  if (isSuper && ((changes.role && changes.role !== user.role) || (changes.status && changes.status !== user.status))) {
+    return { ok: false, reason: "protegido" };
+  }
+
+  const name = changes.name?.trim() || user.name;
+  const role = isSuper ? user.role : (changes.role ?? user.role);
+  const status = isSuper ? user.status : (changes.status ?? user.status);
+
+  const db = await getDb();
+  await db
+    .prepare("UPDATE admin_users SET name = ?, role = ?, status = ?, updated_at = ? WHERE id = ?")
+    .bind(name, role, status, nowIso(), id)
+    .run();
+  return { ok: true };
+}
+
+/** Remove o usuário e tudo que dependia dele (aparelhos, sessões e códigos caem por cascata). */
+export async function deleteUser(
+  id: string,
+  actorId: string,
+): Promise<{ ok: true } | { ok: false; reason: "inexistente" | "protegido" | "proprio" }> {
+  const user = await getUser(id);
+  if (!user) return { ok: false, reason: "inexistente" };
+  if (user.is_superadmin === 1) return { ok: false, reason: "protegido" };
+  if (user.id === actorId) return { ok: false, reason: "proprio" };
+
+  const db = await getDb();
+  await db.prepare("DELETE FROM admin_users WHERE id = ?").bind(id).run();
+  return { ok: true };
+}
+
+/** Resumo por usuário para a lista: quantos aparelhos confiáveis e sessões abertas. */
+export type UserSummary = AdminUser & { aparelhos: number; sessoes: number };
+
+export async function listUsersWithActivity(): Promise<UserSummary[]> {
+  const db = await getDb();
+  const { results } = await db
+    .prepare(
+      `SELECT u.*,
+              (SELECT COUNT(*) FROM admin_devices d
+                WHERE d.user_id = u.id AND d.trusted_at IS NOT NULL AND d.revoked_at IS NULL) AS aparelhos,
+              (SELECT COUNT(*) FROM admin_sessions s
+                WHERE s.user_id = u.id AND s.revoked_at IS NULL AND s.expires_at > datetime('now')) AS sessoes
+         FROM admin_users u
+        ORDER BY u.is_superadmin DESC, u.name COLLATE NOCASE`,
+    )
+    .all<UserSummary>();
+  return results ?? [];
+}

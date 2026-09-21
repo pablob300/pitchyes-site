@@ -8,6 +8,28 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Painel — passo 3: Usuários
+
+Commit `PENDENTE` · Cloudflare `4612ba19`
+
+- **Nova seção Usuários** (`/admin/usuarios`): quem tem acesso, com nome, e-mail, papel,
+  situação, último acesso e quantos aparelhos reconhecidos.
+- **Convidar por e-mail**: o usuário nasce **sem senha** e recebe um convite de 7 dias para
+  criar a dele. Ninguém define senha para outra pessoa — nem o superadmin.
+- **Editar** nome, papel e situação. **Suspender derruba as sessões na hora.** Quem ainda não
+  aceitou o convite tem o botão "Reenviar convite".
+- **Remover** pede confirmação e explica que aparelhos e sessões caem junto.
+- **Proteções do superadmin em três camadas**: a interface desabilita, a API recusa (403) e o
+  **banco aborta por gatilho** — testado com `DELETE` e `UPDATE` direto no SQL, os dois
+  recusados com "superadmin nao pode ser removido / rebaixado nem suspenso".
+- Ninguém remove a própria conta nem altera o próprio papel ou situação: seria o caminho mais
+  curto para se trancar do lado de fora.
+- **Primitivos novos do painel**, pensados para as próximas telas do CMS: `Dialog` (com foco
+  preso, Escape e devolução do foco), `Field` (rótulo, erro e `aria-invalid`) e `PageHeader`.
+
+**Testado no ar:** `/api/admin/usuarios` sem sessão devolve 401 no GET, no POST e no DELETE;
+`/admin/usuarios` sem sessão redireciona para a tela de entrar.
+
 ## 2026-09-21: Painel — passo 2: moldura com menu lateral
 
 Commit `27d5375` · Cloudflare `f60e8ded`

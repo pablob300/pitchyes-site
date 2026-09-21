@@ -14,8 +14,8 @@ export type AdminNavItem = {
 
 export const adminNav: AdminNavItem[] = [
   { href: "/admin/leads", label: "Central de leads", match: "prefix" },
+  { href: "/admin/usuarios", label: "Usuários", match: "prefix" },
   // Próximas seções:
-  // { href: "/admin/usuarios", label: "Usuários", match: "prefix" },
   // { href: "/admin/paginas", label: "Páginas", match: "prefix" },
   // { href: "/admin/blog", label: "Blog", match: "prefix" },
 ];

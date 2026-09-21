@@ -131,3 +131,17 @@ export async function revokeAllSessions(userId: string): Promise<void> {
     .bind(nowIso(), userId)
     .run();
 }
+
+/** Para rotas de API: devolve a sessão ou a resposta 401 pronta. */
+export async function requireApiSession(): Promise<{ session: AdminSession } | { response: Response }> {
+  const session = await getSession();
+  if (!session) {
+    return {
+      response: Response.json(
+        { ok: false, message: "Sessão expirada. Entre de novo." },
+        { status: 401, headers: { "cache-control": "no-store" } },
+      ),
+    };
+  }
+  return { session };
+}

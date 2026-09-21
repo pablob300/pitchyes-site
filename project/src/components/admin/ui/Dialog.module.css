@@ -1,0 +1,22 @@
+.overlay { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: var(--space-5); }
+.backdrop { position: absolute; inset: 0; border: 0; padding: 0; background: rgba(21, 21, 21, 0.35); cursor: pointer; }
+
+.panel {
+  position: relative;
+  width: min(100%, 460px);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
+  display: grid;
+  gap: var(--space-5);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.head { display: grid; gap: var(--space-2); }
+.head h2 { font-size: 20px; line-height: 1.25; }
+.head p { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+
+.foot { display: flex; justify-content: flex-end; gap: var(--space-3); flex-wrap: wrap; }
