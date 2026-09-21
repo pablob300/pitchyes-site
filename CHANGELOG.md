@@ -8,6 +8,35 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-21: Page Editor preenchido, com cartão social de cada página
+
+Commit `PENDENTE` · Cloudflare `eb98ff31`
+
+- **Os campos do editor abrem preenchidos** com o que está valendo no site: título,
+  descrição, título e descrição para redes (iguais aos da busca, até serem mudados) e texto
+  alternativo da imagem (o título da página). Antes abriam vazios, com o padrão só como sugestão.
+- **A edição entra na página no mesmo instante** (`revalidatePath` ao salvar), em vez de esperar
+  a revalidação de um minuto.
+- **Prévia da imagem em tamanho grande**, na largura da gaveta, que também ficou mais larga.
+- **Cada uma das 16 páginas ganhou o próprio cartão de compartilhamento**: um print da primeira
+  dobra, em 1200×630, gerado da página publicada e guardado em `/midia/social/*.webp`
+  (18 a 45 KB). Antes todas dividiam a mesma imagem padrão.
+
+**Uma armadilha encontrada no caminho.** A primeira carga usou o título de `routes.ts`, que é o
+nome curto do menu ("Preços"), enquanto a página serve o título de SEO do arquivo de conteúdo
+("Preços e planos") — e a home não leva sufixo, porque o título dela já é o nome do site. Isso
+teria trocado o título de várias páginas no ar. Corrigido antes de qualquer página mudar:
+
+- `src/lib/page-defaults.ts` passou a ser a fonte única do "padrão de cada página", lendo os
+  mesmos arquivos de conteúdo que as páginas usam. É o que o Page Editor mostra como padrão e o
+  que "Restaurar padrão" devolve.
+- `pageMetadata()` trata a home como título absoluto, sem o sufixo "| PitchYes".
+- A marca "Editada" na lista só aparece quando o texto difere do padrão — a carga inicial de
+  imagens e rótulos sociais não marca as páginas como alteradas.
+
+**Conferido no ar:** os 16 títulos continuam exatamente como estavam, e as 16 páginas já servem
+`og:image` própria. Auditoria: 16/16 páginas sem problemas.
+
 ## 2026-09-21: Painel — Page Editor e menu reorganizado
 
 Commit `c224a42` · Cloudflare `d9168157`

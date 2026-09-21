@@ -23,12 +23,14 @@ export function MetaDrawer({
   onClose: () => void;
   onSaved: (message: string) => void;
 }) {
-  const [titulo, setTitulo] = useState(page.edited ? page.title : "");
-  const [descricao, setDescricao] = useState(page.edited ? page.description : "");
-  const [ogTitulo, setOgTitulo] = useState(page.ogTitle ?? "");
-  const [ogDescricao, setOgDescricao] = useState(page.ogDescription ?? "");
+  // Os campos abrem com o que está valendo no site agora, não em branco: editar é
+  // corrigir um texto existente, não adivinhar o que havia lá.
+  const [titulo, setTitulo] = useState(page.title);
+  const [descricao, setDescricao] = useState(page.description);
+  const [ogTitulo, setOgTitulo] = useState(page.ogTitle ?? page.title);
+  const [ogDescricao, setOgDescricao] = useState(page.ogDescription ?? page.description);
   const [imagem, setImagem] = useState(page.imageUrl ?? "");
-  const [imagemAlt, setImagemAlt] = useState(page.imageAlt ?? "");
+  const [imagemAlt, setImagemAlt] = useState(page.imageAlt ?? page.title);
   const [noindex, setNoindex] = useState(page.noindex && !page.placeholder);
   const [revisadoEm, setRevisadoEm] = useState(page.updated);
   const [busy, setBusy] = useState(false);
@@ -44,6 +46,8 @@ export function MetaDrawer({
 
   const tituloFinal = titulo || page.defaultTitle;
   const descricaoFinal = descricao || page.defaultDescription;
+  const padraoTitulo = page.defaultTitle;
+  const padraoDescricao = page.defaultDescription;
 
   async function salvar(restaurar = false) {
     setBusy(true);
@@ -146,6 +150,7 @@ export function MetaDrawer({
               {erros.titulo && <small className={styles.erro}>{erros.titulo}</small>}
               <small>
                 Comece pelo termo que a pessoa busca. O sufixo &quot;| PitchYes&quot; é acrescentado sozinho.
+                {titulo !== padraoTitulo && <> Padrão do código: &quot;{padraoTitulo}&quot;.</>}
               </small>
             </label>
 
@@ -164,7 +169,10 @@ export function MetaDrawer({
                 aria-invalid={erros.descricao ? true : undefined}
               />
               {erros.descricao && <small className={styles.erro}>{erros.descricao}</small>}
-              <small>Entre 120 e 160 caracteres, com a proposta de valor e uma razão para clicar.</small>
+              <small>
+                Entre 120 e 160 caracteres, com a proposta de valor e uma razão para clicar.
+                {descricao !== padraoDescricao && <> O padrão do código continua guardado.</>}
+              </small>
             </label>
 
             <div className={styles.preview} aria-label="Prévia do resultado de busca">
@@ -182,7 +190,7 @@ export function MetaDrawer({
               <div className={styles.imagem}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={imagem || defaultImage} alt="" />
-                <div>
+                <div className={styles.imagemAcoes}>
                   <input
                     ref={fileInput}
                     type="file"
@@ -192,13 +200,12 @@ export function MetaDrawer({
                       if (file) void enviarImagem(file);
                     }}
                   />
-                  <p className={styles.hint}>
-                    {imagem ? "Imagem própria desta página." : "Usando a imagem padrão do site."}
-                  </p>
-                  {imagem && (
+                  {imagem ? (
                     <button type="button" className={styles.linkButton} onClick={() => setImagem("")}>
-                      Voltar para a padrão
+                      Voltar para a imagem padrão do site
                     </button>
+                  ) : (
+                    <span className={styles.hint}>Usando a imagem padrão do site.</span>
                   )}
                 </div>
               </div>
@@ -218,7 +225,7 @@ export function MetaDrawer({
                 placeholder={`${tituloFinal} | PitchYes`}
                 onChange={(event) => setOgTitulo(event.target.value)}
               />
-              <small>Em branco, usa o título da busca.</small>
+              <small>É o que aparece no WhatsApp, LinkedIn e afins.</small>
             </label>
 
             <label className={styles.field}>

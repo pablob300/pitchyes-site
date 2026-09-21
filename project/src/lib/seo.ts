@@ -27,10 +27,13 @@ export function pageMetadata({
 }): Metadata {
   const indexable = isIndexable() && !noindex;
   const url = new URL(path, getSiteUrl()).toString();
+  // A home é a única página cujo título já é o nome do site: nela o sufixo
+  // "| PitchYes" do layout viraria repetição, então o título vai como absoluto.
+  const titleValue = title ? (path === "/" ? { absolute: title } : title) : undefined;
   return {
     // Only set `title` when the page has one: passing undefined would blank out the
     // layout's default title instead of falling back to it.
-    ...(title ? { title } : {}),
+    ...(titleValue ? { title: titleValue } : {}),
     description,
     alternates: { canonical: path },
     openGraph: {

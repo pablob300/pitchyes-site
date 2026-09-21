@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { audit } from "@/lib/admin/audit";
 import { editablePaths, resetPageMeta, savePageMeta } from "@/lib/admin/pages";
 import { assertSameOrigin, jsonError, jsonOk, readJson } from "@/lib/admin/request";
@@ -40,6 +41,9 @@ export async function POST(request: Request) {
 
   if (body.restaurar) {
     await resetPageMeta(path);
+    // Derruba a versão em cache na hora: a página volta ao padrão do código no
+    // próximo acesso, sem esperar a revalidação de um minuto.
+    revalidatePath(path);
     await audit({
       action: "usuario.editado",
       actorId: actor.id,
@@ -87,6 +91,9 @@ export async function POST(request: Request) {
     { id: actor.id, name: actor.name },
   );
 
+  // O que foi salvo entra na página publicada imediatamente.
+  revalidatePath(path);
+
   await audit({
     action: "usuario.editado",
     actorId: actor.id,
@@ -97,5 +104,5 @@ export async function POST(request: Request) {
     request,
   });
 
-  return jsonOk({ message: "Metadados salvos. A página publicada atualiza em até um minuto." });
+  return jsonOk({ message: "Metadados salvos e já aplicados na página publicada." });
 }

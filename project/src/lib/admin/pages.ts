@@ -2,6 +2,7 @@ import "server-only";
 import { getDb, nowIso } from "./db";
 import { getAllPageMeta, type PageMeta } from "@/lib/page-meta";
 import { pages } from "@/lib/routes";
+import { pageDefault } from "@/lib/page-defaults";
 
 // Páginas editáveis no Page Editor.
 //
@@ -43,14 +44,19 @@ export async function listEditablePages(): Promise<EditablePage[]> {
     .filter((page) => !page.path.startsWith("/blog"))
     .map((page) => {
       const meta: PageMeta | undefined = overrides.get(page.path);
+      const padrao = pageDefault(page.path, page.title, page.description);
+      const title = meta?.title || padrao.title;
+      const description = meta?.description || padrao.description;
       return {
         path: page.path,
         name: page.title,
-        title: meta?.title || page.title,
-        description: meta?.description || page.description,
-        defaultTitle: page.title,
-        defaultDescription: page.description,
-        edited: Boolean(meta),
+        title,
+        description,
+        defaultTitle: padrao.title,
+        defaultDescription: padrao.description,
+        // "Editada" só quando o texto difere do padrão do código — a semente de
+        // imagens e rótulos sociais não deve marcar todas as páginas como alteradas.
+        edited: Boolean(meta) && (title !== padrao.title || description !== padrao.description),
         noindex: meta?.noindex === 1 || page.placeholder,
         placeholder: page.placeholder,
         updated: meta?.updated || page.updated,
