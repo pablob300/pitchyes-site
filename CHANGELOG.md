@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-20: Logos dos clientes em faixa deslizante e em grade
 
-Commit `PENDENTE` · Cloudflare `e2b56b15`
+Commit `326b522` · Cloudflare `e2b56b15`
 
 - **Home:** a lista de clientes virou uma **faixa deslizante em toda a largura da tela**, só com
   as marcas. O movimento é contínuo (GSAP, animando apenas `transform`), pausa quando o ponteiro
