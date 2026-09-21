@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Page Editor preenchido, com cartão social de cada página
 
-Commit `PENDENTE` · Cloudflare `eb98ff31`
+Commit `010b29d` · Cloudflare `eb98ff31`
 
 - **Os campos do editor abrem preenchidos** com o que está valendo no site: título,
   descrição, título e descrição para redes (iguais aos da busca, até serem mudados) e texto
