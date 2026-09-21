@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Painel — passo 4: Central de leads com filtros, busca e CSV
 
-Commit `PENDENTE` · Cloudflare `e0206409`
+Commit `7caff84` · Cloudflare `e0206409`
 
 - **Filtro por formulário e por período** e **busca por nome, e-mail ou empresa**, com
   **paginação de 50 em 50** no lugar do limite fixo de 200.
