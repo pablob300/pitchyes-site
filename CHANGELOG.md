@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-21: Painel — Page Editor e menu reorganizado
 
-Commit `PENDENTE` · Cloudflare `d9168157`
+Commit `c224a42` · Cloudflare `d9168157`
 
 **Menu lateral em dois grupos.** "Page Editor" fica no topo, logo abaixo da marca (é o
 trabalho do dia a dia); "Central de leads" e "Usuários" encostam na base, acima do bloco do
