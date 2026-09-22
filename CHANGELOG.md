@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-22: Painel — seção Newsletter, separada dos leads
 
-Commit `PENDENTE` · Cloudflare `5acc13fa`
+Commit `638163b` · Cloudflare `5acc13fa`
 
 - **Novo menu "Newsletter"** na barra lateral, logo abaixo de "Central de leads"
   (`/admin/newsletter`): a lista de quem assinou pelo rodapé do site, com **e-mail, data e hora**
