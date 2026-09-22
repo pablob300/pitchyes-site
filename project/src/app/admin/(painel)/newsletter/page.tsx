@@ -45,7 +45,7 @@ export default async function Page({
 
   return (
     <>
-      <PageHeader eyebrow="Newsletter" title="Assinaturas do rodapé" description={descricao} />
+      <PageHeader eyebrow="Newsletter" title="Assinaturas da Newsletter" description={descricao} />
       <NewsletterTable rows={rows} filters={filters} total={total} />
       <Pagination filters={filters} total={total} perPage={PER_PAGE} basePath="/admin/newsletter" />
     </>
