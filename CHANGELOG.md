@@ -8,6 +8,30 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-22: Painel — seção Newsletter, separada dos leads
+
+Commit `PENDENTE` · Cloudflare `5acc13fa`
+
+- **Novo menu "Newsletter"** na barra lateral, logo abaixo de "Central de leads"
+  (`/admin/newsletter`): a lista de quem assinou pelo rodapé do site, com **e-mail, data e hora**
+  de cada cadastro, no fuso de Brasília.
+- **Filtro por período** na URL, paginação de 50 em 50 e **exportação em CSV** do que estiver
+  filtrado — sem filtro, a lista inteira. O botão diz qual dos dois vai acontecer.
+- **As assinaturas saíram da Central de leads.** Elas gravavam na mesma tabela `leads` e
+  apareciam misturadas com os contatos do comercial. Agora têm tabela própria
+  (`newsletter`, migração `0005_newsletter.sql`), e os registros antigos foram movidos: a
+  Central de leads não mostra mais nenhum, nem na listagem, nem na contagem, nem na exportação,
+  e "Newsletter" sumiu do filtro por formulário de lá.
+- **Cada formulário declara onde grava** (`storage: "leads" | "newsletter"` em `lib/leads.ts`),
+  então a rota pública `/api/leads` continua sendo a porta única de entrada de qualquer
+  formulário do site — quem decide o destino é a definição do formulário, não um `if` espalhado.
+- **E-mail é único**: assinar duas vezes não cria linha nova nem devolve erro para quem assinou;
+  a data que fica é a da primeira vez.
+
+**Testado no ar:** uma assinatura nova entrou, a repetição não duplicou (2 assinaturas, não 3),
+e-mail inválido devolve 422 com a mensagem do campo, `leads` ficou com zero registros de
+newsletter, e tanto `/admin/newsletter` quanto a exportação exigem sessão.
+
 ## 2026-09-21: Texto alternativo em todas as imagens
 
 Commit `8605839` · Cloudflare `90e1866d`

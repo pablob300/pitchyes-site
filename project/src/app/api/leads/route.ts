@@ -1,5 +1,6 @@
 import { getLeadForm, validateLead, type LeadValues } from "@/lib/leads";
 import { saveLead } from "@/lib/leads-db";
+import { saveSubscriber } from "@/lib/newsletter-db";
 
 // Recebe os formulários do site. Hoje o envio só grava o lead (visível em /admin/leads);
 // o encaminhamento para CRM/e-mail entra aqui depois, sem mexer no front.
@@ -35,13 +36,16 @@ export async function POST(request: Request) {
     );
   }
 
+  const sourceUrl = request.headers.get("referer") ?? undefined;
+  const userAgent = request.headers.get("user-agent") ?? undefined;
+
   try {
-    await saveLead({
-      form,
-      values: result.values,
-      sourceUrl: request.headers.get("referer") ?? undefined,
-      userAgent: request.headers.get("user-agent") ?? undefined,
-    });
+    // A newsletter do rodapé tem tabela e tela próprias: não entra na Central de leads.
+    if (form.storage === "newsletter") {
+      await saveSubscriber({ email: result.values[form.identity.email], sourceUrl, userAgent });
+    } else {
+      await saveLead({ form, values: result.values, sourceUrl, userAgent });
+    }
   } catch (error) {
     console.error("[leads] falha ao gravar", error);
     return Response.json(

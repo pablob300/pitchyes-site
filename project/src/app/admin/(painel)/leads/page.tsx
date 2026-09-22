@@ -25,7 +25,10 @@ const TZ = "America/Sao_Paulo";
 const dateFmt = new Intl.DateTimeFormat("pt-BR", { timeZone: TZ, day: "2-digit", month: "2-digit", year: "numeric" });
 const timeFmt = new Intl.DateTimeFormat("pt-BR", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
 
-const formOptions = Object.values(leadForms).map((form) => ({ value: form.id, label: form.label }));
+// Só os formulários que gravam na Central de leads: a newsletter tem tela própria.
+const formOptions = Object.values(leadForms)
+  .filter((form) => (form.storage ?? "leads") === "leads")
+  .map((form) => ({ value: form.id, label: form.label }));
 
 export default async function Page({
   searchParams,

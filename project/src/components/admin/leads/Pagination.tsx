@@ -2,22 +2,24 @@ import Link from "next/link";
 import { toSearchParams, type LeadFilters } from "@/lib/leads-filters";
 import styles from "./Pagination.module.css";
 
-// Paginação preservando os filtros da URL.
+// Paginação preservando os filtros da URL. Serve à Central de leads e à Newsletter.
 export function Pagination({
   filters,
   total,
   perPage,
+  basePath = "/admin/leads",
 }: {
   filters: LeadFilters;
   total: number;
   perPage: number;
+  basePath?: string;
 }) {
   const pages = Math.max(1, Math.ceil(total / perPage));
   if (pages <= 1) return null;
 
   const href = (page: number) => {
     const query = toSearchParams(filters, { page });
-    return `/admin/leads${query ? `?${query}` : ""}`;
+    return `${basePath}${query ? `?${query}` : ""}`;
   };
 
   return (

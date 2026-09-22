@@ -23,6 +23,7 @@ export const adminNav: AdminNavItem[] = [
   // { href: "/admin/midia", label: "Mídia", match: "prefix", group: "topo" },
 
   { href: "/admin/leads", label: "Central de leads", match: "prefix", group: "base" },
+  { href: "/admin/newsletter", label: "Newsletter", match: "prefix", group: "base" },
   { href: "/admin/usuarios", label: "Usuários", match: "prefix", group: "base" },
 ];
 

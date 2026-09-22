@@ -18,6 +18,11 @@ export type LeadFormDef = {
   id: string;
   /** Rótulo do formulário no painel. */
   label: string;
+  /**
+   * Onde o envio é gravado. "leads" é a Central de leads; "newsletter" é a lista
+   * de assinaturas do rodapé, que tem tela e tabela próprias.
+   */
+  storage?: "leads" | "newsletter";
   /** Campo usado como nome, e-mail, telefone e empresa na listagem de /admin/leads. */
   identity: { name?: string; email: string; phone?: string; company?: string };
   fields: LeadField[];
@@ -85,6 +90,7 @@ export const contatoForm: LeadFormDef = {
 export const newsletterForm: LeadFormDef = {
   id: "newsletter",
   label: "Newsletter",
+  storage: "newsletter",
   identity: { email: "email" },
   fields: [
     { name: "email", label: "E-mail", type: "email", required: true, autoComplete: "email" },
