@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-23: Editor visual de conteúdo — página inicial
 
-Commits `e8039ba`, `168b125`, `600a999`, `0ff7797` · Cloudflare `ffd79f4d`
+Commits `e8039ba`, `168b125`, `600a999`, `0ff7797`, `087ffd0` · Cloudflare `ffd79f4d`
 
 - **"Editar Conteúdo" saiu do "em construção"**, na página inicial. O botão abre a página
   de verdade dentro de um iframe: clicar em qualquer texto ou imagem abre a gaveta daquele
