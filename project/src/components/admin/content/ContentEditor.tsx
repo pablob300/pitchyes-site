@@ -24,6 +24,8 @@ export type ScopeData = {
   rev: number;
   /** Conteúdo já resolvido (padrão do código + o que foi editado). */
   resolved: Record<string, unknown>;
+  /** Só o que foi sobreposto, para a gaveta saber o que mostrar como "Editada". */
+  override: Record<string, unknown>;
 };
 
 type Scope = "pagina" | "site";
@@ -169,6 +171,28 @@ export function ContentEditor({
     };
   }
 
+  /** Devolve a seção ao texto que está no código, tirando a sobreposição do rascunho. */
+  async function voltarAoPadrao(secaoAlvo: SectionSpec) {
+    const scope: Scope = secaoAlvo.scope === "site" ? "site" : "pagina";
+    const ponteiros = [
+      ...(secaoAlvo.prefix ? [secaoAlvo.prefix] : []),
+      ...(secaoAlvo.lists ?? []).map((l) => l.pointer),
+    ];
+    setEstado({ tipo: "salvando" });
+    const json = await chamar({
+      caminho: caminhoDe(scope),
+      acao: "limpar",
+      rev: dados[scope].rev,
+      campos: ponteiros.map((ponteiro) => ({ ponteiro })),
+    });
+    if (!json.ok) {
+      setEstado({ tipo: "erro", mensagem: json.message ?? "Não foi possível voltar ao padrão." });
+      return;
+    }
+    // O conteúdo resolvido muda inteiro: mais simples recarregar do que refazer a fusão aqui.
+    window.location.reload();
+  }
+
   async function salvar() {
     setEstado({ tipo: "salvando" });
     for (const scope of ["pagina", "site"] as Scope[]) {
@@ -280,6 +304,7 @@ export function ContentEditor({
               dados={dados}
               onChange={alterar}
               onFechar={() => setSelecionada(null)}
+              onVoltarAoPadrao={() => void voltarAoPadrao(secao)}
             />
           ) : (
             <div className={styles.vazio}>
@@ -321,21 +346,33 @@ function SectionDrawer({
   dados,
   onChange,
   onFechar,
+  onVoltarAoPadrao,
 }: {
   secao: SectionSpec;
   dados: Record<Scope, ScopeData>;
   onChange: (scope: Scope, ponteiro: string, valor: unknown, estrutural?: boolean) => void;
   onFechar: () => void;
+  onVoltarAoPadrao: () => void;
 }) {
   const scope = secao.scope === "site" ? "site" : "pagina";
   const raiz = dados[scope].resolved;
   const absoluto = (relativo: string) => (secao.prefix ? `${secao.prefix}.${relativo}` : relativo);
 
+  // "Editada" quer dizer que esta seção tem sobreposição gravada — e, portanto, que uma
+  // mudança feita no código não aparece mais nela até alguém voltar ao padrão.
+  const editada = [
+    ...(secao.prefix ? [secao.prefix] : []),
+    ...(secao.lists ?? []).map((l) => l.pointer),
+  ].some((ponteiro) => getAt(dados[scope].override, ponteiro) !== undefined);
+
   return (
     <>
       <div className={styles.gavetaTopo}>
         <div>
-          <p className={styles.rotulo}>{secao.scope === "site" ? "Site inteiro" : "Bloco"}</p>
+          <p className={styles.rotulo}>
+            {secao.scope === "site" ? "Site inteiro" : "Bloco"}
+            {editada && <span className={styles.selo}>Editada</span>}
+          </p>
           <h2>{secao.label}</h2>
         </div>
         <button type="button" onClick={onFechar} aria-label="Fechar o bloco">
@@ -363,6 +400,18 @@ function SectionDrawer({
             onChange={(proxima) => onChange(scope, lista.pointer, proxima, true)}
           />
         ))}
+
+        {editada && (
+          <div className={styles.padrao}>
+            <p>
+              Este bloco tem texto editado pelo painel, então melhorias escritas no código
+              não aparecem mais nele.
+            </p>
+            <button type="button" onClick={onVoltarAoPadrao}>
+              Voltar ao padrão do código
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

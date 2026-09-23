@@ -41,10 +41,12 @@ export default async function EditarConteudo({
         pagina: {
           rev: pagina.rev,
           resolved: resolveHome(pagina.data) as unknown as Record<string, unknown>,
+          override: (pagina.data ?? {}) as Record<string, unknown>,
         },
         site: {
           rev: site.rev,
           resolved: resolveSite(site.data) as unknown as Record<string, unknown>,
+          override: (site.data ?? {}) as Record<string, unknown>,
         },
       }}
       editadoPor={pagina.updatedByName}

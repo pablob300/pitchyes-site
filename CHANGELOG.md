@@ -10,7 +10,7 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ## 2026-09-23: Editor visual de conteúdo — página inicial
 
-Commits `e8039ba`, `168b125`, `600a999`, `0ff7797`, `087ffd0` · Cloudflare `ffd79f4d`
+Commits `e8039ba`, `168b125`, `600a999`, `0ff7797`, `087ffd0`, `HASH` · Cloudflare `41117c6d`
 
 - **"Editar Conteúdo" saiu do "em construção"**, na página inicial. O botão abre a página
   de verdade dentro de um iframe: clicar em qualquer texto ou imagem abre a gaveta daquele
@@ -31,6 +31,9 @@ Commits `e8039ba`, `168b125`, `600a999`, `0ff7797`, `087ffd0` · Cloudflare `ffd
 - **O `/llms.txt` parou de poder divergir**: latência, total de ligações, certificações e
   prazo de implantação passaram a sair do conteúdo publicado. A prosa e o que não existe
   como campo (CNPJ, endereço, planos) continuam escritos à mão.
+- **Selo "Editada" e "voltar ao padrão do código" por bloco.** Assim que uma seção ganha
+  texto editado pelo painel, ela para de receber melhorias escritas no código — o selo
+  avisa e o botão desfaz, devolvendo o bloco ao arquivo de conteúdo.
 - **A faixa de CTA e a parede de logos** são conteúdo do site inteiro (`/_site`): editá-las
   muda todas as páginas, e a gaveta avisa isso. Os logos também alimentam `/clientes`.
 

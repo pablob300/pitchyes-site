@@ -7,6 +7,7 @@ import {
   restoreVersion,
   saveDraft,
   setAtPointer,
+  unsetAtPointer,
   type Actor,
 } from "@/lib/admin/content";
 import { stampPageUpdated } from "@/lib/admin/pages";
@@ -32,7 +33,7 @@ export const dynamic = "force-dynamic";
 
 type Body = {
   caminho?: string;
-  acao?: "salvar" | "publicar" | "descartar" | "restaurar";
+  acao?: "salvar" | "limpar" | "publicar" | "descartar" | "restaurar";
   rev?: number;
   campos?: { ponteiro?: string; valor?: unknown }[];
   versao?: string;
@@ -97,11 +98,13 @@ export async function POST(request: Request) {
   };
 
   switch (body.acao) {
+    case "limpar":
     case "salvar": {
+      const limpando = body.acao === "limpar";
       const campos = Array.isArray(body.campos) ? body.campos : [];
       if (campos.length === 0) return jsonError("Nada para salvar.", 400);
 
-      const patches: { pointer: string; value: unknown }[] = [];
+      const patches: { pointer: string; value?: unknown; unset?: boolean }[] = [];
       for (const campo of campos) {
         const pointer = String(campo.ponteiro ?? "");
         if (!pointer) return jsonError("Campo sem endereço.", 400);
@@ -110,7 +113,9 @@ export async function POST(request: Request) {
         if (pointer.split(".").some((part) => /^\d+$/.test(part))) {
           return jsonError(`Envie a lista inteira, não o item: ${pointer}`, 400);
         }
-        patches.push({ pointer, value: campo.valor });
+        patches.push(
+          limpando ? { pointer, unset: true } : { pointer, value: campo.valor },
+        );
       }
 
       const state = await openDraft(path, actor);
@@ -125,7 +130,10 @@ export async function POST(request: Request) {
         >,
       );
       try {
-        for (const patch of patches) setAtPointer(candidate, patch.pointer, patch.value);
+        for (const patch of patches) {
+          if (patch.unset) unsetAtPointer(candidate, patch.pointer);
+          else setAtPointer(candidate, patch.pointer, patch.value);
+        }
       } catch {
         return jsonError("Campo com endereço inválido.", 400);
       }
@@ -148,8 +156,14 @@ export async function POST(request: Request) {
         );
       }
 
-      await done("conteudo.salvo", { campos: patches.map((p) => p.pointer) });
-      return jsonOk({ rev: result.rev, message: "Rascunho salvo." });
+      await done("conteudo.salvo", {
+        campos: patches.map((p) => p.pointer),
+        acao: limpando ? "voltar ao padrão" : "editar",
+      });
+      return jsonOk({
+        rev: result.rev,
+        message: limpando ? "Seção de volta ao padrão do código." : "Rascunho salvo.",
+      });
     }
 
     case "publicar": {

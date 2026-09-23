@@ -108,6 +108,24 @@ export function setAtPointer(
   node[parts[parts.length - 1]] = value;
 }
 
+/**
+ * Tira o campo da sobreposição — o oposto de setAtPointer.
+ *
+ * É o "voltar ao padrão do código": apagar a chave faz o valor voltar a sair do arquivo
+ * de conteúdo na próxima fusão. Sem isto, uma lista editada uma vez ficaria congelada
+ * para sempre e melhorias feitas no código nunca mais apareceriam.
+ */
+export function unsetAtPointer(target: Record<string, unknown>, pointer: string): void {
+  const parts = pointer.split(".");
+  let node: Record<string, unknown> | undefined = target;
+  for (const part of parts.slice(0, -1)) {
+    const next: unknown = node?.[part];
+    if (typeof next !== "object" || next === null || Array.isArray(next)) return;
+    node = next as Record<string, unknown>;
+  }
+  delete node?.[parts[parts.length - 1]];
+}
+
 export type SaveResult = { ok: true; rev: number } | { ok: false; conflictWith: string | null };
 
 /**
@@ -118,7 +136,7 @@ export type SaveResult = { ok: true; rev: number } | { ok: false; conflictWith: 
  */
 export async function saveDraft(
   path: string,
-  patches: { pointer: string; value: unknown }[],
+  patches: { pointer: string; value?: unknown; unset?: boolean }[],
   rev: number,
   actor: Actor,
 ): Promise<SaveResult> {
@@ -130,7 +148,10 @@ export async function saveDraft(
   const next = (typeof data === "object" && data !== null && !Array.isArray(data)
     ? data
     : {}) as Record<string, unknown>;
-  for (const patch of patches) setAtPointer(next, patch.pointer, patch.value);
+  for (const patch of patches) {
+    if (patch.unset) unsetAtPointer(next, patch.pointer);
+    else setAtPointer(next, patch.pointer, patch.value);
+  }
 
   const db = await getDb();
   const result = await db

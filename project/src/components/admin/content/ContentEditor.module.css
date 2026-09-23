@@ -355,3 +355,33 @@
   .corpo { grid-template-columns: minmax(0, 1fr); grid-template-rows: 55vh minmax(0, 1fr); }
   .gaveta { border-left: 0; border-top: 1px solid var(--color-border); }
 }
+
+.selo {
+  margin-left: var(--space-2);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 1px 7px;
+  color: var(--color-text-secondary);
+}
+
+.padrao {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-4);
+}
+.padrao p { font-size: 12px; color: var(--color-text-muted); line-height: 1.6; }
+.padrao button {
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  cursor: pointer;
+  color: var(--color-text);
+}
+.padrao button:hover { border-color: var(--color-text); }
