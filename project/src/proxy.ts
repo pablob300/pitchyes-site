@@ -4,7 +4,7 @@ import { PUBLIC_ADMIN_PATHS, SESSION_COOKIE, SESSION_RENEW_AFTER_HOURS, SESSION_
 import { readSessionCookie, signSessionCookie } from "@/lib/admin/cookie";
 import { timingSafeEqual } from "@/lib/admin/crypto";
 
-// Porta de entrada da área interna (/admin e /api/admin).
+// Porta de entrada da área interna (/admin, /api/admin e /editor).
 //
 // Aqui a checagem é BARATA e OTIMISTA: confere a assinatura do cookie e o prazo,
 // sem tocar no banco — o proxy roda em toda navegação, inclusive em prefetch.
@@ -18,11 +18,25 @@ import { timingSafeEqual } from "@/lib/admin/crypto";
 
 const REALM = 'Basic realm="PitchYes — área interna", charset="UTF-8"';
 
-function harden(response: NextResponse): NextResponse {
+/**
+ * A pré-visualização do editor (/editor) serve RASCUNHO: é tão interna quanto /admin e
+ * entra no mesmo matcher. A única diferença é que ela PRECISA abrir dentro do iframe do
+ * painel, então troca "frame-ancestors 'none'" por "'self'" e larga o x-frame-options —
+ * não existe um SAMEORIGIN que todos os navegadores honrem junto com a CSP.
+ */
+function isEditorPreview(pathname: string): boolean {
+  return pathname === "/editor" || pathname.startsWith("/editor/");
+}
+
+function harden(response: NextResponse, pathname = ""): NextResponse {
   response.headers.set("cache-control", "no-store");
   response.headers.set("x-robots-tag", "noindex, nofollow, noarchive");
-  response.headers.set("x-frame-options", "DENY");
-  response.headers.set("content-security-policy", "frame-ancestors 'none'");
+  if (isEditorPreview(pathname)) {
+    response.headers.set("content-security-policy", "frame-ancestors 'self'");
+  } else {
+    response.headers.set("x-frame-options", "DENY");
+    response.headers.set("content-security-policy", "frame-ancestors 'none'");
+  }
   response.headers.set("referrer-policy", "no-referrer");
   response.headers.set("x-content-type-options", "nosniff");
   return response;
@@ -62,7 +76,7 @@ export async function proxy(request: NextRequest) {
 
   // Telas e rotas que precisam funcionar sem sessão (entrar, código, recuperar senha).
   if (PUBLIC_ADMIN_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
-    return harden(NextResponse.next());
+    return harden(NextResponse.next(), pathname);
   }
 
   const secret = process.env.ADMIN_SESSION_SECRET?.trim();
@@ -82,10 +96,10 @@ export async function proxy(request: NextRequest) {
     }
     const url = new URL("/admin/entrar", request.url);
     url.searchParams.set("next", `${pathname}${search}`);
-    return harden(NextResponse.redirect(url) as NextResponse);
+    return harden(NextResponse.redirect(url) as NextResponse, pathname);
   }
 
-  const response = harden(NextResponse.next());
+  const response = harden(NextResponse.next(), pathname);
 
   // Renovação do prazo do cookie, no máximo uma vez por dia: componente de servidor
   // não escreve cookie, então esta é a única parte que pode estender o prazo.
@@ -109,4 +123,6 @@ export async function proxy(request: NextRequest) {
   return response;
 }
 
-export const config = { matcher: ["/admin/:path*", "/api/admin/:path*"] };
+// /editor entra aqui junto de /admin: é a pré-visualização do rascunho. Fora do matcher,
+// seria uma URL PÚBLICA servindo conteúdo não publicado.
+export const config = { matcher: ["/admin/:path*", "/api/admin/:path*", "/editor/:path*"] };

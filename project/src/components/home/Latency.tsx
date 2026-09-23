@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useRef } from "react";
 import type { Latency as LatencyContent } from "@/content/home.schema";
 import { editFn } from "@/lib/content/edit";
@@ -10,6 +11,7 @@ const format = (n: number) => n.toLocaleString("pt-BR");
 
 export function Latency({ content, editable }: { content: LatencyContent; editable?: boolean }) {
   const edit = editFn(editable);
+  const pathname = usePathname();
   const max = Math.max(...content.rows.map((r) => r.value));
   const container = useRef<HTMLElement>(null);
 
@@ -17,6 +19,10 @@ export function Latency({ content, editable }: { content: LatencyContent; editab
   // Server HTML carries the final values, so no-JS and reduced-motion users see them as-is.
   useGSAP(
     () => {
+      // No editor as barras já nascem no valor final: o contador depende de rolagem, e
+      // quem está editando precisa ver o número, não a animação.
+      if (pathname.startsWith("/editor")) return;
+
       const mm = gsap.matchMedia(container.current ?? undefined);
       mm.add(motion.noPreference, () => {
         const tl = gsap.timeline({
@@ -44,7 +50,7 @@ export function Latency({ content, editable }: { content: LatencyContent; editab
       });
       return () => mm.revert();
     },
-    { scope: container, dependencies: [content, max] },
+    { scope: container, dependencies: [content, max, pathname] },
   );
 
   return (

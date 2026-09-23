@@ -28,8 +28,8 @@ export default function robots(): MetadataRoute.Robots {
   if (!isIndexable() && !isTestCrawlMode()) {
     return { rules: { userAgent: "*", disallow: "/" } };
   }
-  // Área interna e endpoints não entram em buscador nenhum.
-  const off = ["/admin", "/api"];
+  // Área interna, endpoints e a pré-visualização do editor não entram em buscador nenhum.
+  const off = ["/admin", "/api", "/editor"];
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow: off },

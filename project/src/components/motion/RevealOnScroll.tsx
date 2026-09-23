@@ -19,6 +19,16 @@ export function RevealOnScroll() {
   useGSAP(
     () => {
       const root = document.documentElement;
+
+      // Dentro do editor visual (/editor) a revelação fica desligada. Não é capricho:
+      // os elementos começam em opacity 0 e com y: 24, então um bloco recém-criado fora
+      // da tela ficaria invisível para quem está editando, e o deslocamento moveria o
+      // retângulo de onde o painel desenha as alças de seleção.
+      if (pathname.startsWith("/editor")) {
+        root.classList.add("reveal-ready");
+        return;
+      }
+
       const mm = gsap.matchMedia();
 
       mm.add(motion.noPreference, () => {

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
-import { homeDefaults } from "@/components/home/content";
 import { HomePage } from "@/components/home/HomePage";
-import { siteDefaults } from "@/content/site";
+import { getHomeContent, getSiteContent } from "@/lib/content/resolve";
 import {
   organizationSchema,
   pageMetadataWithOverrides,
@@ -25,9 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
 //
 // O JSON-LD sai do MESMO conteúdo que a página desenha: dado estruturado que contradiz o
 // texto visível é o pior erro de SEO possível.
-export default function Home() {
-  const content = homeDefaults;
-  const { clients } = siteDefaults;
+export default async function Home() {
+  const content = await getHomeContent("publicado");
+  const { clients } = await getSiteContent("publicado");
 
   return (
     <>
