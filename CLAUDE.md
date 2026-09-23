@@ -22,6 +22,8 @@ Leia antes de qualquer alteração no site:
 | Texto de uma página interna | `project/src/content/<pagina>.ts` |
 | Como esse texto vira layout | `project/src/components/blocks/ContentPage.tsx` (`content/types.ts` lista os blocos) |
 | Home | `project/src/components/home/` (textos em `home/content.ts`) |
+| Campos que o editor visual mostra | `project/src/lib/content/schema/` |
+| Quais páginas já têm editor de conteúdo | `project/src/lib/content/pages.ts` |
 | Cabeçalho, rodapé, faixa de CTA | `project/src/components/layout/` |
 | Domínio e regra de indexação | `project/src/lib/site.ts` (`SITE_URL`, `SITE_ENV`) |
 | Resumo do site para IAs | `project/src/app/llms.txt/route.ts` |
@@ -30,6 +32,26 @@ Leia antes de qualquer alteração no site:
 **Página nova com conteúdo real:** crie `project/src/app/<caminho>/page.tsx` (tem prioridade
 sobre o coringa `app/[...slug]`), escreva o texto em `src/content/`, e marque `placeholder: false`
 em `routes.ts` — só assim ela entra no sitemap e na indexação.
+
+## Editor visual de conteúdo
+
+A home já é editável no painel (`/admin/paginas` → "Editar Conteúdo"). Três regras que
+economizam depuração:
+
+- **`content.ts` deixa de mandar sozinho na home depois da primeira publicação.** O que o
+  site mostra é o padrão do código fundido com a sobreposição do D1: objeto mescla por
+  chave, **lista substitui inteira**. Ou seja, uma FAQ nova acrescentada no código **não
+  aparece** se alguém já editou a lista pelo painel — use o "voltar ao padrão" da gaveta.
+- **Nada que o site público importe pode ler cookie, cabeçalho ou sessão.** Uma leitura
+  dessas tira a página do cache estático e passa a custar um render por visita. Leitura de
+  sessão só sob `/admin` e `/editor`. O portão é a saída do `next build`: `/` precisa
+  continuar aparecendo como estática com revalidação, nunca como dinâmica.
+- **Modo editor só acrescenta atributo, nunca elemento.** Nada de `{editable && <div/>}`
+  dentro de um componente de seção — os contornos e as alças moram no painel, por cima do
+  iframe. Confira com `curl -s <home> | grep -c data-edit`: tem que dar zero.
+
+Página nova no editor: escreva o schema dela em `lib/content/schema/`, espalhe os
+`edit()` nos componentes e acrescente o caminho em `lib/content/pages.ts`.
 
 ## Fluxo de trabalho
 
