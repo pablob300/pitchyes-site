@@ -36,10 +36,26 @@ const text = (value: unknown): value is string => typeof value === "string" && v
 const positive = (value: unknown): value is number =>
   typeof value === "number" && Number.isFinite(value) && value > 0;
 
-/** Troca a seção pelo padrão do código quando ela não passa na conferência. */
-function keep<T>(candidate: T, fallback: T, ok: (value: T) => boolean, where: string): T {
-  if (ok(candidate)) return candidate;
-  console.error(`[conteudo] seção inválida, usando o padrão do código: ${where}`);
+/**
+ * Troca a seção pelo padrão do código quando ela não passa na conferência, e anota o
+ * nome dela em `report`. O site ignora o relatório (só quer a página de pé); a API de
+ * salvamento usa a anotação para recusar a gravação e dizer qual seção ficou inválida,
+ * em vez de deixar a pessoa publicar algo que o site vai descartar em silêncio.
+ */
+function keep<T>(
+  candidate: T,
+  fallback: T,
+  ok: (value: T) => boolean,
+  where: string,
+  report?: string[],
+): T {
+  try {
+    if (ok(candidate)) return candidate;
+  } catch {
+    // Formato tão fora do esperado que a própria conferência quebrou.
+  }
+  report?.push(where);
+  if (!report) console.error(`[conteudo] seção inválida, usando o padrão do código: ${where}`);
   return fallback;
 }
 
@@ -57,7 +73,7 @@ function validSections(sections: Section[]): Section[] {
   return all.map((s) => (s.key === FIXED_FIRST_SECTION ? { key: s.key } : s));
 }
 
-export function resolveHome(override: unknown): HomeContent {
+export function resolveHome(override: unknown, report?: string[]): HomeContent {
   const merged = mergeContent(homeDefaults, override);
   const d = homeDefaults;
 
@@ -75,9 +91,10 @@ export function resolveHome(override: unknown): HomeContent {
         h.widget.agents.length > 0 &&
         h.widget.agents.every((a) => text(a.name) && text(a.audio)),
       "hero",
+      report,
     ),
 
-    clientLogos: keep(merged.clientLogos, d.clientLogos, (c) => text(c.title), "clientLogos"),
+    clientLogos: keep(merged.clientLogos, d.clientLogos, (c) => text(c.title), "clientLogos", report),
 
     platform: keep(
       {
@@ -91,6 +108,7 @@ export function resolveHome(override: unknown): HomeContent {
         p.pillars.length > 0 &&
         p.pillars.every((pillar) => text(pillar.title) && text(pillar.text)),
       "platform",
+      report,
     ),
 
     latency: keep(
@@ -102,6 +120,7 @@ export function resolveHome(override: unknown): HomeContent {
         l.rows.length > 0 &&
         l.rows.every((r) => text(r.label) && positive(r.value) && positive(r.duration)),
       "latency",
+      report,
     ),
 
     testimonials: keep(
@@ -122,6 +141,7 @@ export function resolveHome(override: unknown): HomeContent {
             /^\d{4}-\d{2}-\d{2}$/.test(item.published),
         ),
       "testimonials",
+      report,
     ),
 
     rollout: keep(
@@ -133,6 +153,7 @@ export function resolveHome(override: unknown): HomeContent {
         r.steps.length > 0 &&
         r.steps.every((s) => text(s.day) && text(s.title)),
       "rollout",
+      report,
     ),
 
     security: keep(
@@ -145,6 +166,7 @@ export function resolveHome(override: unknown): HomeContent {
         s.items.length > 0 &&
         s.items.every((item) => text(item.name) && text(item.controlTitle)),
       "security",
+      report,
     ),
 
     useCases: keep(
@@ -156,6 +178,7 @@ export function resolveHome(override: unknown): HomeContent {
         u.items.length > 0 &&
         u.items.every((item) => text(item.title)),
       "useCases",
+      report,
     ),
 
     faq: keep(
@@ -167,11 +190,12 @@ export function resolveHome(override: unknown): HomeContent {
         f.items.length > 0 &&
         f.items.every((item) => text(item.q) && text(item.a)),
       "faq",
+      report,
     ),
   };
 }
 
-export function resolveSite(override: unknown): SiteContent {
+export function resolveSite(override: unknown, report?: string[]): SiteContent {
   const merged = mergeContent(siteDefaults, override);
   return {
     finalCta: keep(
@@ -179,6 +203,7 @@ export function resolveSite(override: unknown): SiteContent {
       siteDefaults.finalCta,
       (c) => text(c.title) && text(c.cta),
       "finalCta",
+      report,
     ),
     clients: keep(
       merged.clients,
@@ -189,6 +214,7 @@ export function resolveSite(override: unknown): SiteContent {
         // O alt do logo sai do nome da empresa (SEO.md §1.7): sem nome, sem alt.
         list.every((c) => text(c.name) && text(c.logo) && positive(c.width) && positive(c.height)),
       "clients",
+      report,
     ),
   };
 }
@@ -199,4 +225,17 @@ export async function getHomeContent(status: ContentStatus): Promise<HomeContent
 
 export async function getSiteContent(status: ContentStatus): Promise<SiteContent> {
   return resolveSite(parseOverride(await getPageContentData(SITE_CONTENT_PATH, status)));
+}
+
+/** Nomes das seções que não passariam na conferência — vazio quer dizer "pode salvar". */
+export function invalidHomeSections(override: unknown): string[] {
+  const report: string[] = [];
+  resolveHome(override, report);
+  return report;
+}
+
+export function invalidSiteSections(override: unknown): string[] {
+  const report: string[] = [];
+  resolveSite(override, report);
+  return report;
 }

@@ -19,7 +19,13 @@ export type AuditAction =
   | "usuario.criado"
   | "usuario.editado"
   | "usuario.removido"
-  | "leads.exportados";
+  | "leads.exportados"
+  | "pagina.meta.editada"
+  | "midia.enviada"
+  | "conteudo.salvo"
+  | "conteudo.publicado"
+  | "conteudo.descartado"
+  | "conteudo.restaurado";
 
 export async function audit({
   action,

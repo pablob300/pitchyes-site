@@ -9,6 +9,13 @@ import { getSiteUrl } from "@/lib/site";
 
 export const MAX_BODY = 16 * 1024;
 
+/**
+ * Limite maior, só para o editor de conteúdo: o texto da home sozinho passa de 9 KB, e
+ * um documento inteiro com formatação estoura os 16 KB do padrão. Continua sendo uma
+ * guarda de memória (o corpo já foi lido), não de transporte.
+ */
+export const MAX_CONTENT_BODY = 256 * 1024;
+
 export function jsonError(message: string, status: number, extra?: Record<string, unknown>): Response {
   return Response.json({ ok: false, message, ...extra }, { status, headers: { "cache-control": "no-store" } });
 }
@@ -17,9 +24,9 @@ export function jsonOk(data: Record<string, unknown> = {}): Response {
   return Response.json({ ok: true, ...data }, { headers: { "cache-control": "no-store" } });
 }
 
-export async function readJson<T>(request: Request): Promise<T | null> {
+export async function readJson<T>(request: Request, limit = MAX_BODY): Promise<T | null> {
   const raw = await request.text();
-  if (raw.length > MAX_BODY) return null;
+  if (raw.length > limit) return null;
   try {
     return JSON.parse(raw) as T;
   } catch {

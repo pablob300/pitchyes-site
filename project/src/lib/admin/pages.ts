@@ -117,6 +117,30 @@ export async function savePageMeta(
     .run();
 }
 
+/**
+ * Carimba SÓ a data de revisão (alimenta o <lastmod> do sitemap), preservando o resto.
+ *
+ * Não dá para reaproveitar savePageMeta aqui: ela grava a linha inteira, então uma
+ * chamada só com `updated` zeraria o título, a descrição e a imagem social editados no
+ * Page Editor. Publicar conteúdo não pode apagar metadado.
+ */
+export async function stampPageUpdated(
+  path: string,
+  updated: string,
+  actor: { id: string; name: string },
+): Promise<void> {
+  const db = await getDb();
+  await db
+    .prepare(
+      `INSERT INTO page_meta (path, noindex, updated, updated_at, updated_by, updated_by_name)
+       VALUES (?1, 0, ?2, ?3, ?4, ?5)
+       ON CONFLICT(path) DO UPDATE SET
+         updated = ?2, updated_at = ?3, updated_by = ?4, updated_by_name = ?5`,
+    )
+    .bind(path, updated, nowIso(), actor.id, actor.name)
+    .run();
+}
+
 /** Devolve a página ao que está no código. */
 export async function resetPageMeta(path: string): Promise<void> {
   const db = await getDb();

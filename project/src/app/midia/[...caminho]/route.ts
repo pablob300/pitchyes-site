@@ -14,7 +14,9 @@ export async function GET(_request: Request, { params }: { params: Promise<{ cam
     return new Response(object.body, {
       headers: {
         "content-type": object.httpMetadata?.contentType ?? "application/octet-stream",
-        "cache-control": "public, max-age=604800, stale-while-revalidate=86400",
+        // A chave carrega um UUID: o mesmo endereço nunca devolve outra imagem, então
+        // o navegador e o edge podem guardar para sempre. Trocar a imagem gera chave nova.
+        "cache-control": "public, max-age=31536000, immutable",
         "x-content-type-options": "nosniff",
       },
     });

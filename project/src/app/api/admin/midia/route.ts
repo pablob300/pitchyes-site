@@ -1,5 +1,5 @@
 import { audit } from "@/lib/admin/audit";
-import { jsonError, jsonOk } from "@/lib/admin/request";
+import { assertSameOrigin, jsonError, jsonOk } from "@/lib/admin/request";
 import { requireApiSession } from "@/lib/admin/session";
 import { can } from "@/lib/admin/users";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
@@ -22,6 +22,8 @@ function matchesMagic(bytes: Uint8Array, type: string): boolean {
 }
 
 export async function POST(request: Request) {
+  if (!assertSameOrigin(request)) return jsonError("Pedido inválido.", 403);
+
   const auth = await requireApiSession();
   if ("response" in auth) return auth.response;
   if (!can(auth.session.user, "midia.enviar")) return jsonError("Sem permissão.", 403);
@@ -45,7 +47,7 @@ export async function POST(request: Request) {
   }
 
   await audit({
-    action: "usuario.editado",
+    action: "midia.enviada",
     actorId: auth.session.userId,
     actorEmail: auth.session.user.email,
     targetType: "midia",

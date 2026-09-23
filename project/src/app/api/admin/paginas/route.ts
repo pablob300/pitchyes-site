@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     // próximo acesso, sem esperar a revalidação de um minuto.
     revalidatePath(path);
     await audit({
-      action: "usuario.editado",
+      action: "pagina.meta.editada",
       actorId: actor.id,
       actorEmail: actor.email,
       targetType: "pagina",
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
   revalidatePath(path);
 
   await audit({
-    action: "usuario.editado",
+    action: "pagina.meta.editada",
     actorId: actor.id,
     actorEmail: actor.email,
     targetType: "pagina",
