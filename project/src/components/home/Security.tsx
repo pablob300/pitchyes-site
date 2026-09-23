@@ -1,6 +1,7 @@
 import { ButtonLink } from "@/components/ui/Button";
 import type { Security as SecurityContent } from "@/content/home.schema";
 import { editFn } from "@/lib/content/edit";
+import { rich } from "@/lib/content/richtext";
 import styles from "./Security.module.css";
 
 // Shield outline for the certification badges (drawn in CSS colors via currentColor/tokens).
@@ -19,7 +20,7 @@ export function Security({ content, editable }: { content: SecurityContent; edit
       <div className="container">
         <div className={styles.head} data-reveal>
           <h2 id="seguranca-title" {...edit("security.title")}>{content.title}</h2>
-          <p {...edit("security.lead")}>{content.lead}</p>
+          <p {...edit("security.lead")}>{rich(content.lead)}</p>
         </div>
 
         <ul className={styles.grid}>
@@ -37,7 +38,7 @@ export function Security({ content, editable }: { content: SecurityContent; edit
               </div>
               <div className={styles.control}>
                 <h3>{item.controlTitle}</h3>
-                <p>{item.controlText}</p>
+                <p>{rich(item.controlText)}</p>
               </div>
             </li>
           ))}

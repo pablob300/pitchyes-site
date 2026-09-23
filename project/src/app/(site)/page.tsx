@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { HomePage } from "@/components/home/HomePage";
 import { getHomeContent, getSiteContent } from "@/lib/content/resolve";
+import { toPlainText } from "@/lib/content/richtext";
 import {
   organizationSchema,
   pageMetadataWithOverrides,
@@ -44,7 +45,8 @@ export default async function Home() {
             mainEntity: content.faq.items.map((item) => ({
               "@type": "Question",
               name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
+              // Sem as marcas de formatação: dado estruturado é texto, não marcação.
+              acceptedAnswer: { "@type": "Answer", text: toPlainText(item.a) },
             })),
           },
           ...content.testimonials.items.map(videoSchema),

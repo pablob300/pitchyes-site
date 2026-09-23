@@ -1,5 +1,6 @@
 import type { Faq as FaqContent } from "@/content/home.schema";
 import { editFn } from "@/lib/content/edit";
+import { rich } from "@/lib/content/richtext";
 import styles from "./Faq.module.css";
 
 // Native exclusive accordion: <details name="faq"> keeps one answer open at a time.
@@ -18,7 +19,7 @@ export function Faq({ content, editable }: { content: FaqContent; editable?: boo
                 {item.q}
                 <span className={styles.icon} aria-hidden="true" />
               </summary>
-              <p className={styles.a}>{item.a}</p>
+              <p className={styles.a}>{rich(item.a)}</p>
             </details>
           ))}
         </div>

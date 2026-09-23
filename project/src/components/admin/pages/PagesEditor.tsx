@@ -1,13 +1,18 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { isContentEditable } from "@/lib/content/pages";
 import { fold } from "@/lib/fold";
 import { MetaDrawer } from "./MetaDrawer";
 import styles from "./PagesEditor.module.css";
 
 // Lista das páginas do site, em ordem alfabética pelo endereço, com busca.
-// "Editar Meta" abre a gaveta à direita; "Editar Conteúdo" chega depois.
+//
+// "Editar Meta" abre a gaveta à direita. "Editar Conteúdo" leva ao editor visual, e só
+// está ligado nas páginas já instrumentadas — quem decide é lib/content/pages.ts, a mesma
+// lista que a API consulta. O editor é construído página por página.
 
 export type PageItem = {
   path: string;
@@ -95,15 +100,25 @@ export function PagesEditor({ items, defaultImage }: { items: PageItem[]; defaul
                   <CodeIcon />
                   Editar Meta
                 </button>
-                <button
-                  type="button"
-                  className={styles.action}
-                  disabled
-                  title="Em construção: a edição de conteúdo por blocos chega numa próxima etapa."
-                >
-                  <BlocksIcon />
-                  Editar Conteúdo
-                </button>
+                {isContentEditable(item.path) ? (
+                  <Link
+                    href={`/admin/paginas/editar${item.path === "/" ? "" : item.path}`}
+                    className={styles.action}
+                  >
+                    <BlocksIcon />
+                    Editar Conteúdo
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    className={styles.action}
+                    disabled
+                    title="O editor visual é construído página por página. Esta ainda não entrou."
+                  >
+                    <BlocksIcon />
+                    Editar Conteúdo
+                  </button>
+                )}
               </td>
             </tr>
           ))}

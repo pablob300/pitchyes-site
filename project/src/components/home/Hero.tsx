@@ -1,6 +1,7 @@
 import { ButtonLink } from "@/components/ui/Button";
 import type { Hero as HeroContent } from "@/content/home.schema";
 import { editFn } from "@/lib/content/edit";
+import { rich } from "@/lib/content/richtext";
 import { TALK_TO_AI_HREF } from "@/lib/routes";
 import { AgentWidget } from "./AgentWidget";
 import styles from "./Hero.module.css";
@@ -19,7 +20,7 @@ export function Hero({ content, editable }: { content: HeroContent; editable?: b
             {content.titleAfter}
           </h1>
           <p className="lead" data-reveal {...edit("hero.lead")}>
-            {content.lead}
+            {rich(content.lead)}
           </p>
           <div className={styles.actions} data-reveal>
             <ButtonLink href={TALK_TO_AI_HREF} size="lg" {...edit("hero.cta")}>

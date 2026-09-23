@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { editFn } from "@/lib/content/edit";
+import { rich } from "@/lib/content/richtext";
 import styles from "./CustomerVideos.module.css";
 
 /**
@@ -62,7 +63,7 @@ export function CustomerVideos({
         <div className="section-head" data-reveal>
           <p className="eyebrow" {...edit("testimonials.eyebrow")}>{eyebrow}</p>
           <h2 id="clientes-reais-title" {...edit("testimonials.title")}>{title}</h2>
-          <p className="lead" {...edit("testimonials.lead")}>{lead}</p>
+          <p className="lead" {...edit("testimonials.lead")}>{rich(lead)}</p>
         </div>
 
         <div className={styles.slider} data-reveal {...edit("testimonials.items")}>
@@ -124,7 +125,7 @@ export function CustomerVideos({
           {current.headline && <h3>{current.headline}</h3>}
           {current.quote ? (
             <blockquote>
-              “{current.quote}”{current.person ? ` — ${current.person}, ${current.role}` : ` — ${current.company}`}
+              “{rich(current.quote)}”{current.person ? ` — ${current.person}, ${current.role}` : ` — ${current.company}`}
             </blockquote>
           ) : (
             <figcaption>

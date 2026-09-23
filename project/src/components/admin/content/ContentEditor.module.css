@@ -1,0 +1,357 @@
+/* Editor visual de conteúdo — tokens de System/, como o resto do painel. */
+
+/* Come a folga do painel: o iframe precisa da altura inteira da janela. */
+.tela {
+  margin: calc(var(--space-6) * -1) calc(var(--space-7) * -1) calc(var(--space-8) * -1);
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  background: var(--color-bg-subtle);
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+.esquerda { display: flex; align-items: center; gap: var(--space-5); min-width: 0; }
+.esquerda h1 { font-size: 16px; line-height: 1.2; }
+.esquerda p { font-size: 12px; color: var(--color-text-muted); margin-top: 2px; }
+.esquerda p[data-erro] { color: var(--color-danger); }
+
+.voltar { font-size: 13px; color: var(--color-text-secondary); text-decoration: none; }
+.voltar:hover { color: var(--color-text); text-decoration: underline; }
+
+.acoes { display: flex; align-items: center; gap: var(--space-3); }
+
+/* O histórico fica sem destaque, ao lado do botão que importa. */
+.discreto {
+  font: inherit;
+  font-size: 13px;
+  background: none;
+  border: 0;
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: var(--space-2);
+}
+.discreto:hover { color: var(--color-text); }
+
+.salvar,
+.publicar {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  cursor: pointer;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.salvar:disabled { opacity: 0.45; cursor: default; }
+.publicar {
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-bg);
+  letter-spacing: 0.04em;
+}
+.publicar:disabled { opacity: 0.5; cursor: default; }
+
+.conflito {
+  font-size: 13px;
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-warning-subtle, #fff7ed);
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text);
+}
+
+.corpo { display: grid; grid-template-columns: minmax(0, 1fr) 420px; min-height: 0; }
+
+.moldura { padding: var(--space-4); min-width: 0; }
+.frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.gaveta {
+  background: var(--color-bg);
+  border-left: 1px solid var(--color-border);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+}
+
+.gavetaTopo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.gavetaTopo h2 { font-size: 17px; line-height: 1.3; }
+.gavetaTopo > button {
+  font-size: 24px;
+  line-height: 1;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+.gavetaTopo > button:hover { color: var(--color-text); }
+
+.rotulo {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.gavetaCorpo {
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-5);
+  align-content: start;
+}
+
+.vazio { padding: var(--space-6) var(--space-5); overflow-y: auto; display: grid; gap: var(--space-5); align-content: start; }
+.vazio h2 { font-size: 16px; }
+.vazio > p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+
+.nota {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+}
+
+/* ---- campos ---- */
+
+.campo { display: grid; gap: var(--space-2); }
+.campo > label {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+.campo > label em {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.campo > label em[data-alerta] { color: var(--color-warning); }
+
+.campo input[type="text"],
+.campo input[type="number"],
+.campo input[type="date"],
+.campo textarea {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  padding: 9px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg);
+  color: var(--color-text);
+  width: 100%;
+}
+.campo textarea { resize: vertical; line-height: 1.6; }
+.campo input:focus-visible,
+.campo textarea:focus-visible { outline: 2px solid var(--color-text); outline-offset: 1px; }
+.campo [aria-invalid="true"] { border-color: var(--color-danger); }
+.campo small { font-size: 12px; color: var(--color-text-muted); line-height: 1.5; }
+
+.erro { font-size: 12px; color: var(--color-danger); }
+
+.check { display: flex; gap: var(--space-2); align-items: center; font-size: 13px; }
+
+.formatacao { display: flex; gap: var(--space-2); }
+.formatacao button {
+  font: inherit;
+  font-size: 12px;
+  min-width: 30px;
+  padding: 3px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+.formatacao button:hover { color: var(--color-text); border-color: var(--color-border-strong); }
+
+.imagem { display: grid; gap: var(--space-2); }
+.imagem img {
+  width: 100%;
+  max-width: 180px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-subtle);
+}
+.imagem input[type="file"] { font-size: 12px; max-width: 100%; }
+.semImagem {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+/* ---- listas ---- */
+
+.lista { display: grid; gap: var(--space-3); }
+.lista header { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+.lista h3 {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.lista header span { font-size: 12px; color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.lista ol { list-style: none; display: grid; gap: var(--space-2); }
+.lista li {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+.lista li[data-aberto] { border-color: var(--color-border-strong); }
+
+.itemTopo { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); }
+.itemTitulo {
+  font: inherit;
+  font-size: 13px;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.itemAcoes { display: flex; gap: 2px; }
+.itemAcoes button {
+  font: inherit;
+  font-size: 13px;
+  width: 26px;
+  height: 26px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+.itemAcoes button:hover:not(:disabled) { border-color: var(--color-border); color: var(--color-text); }
+.itemAcoes button:disabled { opacity: 0.3; cursor: default; }
+
+.itemCampos {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.adicionar {
+  font: inherit;
+  font-size: 13px;
+  padding: 8px;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: none;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+.adicionar:hover { color: var(--color-text); border-color: var(--color-text); }
+
+/* ---- ordem das seções ---- */
+
+.ordem { display: grid; gap: var(--space-3); }
+.ordem h3 {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.ordem ol { list-style: none; display: grid; gap: 2px; }
+.ordem li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 4px 4px 4px var(--space-3);
+}
+.ordem li[data-oculta] { opacity: 0.55; }
+.ordem li > button {
+  font: inherit;
+  font-size: 13px;
+  flex: 1;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--color-text);
+  padding: 4px 0;
+}
+.ordem li[data-oculta] > button { text-decoration: line-through; }
+
+/* ---- histórico ---- */
+
+.fundo {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(21, 21, 21, 0.35);
+  cursor: pointer;
+  z-index: 40;
+}
+.historico {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 94vw);
+  background: var(--color-bg);
+  border-left: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.versao { display: grid; gap: 1px; font-size: 13px; }
+.versao em { font-style: normal; font-size: 12px; color: var(--color-text-muted); }
+.atual { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.historico .itemTopo button {
+  font: inherit;
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  cursor: pointer;
+}
+
+/* Tela estreita: a gaveta passa a ocupar a largura inteira, embaixo da prévia. */
+@media (max-width: 1100px) {
+  .corpo { grid-template-columns: minmax(0, 1fr); grid-template-rows: 55vh minmax(0, 1fr); }
+  .gaveta { border-left: 0; border-top: 1px solid var(--color-border); }
+}

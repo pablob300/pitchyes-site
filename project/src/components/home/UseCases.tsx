@@ -1,5 +1,6 @@
 import type { UseCases as UseCasesContent } from "@/content/home.schema";
 import { editFn } from "@/lib/content/edit";
+import { rich } from "@/lib/content/richtext";
 import styles from "./UseCases.module.css";
 
 export function UseCases({ content, editable }: { content: UseCasesContent; editable?: boolean }) {
@@ -14,7 +15,7 @@ export function UseCases({ content, editable }: { content: UseCasesContent; edit
           {content.items.map((item, i) => (
             <li key={item.title} className={styles.card} data-reveal {...edit(`useCases.items.${i}`)}>
               <h3>{item.title}</h3>
-              <p>{item.text}</p>
+              <p>{rich(item.text)}</p>
             </li>
           ))}
         </ul>
