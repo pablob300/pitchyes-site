@@ -8,6 +8,59 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-23: Editor visual de conteúdo — página inicial
+
+Commits `e8039ba`, `168b125`, `600a999`, `0ff7797` · Cloudflare `ffd79f4d`
+
+- **"Editar Conteúdo" saiu do "em construção"**, na página inicial. O botão abre a página
+  de verdade dentro de um iframe: clicar em qualquer texto ou imagem abre a gaveta daquele
+  bloco à direita, com os campos dele. Salvar grava um **rascunho que só o painel enxerga**;
+  **PUBLICAR** manda para o ar e o site mostra na hora, sem deploy.
+- **Histórico** discreto ao lado do Publicar: data, hora e nome de quem publicou, com
+  "restaurar" trazendo a versão de volta **para o rascunho** — voltar atrás continua passando
+  pelo botão Publicar.
+- **Listas viraram conteúdo de verdade**: dá para adicionar, remover e reordenar Shorts do
+  YouTube (colar o endereço preenche o código do vídeo), perguntas da FAQ, casos de uso,
+  etapas da implantação, certificações e logos de clientes.
+- **Seções podem ser reordenadas e ocultadas.** Ocultar **remove a seção do HTML**, nunca
+  a esconde por CSS — `display:none` tira o texto do que o robô lê. O topo é fixo: é onde
+  mora o único `<h1>` da página.
+- **Parágrafos aceitam `**negrito**`, `*itálico*` e `[texto](/caminho)`**, guardados nessa
+  sintaxe e convertidos em elementos na renderização. Não existe HTML vindo do painel em
+  lugar nenhum, então não há o que sanitizar. O JSON-LD recebe o texto sem as marcas.
+- **O `/llms.txt` parou de poder divergir**: latência, total de ligações, certificações e
+  prazo de implantação passaram a sair do conteúdo publicado. A prosa e o que não existe
+  como campo (CNPJ, endereço, planos) continuam escritos à mão.
+- **A faixa de CTA e a parede de logos** são conteúdo do site inteiro (`/_site`): editá-las
+  muda todas as páginas, e a gaveta avisa isso. Os logos também alimentam `/clientes`.
+
+**Como funciona por dentro.** O conteúdo publicado mora no D1 (`page_content`,
+`page_content_versions`, migração `0006`) como **sobreposição esparsa**: o padrão continua
+nos arquivos de código, e o banco só guarda o que alguém mudou — objeto mescla por chave,
+lista substitui inteira. Toda fusão é conferida contra o formato, e **seção inválida volta
+sozinha ao padrão do código**, sem derrubar a página.
+
+A pré-visualização do rascunho é uma rota nova, `/editor`, **dinâmica e protegida**
+(entrou no matcher do `proxy.ts` e no `robots.txt` no mesmo commit — fora deles seria uma
+URL pública servindo conteúdo não publicado). Ela renderiza **os mesmos componentes** do
+site, então o editor mostra o site, e não uma imitação. A home pública continua estática
+com revalidação de 1 minuto: ela nunca lê cookie, que é o que a tiraria do cache.
+
+**Sem custo para quem visita.** O modo editor só acrescenta ATRIBUTO (`data-edit`), nunca
+elemento — o HTML público tem zero ocorrências dele. O markup renderizado da home saiu
+**byte a byte idêntico** ao de antes da refatoração (53.654 bytes), e o peso total variou
++0,12%, porque o texto saiu do bundle JavaScript e entrou no payload do servidor.
+
+**Três correções que apareceram no caminho:** `/api/admin/midia` não conferia a origem do
+pedido, como todo o resto do painel faz; a auditoria gravava `usuario.editado` para
+qualquer coisa, o que deixava a trilha ilegível; e o cache de `/midia` era de uma semana,
+sendo que a chave carrega um UUID e nunca devolve outra imagem.
+
+**Testado no ar:** `/editor` e `/admin/paginas/editar` deslogados redirecionam para o
+login, a API responde 401 sem sessão, `/editor` está no `Disallow` do robots.txt e responde
+com `frame-ancestors 'self'`, a auditoria de SEO passa em 16/16 páginas, e a home publicada
+tem 1.148 palavras, `FAQPage`, `VideoObject` e zero `data-edit`.
+
 ## 2026-09-22: Painel — seção Newsletter, separada dos leads
 
 Commit `638163b` · Cloudflare `5acc13fa`

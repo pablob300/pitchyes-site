@@ -1,3 +1,4 @@
+import { getHomeContent } from "@/lib/content/resolve";
 import { pages } from "@/lib/routes";
 import { absoluteUrl } from "@/lib/sitemap";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
@@ -5,9 +6,46 @@ import { isIndexable } from "@/lib/site";
 
 // /llms.txt — plain-text summary for answer engines (llmstxt.org). Same content as the
 // site, written so a model can quote it: what we do, which pages exist, what is factual.
+//
+// Os NÚMEROS saem do conteúdo publicado da home, não deste arquivo: latência, total de
+// ligações, certificações e prazo de implantação são exatamente os que alguém pode trocar
+// no editor visual, e são os que ficariam divergindo em silêncio (SEO.md §3). A prosa e os
+// fatos que não existem como campo (CNPJ, endereço, planos) continuam escritos aqui, à
+// mão — gerá-los seria inventar texto, e texto errado citado por uma IA não se desfaz.
 export const dynamic = "force-dynamic";
 
-export function GET() {
+/** "20.000.000+ ligações realizadas até hoje" a partir do número em destaque do topo. */
+function callsFact(stat: { value: string; label: string }): string {
+  return `- ${stat.value} ${stat.label}.`;
+}
+
+function latencyFact(rows: { label: string; value: number }[], unit: string): string {
+  const [first, ...rest] = rows;
+  if (!first) return "";
+  const comparison = rest
+    .map((row) => `${row.value.toLocaleString("pt-BR")} ${unit} (${row.label.toLowerCase()})`)
+    .join(", ");
+  return `- Latência de ${first.value.toLocaleString("pt-BR")} ${unit}${
+    comparison ? `, contra ${comparison}` : ""
+  }.`;
+}
+
+function certificationsFact(items: { name: string; detail: string }[]): string {
+  const list = items.map((item) => `${item.name}${item.detail ? ` ${item.detail}` : ""}`);
+  return `- Certificações ${list.join(", ")}; operação em conformidade com a LGPD.`;
+}
+
+function rolloutFact(steps: { day: string; title: string }[]): string {
+  const etapas = steps.map((step) => step.title.toLowerCase()).join(", ");
+  // O rótulo da última etapa é escrito para a tela ("Dia 07 · Ao vivo"); aqui interessa
+  // só o número, senão a frase sai como "cerca de Dia 07 · Ao vivo".
+  const dias = steps[steps.length - 1]?.day.match(/\d+/)?.[0];
+  const prazo = dias ? `cerca de ${Number(dias)} dias` : "poucos dias";
+  return `- Implantação típica em ${prazo} (${etapas}).`;
+}
+
+export async function GET() {
+  const home = await getHomeContent("publicado");
   const section = (title: string, prefix: string) => {
     const items = pages
       .filter((p) => p.path !== "/" && p.path.startsWith(prefix))
@@ -26,10 +64,10 @@ infraestrutura própria, integra com a telefonia, o CRM e a agenda que a empresa
 atende setores regulados (saúde, seguros, serviços financeiros, imobiliário).
 
 Fatos que podem ser citados:
-- Latência média de 400 ms, contra 1.240 ms da média do mercado.
-- Mais de 20 milhões de ligações realizadas até hoje.
-- Certificações SOC 2 Type II, HIPAA (BAA), PCI DSS v4.0 e FedRAMP; operação em conformidade com a LGPD.
-- Implantação típica em cerca de 7 dias (descoberta, construção, testes, produção).
+${latencyFact(home.latency.rows, home.latency.unit)}
+${callsFact(home.hero.stat)}
+${certificationsFact(home.security.items)}
+${rolloutFact(home.rollout.steps)}
 - Atendimento nativo em mais de 40 idiomas, com tradução em tempo real em 23 deles.
 - Cobrança por minuto, cobrindo modelo de linguagem, transcrição, síntese de voz e telefonia.
 - Números divulgados pela empresa: mais de 400 empresas atendidas, 94% de taxa de sucesso e 3x mais leads qualificados.

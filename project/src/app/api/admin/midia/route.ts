@@ -1,16 +1,24 @@
 import { audit } from "@/lib/admin/audit";
+import { imageSize } from "@/lib/admin/image-size";
 import { assertSameOrigin, jsonError, jsonOk } from "@/lib/admin/request";
 import { requireApiSession } from "@/lib/admin/session";
 import { can } from "@/lib/admin/users";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-// Upload das imagens de compartilhamento. Guarda no R2 (binding MEDIA_BUCKET) e
-// devolve o caminho público (/midia/...), que é o que vai para o page_meta.
-// Só sessão do painel envia, e só imagem: o arquivo é aceito pelo tipo declarado
-// E pela assinatura dos primeiros bytes, porque a extensão mente.
+// Upload das imagens do painel. Guarda no R2 (binding MEDIA_BUCKET) e devolve o caminho
+// público (/midia/...), que é o que vai para o page_meta ou para o conteúdo da página.
+//
+// Só sessão do painel envia, e só imagem: o arquivo é aceito pelo tipo declarado E pela
+// assinatura dos primeiros bytes, porque a extensão mente.
+//
+// A resposta traz width/height lidos do cabeçalho do arquivo. O `next/image` precisa dos
+// dois para reservar o espaço antes de a imagem chegar, e é isso que mantém o CLS em zero.
 export const dynamic = "force-dynamic";
 
 const MAX_BYTES = 3 * 1024 * 1024;
+
+/** Pastas aceitas no bucket. Nome livre viraria caminho livre. */
+const FOLDERS = new Set(["social", "conteudo"]);
 const TYPES: Record<string, { ext: string; magic: number[][] }> = {
   "image/jpeg": { ext: "jpg", magic: [[0xff, 0xd8, 0xff]] },
   "image/png": { ext: "png", magic: [[0x89, 0x50, 0x4e, 0x47]] },
@@ -37,7 +45,13 @@ export async function POST(request: Request) {
   const bytes = new Uint8Array(await file.arrayBuffer());
   if (!matchesMagic(bytes, file.type)) return jsonError("O arquivo não é uma imagem válida.", 415);
 
-  const key = `social/${crypto.randomUUID().slice(0, 12)}.${TYPES[file.type].ext}`;
+  const size = imageSize(bytes, file.type);
+  if (!size) return jsonError("Não foi possível ler as dimensões da imagem.", 415);
+
+  const pasta = String(form.get("pasta") ?? "social");
+  if (!FOLDERS.has(pasta)) return jsonError("Destino inválido.", 400);
+
+  const key = `${pasta}/${crypto.randomUUID().slice(0, 12)}.${TYPES[file.type].ext}`;
   try {
     const { env } = await getCloudflareContext({ async: true });
     await env.MEDIA_BUCKET.put(key, bytes, { httpMetadata: { contentType: file.type } });
@@ -52,9 +66,9 @@ export async function POST(request: Request) {
     actorEmail: auth.session.user.email,
     targetType: "midia",
     targetId: key,
-    detail: { tamanho: file.size, tipo: file.type },
+    detail: { tamanho: file.size, tipo: file.type, largura: size.width, altura: size.height },
     request,
   });
 
-  return jsonOk({ url: `/midia/${key}` });
+  return jsonOk({ url: `/midia/${key}`, largura: size.width, altura: size.height });
 }

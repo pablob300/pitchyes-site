@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { ListSpec } from "@/lib/content/schema/types";
-import { FieldInput } from "./FieldInput";
+import { FieldInput, type ImageMeta } from "./FieldInput";
 import { moved, youtubeId } from "./pointer";
 import styles from "./ContentEditor.module.css";
 
@@ -25,8 +25,20 @@ export function ListEditor({
   const podeRemover = !spec.fixed && items.length > (spec.min ?? 0);
   const podeAdicionar = !spec.fixed && (spec.max === undefined || items.length < spec.max);
 
-  const trocar = (indice: number, campo: string, valor: unknown) => {
-    onChange(items.map((item, i) => (i === indice ? { ...item, [campo]: valor } : item)));
+  const trocar = (indice: number, campo: string, valor: unknown, meta?: ImageMeta) => {
+    onChange(
+      items.map((item, i) => {
+        if (i !== indice) return item;
+        const proximo = { ...item, [campo]: valor };
+        // Enviar o logo já acerta largura e altura: são elas que o next/image usa para
+        // reservar o espaço, e ninguém deveria precisar medir a imagem à mão.
+        if (meta && "width" in item && "height" in item) {
+          proximo.width = meta.largura;
+          proximo.height = meta.altura;
+        }
+        return proximo;
+      }),
+    );
   };
 
   return (
@@ -94,7 +106,7 @@ export function ListEditor({
                       key={field.pointer}
                       field={field}
                       value={item[field.pointer]}
-                      onChange={(valor) =>
+                      onChange={(valor, meta) =>
                         trocar(
                           i,
                           field.pointer,
@@ -103,6 +115,7 @@ export function ListEditor({
                           field.pointer === "videoId" && typeof valor === "string"
                             ? youtubeId(valor)
                             : valor,
+                          meta,
                         )
                       }
                     />

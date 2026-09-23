@@ -7,6 +7,9 @@ import styles from "./ContentEditor.module.css";
 // Um campo da gaveta, desenhado a partir do schema. Não existe formulário escrito à mão
 // por seção: tudo o que aparece aqui saiu de lib/content/schema.
 
+/** Dimensões lidas do arquivo enviado, para quem tiver campos de largura e altura. */
+export type ImageMeta = { largura: number; altura: number };
+
 export function FieldInput({
   field,
   value,
@@ -14,7 +17,7 @@ export function FieldInput({
 }: {
   field: Field;
   value: unknown;
-  onChange: (value: unknown) => void;
+  onChange: (value: unknown, meta?: ImageMeta) => void;
 }) {
   const id = useId();
   const text = typeof value === "string" ? value : value === undefined ? "" : String(value);
@@ -128,22 +131,44 @@ function ImageInput({
   id: string;
   value: string;
   aspect?: number;
-  onChange: (value: string) => void;
+  onChange: (value: string, meta?: ImageMeta) => void;
 }) {
   const [busy, setBusy] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
+  const [aviso, setAviso] = useState<string | null>(null);
 
   async function upload(file: File) {
     setBusy(true);
     setErro(null);
+    setAviso(null);
     try {
       const form = new FormData();
       form.append("arquivo", file);
       form.append("pasta", "conteudo");
       const response = await fetch("/api/admin/midia", { method: "POST", body: form });
-      const json = (await response.json()) as { ok: boolean; url?: string; message?: string };
+      const json = (await response.json()) as {
+        ok: boolean;
+        url?: string;
+        largura?: number;
+        altura?: number;
+        message?: string;
+      };
       if (!json.ok || !json.url) throw new Error(json.message ?? "Falha ao enviar.");
-      onChange(json.url);
+
+      // A proporção errada não impede o envio, mas avisa: uma capa 16:9 onde se espera
+      // 9:16 entra na página com tarja preta, e ninguém percebe olhando a lista.
+      if (aspect && json.largura && json.altura) {
+        const real = json.largura / json.altura;
+        if (Math.abs(real - aspect) / aspect > 0.1) {
+          setAviso(
+            `A imagem é ${json.largura}×${json.altura}. Aqui o esperado é a proporção ${proporcao(aspect)}.`,
+          );
+        }
+      }
+      onChange(
+        json.url,
+        json.largura && json.altura ? { largura: json.largura, altura: json.altura } : undefined,
+      );
     } catch (error) {
       setErro(error instanceof Error ? error.message : "Falha ao enviar.");
     } finally {
@@ -178,7 +203,22 @@ function ImageInput({
         }}
       />
       {busy && <small>Enviando…</small>}
+      {aviso && <p className={styles.erro}>{aviso}</p>}
       {erro && <p className={styles.erro}>{erro}</p>}
     </div>
   );
+}
+
+/** "9:16" a partir de 0,5625 — só para a mensagem de aviso ficar legível. */
+function proporcao(aspect: number): string {
+  const candidatos: [number, string][] = [
+    [9 / 16, "9:16"],
+    [16 / 9, "16:9"],
+    [1200 / 630, "1200×630"],
+    [1, "1:1"],
+  ];
+  const melhor = candidatos.reduce((a, b) =>
+    Math.abs(a[0] - aspect) < Math.abs(b[0] - aspect) ? a : b,
+  );
+  return melhor[1];
 }
