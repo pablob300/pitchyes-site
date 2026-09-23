@@ -2,15 +2,43 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { testimonials } from "./content";
+import { editFn } from "@/lib/content/edit";
 import styles from "./CustomerVideos.module.css";
 
-const { eyebrow, title, lead, items } = testimonials;
+/**
+ * Só os campos que o carrossel realmente desenha. `seconds` e `published` ficam de fora
+ * de propósito: alimentam o VideoObject no JSON-LD, que é montado no servidor, e mandar
+ * os dois para o cliente só engordaria o payload do RSC.
+ */
+export type VideoCard = {
+  company: string;
+  videoId: string;
+  thumb: string;
+  person?: string;
+  role?: string;
+  headline?: string;
+  quote?: string;
+};
+
+export type VideosContent = {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  items: VideoCard[];
+};
 
 // Carrossel de depoimentos em vídeo (Shorts do canal da PitchYes), em 9:16.
 // A capa é servida pelo próprio site: nada é pedido ao YouTube antes de a pessoa dar play,
 // e só então o iframe do youtube-nocookie entra na página.
-export function CustomerVideos() {
+export function CustomerVideos({
+  content,
+  editable,
+}: {
+  content: VideosContent;
+  editable?: boolean;
+}) {
+  const { eyebrow, title, lead, items } = content;
+  const edit = editFn(editable);
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState<number | null>(null);
   const trackRef = useRef<HTMLUListElement>(null);
@@ -32,18 +60,18 @@ export function CustomerVideos() {
     <section className="section" aria-labelledby="clientes-reais-title">
       <div className="container">
         <div className="section-head" data-reveal>
-          <p className="eyebrow">{eyebrow}</p>
-          <h2 id="clientes-reais-title">{title}</h2>
-          <p className="lead">{lead}</p>
+          <p className="eyebrow" {...edit("testimonials.eyebrow")}>{eyebrow}</p>
+          <h2 id="clientes-reais-title" {...edit("testimonials.title")}>{title}</h2>
+          <p className="lead" {...edit("testimonials.lead")}>{lead}</p>
         </div>
 
-        <div className={styles.slider} data-reveal>
+        <div className={styles.slider} data-reveal {...edit("testimonials.items")}>
           <button type="button" className={styles.arrow} onClick={() => select(active - 1)} aria-label="Depoimento anterior">
             ‹
           </button>
           <ul ref={trackRef} className={styles.track}>
             {items.map((item, i) => (
-              <li key={item.videoId}>
+              <li key={item.videoId} {...edit(`testimonials.items.${i}`)}>
                 {playing === i ? (
                   <div className={styles.video} data-active="true">
                     <iframe

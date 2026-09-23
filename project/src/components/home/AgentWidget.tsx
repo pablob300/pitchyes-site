@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { hero } from "./content";
+import type { Hero } from "@/content/home.schema";
+import { editFn } from "@/lib/content/edit";
 import styles from "./AgentWidget.module.css";
-
-const { eyebrow, agents, hint } = hero.widget;
 
 // Amostra de voz de cada agente: o círculo laranja é o play/pause do áudio.
 // TODO: conversa ao vivo pelo navegador. Por enquanto o widget toca a locução de exemplo.
@@ -15,7 +14,15 @@ function formatTime(seconds: number) {
   return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
 }
 
-export function AgentWidget() {
+export function AgentWidget({
+  content,
+  editable,
+}: {
+  content: Hero["widget"];
+  editable?: boolean;
+}) {
+  const { eyebrow, agents, hint } = content;
+  const edit = editFn(editable);
   const [agent, setAgent] = useState(agents[0]);
   const [playing, setPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
@@ -59,9 +66,9 @@ export function AgentWidget() {
 
   return (
     <div id="fale-com-a-ia" className={styles.widget}>
-      <p className={styles.eyebrow}>{eyebrow}</p>
+      <p className={styles.eyebrow} {...edit("hero.widget.eyebrow")}>{eyebrow}</p>
 
-      <div className={styles.pills} role="radiogroup" aria-label="Escolha o agente">
+      <div className={styles.pills} role="radiogroup" aria-label="Escolha o agente" {...edit("hero.widget.agents")}>
         {agents.map((item) => (
           <button
             key={item.name}

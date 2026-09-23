@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ui/Button";
-import { security } from "./content";
+import type { Security as SecurityContent } from "@/content/home.schema";
+import { editFn } from "@/lib/content/edit";
 import styles from "./Security.module.css";
 
 // Shield outline for the certification badges (drawn in CSS colors via currentColor/tokens).
@@ -11,41 +12,39 @@ function Shield() {
   );
 }
 
-export function Security() {
+export function Security({ content, editable }: { content: SecurityContent; editable?: boolean }) {
+  const edit = editFn(editable);
   return (
     <section className="section" aria-labelledby="seguranca-title">
       <div className="container">
         <div className={styles.head} data-reveal>
-          <h2 id="seguranca-title">{security.title}</h2>
-          <p>{security.lead}</p>
+          <h2 id="seguranca-title" {...edit("security.title")}>{content.title}</h2>
+          <p {...edit("security.lead")}>{content.lead}</p>
         </div>
 
         <ul className={styles.grid}>
-          {security.certifications.map((cert, i) => {
-            const control = security.controls[i];
-            return (
-              <li key={cert.name} className={styles.cell} data-reveal>
-                <div className={styles.badgeArea}>
-                  <div className={styles.badge}>
-                    <Shield />
-                    <div className={styles.badgeText}>
-                      <span className={styles.status}>{cert.status}</span>
-                      <strong>{cert.name}</strong>
-                      <span className={styles.detail}>{cert.detail}</span>
-                    </div>
+          {content.items.map((item, i) => (
+            <li key={item.name} className={styles.cell} data-reveal {...edit(`security.items.${i}`)}>
+              <div className={styles.badgeArea}>
+                <div className={styles.badge}>
+                  <Shield />
+                  <div className={styles.badgeText}>
+                    <span className={styles.status}>{item.status}</span>
+                    <strong>{item.name}</strong>
+                    <span className={styles.detail}>{item.detail}</span>
                   </div>
                 </div>
-                <div className={styles.control}>
-                  <h3>{control.title}</h3>
-                  <p>{control.text}</p>
-                </div>
-              </li>
-            );
-          })}
+              </div>
+              <div className={styles.control}>
+                <h3>{item.controlTitle}</h3>
+                <p>{item.controlText}</p>
+              </div>
+            </li>
+          ))}
         </ul>
 
-        <ButtonLink href="/privacidade" variant="outline" size="lg" data-reveal>
-          {security.cta} →
+        <ButtonLink href="/privacidade" variant="outline" size="lg" data-reveal {...edit("security.cta")}>
+          {content.cta} →
         </ButtonLink>
       </div>
     </section>

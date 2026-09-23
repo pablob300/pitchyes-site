@@ -1,16 +1,18 @@
-import { useCases } from "./content";
+import type { UseCases as UseCasesContent } from "@/content/home.schema";
+import { editFn } from "@/lib/content/edit";
 import styles from "./UseCases.module.css";
 
-export function UseCases() {
+export function UseCases({ content, editable }: { content: UseCasesContent; editable?: boolean }) {
+  const edit = editFn(editable);
   return (
     <section className="section" aria-labelledby="casos-de-uso-title">
       <div className="container">
-        <h2 id="casos-de-uso-title" className={styles.title} data-reveal>
-          {useCases.title}
+        <h2 id="casos-de-uso-title" className={styles.title} data-reveal {...edit("useCases.title")}>
+          {content.title}
         </h2>
         <ul className={styles.grid}>
-          {useCases.items.map((item) => (
-            <li key={item.title} className={styles.card} data-reveal>
+          {content.items.map((item, i) => (
+            <li key={item.title} className={styles.card} data-reveal {...edit(`useCases.items.${i}`)}>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </li>

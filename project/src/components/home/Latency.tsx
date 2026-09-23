@@ -1,14 +1,16 @@
 "use client";
 
 import { useRef } from "react";
+import type { Latency as LatencyContent } from "@/content/home.schema";
+import { editFn } from "@/lib/content/edit";
 import { gsap, motion, useGSAP } from "@/lib/gsap";
-import { latency } from "./content";
 import styles from "./Latency.module.css";
 
-const max = Math.max(...latency.rows.map((r) => r.value));
 const format = (n: number) => n.toLocaleString("pt-BR");
 
-export function Latency() {
+export function Latency({ content, editable }: { content: LatencyContent; editable?: boolean }) {
+  const edit = editFn(editable);
+  const max = Math.max(...content.rows.map((r) => r.value));
   const container = useRef<HTMLElement>(null);
 
   // Bar width and number grow from 0 together, each row with its own duration.
@@ -20,7 +22,7 @@ export function Latency() {
         const tl = gsap.timeline({
           scrollTrigger: { trigger: container.current, start: motion.counter.start, once: true },
         });
-        latency.rows.forEach((row, i) => {
+        content.rows.forEach((row, i) => {
           const numbers = gsap.utils.toArray<HTMLElement>(`[data-num="${i}"]`);
           const counter = { value: 0 };
           const render = () => {
@@ -42,25 +44,30 @@ export function Latency() {
       });
       return () => mm.revert();
     },
-    { scope: container },
+    { scope: container, dependencies: [content, max] },
   );
 
   return (
     <section ref={container} className="section" aria-labelledby="latencia-title">
       <div className="container">
-        <h2 id="latencia-title" className={styles.title} data-reveal>
-          {latency.title}
+        <h2 id="latencia-title" className={styles.title} data-reveal {...edit("latency.title")}>
+          {content.title}
         </h2>
         <dl className={styles.rows}>
-          {latency.rows.map((row, i) => (
-            <div key={row.label} className={styles.row} data-highlight={row.highlight}>
+          {content.rows.map((row, i) => (
+            <div
+              key={row.label}
+              className={styles.row}
+              data-highlight={row.highlight}
+              {...edit(`latency.rows.${i}`)}
+            >
               <dt>{row.label}</dt>
               <dd className={styles.track}>
                 {/* Label drawn twice: dark over the empty track, light inside the fill,
                     so the text changes color exactly where the growing bar passes it. */}
                 <span className={styles.label}>
                   <span data-num={i}>{format(row.value)}</span>
-                  {latency.unit}
+                  {content.unit}
                 </span>
                 <span
                   className={styles.fill}
@@ -70,7 +77,7 @@ export function Latency() {
                 >
                   <span className={styles.label}>
                     <span data-num={i}>{format(row.value)}</span>
-                    {latency.unit}
+                    {content.unit}
                   </span>
                 </span>
               </dd>

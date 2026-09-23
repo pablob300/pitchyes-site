@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
-import { ClientLogos } from "@/components/home/ClientLogos";
-import { faq, testimonials } from "@/components/home/content";
-import { CustomerVideos } from "@/components/home/CustomerVideos";
-import { Faq } from "@/components/home/Faq";
-import { Hero } from "@/components/home/Hero";
-import { Latency } from "@/components/home/Latency";
-import { Platform } from "@/components/home/Platform";
-import { Rollout } from "@/components/home/Rollout";
-import { Security } from "@/components/home/Security";
-import { UseCases } from "@/components/home/UseCases";
+import { homeDefaults } from "@/components/home/content";
+import { HomePage } from "@/components/home/HomePage";
+import { siteDefaults } from "@/content/site";
 import {
   organizationSchema,
   pageMetadataWithOverrides,
@@ -29,7 +22,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
 // Section order follows docs/PitchYes — Wireframe Homepage (Desktop).pdf (01 → 09);
 // section 10 (final CTA) is site-wide, rendered by the root layout.
+//
+// O JSON-LD sai do MESMO conteúdo que a página desenha: dado estruturado que contradiz o
+// texto visível é o pior erro de SEO possível.
 export default function Home() {
+  const content = homeDefaults;
+  const { clients } = siteDefaults;
+
   return (
     <>
       <JsonLd
@@ -43,24 +42,16 @@ export default function Home() {
           }),
           {
             "@type": "FAQPage",
-            mainEntity: faq.items.map((item) => ({
+            mainEntity: content.faq.items.map((item) => ({
               "@type": "Question",
               name: item.q,
               acceptedAnswer: { "@type": "Answer", text: item.a },
             })),
           },
-          ...testimonials.items.map(videoSchema),
+          ...content.testimonials.items.map(videoSchema),
         ]}
       />
-      <Hero />
-      <ClientLogos />
-      <Platform />
-      <Latency />
-      <CustomerVideos />
-      <Rollout />
-      <Security />
-      <UseCases />
-      <Faq />
+      <HomePage content={content} clients={clients} />
     </>
   );
 }

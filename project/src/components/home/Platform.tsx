@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
-import { platform } from "./content";
+import type { PillarKey, Platform as PlatformContent } from "@/content/home.schema";
+import { editFn } from "@/lib/content/edit";
 import styles from "./Platform.module.css";
-
-type PillarKey = (typeof platform.pillars)[number]["key"];
 
 // Structural product mocks for each pillar (wireframe: "mock estrutural da funcionalidade").
 const visuals: Record<PillarKey, ReactNode> = {
@@ -68,23 +67,26 @@ const visuals: Record<PillarKey, ReactNode> = {
   ),
 };
 
-export function Platform() {
+export function Platform({ content, editable }: { content: PlatformContent; editable?: boolean }) {
+  const edit = editFn(editable);
   return (
     <section className="section" aria-labelledby="plataforma-title">
       <div className="container">
         <div className="section-head" data-reveal>
-          <p className="eyebrow">{platform.eyebrow}</p>
-          <h2 id="plataforma-title">{platform.title}</h2>
-          <p className="lead">{platform.lead}</p>
+          <p className="eyebrow" {...edit("platform.eyebrow")}>{content.eyebrow}</p>
+          <h2 id="plataforma-title" {...edit("platform.title")}>{content.title}</h2>
+          <p className="lead" {...edit("platform.lead")}>{content.lead}</p>
         </div>
         <div className={styles.grid}>
-          {platform.pillars.map((p) => (
-            <article key={p.key} className={styles.card} data-reveal>
+          {content.pillars.map((p, i) => (
+            <article key={p.key} className={styles.card} data-reveal {...edit(`platform.pillars.${i}`)}>
               <p className="eyebrow">{p.eyebrow}</p>
               <h3>{p.title}</h3>
               <p className={styles.text}>{p.text}</p>
               <div className={styles.visual} aria-hidden="true">
-                {visuals[p.key]}
+                {/* A ilustração é JSX, indexada pela chave. Chave desconhecida (dado ruim
+                    no banco) não pode derrubar a home: renderiza sem ilustração. */}
+                {visuals[p.key] ?? null}
               </div>
             </article>
           ))}

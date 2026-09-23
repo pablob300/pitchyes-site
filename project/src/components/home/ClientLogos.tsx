@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { clients } from "@/content/clients";
+import type { Client } from "@/content/clients";
+import type { ClientLogos as ClientLogosContent } from "@/content/home.schema";
+import { editFn } from "@/lib/content/edit";
 import { gsap, motion, useGSAP } from "@/lib/gsap";
-import { clientLogos } from "./content";
 import styles from "./ClientLogos.module.css";
 
 // Faixa de logos em toda a largura da tela, rolando sem parar. O HTML já traz as duas
@@ -14,7 +15,16 @@ import styles from "./ClientLogos.module.css";
 
 const SPEED = 40; // segundos para percorrer uma cópia inteira
 
-export function ClientLogos() {
+export function ClientLogos({
+  content,
+  clients,
+  editable,
+}: {
+  content: ClientLogosContent;
+  clients: Client[];
+  editable?: boolean;
+}) {
+  const edit = editFn(editable);
   const track = useRef<HTMLDivElement>(null);
   const tween = useRef<gsap.core.Tween | null>(null);
 
@@ -56,12 +66,13 @@ export function ClientLogos() {
   return (
     <section className={styles.section} aria-labelledby="clientes-title">
       <div className="container">
-        <h2 id="clientes-title" className={styles.title} data-reveal>
-          {clientLogos.title}
+        <h2 id="clientes-title" className={styles.title} data-reveal {...edit("clientLogos.title")}>
+          {content.title}
         </h2>
       </div>
       <div
         className={styles.viewport}
+        {...edit("@site.clients")}
         onMouseEnter={() => tween.current?.pause()}
         onMouseLeave={() => tween.current?.resume()}
       >
