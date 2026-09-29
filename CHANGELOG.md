@@ -8,6 +8,43 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-29: Cores da marca, player em anel, título animado e rodapé institucional
+
+Commits `73bf238`, `3e57f07`, `1eb0680` · Cloudflare `cb2a6e12`
+
+- **Cores da marca no design system.** O dourado e o laranja eram da bland.ai. Viraram
+  `--color-accent-primary` (violeta `#776eed`) e `--color-accent-secondary` (menta
+  `#54cfa8`), trocados no site, no painel, no e-mail de senha e em todo o `System/`.
+  O menta dá só 1,9:1 sobre branco, então texto em destaque usa `--color-accent-secondary-ink`
+  (`#178060`); erro de formulário passou a usar `--color-danger`.
+- **Botão violeta com texto branco e borda branca de 1px**, que destaca o botão nos fundos
+  escuros (faixa de CTA antes do rodapé). O contraste do texto fica em 4,0:1.
+- **Player do topo virou um anel 3D de cards** "Ouça nosso agente de…" (Saúde, Seguros,
+  Finanças, Imóveis, Atendimento): o card da frente toca o MP3; setas, pontos, arrastar/deslizar,
+  trackpad e teclado giram o anel. O círculo é "metal líquido" nas cores da marca (GSAP,
+  só `transform`/`opacity`), acelera enquanto toca e para fora da tela.
+- **Título com palavras que rolam**: parte fixa em preto e, na linha de baixo, em cor,
+  saúde → seguros → serviços financeiros → e muito mais (2s cada, a última 5s, troca de
+  0,5s). As quatro palavras estão no HTML do servidor; no celular a linha encolhe via `cqi`
+  para caber inteira, sem mudar de altura. Editáveis em "Palavras do título".
+- **Latência:** a barra da média do mercado ficou vermelho suave (`--color-negative`,
+  `#e0675b`), e as duas barras voltaram a ter texto escuro.
+- **Rodapé:** endereço, telefone, e-mail e CNPJ; redes do site oficial (LinkedIn,
+  Instagram `@pitchyesai`, YouTube, TikTok, Facebook) e o selo "Verificada por Reclame
+  Aqui" com a arte oficial hospedada aqui (sem o script deles). Links externos abrem em
+  aba nova. Os dados moram em `lib/company.ts`, que também alimenta o JSON-LD da
+  Organization (`sameAs`, `contactPoint`, endereço) e o `/llms.txt`.
+
+Auditoria (`seo-audit.mjs`) no ar: 16/16 páginas sem problemas; a home agora declara
+Organization com PostalAddress e ContactPoint. Home continua estática com revalidação de
+1 minuto e com zero `data-edit` no HTML público.
+
+**Pendências:** TODO(produto) confirmar os setores dos cards (o antigo "PitchYes" virou
+"Atendimento") e trocar os cinco MP3, que ainda são a mesma locução; confirmar qual
+Instagram é o oficial (o JSON-LD do site atual aponta `@pitchyes`, o rodapé `@pitchyesai`).
+
+---
+
 ## 2026-09-23: Editor visual de conteúdo — página inicial
 
 Commits `e8039ba`, `168b125`, `600a999`, `0ff7797`, `087ffd0`, `197f3f6` · Cloudflare `41117c6d`
