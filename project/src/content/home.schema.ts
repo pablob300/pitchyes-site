@@ -18,10 +18,13 @@ export type Agent = {
 };
 
 export type Hero = {
-  /** O h1 é quebrado em três para o trecho do meio receber a cor de destaque. */
-  titleBefore: string;
-  titleAccent: string;
-  titleAfter: string;
+  /** Parte fixa do h1, em preto. */
+  title: string;
+  /**
+   * Palavras que se revezam na linha de baixo do h1, coloridas (RotatingWords.tsx): cada
+   * uma fica 2s, a última 5s, e o ciclo recomeça. Todas vão no HTML do servidor.
+   */
+  titleWords: { text: string }[];
   lead: string;
   /** Só o rótulo do botão: o endereço é TALK_TO_AI_HREF, de lib/routes.ts. */
   cta: string;

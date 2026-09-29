@@ -4,6 +4,7 @@ import { editFn } from "@/lib/content/edit";
 import { rich } from "@/lib/content/richtext";
 import { TALK_TO_AI_HREF } from "@/lib/routes";
 import { AgentWidget } from "./AgentWidget";
+import { RotatingWords } from "./RotatingWords";
 import styles from "./Hero.module.css";
 
 // Toda seção recebe `editable` (booleano), e não a função de marcação: metade das seções
@@ -15,9 +16,8 @@ export function Hero({ content, editable }: { content: HeroContent; editable?: b
       <div className={`container ${styles.grid}`}>
         <div className={styles.copy}>
           <h1 data-reveal {...edit("hero.title")}>
-            {content.titleBefore}
-            <span className="accent">{content.titleAccent}</span>
-            {content.titleAfter}
+            {content.title}{" "}
+            <RotatingWords words={content.titleWords.map((w) => w.text)} editable={editable} />
           </h1>
           <p className="lead" data-reveal {...edit("hero.lead")}>
             {rich(content.lead)}

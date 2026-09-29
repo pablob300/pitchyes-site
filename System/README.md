@@ -54,6 +54,7 @@ Toda animação do site usa **GSAP** (`gsap` + `@gsap/react`, instalação confo
 |---|---|---|
 | **Reveal** (fade + slide ao aparecer) | Adicione `data-reveal` ao elemento. Em grades, marque cada card: eles entram em sequência. | `y: 24 → 0`, opacidade `0 → 1`, `0.8s`, `power2.out`, stagger `0.08s`, dispara quando o elemento passa 5% acima da base da tela (IntersectionObserver, confiável em saltos de rolagem), uma vez |
 | **Anel de cards** (player do hero) | Uma posição decimal (`pos`) que o GSAP interpola; cada quadro escreve `transform`/`opacity` nos cards. Arrastar move o anel com o dedo; ao soltar, encaixa no card mais próximo (um arremesso rápido leva até 2 cards) | `power3.out`, 0,55–0,9s; cards vizinhos a ±58% da largura, `rotateY` 32°, `z` −150px |
+| **Palavras que rolam** (h1 do hero, `home/RotatingWords.tsx`) | Todas as palavras no HTML, empilhadas na mesma célula de grade; a atual sobe e sai enquanto a próxima entra de baixo. Linha de uma altura só (fonte encolhe via `cqi` no celular), então nada abaixo pula | cada uma 2s, a última 5s; troca 0,5s `power2.inOut`; com `prefers-reduced-motion` vira fade sem deslocamento |
 | **Metal líquido** (orb) | Camadas de gradiente giram e ondulam em loop lento; pausa fora da tela | 14–18s por volta; tocando, `timeScale` 3 |
 | **Contador + barra** (ex.: Latência) | `useGSAP` + timeline com ScrollTrigger; número e largura saem de 0 juntos | `power2.out`, dispara em `top 75%`, duração por item (PitchYes 1s, mercado 3s) |
 
@@ -66,6 +67,7 @@ Regras: animar só `transform`/`opacity` (e `width` em barras); nada de animaç�
 | `--color-text` | `#151515` | texto primário |
 | `--color-accent-primary` | `#776eed` | violeta da marca: CTA principal, foco, marcadores; texto e borda de 1px dos botões violeta são `--color-accent-primary-contrast` (branco) |
 | `--color-accent-secondary` | `#54cfa8` | menta da marca: preenchimentos (barras, pontos, contornos). **Nunca como cor de texto** (1,9:1 no branco) |
+| `--color-negative` | `#e0675b` | vermelho suave de comparação “problema” (barra do mercado na Latência); erro de formulário continua `--color-danger` |
 | `--color-accent-secondary-ink` | `#178060` | menta escura: texto em destaque (trecho do h1, números, rótulos) |
 | `--font-sans` | Söhne → Inter → system-ui | stack tipográfica completa |
 | `--content-width` | `1280px` | largura máxima do conteúdo |

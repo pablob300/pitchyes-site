@@ -51,6 +51,9 @@
   /* Semantic status (inferred from check/x marks in comparison table) */
   --color-positive: #2f6b3a;
   --color-neutral-mark: #15151533;
+  /* Comparação "problema" (ex.: barra da média do mercado na Latência): vermelho suave,
+     não o --color-danger, que é de erro. Texto escuro por cima (5,5:1). */
+  --color-negative: #e0675b;
 
   /* Semantic status — área interna (/admin). Danger is deliberately NOT
      --color-accent-secondary: that one is a brand highlight and must not come to

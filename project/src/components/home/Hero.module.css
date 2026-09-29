@@ -19,6 +19,7 @@
 }
 
 .copy h1 {
+  container-type: inline-size; /* the rotating line sizes itself to the h1 width (cqi) */
   font-size: 48px;
   line-height: 52px;
   letter-spacing: -0.96px;

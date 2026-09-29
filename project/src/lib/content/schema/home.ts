@@ -18,13 +18,11 @@ export const homeSchema: PageSchema = {
       lockedReason: "O topo carrega o único título principal (h1) da página.",
       fields: [
         {
-          pointer: "titleBefore",
-          label: "Título — início",
+          pointer: "title",
+          label: "Título (parte fixa)",
           type: "texto",
-          help: "O h1 é montado em três pedaços. Cuide dos espaços nas pontas.",
+          help: "Fica em preto. As palavras que se revezam embaixo dela estão em “Palavras do título”.",
         },
-        { pointer: "titleAccent", label: "Título — trecho em destaque", type: "texto" },
-        { pointer: "titleAfter", label: "Título — fim", type: "texto" },
         { pointer: "lead", label: "Linha de apoio", type: "paragrafo", max: 180 },
         { pointer: "cta", label: "Botão", type: "texto", max: 30 },
         { pointer: "stat.value", label: "Número em destaque", type: "texto" },
@@ -33,6 +31,22 @@ export const homeSchema: PageSchema = {
         { pointer: "widget.hint", label: "Dica abaixo dos cards", type: "texto", max: 60 },
       ],
       lists: [
+        {
+          pointer: "hero.titleWords",
+          label: "Palavras do título",
+          titleField: "text",
+          min: 1,
+          template: { text: "nova palavra" },
+          fields: [
+            {
+              pointer: "text",
+              label: "Palavra ou trecho",
+              type: "texto",
+              max: 24,
+              help: "Cada uma aparece 2 segundos na linha de baixo do título; a última fica 5.",
+            },
+          ],
+        },
         {
           pointer: "hero.widget.agents",
           label: "Cards de agente",

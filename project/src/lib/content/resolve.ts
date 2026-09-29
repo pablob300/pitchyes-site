@@ -84,6 +84,10 @@ export function resolveHome(override: unknown, report?: string[]): HomeContent {
       merged.hero,
       d.hero,
       (h) =>
+        text(h.title) &&
+        Array.isArray(h.titleWords) &&
+        h.titleWords.length > 0 &&
+        h.titleWords.every((w) => text(w.text)) &&
         text(h.lead) &&
         text(h.cta) &&
         text(h.stat?.value) &&

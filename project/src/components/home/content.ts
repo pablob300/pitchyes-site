@@ -22,9 +22,13 @@ export const homeDefaults: HomeContent = {
   ],
 
   hero: {
-    titleBefore: "IA de voz para setores que exigem ",
-    titleAccent: "segurança e confiança",
-    titleAfter: ": saúde, seguros, serviços financeiros e mais.",
+    title: "IA de voz para setores que exigem segurança e confiança:",
+    titleWords: [
+      { text: "saúde" },
+      { text: "seguros" },
+      { text: "serviços financeiros" },
+      { text: "e muito mais" },
+    ],
     lead: "Construída para ligações de alto risco, onde segurança e confiança realmente importam.",
     cta: "Fale com nossa IA",
     stat: { value: "20.000.000+", label: "ligações realizadas até hoje" },

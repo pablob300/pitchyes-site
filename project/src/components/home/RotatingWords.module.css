@@ -1,0 +1,31 @@
+/* PitchYes component — documented in System/components/hero.html (rotating words) */
+
+/* Own line under the fixed part of the h1; every word shares the same grid cell */
+.rotator {
+  display: grid;
+  justify-items: start;
+  align-items: start;
+  /* Clip the roll at the line edges, with room for descenders and accents (ç, ú) */
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+/* Keep the line to ONE line: the title size while "serviços financeiros" (9.42em, the
+   longest default) fits in the h1, a little smaller on narrow phones. A longer word
+   typed in the editor still wraps, and the cell keeps the text below from jumping. */
+.rotator {
+  font-size: min(1em, 100cqi / 9.6);
+}
+
+.word {
+  grid-area: 1 / 1;
+  color: var(--color-accent-secondary-ink);
+  will-change: transform, opacity;
+}
+
+/* Server state = the first frame: first word in place, the others waiting below */
+.word:not([data-first]) {
+  opacity: 0;
+  transform: translateY(100%);
+}
