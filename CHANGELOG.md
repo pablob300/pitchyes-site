@@ -8,6 +8,23 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-09-29: Rastreamento bloqueado de novo no endereço de homologação
+
+Commit `7d8f865` · Cloudflare `b3e8f3b1`
+
+Testes do Search Console encerrados. Desfaz a liberação temporária de 21/09:
+
+- **`/robots.txt` voltou a `Disallow: /`** e as 16 páginas voltaram a `noindex, nofollow`;
+  o `/llms.txt` voltou a avisar que é homologação.
+- **A chave saiu do código**: `ROBOTS_MODE` e `isTestCrawlMode()` foram removidos. Indexação
+  agora depende só de `SITE_ENV=production` num domínio que não seja `workers.dev`.
+- No build, o D1 respondeu com erro interno da Cloudflare ao ler o Page Editor de `/contato`
+  e `/clientes/cases`; o código caiu no padrão e a revalidação de 1 minuto corrigiu as duas.
+
+Auditoria no ar: 16/16 páginas sem problemas.
+
+---
+
 ## 2026-09-29: Cores da marca, player em anel, título animado e rodapé institucional
 
 Commits `73bf238`, `3e57f07`, `1eb0680` · Cloudflare `cb2a6e12`
@@ -155,8 +172,7 @@ A pedido do time, para testar Search Console e os robôs de IA antes do domínio
   da resposta, e está no `Disallow`.
 
 **Risco assumido, registrado aqui de propósito:** um endereço `workers.dev` no índice do Google
-depois compete com `pitchyes.com.br` e dá trabalho para remover (ver SEO.md §6). **Voltar para
-`ROBOTS_MODE=padrao` na próxima atualização do site.**
+depois compete com `pitchyes.com.br` e dá trabalho para remover (ver SEO.md §6). Revertido em 29/09/2026 (ver a entrada daquele dia).
 
 ## 2026-09-21: Page Editor preenchido, com cartão social de cada página
 
