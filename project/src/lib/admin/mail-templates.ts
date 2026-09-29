@@ -58,7 +58,7 @@ O link vale por ${RESET_TTL_HOURS} horas e só pode ser usado uma vez.`;
       `<p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:${MUTED}">
          Clique no botão para criar uma senha nova. O link vale por ${RESET_TTL_HOURS} horas e só funciona uma vez.
        </p>
-       <p style="margin:0 0 24px"><a href="${url}" style="display:inline-block;background:#f9a900;color:${INK};text-decoration:none;font-weight:600;font-size:15px;padding:12px 20px;border-radius:6px">Definir senha</a></p>
+       <p style="margin:0 0 24px"><a href="${url}" style="display:inline-block;background:#776eed;color:#ffffff;border:1px solid #ffffff;text-decoration:none;font-weight:600;font-size:15px;padding:12px 20px;border-radius:6px">Definir senha</a></p>
        <p style="margin:0;font-size:13px;line-height:1.6;color:${MUTED};word-break:break-all">${url}</p>`,
     ),
   };
@@ -78,7 +78,7 @@ O convite vale por 7 dias.`;
       `<p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:${MUTED}">
          Você recebeu acesso ao painel da PitchYes. Defina sua senha para entrar. O convite vale por 7 dias.
        </p>
-       <p style="margin:0 0 24px"><a href="${url}" style="display:inline-block;background:#f9a900;color:${INK};text-decoration:none;font-weight:600;font-size:15px;padding:12px 20px;border-radius:6px">Definir senha</a></p>
+       <p style="margin:0 0 24px"><a href="${url}" style="display:inline-block;background:#776eed;color:#ffffff;border:1px solid #ffffff;text-decoration:none;font-weight:600;font-size:15px;padding:12px 20px;border-radius:6px">Definir senha</a></p>
        <p style="margin:0;font-size:13px;line-height:1.6;color:${MUTED};word-break:break-all">${url}</p>`,
     ),
   };

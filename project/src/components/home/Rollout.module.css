@@ -43,8 +43,8 @@
   margin-bottom: var(--space-3);
 }
 .step[data-live="true"] .dot {
-  background: var(--color-accent-burnt);
-  box-shadow: 0 0 0 1px var(--color-accent-burnt), 0 0 0 6px rgba(216, 68, 31, 0.15);
+  background: var(--color-accent-secondary);
+  box-shadow: 0 0 0 1px var(--color-accent-secondary), 0 0 0 6px var(--color-accent-secondary-glow);
 }
 
 .day {
@@ -54,7 +54,7 @@
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
-.step[data-live="true"] .day { color: var(--color-accent-burnt); }
+.step[data-live="true"] .day { color: var(--color-accent-secondary-ink); }
 
 .step h3 { font-size: 18px; }
 

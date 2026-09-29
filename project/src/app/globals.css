@@ -40,7 +40,7 @@ p {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent-gold);
+  outline: 2px solid var(--color-accent-primary);
   outline-offset: 2px;
 }
 
@@ -87,7 +87,7 @@ p {
 }
 
 .accent {
-  color: var(--color-accent-burnt);
+  color: var(--color-accent-secondary-ink);
 }
 
 @media (max-width: 640px) {

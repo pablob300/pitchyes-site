@@ -7,6 +7,6 @@
   font-size: 14px;
 }
 .nav a { color: var(--color-text); text-decoration: none; }
-.nav a:hover { color: var(--color-accent-burnt); }
+.nav a:hover { color: var(--color-accent-secondary-ink); }
 .nav span[aria-hidden] { color: var(--color-text-muted); }
 .status { color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }

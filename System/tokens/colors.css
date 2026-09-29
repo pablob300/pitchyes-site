@@ -17,10 +17,12 @@
   --color-text-inverse: #ffffff;
   --color-text-inverse-muted: rgba(255, 255, 255, 0.6);
 
-  /* Accents */
-  --color-accent-gold: #f9a900;    /* solid CTA buttons ("Book a call") */
-  --color-accent-gold-contrast: #151515;
-  --color-accent-burnt: #d8441f;   /* headline highlight word, big stat numbers */
+  /* Accents — PitchYes brand (replaced bland.ai's gold #f9a900 / burnt #d8441f, 2026-09-29) */
+  --color-accent-primary: #776eed;          /* violeta: CTA principal, foco, marcadores */
+  --color-accent-primary-contrast: #ffffff; /* texto e borda de 1px dos botões violeta (a borda os destaca em fundo escuro) */
+  --color-accent-secondary: #54cfa8;        /* menta: preenchimentos — barras, pontos, contornos */
+  --color-accent-secondary-ink: #178060;    /* menta escura para TEXTO: #54cfa8 no branco dá 1.9:1 */
+  --color-accent-secondary-glow: rgba(84, 207, 168, 0.25);
 
   /* Inverse surfaces (PitchYes: hero "Fale com um agente" widget) */
   --color-bg-inverse-elevated: #222222;
@@ -51,7 +53,7 @@
   --color-neutral-mark: #15151533;
 
   /* Semantic status — área interna (/admin). Danger is deliberately NOT
-     --color-accent-burnt: that one is a brand highlight and must not come to
+     --color-accent-secondary: that one is a brand highlight and must not come to
      mean "error" across the site. */
   --color-danger: #a32915;
   --color-danger-strong: #8b2211;

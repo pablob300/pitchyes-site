@@ -1,6 +1,8 @@
 /* Mirrors System/components/hero.html */
 .hero {
   padding: 88px 0 var(--section-lg);
+  /* The agent ring's side cards spill past the column; clip (not hidden) keeps no scroll box */
+  overflow-x: clip;
 }
 
 .grid {

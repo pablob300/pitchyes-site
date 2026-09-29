@@ -29,17 +29,19 @@ export const homeDefaults: HomeContent = {
     cta: "Fale com nossa IA",
     stat: { value: "20.000.000+", label: "ligações realizadas até hoje" },
     widget: {
-      eyebrow: "Ouça nossos agentes",
+      // Each card reads "OUÇA NOSSO AGENTE DE" + the agent name, so names complete that phrase.
+      eyebrow: "Ouça nosso agente de",
       // TODO(produto): os cinco MP3 em /public/audio são a MESMA locução de exemplo, só para
       // montar a estrutura. Substituir pela amostra real de cada setor, mesmo nome de arquivo.
+      // TODO(produto): confirmar os setores; "Atendimento" ocupa o lugar do antigo "PitchYes".
       agents: [
-        { name: "PitchYes", audio: "/audio/agente-pitchyes.mp3" },
         { name: "Saúde", audio: "/audio/agente-saude.mp3" },
         { name: "Seguros", audio: "/audio/agente-seguros.mp3" },
-        { name: "Financeiro", audio: "/audio/agente-financeiro.mp3" },
-        { name: "Imobiliário", audio: "/audio/agente-imobiliario.mp3" },
+        { name: "Finanças", audio: "/audio/agente-financeiro.mp3" },
+        { name: "Imóveis", audio: "/audio/agente-imobiliario.mp3" },
+        { name: "Atendimento", audio: "/audio/agente-pitchyes.mp3" },
       ],
-      hint: "Toque no play para ouvir uma ligação de exemplo",
+      hint: "Toque no card para ouvir o agente",
     },
   },
 

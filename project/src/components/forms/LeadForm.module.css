@@ -57,7 +57,7 @@
 .field { display: flex; flex-direction: column; gap: var(--space-2); grid-column: 1 / -1; }
 .field[data-half] { grid-column: auto; }
 .field label { font-size: 14px; color: var(--color-text); }
-.field label span { color: var(--color-accent-burnt); }
+.field label span { color: var(--color-danger); }
 
 .field input,
 .field select,
@@ -78,10 +78,10 @@
 .field input:focus-visible,
 .field select:focus-visible,
 .field textarea:focus-visible { outline: 2px solid var(--color-text); outline-offset: 1px; }
-.field [aria-invalid="true"] { border-color: var(--color-accent-burnt); }
+.field [aria-invalid="true"] { border-color: var(--color-danger); }
 
-.error { font-size: 13px; color: var(--color-accent-burnt); line-height: 1.4; }
-.status { font-size: 13px; color: var(--color-accent-burnt); min-height: 1.4em; }
+.error { font-size: 13px; color: var(--color-danger); line-height: 1.4; }
+.status { font-size: 13px; color: var(--color-danger); min-height: 1.4em; }
 .success { font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; }
 
 .submit { width: 100%; justify-content: center; }

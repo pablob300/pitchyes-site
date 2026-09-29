@@ -53,6 +53,8 @@ Toda animação do site usa **GSAP** (`gsap` + `@gsap/react`, instalação confo
 | Padrão | Como usar | Parâmetros |
 |---|---|---|
 | **Reveal** (fade + slide ao aparecer) | Adicione `data-reveal` ao elemento. Em grades, marque cada card: eles entram em sequência. | `y: 24 → 0`, opacidade `0 → 1`, `0.8s`, `power2.out`, stagger `0.08s`, dispara quando o elemento passa 5% acima da base da tela (IntersectionObserver, confiável em saltos de rolagem), uma vez |
+| **Anel de cards** (player do hero) | Uma posição decimal (`pos`) que o GSAP interpola; cada quadro escreve `transform`/`opacity` nos cards. Arrastar move o anel com o dedo; ao soltar, encaixa no card mais próximo (um arremesso rápido leva até 2 cards) | `power3.out`, 0,55–0,9s; cards vizinhos a ±58% da largura, `rotateY` 32°, `z` −150px |
+| **Metal líquido** (orb) | Camadas de gradiente giram e ondulam em loop lento; pausa fora da tela | 14–18s por volta; tocando, `timeScale` 3 |
 | **Contador + barra** (ex.: Latência) | `useGSAP` + timeline com ScrollTrigger; número e largura saem de 0 juntos | `power2.out`, dispara em `top 75%`, duração por item (PitchYes 1s, mercado 3s) |
 
 Regras: animar só `transform`/`opacity` (e `width` em barras); nada de animação em loop chamativa; respeitar `prefers-reduced-motion` (conteúdo aparece direto, sem movimento); o HTML do servidor sempre traz o estado final (sem JS o conteúdo aparece normalmente — fallback de 3s).
@@ -62,8 +64,9 @@ Regras: animar só `transform`/`opacity` (e `width` em barras); nada de animaç�
 | Token | Valor | Uso |
 |---|---|---|
 | `--color-text` | `#151515` | texto primário |
-| `--color-accent-gold` | `#f9a900` | CTA principal ("Book a call") |
-| `--color-accent-burnt` | `#d8441f` | destaque em headline, números de estatística |
+| `--color-accent-primary` | `#776eed` | violeta da marca: CTA principal, foco, marcadores; texto e borda de 1px dos botões violeta são `--color-accent-primary-contrast` (branco) |
+| `--color-accent-secondary` | `#54cfa8` | menta da marca: preenchimentos (barras, pontos, contornos). **Nunca como cor de texto** (1,9:1 no branco) |
+| `--color-accent-secondary-ink` | `#178060` | menta escura: texto em destaque (trecho do h1, números, rótulos) |
 | `--font-sans` | Söhne → Inter → system-ui | stack tipográfica completa |
 | `--content-width` | `1280px` | largura máxima do conteúdo |
 | `--margin` | `80px` | margem lateral desktop |
@@ -82,7 +85,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 
 | Arquivo | Uso | Espelho React (`project/src/components/…`) |
 |---|---|---|
-| `agent-widget.html` | Hero: "Fale com um agente", pills de setor + orb | `home/AgentWidget.tsx` |
+| `agent-widget.html` | Hero: anel 3D de cards "Ouça nosso agente de…", orb de metal líquido que toca o MP3 do card da frente | `home/AgentWidget.tsx` |
 | `logo-wall.html` | Prova social: grade de logos (nomes tipográficos até chegarem os SVGs) | `home/ClientLogos.tsx` |
 | `platform-mocks.html` | Mocks estruturais dentro dos feature cards | `home/Platform.tsx` |
 | `bar-comparison.html` | Latência: barras proporcionais (variante do stat-comparison) | `home/Latency.tsx` |

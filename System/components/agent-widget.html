@@ -6,64 +6,59 @@
 <title>Agent widget — Design System</title>
 <link rel="stylesheet" href="../tokens/tokens.css" />
 <style>
-  body { margin: 0; padding: var(--space-8) var(--margin); }
-  .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
-  .widget { max-width: 460px; background: var(--color-bg-inverse); color: var(--color-text-inverse); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-5); box-shadow: var(--shadow-lg); }
-  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-inverse-muted); margin: 0; }
-  .pills { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-  .pill { font-family: var(--font-sans); font-size: 13px; padding: 7px 14px; border-radius: var(--radius-pill); border: 1px solid var(--color-border-inverse-strong); background: transparent; color: var(--color-text-inverse); cursor: pointer; }
-  .pill:hover { border-color: var(--color-text-inverse); }
-  .pill[aria-checked="true"] { background: var(--color-text-inverse); border-color: var(--color-text-inverse); color: var(--color-text); }
-  .stage { border: 1px dashed var(--color-border-inverse-strong); border-radius: var(--radius-md); background: var(--color-bg-inverse-elevated); min-height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); text-align: center; }
-  .stage p { margin: 0; }
-  .orb { width: 88px; height: 88px; border-radius: 50%; border: 0; background: radial-gradient(circle at 30% 30%, var(--color-accent-gold), var(--color-accent-burnt)); display: grid; place-items: center; position: relative; margin-bottom: var(--space-2); cursor: pointer; }
-  .orb::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(249,169,0,.45); animation: pulse 2.4s var(--ease) infinite; }
-  /* Play (estado parado) e pause (tocando) dentro do círculo */
-  .playIcon { width: 0; height: 0; margin-left: 4px; border-left: 18px solid #fff; border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
-  .pauseIcon { width: 16px; height: 20px; border-left: 5px solid #fff; border-right: 5px solid #fff; }
-  .orb[data-playing]::after { animation: none; opacity: .9; transform: scale(1.08); }
-  .name { font-size: 15px; font-weight: 600; }
-  .hint { font-size: 13px; color: var(--color-text-inverse-muted); }
-  @keyframes pulse { 0% { transform: scale(.92); opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
+  body { margin: 0; padding: var(--space-8) var(--margin); overflow-x: hidden; }
+  .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); max-width: 70ch; }
+  .widget { --card-w: 256px; --card-h: 320px; --orb: 156px; max-width: 620px; display: flex; flex-direction: column; align-items: center; gap: var(--space-5); }
+  .stage { position: relative; width: 100%; height: calc(var(--card-h) + var(--space-6)); perspective: 1100px; }
+  .card { position: absolute; top: var(--space-4); left: 50%; width: var(--card-w); height: var(--card-h); margin-left: calc(var(--card-w) / -2); box-sizing: border-box; padding: var(--space-6) var(--space-4) var(--space-5); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); background: var(--color-pastel-cream); border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); text-align: center; }
+  /* Posições que a função place() do React calcula para o anel parado */
+  .card.front { transform: translate3d(0, 0, 0); z-index: 100; }
+  .card.left { transform: translate3d(-58%, 0, -150px) rotateY(32deg); z-index: 90; }
+  .card.right { transform: translate3d(58%, 0, -150px) rotateY(-32deg); z-index: 90; }
+  .t0 { --orb-a: #776eed; --orb-b: #54cfa8; --orb-c: #d6d2ff; --orb-halo: rgba(119,110,237,.28); }
+  .t1 { --orb-a: #54cfa8; --orb-b: #776eed; --orb-c: #d4f7ea; --orb-halo: rgba(84,207,168,.3); }
+  .t3 { --orb-a: #3fbf98; --orb-b: #a39dff; --orb-c: #fff; --orb-halo: rgba(63,191,152,.28); }
+  .orb { position: relative; display: grid; place-items: center; width: var(--orb); height: var(--orb); margin-bottom: var(--space-4); border-radius: 50%; background: var(--orb-halo); box-shadow: inset 0 0 0 1px rgba(255,255,255,.6), 0 10px 30px -12px var(--orb-a); }
+  .sphere { position: absolute; inset: 9px; overflow: hidden; border-radius: 50%; background: var(--orb-a); }
+  .sphere::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.55), inset 0 10px 18px rgba(255,255,255,.45), inset 0 -12px 22px rgba(21,21,21,.14); }
+  .sphere > span { position: absolute; display: block; }
+  .swirl { inset: -30%; border-radius: 50%; background: conic-gradient(from 0deg, var(--orb-a), var(--orb-b) 22%, var(--orb-c) 34%, var(--orb-a) 52%, var(--orb-b) 70%, var(--orb-c) 82%, var(--orb-a)); filter: blur(10px); animation: spin 16s linear infinite; }
+  .band { left: -6%; right: -6%; top: 38%; height: 24%; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(255,255,255,.95), rgba(255,255,255,.55) 35%, transparent 70%); filter: blur(2px); }
+  .arcTop, .arcBottom { left: 10%; right: 10%; height: 46%; border-radius: 50%; filter: blur(1px); }
+  .arcTop { top: 12%; border-top: 3px solid rgba(255,255,255,.8); }
+  .arcBottom { bottom: 12%; border-bottom: 3px solid rgba(255,255,255,.7); }
+  .play { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: #fff; box-shadow: 0 6px 16px -6px rgba(21,21,21,.35); }
+  .card:not(.front) .play { opacity: 0; }
+  .playIcon { width: 0; height: 0; margin-left: 3px; border-left: 13px solid var(--color-text); border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); }
+  .name { font-size: 22px; font-weight: 600; line-height: 1.1; letter-spacing: -.44px; }
+  .controls { display: flex; align-items: center; gap: var(--space-4); }
+  .arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border); background: #fff; }
+  .dots { display: flex; gap: 12px; }
+  .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--color-neutral-mark); }
+  .dots i.on { background: var(--color-accent-primary); transform: scale(1.3); }
+  .hint { font-size: 14px; color: var(--color-text-muted); margin: 0; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
   <p class="note">
-    PitchYes · Hero, bloco “Ouça nossos agentes”: o círculo laranja é o play/pause da amostra de voz
-    de cada setor (MP3 em <code>project/public/audio/</code>, carregado só no play).
+    PitchYes · Hero, player “Ouça nosso agente de…”: anel 3D de cards (padrão da home da bland.ai).
+    O card da frente toca o MP3 do setor (<code>project/public/audio/</code>, baixado só no play);
+    setas, pontos, arrastar/deslizar o dedo, trackpad e as setas do teclado giram o anel, que não tem fim.
+    O círculo é “metal líquido”: camadas de gradiente com as duas cores da marca que o GSAP gira e
+    ondula só com <code>transform</code>; tocando, a do card da frente acelera 3×. Parado fora da tela e
+    com <code>prefers-reduced-motion</code>. Nesta referência a animação é CSS só para ilustrar.
     React: project/src/components/home/AgentWidget.tsx
   </p>
   <div class="widget">
-    <p class="eyebrow">Ouça nossos agentes</p>
-    <div class="pills" role="radiogroup">
-      <button class="pill" role="radio" aria-checked="true">PitchYes</button>
-      <button class="pill" role="radio" aria-checked="false">Saúde</button>
-      <button class="pill" role="radio" aria-checked="false">Seguros</button>
-      <button class="pill" role="radio" aria-checked="false">Financeiro</button>
-      <button class="pill" role="radio" aria-checked="false">Imobiliário</button>
-    </div>
     <div class="stage">
-      <button class="orb" aria-label="Ouvir o agente PitchYes"><span class="playIcon"></span></button>
-      <p class="name">Agente PitchYes</p>
-      <p class="hint">Toque no play para ouvir uma ligação de exemplo</p>
+      <div class="card left t1"><span class="orb"><span class="sphere"><span class="swirl"></span><span class="band"></span><span class="arcTop"></span><span class="arcBottom"></span></span><span class="play"><span class="playIcon"></span></span></span><span class="eyebrow">Ouça nosso agente de</span><span class="name">Atendimento</span></div>
+      <div class="card right t3"><span class="orb"><span class="sphere"><span class="swirl"></span><span class="band"></span><span class="arcTop"></span><span class="arcBottom"></span></span><span class="play"><span class="playIcon"></span></span></span><span class="eyebrow">Ouça nosso agente de</span><span class="name">Seguros</span></div>
+      <div class="card front t0"><span class="orb"><span class="sphere"><span class="swirl"></span><span class="band"></span><span class="arcTop"></span><span class="arcBottom"></span></span><span class="play"><span class="playIcon"></span></span></span><span class="eyebrow">Ouça nosso agente de</span><span class="name">Saúde</span></div>
     </div>
-  </div>
-
-  <p class="note" style="margin-top:var(--space-6)">Estado tocando:</p>
-  <div class="widget">
-    <p class="eyebrow">Ouça nossos agentes</p>
-    <div class="pills" role="radiogroup">
-      <button class="pill" role="radio" aria-checked="false">PitchYes</button>
-      <button class="pill" role="radio" aria-checked="true">Saúde</button>
-      <button class="pill" role="radio" aria-checked="false">Seguros</button>
-      <button class="pill" role="radio" aria-checked="false">Financeiro</button>
-      <button class="pill" role="radio" aria-checked="false">Imobiliário</button>
-    </div>
-    <div class="stage">
-      <button class="orb" data-playing aria-label="Pausar a amostra do agente Saúde"><span class="pauseIcon"></span></button>
-      <p class="name">Agente Saúde</p>
-      <p class="hint">Tocando · 0:12 de 1:14</p>
-    </div>
+    <div class="controls"><button class="arrow" aria-label="Agente anterior">‹</button><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div><button class="arrow" aria-label="Próximo agente">›</button></div>
+    <p class="hint">Toque no card para ouvir o agente</p>
   </div>
 </body>
 </html>

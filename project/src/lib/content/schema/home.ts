@@ -29,18 +29,18 @@ export const homeSchema: PageSchema = {
         { pointer: "cta", label: "Botão", type: "texto", max: 30 },
         { pointer: "stat.value", label: "Número em destaque", type: "texto" },
         { pointer: "stat.label", label: "Legenda do número", type: "texto" },
-        { pointer: "widget.eyebrow", label: "Rótulo do player", type: "texto" },
-        { pointer: "widget.hint", label: "Dica do player", type: "texto" },
+        { pointer: "widget.eyebrow", label: "Rótulo dos cards", type: "texto", max: 30, help: "Vem antes do nome de cada agente: “Ouça nosso agente de” + “Saúde”." },
+        { pointer: "widget.hint", label: "Dica abaixo dos cards", type: "texto", max: 60 },
       ],
       lists: [
         {
           pointer: "hero.widget.agents",
-          label: "Agentes do player",
+          label: "Cards de agente",
           titleField: "name",
           min: 1,
           template: { name: "Novo agente", audio: "/audio/agente-pitchyes.mp3" },
           fields: [
-            { pointer: "name", label: "Nome", type: "texto", max: 20 },
+            { pointer: "name", label: "Nome (completa o rótulo)", type: "texto", max: 20 },
             {
               pointer: "audio",
               label: "Arquivo de áudio",

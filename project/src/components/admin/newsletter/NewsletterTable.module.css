@@ -58,7 +58,7 @@
 .table tbody tr:hover { background: var(--color-bg-subtle); }
 
 .email a { text-decoration: none; }
-.email a:hover { color: var(--color-accent-burnt); text-decoration: underline; }
+.email a:hover { color: var(--color-accent-secondary-ink); text-decoration: underline; }
 /* Data e hora em largura fixa: a coluna não dança conforme o dígito */
 .quando { color: var(--color-text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; width: 1%; }
 

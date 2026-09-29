@@ -38,7 +38,7 @@
   border-radius: var(--radius-sm);
   background: var(--color-pastel-gray);
 }
-.row[data-highlight="true"] .fill { background: var(--color-accent-burnt); }
+.row[data-highlight="true"] .fill { background: var(--color-accent-secondary); }
 
 /* Same position in the track and inside the fill (fill starts at the track's left edge) */
 .label {

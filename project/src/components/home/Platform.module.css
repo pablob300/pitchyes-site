@@ -53,8 +53,8 @@
 }
 .nodeCore {
   font-weight: 600;
-  border-color: var(--color-accent-burnt);
-  color: var(--color-accent-burnt);
+  border-color: var(--color-accent-secondary);
+  color: var(--color-accent-secondary-ink);
 }
 .link {
   width: 1px;
@@ -146,8 +146,8 @@
   font-size: 11px;
 }
 .channels li:first-child {
-  border-color: var(--color-accent-burnt);
-  color: var(--color-accent-burnt);
+  border-color: var(--color-accent-secondary);
+  color: var(--color-accent-secondary-ink);
   font-weight: 600;
 }
 
@@ -184,7 +184,7 @@
   width: 2px;
   height: 30%;
   border-radius: 1px;
-  background: var(--color-accent-gold);
+  background: var(--color-accent-primary);
 }
 .wave i:nth-child(3n) { height: 90%; }
 .wave i:nth-child(3n + 1) { height: 55%; }

@@ -34,7 +34,7 @@
 }
 .card h3 { font-size: 18px; line-height: 1.25; }
 .card h3 a { text-decoration: none; }
-.card h3 a:hover { color: var(--color-accent-burnt); }
+.card h3 a:hover { color: var(--color-accent-secondary-ink); }
 .card p { font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); }
 
 .steps {
@@ -51,7 +51,7 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent-burnt);
+  color: var(--color-accent-secondary-ink);
   margin-bottom: var(--space-2);
 }
 .steps h3 { font-size: 18px; margin-bottom: var(--space-2); }
@@ -68,7 +68,7 @@
   font-weight: var(--text-stat-weight);
   letter-spacing: var(--text-stat-ls);
   line-height: 1;
-  color: var(--color-accent-burnt);
+  color: var(--color-accent-secondary-ink);
 }
 .stats dd { margin: var(--space-3) 0 0; font-size: 14px; color: var(--color-text-secondary); }
 
@@ -367,7 +367,7 @@
   gap: var(--space-4);
   margin-top: var(--space-2);
 }
-.highlightStats dt { font-size: 32px; font-weight: 700; line-height: 1.1; color: var(--color-accent-gold); }
+.highlightStats dt { font-size: 32px; font-weight: 700; line-height: 1.1; color: var(--color-accent-primary); }
 .highlightStats dd { font-size: 13px; color: var(--color-text-inverse-muted); margin-top: var(--space-1); }
 
 @media (max-width: 900px) {

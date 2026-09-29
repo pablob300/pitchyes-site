@@ -51,7 +51,7 @@
 }
 .rowButton { font-weight: 500; }
 .rowButton:hover,
-.rowLink:hover { color: var(--color-accent-burnt); }
+.rowLink:hover { color: var(--color-accent-secondary-ink); }
 .rowLink { font-size: 13px; color: var(--color-text-secondary); }
 
 .empty { font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; }
