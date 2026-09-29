@@ -1,36 +1,43 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { footerNav, legalNav } from "@/lib/routes";
 import { Logo } from "@/components/Logo";
+import { company, socials } from "@/lib/company";
 import { NewsletterForm } from "./NewsletterForm";
 import styles from "./SiteFooter.module.css";
 
-// TODO: fill in the official profile URLs; icons render unlinked until then.
-const socials: { label: string; href: string | null; icon: ReactNode }[] = [
-  {
-    label: "LinkedIn",
-    href: null,
-    icon: (
-      <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.61 0-1.86 1.26-1.86 2.56v4.91h-4V9.75Z" />
-    ),
-  },
-  {
-    label: "X",
-    href: null,
-    icon: (
-      <path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.2h1.7L7.4 4.73H5.58L16.67 19.2Z" />
-    ),
-  },
-];
+const { address, phone, email } = company;
+
+/** External links always open in a new tab, without handing the page to the other site. */
+const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 export function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.top}>
-          <Link href="/" className={styles.logo} aria-label="PitchYes — página inicial">
-            <Logo height={32} />
-          </Link>
+          <div className={styles.brand}>
+            <Link href="/" className={styles.logo} aria-label="PitchYes — página inicial">
+              <Logo height={32} />
+            </Link>
+            <address className={styles.contact}>
+              <span>
+                {address.street} — {address.district}, {address.city} ({address.state})
+              </span>
+              <a href={`tel:${phone.tel}`}>{phone.display}</a>
+              <a href={`mailto:${email}`}>{email}</a>
+            </address>
+            <ul className={styles.socials} aria-label="PitchYes nas redes sociais">
+              {socials.map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} {...external} aria-label={`PitchYes no ${s.label}`} title={s.label}>
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d={s.path} fillRule={s.evenOdd ? "evenodd" : undefined} />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
           <NewsletterForm />
         </div>
 
@@ -51,7 +58,7 @@ export function SiteFooter() {
 
         <div className={styles.bottom}>
           <p>
-            © {new Date().getFullYear()} PitchYes. Todos os direitos reservados.
+            © {new Date().getFullYear()} PitchYes. Todos os direitos reservados. CNPJ 58.177.364/0001-21.
             {legalNav.map((link) => (
               <span key={link.href}>
                 {" · "}
@@ -59,26 +66,21 @@ export function SiteFooter() {
               </span>
             ))}
           </p>
-          <ul className={styles.socials}>
-            {socials.map((s) => {
-              const svg = (
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  {s.icon}
-                </svg>
-              );
-              return (
-                <li key={s.label}>
-                  {s.href ? (
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                      {svg}
-                    </a>
-                  ) : (
-                    <span title={`${s.label} (em breve)`}>{svg}</span>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+          <a
+            href={company.reclameAqui}
+            {...external}
+            className={styles.reclameAqui}
+            aria-label="PitchYes verificada pelo Reclame Aqui — ver a página da empresa"
+          >
+            {/* Official seal art from Reclame Aqui, self-hosted (no third-party script) */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/reclame-aqui/ra-verificada.svg" alt="Selo RA Verificada" width={30} height={30} loading="lazy" />
+            <span className={styles.raText}>
+              <span>Verificada por</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/reclame-aqui/ra-logo.svg" alt="Logo do Reclame Aqui" width={93} height={17} loading="lazy" />
+            </span>
+          </a>
         </div>
       </div>
     </footer>

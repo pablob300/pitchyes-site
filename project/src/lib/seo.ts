@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { company, socials } from "./company";
 import { getPageMeta } from "./page-meta";
 import { getSiteUrl, isIndexable } from "./site";
 
@@ -100,7 +101,26 @@ export function organizationSchema(): Thing {
     url,
     logo: `${url}/brand/pitchyes-logo.svg`,
     description: SITE_DESCRIPTION,
-    // TODO(seo): add sameAs (LinkedIn, X) and contactPoint once the profiles exist.
+    // Official profiles and contact: lets search and AI engines tie them to this brand.
+    sameAs: [...socials.map((s) => s.href), company.reclameAqui],
+    email: company.email,
+    telephone: company.phone.tel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: company.address.street,
+      addressLocality: company.address.city,
+      addressRegion: company.address.state,
+      postalCode: company.address.postalCode,
+      addressCountry: company.address.country,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      telephone: company.phone.tel,
+      email: company.email,
+      areaServed: "BR",
+      availableLanguage: "pt-BR",
+    },
   };
 }
 

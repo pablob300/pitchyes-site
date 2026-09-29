@@ -1,3 +1,4 @@
+import { company, socials } from "@/lib/company";
 import { getHomeContent } from "@/lib/content/resolve";
 import { pages } from "@/lib/routes";
 import { absoluteUrl } from "@/lib/sitemap";
@@ -99,6 +100,8 @@ Em construção. Será publicado em ${absoluteUrl("/blog")} com artigos, categor
 - [Fale com nossa IA](${absoluteUrl("/#fale-com-a-ia")})
 - [Contato](${absoluteUrl("/contato")}): formulário para agendar uma demonstração gratuita de 30 minutos.
 - Telefone: +55 (11) 5196-9381 · E-mail: comercial@pitchyes.com.br
+- Perfis oficiais: ${socials.map((s) => `[${s.label}](${s.href})`).join(" · ")}
+- Reputação: empresa verificada no [Reclame Aqui](${company.reclameAqui}).
 
 ## Observações
 
