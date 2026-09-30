@@ -25,6 +25,7 @@ Leia antes de qualquer alteração no site:
 | Campos que o editor visual mostra | `project/src/lib/content/schema/` |
 | Quais páginas já têm editor de conteúdo | `project/src/lib/content/pages.ts` |
 | Cabeçalho, rodapé, faixa de CTA | `project/src/components/layout/` |
+| Endereço, telefone, e-mail, redes sociais, selo Reclame Aqui | `project/src/lib/company.ts` (fonte única; alimenta o rodapé, o JSON-LD da Organization e o `/llms.txt`) |
 | Domínio e regra de indexação | `project/src/lib/site.ts` (`SITE_URL`, `SITE_ENV`) |
 | Resumo do site para IAs | `project/src/app/llms.txt/route.ts` |
 | Cores, tipografia, espaçamento, motion | `project/src/styles/tokens/` (espelham `System/tokens/`) |
