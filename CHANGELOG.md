@@ -8,6 +8,21 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-25: "copy in raw" no plano de ação do PageSpeed
+
+Commit `7079f32` · Cloudflare `e229e6c8`
+
+- Botão discreto **copy in raw** ao lado de "Plano de ação" no relatório do PageSpeed. Copia
+  em texto puro (sem Markdown) só as melhorias pendentes, sem o que já passa nem o que é
+  esperado na homologação, escritas como instruções para o desenvolvedor ou a IA que vai
+  ajustar o código: objetivo e notas atuais, regras do projeto a seguir, cada correção com o
+  que fazer e onde está o problema, e como validar no fim (`tsc`, lint, deploy, auditoria,
+  nova análise). Gerado por `toRawInstructions()` em `lib/admin/pagespeed/report.ts`.
+- No build, o D1 respondeu com erro interno ao ler metadados de `/sobre`; o código caiu no
+  padrão e a revalidação de 1 minuto corrige.
+
+---
+
 ## 2026-10-25: Painel ganha Análise › PageSpeed
 
 Commit `9e56810` · Cloudflare `517aaf62`
