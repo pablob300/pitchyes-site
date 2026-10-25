@@ -6,7 +6,7 @@ import { getSiteUrl, isIndexable } from "./site";
 export const SITE_NAME = "PitchYes";
 export const SITE_TAGLINE = "IA de voz para empresas";
 export const SITE_DESCRIPTION =
-  "Agentes de voz com IA que fazem e recebem ligações em escala: prospecção, atendimento e agendamento para saúde, seguros e serviços financeiros.";
+  "IA de voz que atende, qualifica, agenda, transfere e liga para clínicas, imobiliárias, concessionárias, seguradoras, faculdades, corretoras e franquias.";
 
 /**
  * Metadata for one page. Every page must go through here so canonical, Open Graph and
