@@ -23,7 +23,7 @@ export const SITE_CONTENT_PATH = "/_site";
 
 export const siteDefaults: SiteContent = {
   finalCta: {
-    title: "IA de voz segura, que se paga sozinha.",
+    title: "Sua IA de voz sob medida para sua empresa.",
     cta: "Fale com nossa IA",
   },
   clients,

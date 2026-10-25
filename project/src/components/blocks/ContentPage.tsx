@@ -10,7 +10,7 @@ function Blocks({ block }: { block: Block }) {
   switch (block.kind) {
     case "prose":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className={`container ${styles.prose}`}>
             {block.eyebrow && <p className="eyebrow" data-reveal>{block.eyebrow}</p>}
             {block.title && <h2 data-reveal>{block.title}</h2>}
@@ -25,7 +25,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "features":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
               {block.eyebrow && <p className="eyebrow">{block.eyebrow}</p>}
@@ -46,7 +46,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "steps":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
               <h2>{block.title}</h2>
@@ -67,7 +67,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "stats":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             {block.title && (
               <div className="section-head" data-reveal>
@@ -89,7 +89,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "checklist":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
               <h2>{block.title}</h2>
@@ -108,7 +108,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "cases":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
               <h2>{block.title}</h2>
@@ -136,7 +136,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "logos":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <h2 className={styles.logosTitle} data-reveal>
               {block.title}
@@ -163,7 +163,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "pricing":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head section-head--center" data-reveal>
               <h2>{block.title}</h2>
@@ -201,7 +201,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "table":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
               <h2>{block.title}</h2>
@@ -299,7 +299,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "faq":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <h2 className={styles.faqTitle} data-reveal>
               {block.title}
@@ -321,7 +321,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "links":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
               <h2>{block.title}</h2>
@@ -343,7 +343,7 @@ function Blocks({ block }: { block: Block }) {
 
     case "image":
       return (
-        <section className="section">
+        <section className="section" id={block.id}>
           <figure className={`container ${styles.figure}`} data-reveal>
             <Image src={block.src} alt={block.alt} width={1600} height={900} />
             {block.caption && <figcaption>{block.caption}</figcaption>}

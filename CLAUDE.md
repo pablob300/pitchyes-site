@@ -56,6 +56,25 @@ economizam depuração:
 Página nova no editor: escreva o schema dela em `lib/content/schema/`, espalhe os
 `edit()` nos componentes e acrescente o caminho em `lib/content/pages.ts`.
 
+### Rotina: todo conteúdo criado, alterado ou apagado passa pelo Page Editor
+
+Antes de publicar qualquer mudança de texto, seção, lista ou página, confira:
+
+1. **O banco manda?** Leia o que está publicado: `page_content` (home `/` e conteúdo global
+   `/_site`) e `page_meta` (título, descrição e data de todas as páginas):
+   `npx wrangler d1 execute pitchyes-leads --remote --command "SELECT path, status, data FROM page_content"`.
+   Se a chave mudada estiver sobrescrita lá, o código sozinho não muda o site: atualize a
+   sobreposição (pelo painel, ou SQL guardando versão em `page_content_versions`) ou avise quem edita.
+2. **O editor enxerga?** Campo novo na home ou no `_site` precisa de entrada no schema
+   (`lib/content/schema/home.ts`) e de `edit()` no componente; texto maior que o `max` do
+   campo não cabe no painel — ajuste o limite junto. Campo apagado sai do schema também.
+3. **Página nova, renomeada ou apagada:** `lib/routes.ts`, `lib/page-defaults.ts` (padrão da
+   gaveta de metadados), linha de `page_meta` (mover o `path` quando a URL muda, apagar quando
+   a página some) e redirecionamento 301 em `next.config.ts`.
+4. **Data de revisão:** `updated` em `routes.ts` **e** em `page_meta` (a do banco vence no sitemap).
+5. Depois do deploy, abra `/admin/paginas` e a gaveta/editor da página mudada e confira que
+   ela mostra o texto novo.
+
 ## Fluxo de trabalho
 
 1. Alterar o código em `project/`, usando os tokens e componentes de `System/`.

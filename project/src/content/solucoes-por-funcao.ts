@@ -83,7 +83,7 @@ export const solucoesPorFuncao: PageContent = {
       title: "Continue por aqui.",
       items: [
         { title: "Por setor", text: "Saúde, seguros, financeiro, imobiliário, energia e tecnologia.", href: "/solucoes/por-setor" },
-        { title: "Preços", text: "Uma tarifa por minuto, com tudo incluído.", href: "/precos" },
+        { title: "Planos", text: "Uma tarifa por minuto, com tudo incluído.", href: "/planos" },
       ],
     },
   ],

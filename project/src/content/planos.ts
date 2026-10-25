@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // Estrutura de planos e tabela espelhando bland.ai/pricing, com valores em reais.
 // TODO(comercial): validar os valores antes da publicação no domínio definitivo —
 // são conversões de referência, não uma tabela aprovada.
-export const precos: PageContent = {
-  seoTitle: "Preços e planos",
+export const planos: PageContent = {
+  seoTitle: "Planos e preços",
   seoDescription:
     "Uma tarifa por minuto que já inclui modelo de linguagem, transcrição, síntese de voz e telefonia. Sem cobrança por token, sem sobretaxa por funcionalidade.",
-  eyebrow: "Preços",
+  eyebrow: "Planos",
   h1: "Um valor por minuto. Sem surpresa na fatura.",
   lead: "A tarifa cobre o modelo de linguagem, a transcrição, a síntese de voz e a telefonia. Você não paga por token, não recebe fatura de terceiros e não descobre custo novo ao ligar uma funcionalidade.",
   blocks: [

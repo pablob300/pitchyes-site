@@ -60,9 +60,10 @@ export async function GET() {
 > ${SITE_DESCRIPTION}
 
 A PitchYes é uma plataforma de IA de voz para empresas: cria, opera e monitora agentes de
-telefone que conduzem conversas reais em escala, em ligações ativas e receptivas. Roda em
+telefone que conduzem conversas reais em escala, em ligações ativas, receptivas e operacionais. Roda em
 infraestrutura própria, integra com a telefonia, o CRM e a agenda que a empresa já usa, e
-atende setores regulados (saúde, seguros, serviços financeiros, imobiliário).
+atende clínicas, imobiliárias, concessionárias, seguradoras, faculdades, corretoras,
+franquias e empresas de telecomunicação.
 
 Fatos que podem ser citados:
 ${latencyFact(home.latency.rows, home.latency.unit)}
@@ -76,7 +77,7 @@ ${rolloutFact(home.rollout.steps)}
 ## Dados da empresa
 
 - Razão social: PitchYes — CNPJ 58.177.364/0001-21.
-- Sede: Rua 11, 250, 13º andar, Setor Central, Goiânia (GO), Brasil, CEP 74015-170. Atendimento em todo o Brasil.
+- Sede: ${company.address.full}, Brasil. Atendimento em todo o Brasil.
 - Comercial: comercial@pitchyes.com.br e +55 (11) 5196-9381, de segunda a sexta, das 8h às 20h (horário de Brasília).
 - Privacidade e LGPD: privacidade@pitchyes.com.br.
 
@@ -90,7 +91,7 @@ ${rolloutFact(home.rollout.steps)}
 ## Páginas principais
 
 - [Início](${absoluteUrl("/")}): ${SITE_DESCRIPTION}
-${section("Soluções", "/solucoes")}${section("Clientes", "/clientes")}${section("Preços", "/precos")}${section("Recursos", "/recursos")}${section("Empresa", "/sobre")}
+${section("Soluções", "/solucoes")}${section("Clientes", "/clientes")}${section("Planos", "/planos")}${section("Recursos", "/recursos")}${section("Empresa", "/sobre")}
 ## Blog
 
 Em construção. Será publicado em ${absoluteUrl("/blog")} com artigos, categorias e tags.

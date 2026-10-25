@@ -12,18 +12,19 @@ export type SitePage = {
 };
 
 export const pages = [
-  { path: "/", title: "Início", description: "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.", placeholder: false, updated: "2026-09-19" },
+  { path: "/", title: "Início", description: "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.", placeholder: false, updated: "2026-10-25" },
 
-  { path: "/solucoes", title: "Soluções", description: "Como a IA de voz da PitchYes atende ligações ativas e receptivas em escala.", placeholder: false, updated: "2026-09-19" },
+  { path: "/solucoes", title: "Soluções", description: "Como a IA de voz da PitchYes atende ligações ativas e receptivas em escala.", placeholder: false, updated: "2026-10-25" },
   { path: "/solucoes/ativo", title: "Ligações ativas", description: "Prospecção, qualificação de leads, confirmação de reuniões e follow-up com IA de voz.", placeholder: false, updated: "2026-09-19" },
   { path: "/solucoes/receptivo", title: "Atendimento receptivo", description: "Todo cliente atendido, qualificado e direcionado, 24 horas por dia.", placeholder: false, updated: "2026-09-19" },
   { path: "/solucoes/por-setor", title: "Soluções por setor", description: "IA de voz para saúde, seguros, serviços financeiros, imobiliário e mais.", placeholder: false, updated: "2026-09-19" },
   { path: "/solucoes/por-funcao", title: "Soluções por função", description: "IA de voz para vendas, atendimento, cobrança e operações.", placeholder: false, updated: "2026-09-19" },
 
-  { path: "/clientes", title: "Clientes", description: "Empresas que automatizam ligações com a PitchYes.", placeholder: false, updated: "2026-09-19" },
+  { path: "/clientes", title: "Clientes", description: "Empresas que automatizam ligações com a PitchYes.", placeholder: false, updated: "2026-10-25" },
   { path: "/clientes/cases", title: "Cases", description: "Resultados reais de clientes que usam a IA de voz da PitchYes.", placeholder: false, updated: "2026-09-19" },
 
-  { path: "/precos", title: "Preços", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: false, updated: "2026-09-19" },
+  // Era /precos até 25/10/2026; o endereço antigo redireciona com 301 (next.config.ts).
+  { path: "/planos", title: "Planos", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: false, updated: "2026-10-25" },
 
   { path: "/recursos/integracoes", title: "Integrações", description: "A PitchYes conecta com sua telefonia, CRM e agenda atuais.", placeholder: false, updated: "2026-09-19" },
   { path: "/recursos/novidades", title: "Novidades", description: "Lançamentos e atualizações da plataforma PitchYes.", placeholder: false, updated: "2026-09-19" },
@@ -32,11 +33,11 @@ export const pages = [
   { path: "/blog", title: "Blog", description: "Artigos sobre IA de voz, vendas e atendimento.", placeholder: true, updated: "2026-09-19" },
   { path: "/blog/categorias", title: "Categorias do blog", description: "Todas as categorias de artigos do blog da PitchYes.", placeholder: true, updated: "2026-09-19" },
 
-  { path: "/sobre", title: "Sobre a PitchYes", description: "Empresa brasileira de voz conversacional com IA para contato, vendas, suporte e atendimento.", placeholder: false, updated: "2026-09-20" },
+  { path: "/sobre", title: "Sobre a PitchYes", description: "Empresa brasileira de voz conversacional com IA para contato, vendas, suporte e atendimento.", placeholder: false, updated: "2026-10-25" },
   { path: "/carreiras", title: "Carreiras", description: "Trabalhe na PitchYes.", placeholder: false, updated: "2026-09-19" },
-  { path: "/contato", title: "Contato", description: "Agende uma demonstração gratuita de 30 minutos com o time da PitchYes.", placeholder: false, updated: "2026-09-20" },
+  { path: "/contato", title: "Contato", description: "Agende uma demonstração gratuita de 30 minutos com o time da PitchYes.", placeholder: false, updated: "2026-10-25" },
 
-  { path: "/privacidade", title: "Política de Privacidade", description: "Como a PitchYes coleta, usa e protege dados pessoais.", placeholder: false, updated: "2026-09-20" },
+  { path: "/privacidade", title: "Política de Privacidade", description: "Como a PitchYes coleta, usa e protege dados pessoais.", placeholder: false, updated: "2026-10-25" },
   { path: "/termos", title: "Termos de Uso", description: "Termos de uso do site e da plataforma PitchYes.", placeholder: false, updated: "2026-09-19" },
 ] as const satisfies readonly SitePage[];
 
@@ -55,15 +56,10 @@ export type NavItem = NavLink | { label: string; children: NavLink[] };
 export const mainNav: NavItem[] = [
   { label: "Soluções", href: "/solucoes" },
   { label: "Clientes", href: "/clientes" },
-  { label: "Preços", href: "/precos" },
-  {
-    label: "Recursos",
-    children: [
-      { label: "Integrações", href: "/recursos/integracoes" },
-      { label: "Novidades", href: "/recursos/novidades" },
-    ],
-  },
+  { label: "Planos", href: "/planos" },
+  { label: "Integrações", href: "/recursos/integracoes" },
   { label: "Blog", href: "/blog" },
+  { label: "Contato", href: "/contato" },
 ];
 
 export const footerNav: { title: string; links: NavLink[] }[] = [
@@ -83,7 +79,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
       { label: "Cases", href: "/clientes/cases" },
     ],
   },
-  { title: "Preços", links: [{ label: "Planos e valores", href: "/precos" }] },
+  { title: "Planos", links: [{ label: "Planos e valores", href: "/planos" }] },
   {
     title: "Recursos",
     links: [

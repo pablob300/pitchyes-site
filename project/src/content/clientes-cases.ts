@@ -68,7 +68,7 @@ export const clientesCases: PageContent = {
       title: "Continue por aqui.",
       items: [
         { title: "Clientes", text: "A lista de empresas que usam a PitchYes.", href: "/clientes" },
-        { title: "Preços", text: "Quanto custa colocar uma operação no ar.", href: "/precos" },
+        { title: "Planos", text: "Quanto custa colocar uma operação no ar.", href: "/planos" },
       ],
     },
   ],

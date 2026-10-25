@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { ContentPage } from "@/components/blocks/ContentPage";
 import { JsonLd } from "@/components/JsonLd";
-import { precos } from "@/content/precos";
+import { planos } from "@/content/planos";
 import { faqItems } from "@/content/types";
 import { breadcrumbSchema, pageMetadataWithOverrides, webPageSchema } from "@/lib/seo";
 
-const content = precos;
-const path = "/precos";
+const content = planos;
+const path = "/planos";
 
 // Os metadados podem ser editados no Page Editor: a página se reconstrói a cada
 // minuto para a mudança aparecer sem precisar de um novo deploy.

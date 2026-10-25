@@ -4,7 +4,7 @@ import { clientesCases } from "@/content/clientes-cases";
 import { contato } from "@/content/contato";
 import { integracoes } from "@/content/integracoes";
 import { novidades } from "@/content/novidades";
-import { precos } from "@/content/precos";
+import { planos } from "@/content/planos";
 import { privacidade } from "@/content/privacidade";
 import { sobre } from "@/content/sobre";
 import { solucoes } from "@/content/solucoes";
@@ -18,8 +18,8 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "./seo";
 // Título e descrição que cada página mostra quando NADA foi editado no painel.
 //
 // Cuidado com a tentação de usar lib/routes.ts aqui: o título de lá é o nome curto
-// do menu ("Preços"), enquanto a página serve o título de SEO do arquivo de conteúdo
-// ("Preços e planos"). Se o Page Editor mostrasse o do menu como padrão, "Restaurar
+// do menu ("Planos"), enquanto a página serve o título de SEO do arquivo de conteúdo
+// ("Planos e preços"). Se o Page Editor mostrasse o do menu como padrão, "Restaurar
 // padrão" trocaria o título que está no ar. Por isso esta tabela vem dos mesmos
 // dados que as páginas usam.
 
@@ -35,7 +35,7 @@ const byPath: Record<string, PageDefault> = {
   "/solucoes/por-funcao": { title: solucoesPorFuncao.seoTitle, description: solucoesPorFuncao.seoDescription },
   "/clientes": { title: clientes.seoTitle, description: clientes.seoDescription },
   "/clientes/cases": { title: clientesCases.seoTitle, description: clientesCases.seoDescription },
-  "/precos": { title: precos.seoTitle, description: precos.seoDescription },
+  "/planos": { title: planos.seoTitle, description: planos.seoDescription },
   "/recursos/integracoes": { title: integracoes.seoTitle, description: integracoes.seoDescription },
   "/recursos/novidades": { title: novidades.seoTitle, description: novidades.seoDescription },
   "/sobre": { title: sobre.seoTitle, description: sobre.seoDescription },

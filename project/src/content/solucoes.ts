@@ -7,26 +7,31 @@ export const solucoes: PageContent = {
   seoDescription:
     "Agentes de voz que fazem e recebem ligações em escala: prospecção, atendimento, agendamento e cobrança, integrados à sua telefonia e ao seu CRM.",
   eyebrow: "Soluções",
-  h1: "Agentes de voz que resolvem a ligação inteira.",
-  lead: "A PitchYes automatiza as ligações que hoje exigem uma pessoa: o agente entende o que foi dito, consulta seus sistemas, executa a ação e registra tudo. Ativo e receptivo, na mesma plataforma.",
+  h1: "Atendimento instantâneo e o fim do funil engessado.",
+  lead: "Agentes de voz autônomos que executam o ciclo completo da chamada: resolução de 100% dos chamados na primeira tentativa, sem intervenção humana.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [
     {
       kind: "features",
       eyebrow: "Por tipo de ligação",
-      title: "Duas frentes, um mesmo agente.",
+      title: "Três frentes, com agentes inteligentes.",
       lead: "O mesmo agente conversa, transfere para um humano quando necessário e devolve o contexto completo para a sua equipe.",
-      columns: 2,
+      columns: 3,
       items: [
         {
-          title: "Ligações ativas",
-          text: "Prospecção, qualificação de leads, confirmação de reuniões, recuperação de carrinho e cobrança amigável, com discagem em escala e horário controlado.",
+          title: "Ligação Ativa",
+          text: "Prospecção ativa sem desgaste: a IA faz as ligações, filtra quem quer comprar e passa a bola para o seu time comercial com o contexto completo da conversa.",
           href: "/solucoes/ativo",
         },
         {
-          title: "Atendimento receptivo",
-          text: "Substituição de URA, triagem, agendamento, segunda via e suporte de primeiro nível, 24 horas por dia, sem fila e sem menu de teclado.",
+          title: "Ligação Receptiva",
+          text: "O fim da URA tradicional: substitua menus de teclado e filas de espera por um atendimento 24/7 que resolve triagem, agendamentos, segunda via e suporte instantaneamente.",
           href: "/solucoes/receptivo",
+        },
+        {
+          // Sem página própria ainda: quando existir (ex. /solucoes/operacional), ganha href.
+          title: "Ligação Operacional",
+          text: "Da recuperação de inadimplentes e carrinhos abandonados ao onboarding e pesquisas de satisfação: se a sua estratégia exige ligar para milhares de clientes, nossa IA automatiza a jornada inteira com voz natural e sem esforço humano.",
         },
       ],
     },

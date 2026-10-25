@@ -97,7 +97,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 | `cta-band.html` | Faixa "Fale com nossa IA" antes do footer, **em todas as páginas**: textura verde em movimento + véu preto 32%, título branco, botão dourado | `layout/FinalCta.tsx` |
 | `page-headline.html` | Topo das páginas internas | `PageHeadline.tsx` |
 
-`navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Preços · Recursos ▾ · Blog; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
+`navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Planos · Integrações · Blog · Contato, sem submenu desde 25/10/2026; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
 
 **Painel (`/admin`):** as telas internas não têm `.html` de referência, mas só usam tokens daqui. O PageSpeed (`project/src/components/admin/pagespeed/`) mapeia as faixas do Google para os tokens de estado: 90–100 `--color-positive`, 50–89 `--color-warning`, 0–49 `--color-danger` (com os `-bg` de cada um).
 

@@ -2,7 +2,8 @@
 // (components/blocks/ContentPage.tsx), so copy stays reviewable in one place.
 // SEO rules for new pages: ../../SEO.md
 
-export type Block =
+/** `id` opcional vira âncora da seção (ex. botão "#clientes" no topo da página). */
+export type Block = (
   | { kind: "prose"; title?: string; eyebrow?: string; paragraphs: string[] }
   | {
       kind: "features";
@@ -64,7 +65,8 @@ export type Block =
     }
   | { kind: "faq"; title: string; items: { q: string; a: string }[] }
   | { kind: "image"; src: string; alt: string; caption?: string }
-  | { kind: "links"; title: string; lead?: string; items: { title: string; text: string; href: string }[] };
+  | { kind: "links"; title: string; lead?: string; items: { title: string; text: string; href: string }[] }
+) & { id?: string };
 
 export type PageContent = {
   /** <title> (without the “| PitchYes” suffix) — keep under ~60 characters. */

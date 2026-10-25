@@ -83,7 +83,7 @@ export const solucoesAtivo: PageContent = {
       title: "Continue por aqui.",
       items: [
         { title: "Atendimento receptivo", text: "O outro lado da operação: quem liga para você é atendido na hora.", href: "/solucoes/receptivo" },
-        { title: "Preços", text: "Tarifa por minuto e planos, sem cobrança por funcionalidade.", href: "/precos" },
+        { title: "Planos", text: "Tarifa por minuto e planos, sem cobrança por funcionalidade.", href: "/planos" },
       ],
     },
   ],

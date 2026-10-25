@@ -1,17 +1,21 @@
 // Dados institucionais da PitchYes — fonte única para o rodapé e o JSON-LD da Organization.
 // Copiados do site oficial (pitchyes.com.br, set/2026): rodapé, lista de redes do código dele
-// e o selo "RA Verificada". Mudou um dado? Mude aqui e confira /contato, /privacidade e
-// /llms.txt, que ainda escrevem o endereço e o telefone por extenso.
+// e o selo "RA Verificada". O endereço por extenso (`address.full`) é lido pelo rodapé,
+// /contato, /privacidade, /sobre e /llms.txt. O telefone ainda aparece por extenso em
+// /contato e /privacidade: mudou, confira lá também.
 
 export const company = {
   phone: { display: "+55 (11) 5196-9381", tel: "+551151969381" },
   email: "comercial@pitchyes.com.br",
   address: {
-    street: "Rua 11, 250, 13º andar",
-    district: "Setor Central",
+    /** Como aparece no site, no formato aprovado pela empresa (out/2026). */
+    full: "Av. T-7, 371 - 20º andar - St. Oeste, Goiânia - GO, 74140-110",
+    // Partes separadas para o JSON-LD da Organization (PostalAddress).
+    street: "Av. T-7, 371, 20º andar",
+    district: "Setor Oeste",
     city: "Goiânia",
     state: "GO",
-    postalCode: "74015-170",
+    postalCode: "74140-110",
     country: "BR",
   },
   reclameAqui: "https://www.reclameaqui.com.br/empresa/pitchyes-desenvolvimento/",

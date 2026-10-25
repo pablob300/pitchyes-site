@@ -8,11 +8,12 @@ export const clientes: PageContent = {
   seoDescription:
     "Empresas de energia, tecnologia, serviços e educação que automatizam ligações com a PitchYes — e o que mudou na operação de cada uma.",
   eyebrow: "Clientes",
-  h1: "Empresas que colocaram a IA no telefone.",
-  lead: "São operações de energia, tecnologia, serviços e educação que usam a PitchYes para atender, qualificar e acompanhar ligações todos os dias. Aqui estão elas e o tipo de conversa que a IA assumiu.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  h1: "Empresas que já colocaram a IA de voz da PitchYes para conversar.",
+  lead: "Empresas de energia, tecnologia, serviços, educação, varejo e outros setores já usam a IA de voz da PitchYes para atender, qualificar, acompanhar e transformar ligações em oportunidades.",
+  // Desce até a parede de logos, nesta mesma página.
+  cta: { label: "Conheça quem já usa a PitchYes", href: "#clientes" },
   blocks: [
-    { kind: "logos", title: "Empresas que confiam na PitchYes.", items: clients },
+    { kind: "logos", id: "clientes", title: "Empresas que confiam na PitchYes.", items: clients },
     {
       kind: "cases",
       title: "O que mudou na operação.",
@@ -36,9 +37,8 @@ export const clientes: PageContent = {
       kind: "prose",
       title: "O que essas operações têm em comum.",
       paragraphs: [
-        "Todas começaram pequeno: um tipo de ligação, um indicador, uma semana de piloto. Nenhuma trocou de CRM ou de telefonia para isso.",
-        "Depois do piloto, o caminho costuma ser o mesmo: ampliar o horário de cobertura, incluir um segundo tipo de chamada e conectar mais um sistema. O agente cresce junto com a operação, sem mudança de plataforma.",
-        "Se você quiser conversar com alguém que já passou por essa implantação, podemos apresentar um cliente do seu setor.",
+        "Todas começaram pequeno: uma ligação, um indicador e uma semana de piloto. Sem trocar CRM. Sem mudar a telefonia. Sem virar a operação de cabeça para baixo.",
+        "Quando o resultado aparece, a expansão acontece naturalmente: mais horários, novos tipos de conversa e mais integrações. O agente cresce junto com a operação, sem exigir uma nova plataforma. E se quiser ouvir quem já passou por isso, podemos conectar você a um cliente do seu setor.",
       ],
     },
     {

@@ -21,7 +21,7 @@ export function writableContentPaths(): string[] {
   return [...contentEditablePaths, SITE_CONTENT_PATH];
 }
 
-/** "/" → "/editor"; "/precos" → "/editor/precos". */
+/** "/" → "/editor"; "/planos" → "/editor/planos". */
 export function editorHref(path: string): string {
   return path === "/" ? "/editor" : `/editor${path}`;
 }

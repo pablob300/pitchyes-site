@@ -1,3 +1,4 @@
+import { company } from "@/lib/company";
 import type { PageContent } from "./types";
 
 // Posicionamento institucional: empresa de tecnologia de voz conversacional para contato,
@@ -128,7 +129,7 @@ export const sobre: PageContent = {
         },
         {
           q: "Onde fica a PitchYes?",
-          a: "A sede fica em Goiânia (GO), na Rua 11, 250, 13º andar, Setor Central, e o atendimento é feito para todo o Brasil.",
+          a: `A sede fica em Goiânia (GO), na ${company.address.full}, e o atendimento é feito para todo o Brasil.`,
         },
       ],
     },

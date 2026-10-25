@@ -20,9 +20,7 @@ export function SiteFooter() {
               <Logo height={32} />
             </Link>
             <address className={styles.contact}>
-              <span>
-                {address.street} — {address.district}, {address.city} ({address.state})
-              </span>
+              <span>{address.full}</span>
               <a href={`tel:${phone.tel}`}>{phone.display}</a>
               <a href={`mailto:${email}`}>{email}</a>
             </address>

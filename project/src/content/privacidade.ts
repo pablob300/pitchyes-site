@@ -1,3 +1,4 @@
+import { company } from "@/lib/company";
 import type { PageContent } from "./types";
 
 // Texto oficial, copiado da política publicada em https://www.pitchyes.com.br/privacidade
@@ -16,7 +17,7 @@ export const privacidade: PageContent = {
       kind: "prose",
       title: "1. Informações Gerais",
       paragraphs: [
-        "A PitchYes, pessoa jurídica de direito privado, com sede na Rua 11, 250, 13º andar - Setor Central, Goiânia (GO), Brasil - 74015-170, inscrita no CNPJ sob o nº 58.177.364/0001-21, leva a sua privacidade a sério e zela pela segurança e proteção de dados de todos os seus usuários.",
+        `A PitchYes, pessoa jurídica de direito privado, com sede na ${company.address.full}, inscrita no CNPJ sob o nº 58.177.364/0001-21, leva a sua privacidade a sério e zela pela segurança e proteção de dados de todos os seus usuários.`,
         "Esta Política de Privacidade destina-se a informá-lo sobre como coletamos, usamos, comunicamos, divulgamos e fazemos uso de informações pessoais.",
       ],
     },
@@ -103,7 +104,7 @@ export const privacidade: PageContent = {
         "Para exercer seus direitos ou esclarecer dúvidas sobre esta Política de Privacidade, entre em contato conosco:",
         "E-mail: privacidade@pitchyes.com.br",
         "Telefone: +55 (11) 5196-9381",
-        "Endereço: Rua 11, 250, 13º andar - Setor Central, Goiânia (GO), Brasil - 74015-170",
+        `Endereço: ${company.address.full}`,
       ],
     },
     {

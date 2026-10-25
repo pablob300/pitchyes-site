@@ -11,9 +11,10 @@
   margin-bottom: -0.14em;
 }
 
-/* Keep the line to ONE line: the title size while "serviços financeiros" (9.42em, the
-   longest default) fits in the h1, a little smaller on narrow phones. A longer word
-   typed in the editor still wraps, and the cell keeps the text below from jumping. */
+/* Keep the line to ONE line: the title size while a 9.4em word fits in the h1 (sized for
+   the old "serviços financeiros"; "Concessionárias" is shorter), a little smaller on narrow
+   phones. A longer word typed in the editor still wraps, and the cell keeps the text below
+   from jumping. */
 .rotator {
   font-size: min(1em, 100cqi / 9.6);
 }

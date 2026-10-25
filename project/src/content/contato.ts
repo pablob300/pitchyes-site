@@ -1,3 +1,4 @@
+import { company } from "@/lib/company";
 import type { PageContent } from "./types";
 
 // Canais oficiais e campos do formulário conforme a página de contato do pitchyes.com.br.
@@ -24,7 +25,7 @@ export const contato: PageContent = {
       channels: [
         { label: "Telefone", value: "+55 (11) 5196-9381", href: "tel:+551151969381", hint: "Seg-Sex das 8h às 20h" },
         { label: "Email", value: "comercial@pitchyes.com.br", href: "mailto:comercial@pitchyes.com.br", hint: "Resposta em até 2 horas" },
-        { label: "Endereço", value: "Rua 11, 250, 13º andar - Setor Central, Goiânia (GO), Brasil - 74015-170", hint: "Atendimento em todo Brasil" },
+        { label: "Endereço", value: company.address.full, hint: "Atendimento em todo Brasil" },
         { label: "Atendimento", value: "Atendimento via WhatsApp", hint: "Seg-Sex das 8h às 20h" },
       ],
       highlight: {
@@ -84,7 +85,7 @@ export const contato: PageContent = {
       kind: "links",
       title: "Continue por aqui.",
       items: [
-        { title: "Preços", text: "Planos e tarifa por minuto, para chegar com o orçamento pronto.", href: "/precos" },
+        { title: "Planos", text: "Planos e tarifa por minuto, para chegar com o orçamento pronto.", href: "/planos" },
         { title: "Soluções", text: "O que o agente resolve em ligações ativas e receptivas.", href: "/solucoes" },
       ],
     },

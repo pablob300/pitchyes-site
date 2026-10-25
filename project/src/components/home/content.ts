@@ -22,14 +22,18 @@ export const homeDefaults: HomeContent = {
   ],
 
   hero: {
-    title: "IA de voz para setores que exigem segurança e confiança:",
+    title: "IA de voz para:",
     titleWords: [
-      { text: "saúde" },
-      { text: "seguros" },
-      { text: "serviços financeiros" },
-      { text: "e muito mais" },
+      { text: "Clínicas" },
+      { text: "Imobiliárias" },
+      { text: "Concessionárias" },
+      { text: "Seguradoras" },
+      { text: "Faculdades" },
+      { text: "Corretoras" },
+      { text: "Franquias" },
+      { text: "Telecomunicação" },
     ],
-    lead: "Construída para ligações de alto risco, onde segurança e confiança realmente importam.",
+    lead: "Atende, qualifica, agenda, transfere e liga.",
     cta: "Fale com nossa IA",
     stat: { value: "20.000.000+", label: "ligações realizadas até hoje" },
     widget: {
@@ -55,8 +59,8 @@ export const homeDefaults: HomeContent = {
 
   platform: {
     eyebrow: "Plataforma",
-    title: "Uma plataforma. Toda ligação.",
-    lead: "A PitchYes automatiza as ligações que hoje exigem um humano, rodando com infraestrutura própria para máxima segurança.",
+    title: "Toda ligação importa.",
+    lead: "A PitchYes é a plataforma de IA de voz que transforma espera em conversa e rotina de ligação em resultado.",
     pillars: [
       { key: "infra", eyebrow: "Infraestrutura", title: "Confiabilidade em cada ligação.", text: "Modelo próprio para chamadas de voz. Seus dados nunca passam por terceiros." },
       { key: "build", eyebrow: "Construir", title: "Agentes prontos para produção, sem experiência.", text: "Descreva o que precisa. Nenhuma experiência em IA de voz é necessária." },
@@ -73,15 +77,15 @@ export const homeDefaults: HomeContent = {
     // Bars are proportional to the largest value; each bar and its number count up from
     // zero over `duration` seconds when the section scrolls into view.
     rows: [
-      { label: "PitchYes", value: 400, duration: 1, highlight: true },
-      { label: "Média do mercado", value: 1240, duration: 3, highlight: false },
+      { label: "PitchYes", value: 800, duration: 1, highlight: true },
+      { label: "Média do mercado", value: 1620, duration: 3, highlight: false },
     ],
   },
 
   testimonials: {
     eyebrow: "Clientes reais",
-    title: "Clientes reais. Resultado real.",
-    lead: "Empresas de pagamentos, saúde, educação e tecnologia contando, em vídeo, o que mudou depois de automatizar as ligações com a PitchYes.",
+    title: "Clientes reais. Resultados reais.",
+    lead: "Nenhuma prova é maior do que a palavra de quem já usa a IA de voz da PitchYes.",
     // Vídeos do canal da PitchYes no YouTube (Shorts). As capas em /images/depoimentos foram
     // extraídas do próprio vídeo, para a página não depender de um pedido ao YouTube.
     items: [
