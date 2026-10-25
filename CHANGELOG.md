@@ -8,6 +8,19 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-25: Nova meta description da home
+
+Commit `b6af186` · Cloudflare `ccd1e058`
+
+- Descrição da home (152 caracteres): "IA de voz que atende, qualifica, agenda, transfere e liga para
+  clínicas, imobiliárias, concessionárias, seguradoras, faculdades, corretoras e franquias."
+  Trocada no padrão do código (`SITE_DESCRIPTION`, que também abre o `/llms.txt` e o manifest)
+  e no `page_meta` do banco, que é o que o painel mostra e o site serve.
+
+Auditoria no ar: 16/16 páginas sem problemas.
+
+---
+
 ## 2026-10-25: Novos textos, menu com Planos e endereço novo
 
 Commit `e7e5498` · Cloudflare `43768a0a`
@@ -35,8 +48,7 @@ Commit `e7e5498` · Cloudflare `43768a0a`
 
 Auditoria no ar: 16/16 páginas sem problemas; `/` e `/planos` estáticas; zero `data-edit`.
 
-**Pendências:** TODO(comercial) a descrição da home no banco ainda fala em "saúde, seguros e
-serviços financeiros" (Editar Meta da home); TODO(produto) os cards do player seguem Saúde,
+**Pendências:** TODO(produto) os cards do player seguem Saúde,
 Seguros, Finanças, Imóveis e Atendimento; TODO(conteúdo) "resolução de 100% dos chamados na
 primeira tentativa" (Soluções) precisa de fonte antes do domínio definitivo (SEO.md §1.5).
 
