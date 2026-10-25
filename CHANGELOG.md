@@ -8,6 +8,40 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-25: Novos textos, menu com Planos e endereço novo
+
+Commit `e7e5498` · Cloudflare `43768a0a`
+
+- **Menu:** Soluções · Clientes · Planos · Integrações · Blog · Contato (sem o submenu Recursos;
+  Novidades segue no rodapé). **Preços virou Planos:** `/precos` → `/planos` com 301
+  (`next.config.ts`), título "Planos e preços"; a linha de `page_meta` do banco foi movida junto.
+- **Home:** título "IA de voz para:" com as palavras Clínicas, Imobiliárias, Concessionárias,
+  Seguradoras, Faculdades, Corretoras, Franquias e Telecomunicação; linha de apoio "Atende,
+  qualifica, agenda, transfere e liga."; "Toda ligação importa." com texto novo; latência
+  PitchYes 800 ms × mercado 1.620 ms; "Clientes reais. Resultados reais." com texto novo; faixa
+  final "Sua IA de voz sob medida para sua empresa." O banco só sobrescreve depoimentos e FAQ
+  da home, então tudo isso saiu do código; o editor mostra os novos textos como padrão.
+- **Soluções:** título e texto novos; "Três frentes, com agentes inteligentes." em 3 colunas
+  (Ligação Ativa, Receptiva e Operacional — esta ainda sem página própria).
+- **Clientes:** título e texto novos; botão "Conheça quem já usa a PitchYes" desce até a parede
+  de logos (`#clientes`; bloco de conteúdo agora aceita `id`); "O que essas operações têm em
+  comum." reescrito.
+- **Endereço:** Av. T-7, 371 - 20º andar - St. Oeste, Goiânia - GO, 74140-110, agora em
+  `company.address.full` e lido por rodapé, JSON-LD, /contato, /privacidade, /sobre e /llms.txt.
+- `/llms.txt` com os novos segmentos e ligações operacionais; datas de revisão das 7 páginas
+  em `routes.ts` e `page_meta`.
+- **Rotina nova no `CLAUDE.md`:** todo conteúdo criado, alterado ou apagado passa pela
+  checagem do Page Editor (sobreposição no D1, schema e `max` dos campos, `page_meta`, 301, datas).
+
+Auditoria no ar: 16/16 páginas sem problemas; `/` e `/planos` estáticas; zero `data-edit`.
+
+**Pendências:** TODO(comercial) a descrição da home no banco ainda fala em "saúde, seguros e
+serviços financeiros" (Editar Meta da home); TODO(produto) os cards do player seguem Saúde,
+Seguros, Finanças, Imóveis e Atendimento; TODO(conteúdo) "resolução de 100% dos chamados na
+primeira tentativa" (Soluções) precisa de fonte antes do domínio definitivo (SEO.md §1.5).
+
+---
+
 ## 2026-10-25: Plano de ação do PageSpeed aplicado na home
 
 Commit `4e2d52a` · Cloudflare `3b91fcad`
