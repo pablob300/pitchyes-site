@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ActionPlan } from "@/components/admin/pagespeed/ActionPlan";
 import { AnalyzeForm } from "@/components/admin/pagespeed/AnalyzeForm";
+import { CopyRaw } from "@/components/admin/pagespeed/CopyRaw";
 import { CopyReport } from "@/components/admin/pagespeed/CopyReport";
 import { ScoreRing } from "@/components/admin/pagespeed/ScoreRing";
 import styles from "@/components/admin/pagespeed/PageSpeed.module.css";
@@ -19,6 +20,7 @@ import {
   metricRating,
   STRATEGY_LABEL,
   toMarkdown,
+  toRawInstructions,
 } from "@/lib/admin/pagespeed/report";
 import { CATEGORIES, STRATEGIES, type Scores, type Strategy } from "@/lib/admin/pagespeed/types";
 import { pageMetadata } from "@/lib/seo";
@@ -199,7 +201,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       )}
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Plano de ação</h2>
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle}>Plano de ação</h2>
+          <CopyRaw text={toRawInstructions(report)} />
+        </div>
         <p className={styles.intro}>
           Ordenado pelo quanto cada correção deve subir a nota. &quot;pts&quot; é a estimativa de pontos devolvidos à
           categoria; nos itens de oportunidade, convertida da economia de tempo e de bytes. Depois de corrigir, publique e

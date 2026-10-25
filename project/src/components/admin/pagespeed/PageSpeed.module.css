@@ -3,6 +3,22 @@
 
 .section { margin-top: var(--space-7); }
 .sectionTitle { font-size: 18px; line-height: 1.3; margin-bottom: var(--space-4); }
+.sectionHead { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+
+/* "copy in raw": ação secundária, quase um link */
+.rawButton {
+  font: inherit;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
+}
+.rawButton:hover { color: var(--color-text); border-color: var(--color-border); }
+.rawButton:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 1px; }
 .muted { color: var(--color-text-muted); font-size: 13px; }
 .legend { color: var(--color-text-muted); font-size: 13px; margin-top: var(--space-3); }
 .intro { color: var(--color-text-muted); font-size: 13px; line-height: 1.6; margin-bottom: var(--space-4); max-width: 72ch; }

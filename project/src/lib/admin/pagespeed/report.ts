@@ -309,3 +309,65 @@ export function toMarkdown(report: Report): string {
 
   return lines.join("\n");
 }
+
+/** Tira a marcação Markdown: `código` vira código, [texto](url) vira "texto (url)". */
+function plain(text: string): string {
+  return text.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, "$1 ($2)").replace(/`([^`]+)`/g, "$1");
+}
+
+/**
+ * Só as melhorias, em texto corrido, escritas como instruções para quem (ou a IA que)
+ * vai mexer no código. Nada do que já passou, nada do que é esperado na homologação.
+ */
+export function toRawInstructions(report: Report): string {
+  const present = STRATEGIES.filter((strategy) => report.runs[strategy]);
+  const tasks = report.tasks.filter((task) => task.priority !== "esperado");
+  const lines: string[] = [];
+
+  const notas = present
+    .map((strategy) => {
+      const scores = report.runs[strategy]!.scores;
+      return `${STRATEGY_LABEL[strategy].toLowerCase()}: ${CATEGORIES.map((c) => `${CATEGORY_LABEL[c].toLowerCase()} ${scores[c] ?? "sem nota"}`).join(", ")}`;
+    })
+    .join("; ");
+
+  lines.push(
+    `Objetivo: levar a página ${report.url} o mais perto possível de 100 em todas as categorias do PageSpeed Insights. Notas atuais (${formatDate(report.createdAt)}) — ${notas}.`,
+    "",
+    "Projeto: site da PitchYes em Next.js 16 (pasta project/), servido pelo Cloudflare Workers via OpenNext. Antes de mexer, leia CLAUDE.md, SEO.md e System/README.md na raiz do repositório e siga as regras deles: todo texto continua no HTML do servidor, animação só com GSAP em transform/opacity, cores e espaçamentos só pelos tokens, e a home precisa continuar estática no next build.",
+    "",
+  );
+
+  if (!tasks.length) {
+    lines.push("Nenhuma correção pendente: todas as auditorias com nota já estão em 90 ou mais.");
+    return lines.join("\n");
+  }
+
+  lines.push(`Faça as ${tasks.length} correções abaixo, na ordem (da que mais sobe a nota para a que menos sobe):`, "");
+
+  tasks.forEach((task, index) => {
+    const where = present.filter((strategy) => task.where[strategy]);
+    const scope = where.length === STRATEGIES.length ? "mobile e desktop" : `só no ${STRATEGY_LABEL[where[0]].toLowerCase()}`;
+    const savings = where.map((strategy) => savingsText(task.where[strategy])).find(Boolean);
+
+    lines.push(
+      `${index + 1}. ${plain(task.title)} — prioridade ${PRIORITY_LABEL[task.priority].toLowerCase()}, ${CATEGORY_LABEL[task.category].toLowerCase()}, acontece ${scope}${savings ? `, ${savings}` : ""}. Auditoria do Lighthouse: ${task.id}.`,
+      `O que fazer: ${plain(task.action)}`,
+    );
+    if (task.items.length) {
+      lines.push(
+        task.itemCount > task.items.length
+          ? `Onde está o problema (${task.items.length} de ${task.itemCount} ocorrências; corrija o padrão em todas):`
+          : "Onde está o problema:",
+      );
+      for (const item of task.items) lines.push(`- ${item.label}${item.detail ? ` — ${item.detail}` : ""}`);
+    }
+    lines.push("");
+  });
+
+  lines.push(
+    "Ao terminar: rode cd project && npx tsc --noEmit && npm run lint, publique com npm run deploy, rode node scripts/seo-audit.mjs e analise a página de novo no painel (Análise › PageSpeed) para confirmar que as notas subiram. Registre a versão no CHANGELOG.md.",
+  );
+
+  return lines.join("\n");
+}
