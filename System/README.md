@@ -99,6 +99,8 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 
 `navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Preços · Recursos ▾ · Blog; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
 
+**Painel (`/admin`):** as telas internas não têm `.html` de referência, mas só usam tokens daqui. O PageSpeed (`project/src/components/admin/pagespeed/`) mapeia as faixas do Google para os tokens de estado: 90–100 `--color-positive`, 50–89 `--color-warning`, 0–49 `--color-danger` (com os `-bg` de cada um).
+
 **Tokens adicionados (PitchYes):** `--color-text-inverse-muted`, `--color-bg-inverse-elevated`, `--color-border-inverse`, `--color-border-inverse-strong`, `--shadow-sm`, `--shadow-lg`, `--color-badge`, `--color-badge-ink` (selos de certificação).
 
 **SEO:** mudanças de estrutura ou conteúdo seguem as regras de `../SEO.md` (conteúdo no HTML do servidor, hierarquia de títulos, animação por opacidade e nunca `visibility: hidden`).

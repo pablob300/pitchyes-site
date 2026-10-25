@@ -27,6 +27,8 @@ Leia antes de qualquer alteração no site:
 | Cabeçalho, rodapé, faixa de CTA | `project/src/components/layout/` |
 | Endereço, telefone, e-mail, redes sociais, selo Reclame Aqui | `project/src/lib/company.ts` (fonte única; alimenta o rodapé, o JSON-LD da Organization e o `/llms.txt`) |
 | Domínio e regra de indexação | `project/src/lib/site.ts` (`SITE_URL`, `SITE_ENV`) |
+| Menu do painel (seções e submenus) | `project/src/lib/admin/nav.ts` |
+| PageSpeed no painel (chamada ao Google, relatório, textos em português) | `project/src/lib/admin/pagespeed/` (`guide.ts` traduz cada auditoria) |
 | Resumo do site para IAs | `project/src/app/llms.txt/route.ts` |
 | Cores, tipografia, espaçamento, motion | `project/src/styles/tokens/` (espelham `System/tokens/`) |
 

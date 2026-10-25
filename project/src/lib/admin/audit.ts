@@ -25,7 +25,8 @@ export type AuditAction =
   | "conteudo.salvo"
   | "conteudo.publicado"
   | "conteudo.descartado"
-  | "conteudo.restaurado";
+  | "conteudo.restaurado"
+  | "pagespeed.analisada";
 
 export async function audit({
   action,

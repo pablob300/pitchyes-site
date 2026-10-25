@@ -40,3 +40,19 @@ Para trocar para o domínio definitivo (ex.: `pitchyes.com.br`):
    URLs canônicas das páginas estáticas são geradas no build).
 
 `keep_vars: true` no `wrangler.jsonc` garante que o deploy não apague variáveis definidas no painel.
+
+## Painel: Análise › PageSpeed
+
+`/admin/analise/pagespeed` roda o [PageSpeed Insights](https://developers.google.com/speed/docs/insights/v5/get-started)
+(mobile e desktop em paralelo) para qualquer página do próprio site, guarda o histórico no D1
+(`pagespeed_runs`, migração `0007`) e monta um plano de ação em português, com o que mexer
+neste projeto para cada auditoria. O relatório sai na tela e em Markdown ("Copiar relatório").
+
+- **Chave:** segredo do Worker, nunca no código: `npx wrangler secret put PAGESPEED_API_KEY`.
+  No Google Cloud, deixe a chave restrita à *PageSpeed Insights API*.
+- **Só páginas do site:** a rota `POST /api/admin/pagespeed` recusa URL de outro domínio.
+- **Textos:** o Google devolve o Lighthouse em inglês. Título e "o que fazer" de cada auditoria
+  ficam em `src/lib/admin/pagespeed/guide.ts`; auditoria nova que aparecer sem tradução ganha
+  uma entrada lá.
+- **Menu:** `src/lib/admin/nav.ts` aceita seções com submenu (`children`); Análise › SEO entra
+  como mais um filho de "Análise".

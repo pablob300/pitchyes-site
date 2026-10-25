@@ -114,8 +114,9 @@ Sai com código 1 se alguma página tiver problema. Em `*.workers.dev` o `noinde
 não conta como erro; no domínio definitivo, conta.
 
 **Rode antes e depois de qualquer mudança grande** e registre o resultado no `CHANGELOG.md`.
-Ela olha só o HTML do servidor — é exatamente o que o robô lê. Peso, LCP e CLS continuam
-sendo medidos à parte (DevTools/PageSpeed), contra o site publicado.
+Ela olha só o HTML do servidor — é exatamente o que o robô lê. Peso, LCP e CLS são medidos
+no painel, em **Análise › PageSpeed** (`/admin/analise/pagespeed`): notas mobile e desktop do
+Google, histórico por página e plano de ação do que corrigir.
 
 ## 9. Erros que já aconteceram neste site
 

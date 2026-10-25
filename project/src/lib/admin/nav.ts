@@ -17,8 +17,26 @@ export type AdminNavItem = {
   group?: "topo" | "base";
 };
 
-export const adminNav: AdminNavItem[] = [
+/** Seção com submenu: um rótulo que não é link e os itens dentro dele. */
+export type AdminNavGroup = {
+  label: string;
+  children: AdminNavItem[];
+  hidden?: boolean;
+  group?: "topo" | "base";
+};
+
+export type AdminNavEntry = AdminNavItem | AdminNavGroup;
+
+export const adminNav: AdminNavEntry[] = [
   { href: "/admin/paginas", label: "Page Editor", match: "prefix", group: "topo" },
+  {
+    label: "Análise",
+    group: "topo",
+    children: [
+      { href: "/admin/analise/pagespeed", label: "PageSpeed", match: "prefix" },
+      // { href: "/admin/analise/seo", label: "SEO", match: "prefix" },
+    ],
+  },
   // Próximas seções do CMS entram aqui, no grupo "topo":
   // { href: "/admin/midia", label: "Mídia", match: "prefix", group: "topo" },
 
@@ -27,10 +45,18 @@ export const adminNav: AdminNavItem[] = [
   { href: "/admin/usuarios", label: "Usuários", match: "prefix", group: "base" },
 ];
 
+export function isNavGroup(entry: AdminNavEntry): entry is AdminNavGroup {
+  return "children" in entry;
+}
+
 export function isActive(item: AdminNavItem, pathname: string): boolean {
   return item.match === "prefix" ? pathname.startsWith(item.href) : pathname === item.href;
 }
 
-export function navGroup(group: "topo" | "base"): AdminNavItem[] {
-  return adminNav.filter((item) => !item.hidden && (item.group ?? "topo") === group);
+/** Entradas visíveis de um grupo; seção com submenu sem filho visível some junto. */
+export function navGroup(group: "topo" | "base"): AdminNavEntry[] {
+  return adminNav
+    .filter((entry) => !entry.hidden && (entry.group ?? "topo") === group)
+    .map((entry) => (isNavGroup(entry) ? { ...entry, children: entry.children.filter((child) => !child.hidden) } : entry))
+    .filter((entry) => !isNavGroup(entry) || entry.children.length > 0);
 }
