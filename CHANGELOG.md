@@ -8,6 +8,37 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-25: Painel ganha Análise › PageSpeed
+
+Commit `9e56810` · Cloudflare `517aaf62`
+
+- **Menu do painel com submenu.** `lib/admin/nav.ts` aceita seções com `children`; "Análise"
+  abre com "PageSpeed", e "SEO" entra depois como mais um filho.
+- **PageSpeed Insights no painel** (`/admin/analise/pagespeed`): escolhe-se uma página do site e
+  o servidor roda mobile e desktop em paralelo (15–40 s). A chave fica no segredo do Worker
+  `PAGESPEED_API_KEY`, nunca no navegador nem no Git; a rota recusa URL de outro domínio e
+  limita 30 análises por hora por usuário. Cada análise fica registrada na auditoria do painel.
+- **Relatório:** 4 notas por estratégia com a variação desde a análise anterior, métricas de
+  laboratório contra as metas do Google, dados reais do CrUX quando houver e um **plano de ação
+  ordenado por impacto**: prioridade, pontos estimados, o que fazer neste projeto, por que
+  importa e os arquivos/elementos afetados. Sai também em Markdown ("Copiar relatório" / ".md").
+- **Português:** o Google ignora o idioma pedido e devolve o Lighthouse em inglês; títulos e
+  orientações de ~100 auditorias estão em `lib/admin/pagespeed/guide.ts`. Sem IA: nada é inventado.
+- **Banco:** tabela `pagespeed_runs` (migração `0007`). As migrações anteriores foram aplicadas
+  direto e o D1 não tem o histórico delas, então `wrangler d1 migrations apply` falha na 0003;
+  a 0007 foi aplicada com `wrangler d1 execute --file`.
+
+Primeira análise da home (homologação): mobile 96 · 97 · 100 · 69, desktop 97 · 97 · 100 · 69
+(desempenho, acessibilidade, boas práticas, SEO; o SEO perde pelo `noindex` proposital).
+Auditoria (`seo-audit.mjs`) no ar: 16/16 páginas sem problemas; `/` continua estática, zero
+`data-edit` no HTML público.
+
+**Pendências:** restringir a chave no Google Cloud à PageSpeed Insights API (ela foi colada no
+chat; se possível, gerar uma nova); itens do plano da home: CSS que bloqueia a renderização,
+JavaScript não usado e antigo, contraste do botão violeta (4,0:1) e dos textos cinza do rodapé.
+
+---
+
 ## 2026-09-29: Rastreamento bloqueado de novo no endereço de homologação
 
 Commit `7d8f865` · Cloudflare `b3e8f3b1`
