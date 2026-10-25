@@ -8,6 +8,48 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-25: Plano de ação do PageSpeed aplicado na home
+
+Commit `4e2d52a` · Cloudflare `3b91fcad`
+
+Medido pela API do PageSpeed (8 rodadas, 4 mobile e 4 desktop) contra a análise da manhã:
+
+| | Antes (mobile · desktop) | Depois (mobile · desktop) |
+|---|---|---|
+| Desempenho | 96 · 97 | 96–100 (típico 99) · 98–100 (típico 99) |
+| Acessibilidade | 97 · 97 | 100 · 100 (8 de 8 rodadas) |
+| Boas práticas | 100 · 100 | 100 · 100 |
+| SEO | 69 · 69 | 69 · 69 (`noindex` proposital da homologação) |
+| LCP | 2,5 s · 531 ms | 1,4–2,0 s · 350–500 ms |
+| Speed Index | 3,5 s · 1,7 s | 2,8–3,5 s · 0,9–1,5 s |
+
+- **Topo da home pintado de cara.** Título, texto e botão do hero saíram do `data-reveal`: o
+  `<h1>` é o LCP e esperava ~2 s o GSAP hidratar. O player ao lado e as seções abaixo
+  continuam com a revelação. Exceção registrada no `System/README.md` (Motion).
+- **Contraste.** `--color-text-muted` 50% → 62% e `--color-text-dim` 55% → 66% de opacidade
+  (5,1:1 no branco, 5,0:1 no creme). Botão sólido usa o novo `--color-accent-primary-strong`
+  (`#6961d1`, texto branco a 5,0:1, antes 4,0:1); o violeta da marca segue nos demais usos.
+  Tokens idênticos em `System/tokens` e `project/src/styles/tokens`; referências do System atualizadas.
+- **Palavras que rolam** ficam opacas enquanto deslizam (o recorte da linha as esconde): o
+  validador pegava a palavra no meio do fade e acusava contraste 1,06:1.
+- **Cache.** `/brand`, `/images`, `/logos` e `/audio` com 1 ano e `immutable`. Isso também
+  resolve `/_next/image`, que o OpenNext só entrega com cache quando a origem é `immutable`
+  (antes saía sem `Cache-Control`). **Regra nova:** arquivo alterado ganha nome novo.
+- **Nome acessível.** Cards do player sem `aria-label` (nome vem do texto visível + ação
+  oculta); selo do Reclame Aqui com "Verificada por" no rótulo.
+- **Imagens:** tamanho 320 em `images.imageSizes` (miniaturas dos depoimentos no desktop).
+  **JS:** `browserslist` moderno no `package.json`.
+- **Testado e descartado:** `experimental.inlineCss`. Repete o CSS dentro dos dados do React,
+  a home foi de 23 KB para 71 KB (gzip) e a nota caiu (98 contra 99). Anotado no `next.config.ts`.
+
+Auditoria no ar: 16/16 páginas sem problemas; `/` estática; zero `data-edit`.
+
+**Pendências:** ainda aparecem "JavaScript não usado" (é o React e o GSAP, carregados em toda
+página), "JavaScript antigo" (vem do próprio Next, o `browserslist` não removeu) e "CSS que
+bloqueia a renderização" (~19 KB); juntos valem ~1 ponto e exigem mudança maior.
+
+---
+
 ## 2026-10-25: "copy in raw" no plano de ação do PageSpeed
 
 Commit `7079f32` · Cloudflare `e229e6c8`
