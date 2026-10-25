@@ -2,6 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Sem experimental.inlineCss: testado em 25/10/2026, ele repete o CSS dentro dos dados do
+  // React e a home vai de 23 KB para 71 KB (gzip); o PageSpeed piorou (98 contra 99 no celular).
+  images: {
+    // 320 entre os tamanhos: a miniatura dos depoimentos ocupa ~280px no desktop e, sem
+    // ele, o Next pulava de 256 para 384 (PageSpeed "Improve image delivery").
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 320, 384],
+  },
 };
 
 export default nextConfig;

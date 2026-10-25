@@ -91,12 +91,12 @@ export const AUDIT_GUIDE: Record<string, AuditGuide> = {
   "render-blocking-insight": {
     title: "Requisições que bloqueiam a renderização",
     action:
-      "Os arquivos listados (normalmente os CSS de `/_next/static/chunks/`) seguram a primeira pintura. Reduza o CSS global (`app/globals.css` e tokens), mova estilos de seções abaixo da dobra para os módulos dos próprios componentes e evite importar CSS de componentes que a página não usa.",
+      "Os arquivos listados (normalmente os CSS de `/_next/static/chunks/`) seguram a primeira pintura. Reduza o CSS global (`app/globals.css` e tokens), mova estilos de seções abaixo da dobra para os módulos dos próprios componentes e evite importar CSS de componentes que a página não usa. Não ligue `experimental.inlineCss`: testado em 25/10/2026, ele repete o CSS no HTML e a nota caiu (ver `next.config.ts`).",
   },
   "cache-insight": {
     title: "Aumentar o tempo de cache dos arquivos estáticos",
     action:
-      "Ajuste `project/public/_headers`. Arquivos com hash já são `immutable`; para `/brand/*`, `/images/*` e `/logos/*` (hoje 7 dias) dá para subir para 1 ano se o nome do arquivo mudar a cada nova versão (ex. `logo-v2.svg`).",
+      "`/brand/*`, `/images/*`, `/logos/*` e `/audio/*` já saem com 1 ano e `immutable` (`project/public/_headers`), o que também dá cache longo às versões de `/_next/image`. Se aparecer arquivo aqui, ele está fora dessas pastas: mova-o para uma delas ou acrescente a regra no `_headers`. Arquivo alterado ganha nome novo (ex. `logo-v2.svg`).",
   },
   "cls-culprits-insight": {
     title: "Elementos que causam deslocamento de layout",

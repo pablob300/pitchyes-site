@@ -323,11 +323,6 @@ export function AgentWidget({
               data-playing={(isFront && playing) || undefined}
               tabIndex={isFront ? 0 : -1}
               aria-roledescription="slide"
-              aria-label={
-                isFront
-                  ? `${playing ? "Pausar" : "Ouvir"} o agente de ${item.name} (${i + 1} de ${n})`
-                  : `Mostrar o agente de ${item.name} (${i + 1} de ${n})`
-              }
               onClick={() => onCardClick(i)}
             >
               <span className={styles.orb} aria-hidden="true">
@@ -347,6 +342,12 @@ export function AgentWidget({
                 {eyebrow}
               </span>
               <span className={styles.name}>{item.name}</span>
+              {/* Sem aria-label: o nome acessível sai do texto visível ("Ouça nosso agente de
+                  Saúde") mais a ação, só para leitor de tela — quem navega por comando de voz
+                  fala o que vê (WCAG 2.5.3, PageSpeed "label-content-name-mismatch"). */}
+              <span className="visually-hidden">
+                {`, ${isFront ? (playing ? "pausar" : "tocar") : "mostrar"} (${i + 1} de ${n})`}
+              </span>
               <span className={styles.progress} aria-hidden="true">
                 <span style={{ transform: `scaleX(${isFront ? progress : 0})` }} />
               </span>

@@ -12,13 +12,14 @@
   /* Text */
   --color-text: #151515;
   --color-text-secondary: #15151599; /* ~60% alpha */
-  --color-text-muted: #15151580;     /* ~50% alpha */
-  --color-text-dim: #1515158c;       /* ~55% alpha */
+  --color-text-muted: #1515159e;     /* ~62% alpha: 5,1:1 no branco, 5,0:1 no creme (mínimo 4,5:1) */
+  --color-text-dim: #151515a8;       /* ~66% alpha: 5,8:1 no branco */
   --color-text-inverse: #ffffff;
   --color-text-inverse-muted: rgba(255, 255, 255, 0.6);
 
   /* Accents — PitchYes brand (replaced bland.ai's gold #f9a900 / burnt #d8441f, 2026-09-29) */
   --color-accent-primary: #776eed;          /* violeta: CTA principal, foco, marcadores */
+  --color-accent-primary-strong: #6961d1;   /* violeta escurecido, fundo do botão sólido: texto branco a 5,0:1 (o #776eed dá 4,0:1) */
   --color-accent-primary-contrast: #ffffff; /* texto e borda de 1px dos botões violeta (a borda os destaca em fundo escuro) */
   --color-accent-secondary: #54cfa8;        /* menta: preenchimentos — barras, pontos, contornos */
   --color-accent-secondary-ink: #178060;    /* menta escura para TEXTO: #54cfa8 no branco dá 1.9:1 */

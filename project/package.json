@@ -2,6 +2,10 @@
   "name": "pitchyes-site",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "not dead"
+  ],
   "scripts": {
     "build": "next build",
     "dev": "next dev",

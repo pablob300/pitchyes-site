@@ -20,7 +20,7 @@
 
 .solid {
   color: var(--color-accent-primary-contrast);
-  background: var(--color-accent-primary);
+  background: var(--color-accent-primary-strong);
   border-color: var(--color-accent-primary-contrast);
 }
 .solid:hover { opacity: 0.85; }

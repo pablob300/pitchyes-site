@@ -70,7 +70,7 @@ export function SiteFooter() {
             href={company.reclameAqui}
             {...external}
             className={styles.reclameAqui}
-            aria-label="PitchYes verificada pelo Reclame Aqui — ver a página da empresa"
+            aria-label="PitchYes: Verificada por Reclame Aqui — ver a página da empresa"
           >
             {/* Official seal art from Reclame Aqui, self-hosted (no third-party script) */}
             {/* eslint-disable-next-line @next/next/no-img-element */}

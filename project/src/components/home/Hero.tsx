@@ -15,14 +15,18 @@ export function Hero({ content, editable }: { content: HeroContent; editable?: b
     <section className={styles.hero}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.copy}>
-          <h1 data-reveal {...edit("hero.title")}>
+          {/* Título, texto e botão do topo aparecem já pintados, sem `data-reveal`: o h1 é o
+              maior elemento da primeira tela (LCP) e, escondido até o GSAP hidratar, atrasava
+              o LCP e o Speed Index em ~2 s no celular (PageSpeed, 25/10/2026). A revelação
+              continua no player ao lado e em todas as seções abaixo. */}
+          <h1 {...edit("hero.title")}>
             {content.title}{" "}
             <RotatingWords words={content.titleWords.map((w) => w.text)} editable={editable} />
           </h1>
-          <p className="lead" data-reveal {...edit("hero.lead")}>
+          <p className="lead" {...edit("hero.lead")}>
             {rich(content.lead)}
           </p>
-          <div className={styles.actions} data-reveal>
+          <div className={styles.actions}>
             <ButtonLink href={TALK_TO_AI_HREF} size="lg" {...edit("hero.cta")}>
               {content.cta}
             </ButtonLink>

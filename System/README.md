@@ -58,7 +58,7 @@ Toda animação do site usa **GSAP** (`gsap` + `@gsap/react`, instalação confo
 | **Metal líquido** (orb) | Camadas de gradiente giram e ondulam em loop lento; pausa fora da tela | 14–18s por volta; tocando, `timeScale` 3 |
 | **Contador + barra** (ex.: Latência) | `useGSAP` + timeline com ScrollTrigger; número e largura saem de 0 juntos | `power2.out`, dispara em `top 75%`, duração por item (PitchYes 1s, mercado 3s) |
 
-Regras: animar só `transform`/`opacity` (e `width` em barras); nada de animação em loop chamativa; respeitar `prefers-reduced-motion` (conteúdo aparece direto, sem movimento); o HTML do servidor sempre traz o estado final (sem JS o conteúdo aparece normalmente — fallback de 3s).
+Regras: animar só `transform`/`opacity` (e `width` em barras); nada de animação em loop chamativa; respeitar `prefers-reduced-motion` (conteúdo aparece direto, sem movimento); o HTML do servidor sempre traz o estado final (sem JS o conteúdo aparece normalmente — fallback de 3s). **Exceção: o topo da primeira tela não usa `data-reveal`** — título, texto e botão do hero aparecem já pintados, porque o `<h1>` é o LCP e esperar o GSAP hidratar custava ~2 s de LCP e Speed Index no celular. O resto (inclusive o player ao lado) continua com a revelação.
 
 ## Tokens principais
 
@@ -100,6 +100,8 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 `navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Preços · Recursos ▾ · Blog; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
 
 **Painel (`/admin`):** as telas internas não têm `.html` de referência, mas só usam tokens daqui. O PageSpeed (`project/src/components/admin/pagespeed/`) mapeia as faixas do Google para os tokens de estado: 90–100 `--color-positive`, 50–89 `--color-warning`, 0–49 `--color-danger` (com os `-bg` de cada um).
+
+**Contraste (PageSpeed, 25/10/2026):** `--color-text-muted` foi de 50% para 62% de opacidade e `--color-text-dim` de 55% para 66% (mínimo de 4,5:1 sobre branco e creme). Botão sólido violeta usa `--color-accent-primary-strong` (`#6961d1`, texto branco a 5,0:1); o `--color-accent-primary` (`#776eed`) continua nos marcadores, barras e foco.
 
 **Tokens adicionados (PitchYes):** `--color-text-inverse-muted`, `--color-bg-inverse-elevated`, `--color-border-inverse`, `--color-border-inverse-strong`, `--shadow-sm`, `--shadow-lg`, `--color-badge`, `--color-badge-ink` (selos de certificação).
 

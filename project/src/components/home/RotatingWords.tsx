@@ -45,12 +45,26 @@ export function RotatingWords({ words, editable }: { words: string[]; editable?:
           const out = items[current];
           current = (current + 1) % n;
           const into = items[current];
-          gsap.to(out, { yPercent: -travel, opacity: 0, duration: ROLL, ease: "power2.inOut", overwrite: true });
-          gsap.fromTo(
-            into,
-            { yPercent: travel, opacity: 0 },
-            { yPercent: 0, opacity: 1, duration: ROLL, ease: "power2.inOut", overwrite: true },
-          );
+          if (travel) {
+            // The line's overflow clip hides the words while they travel, so they stay fully
+            // opaque: a half-faded word read mid-roll counts as low-contrast text
+            // (PageSpeed color-contrast, 25/10/2026). Opacity only switches at the ends.
+            gsap.to(out, {
+              yPercent: -travel,
+              duration: ROLL,
+              ease: "power2.inOut",
+              overwrite: true,
+              onComplete: () => gsap.set(out, { opacity: 0 }),
+            });
+            gsap.fromTo(
+              into,
+              { yPercent: travel, opacity: 1 },
+              { yPercent: 0, duration: ROLL, ease: "power2.inOut", overwrite: true },
+            );
+          } else {
+            gsap.to(out, { opacity: 0, duration: ROLL, ease: "power2.inOut", overwrite: true });
+            gsap.fromTo(into, { opacity: 0 }, { opacity: 1, duration: ROLL, ease: "power2.inOut", overwrite: true });
+          }
           call = gsap.delayedCall(ROLL + hold(current), roll);
         };
 
