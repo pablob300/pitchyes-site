@@ -8,6 +8,33 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-26: Revalidação do ISR consertada e faixa final com o fundo da marca
+
+Commits `e2e075d`, `7c154fb` · Cloudflare `5e613309`
+
+- **Causa real das páginas vazias e dos 503**: o OpenNext estava sem fila de revalidação (padrão
+  "dummy", que lança erro). Toda página que passava do `revalidate` de 60 s respondia vazia, com
+  503 ou pendurada — com ~150 páginas do blog virou rotina. Também significava que a revalidação
+  por tempo nunca funcionou. `open-next.config.ts` agora tem `memoryQueue` (regenera via
+  `WORKER_SELF_REFERENCE`, com deduplicação), `d1NextTagCache` (binding `NEXT_TAG_CACHE_D1`, tabela
+  `revalidations` no mesmo D1, criada pelo deploy — é o que faz o `revalidatePath` do painel valer) e
+  `enableCacheInterception` (página em cache sai sem subir o Next).
+- **Correção de registro**: a entrada "Planos… e estabilidade do Worker" atribuiu a melhora ao
+  `cacheMaxMemorySize: 0`; o OpenNext já força esse valor, então a mudança foi removida. O editor
+  do blog continua só no navegador (pacote menor).
+- Teste: varredura com as páginas frescas, espera de 75 s (todas vencidas) e mais duas varreduras:
+  nenhuma resposta vazia (antes, dezenas). Sobra ~1 resposta 503 "Worker exceeded resource limits"
+  a cada ~180 pedidos seguidos, durante regeneração — a acompanhar.
+- **Faixa "Sua IA de voz sob medida…"** (todas as páginas): sai a textura verde e o véu preto, entra
+  o fundo da marca (`docs/FUNDO 3.svg`, azul-marinho `#001239`→`#0C2764` com os pontos violeta
+  `#7F53FF` do logotipo), em WebP de 1920px (12 KB) e 960px no celular (4 KB), ancorado à direita.
+  Título branco a ~16:1; botão violeta com borda branca mantido. Referência no System atualizada
+  (`textures/cta-fundo-pitchyes.svg`); `public/images/cta-texture.webp` removido.
+
+Auditoria no ar: 92/92.
+
+---
+
 ## 2026-10-26: "Fale com nossa IA" do blog leva ao contato
 
 Commit `8a4f389` · Cloudflare `7684cf74`
@@ -16,7 +43,7 @@ Commit `8a4f389` · Cloudflare `7684cf74`
   apontam para `/contato`; no resto do site continuam no player da home. Regra única em
   `talkToAiHref()` (`lib/routes.ts`), usada pelo cabeçalho e pelo novo `TalkToAiButton` da faixa.
 
-Auditoria no ar: 92/92; home estática, zero `data-edit`.
+Auditoria logo depois do deploy: 61/92 — páginas vencidas voltavam vazias ou com 503 (causa e correção na entrada acima). Home estática, zero `data-edit`.
 
 ---
 
