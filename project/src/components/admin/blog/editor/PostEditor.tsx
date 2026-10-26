@@ -1,6 +1,7 @@
 "use client";
 
 import type { Editor } from "@tiptap/react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -11,8 +12,14 @@ import { DESCRIPTION_MAX, DESCRIPTION_MIN, runChecks, SEO_TITLE_MAX } from "@/li
 import { toPostInput } from "@/lib/blog/post-input";
 import { isValidSlug, slugify } from "@/lib/blog/slug";
 import { MediaDialog } from "./MediaDialog";
-import { RichEditor } from "./RichEditor";
 import styles from "./Editor.module.css";
+
+// O editor (TipTap/ProseMirror) só existe no navegador: fora do pacote do Worker, que
+// precisa caber na memória do isolate.
+const RichEditor = dynamic(() => import("./RichEditor").then((m) => m.RichEditor), {
+  ssr: false,
+  loading: () => <div className={styles.editorShell}>Carregando editor…</div>,
+});
 
 // Tela de edição de artigo, no espírito do WordPress: texto à esquerda, caixas de
 // publicação, organização e SEO à direita. Toda regra é conferida de novo no servidor.
