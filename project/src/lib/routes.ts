@@ -24,7 +24,7 @@ export const pages = [
   { path: "/clientes/cases", title: "Cases", description: "Resultados reais de clientes que usam a IA de voz da PitchYes.", placeholder: false, updated: "2026-09-19" },
 
   // Era /precos até 25/10/2026; o endereço antigo redireciona com 301 (next.config.ts).
-  { path: "/planos", title: "Planos", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: false, updated: "2026-10-25" },
+  { path: "/planos", title: "Planos", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: false, updated: "2026-10-26" },
 
   { path: "/recursos/integracoes", title: "Integrações", description: "A PitchYes conecta com sua telefonia, CRM e agenda atuais.", placeholder: false, updated: "2026-09-19" },
   { path: "/recursos/novidades", title: "Novidades", description: "Lançamentos e atualizações da plataforma PitchYes.", placeholder: false, updated: "2026-09-19" },

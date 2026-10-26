@@ -95,12 +95,12 @@ ${rolloutFact(home.rollout.steps)}
 - Comercial: comercial@pitchyes.com.br e +55 (11) 5196-9381, de segunda a sexta, das 8h às 20h (horário de Brasília).
 - Privacidade e LGPD: privacidade@pitchyes.com.br.
 
-## Planos (valores de referência, em reais)
+## Planos (em reais)
 
-- Start (desenvolvedores): R$ 0,79/min, sem mensalidade de plataforma, 10 ligações simultâneas, 100 ligações/dia.
-- Build (times): R$ 0,69/min + R$ 1.590/mês, 50 ligações simultâneas, 2.000 ligações/dia, WhatsApp/SMS/chat.
-- Enterprise (organizações): sob consulta, contratado por volume, com implantação dedicada, SSO, residência de dados e SLA.
-- Transferência para humano é cobrada à parte, por minuto transferido.
+- Blitz (pré-pago, pequenas empresas): R$ 250 por 100 minutos (R$ 2,50/min), sem contrato (termo de aceite), 1 ligação simultânea, 1 assistente, material de apoio.
+- Starter (pequenas e médias empresas): R$ 1.249; minutos avulsos a R$ 2,00 (mínimo de 100); 3 ligações simultâneas; integração por API aberta ou avulsa (R$ 250/h); número dedicado opcional (R$ 99/mês).
+- Pro (médias empresas): R$ 2.449; 700 minutos a R$ 1,80; 10 ligações simultâneas; assistentes, cadências e reuniões com CS ilimitados; número dedicado com nome e logo.
+- Enterprise (grandes empresas): R$ 3.997; 1.000 minutos a R$ 1,40; 30 ligações simultâneas; integração inclusa; assistentes, cadências e reuniões com CS ilimitados.
 
 ## Páginas principais
 

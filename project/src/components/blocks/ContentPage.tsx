@@ -169,7 +169,7 @@ function Blocks({ block }: { block: Block }) {
               <h2>{block.title}</h2>
               {block.lead && <p className="lead">{block.lead}</p>}
             </div>
-            <ul className={styles.plans}>
+            <ul className={styles.plans} data-count={block.plans.length}>
               {block.plans.map((plan) => (
                 <li key={plan.name} className={styles.plan} data-highlight={plan.highlight} data-reveal>
                   <p className="eyebrow">{plan.audience}</p>
