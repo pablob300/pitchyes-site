@@ -9,10 +9,6 @@ const nextConfig: NextConfig = {
     // ele, o Next pulava de 256 para 384 (PageSpeed "Improve image delivery").
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 320, 384],
   },
-  // Sem cache de páginas em memória: o cache real é o R2 do OpenNext. Com o blog (~150
-  // páginas pré-geradas), o LRU padrão de 50 MB enchia o isolate do Worker (128 MB) e a
-  // Cloudflare respondia 503 "Worker exceeded resource limits" no meio de uma varredura.
-  cacheMaxMemorySize: 0,
   // O Next trata o postcss (dependência do sanitize-html, que limpa o HTML do blog) como
   // pacote externo do servidor; no Windows o OpenNext não consegue criar o link simbólico
   // dele (EPERM). Empacotado junto, o problema some e nada muda em produção.
