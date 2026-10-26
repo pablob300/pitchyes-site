@@ -8,6 +8,51 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-26: Blog próprio, editor no painel e os 49 artigos importados
+
+Commit `e0f47cd` · Cloudflare `54a2651e`
+
+O blog saiu do plano do WordPress e passou a morar no próprio site (D1 + R2), editado no painel.
+
+- **Site público** (`/blog`): listagem com destaque e paginação, artigos, `/blog/categorias`,
+  categorias, tags e autores (todos paginados), RSS em `/feed.xml` (dentro de `/blog` o OpenNext
+  o confundia com um artigo). Artigo com trilha, autor, datas, capa responsiva (`/midia?w=`, AVIF/WebP
+  com cache na borda), sumário, tags, faixa final ligada à página comercial da categoria, caixa do
+  autor, anterior/próximo e "Leia também".
+- **SEO**: `BlogPosting` + `Person` + `BreadcrumbList` nos artigos, `CollectionPage` + `ItemList` nas
+  listagens, `ProfilePage` no autor, `FAQPage` com o bloco de perguntas; `og:type=article` com datas e
+  seção; sitemap do blog com `<image:image>`; tag com menos de 5 artigos e páginas 2+ de tag/autor em
+  `noindex, follow` e fora do sitemap; título sem " | PitchYes" quando passaria de 60 caracteres;
+  `/llms.txt` lista os artigos. Slug, categoria e tag renomeados ou fundidos geram 301 sozinhos.
+- **Painel › Blog** (Novo Artigo, Artigos, Categorias, Tags): editor TipTap **Visual | HTML** com
+  H2–H4, listas, citação, código, tabela, link interno com busca, imagem com alt obrigatório e
+  legenda (biblioteca de mídia), vídeo do YouTube/Vimeo, blocos de CTA e FAQ; barra lateral com
+  publicar/agendar/data, categoria, tags, imagem destacada, autor (com bio e perfis), destaque,
+  SEO (palavra-chave, título, descrição, prévia do Google, noindex), checklist de SEO ao vivo (o
+  mesmo que bloqueia a publicação na API), sugestões de links internos, versões, prévia,
+  salvamento automático de rascunho e aviso de edição simultânea.
+- **Importação** (`scripts/blog-import.mjs` + `scripts/blog-import/mapa.json`): 48 artigos com as
+  datas originais de publicação e edição; o duplicado "O Vendedor do Futuro" (16/12/2025) virou 301
+  para o original de 21/09/2025. Taxonomia nova (5 categorias, 22 tags com descrição própria), slugs
+  de SEO com 301 dos 49 endereços antigos e das categorias antigas, título e meta description por
+  artigo, alt descritivo de cada capa (as 48 viraram WebP no R2), `#` do corpo virou H2, hashtags
+  viraram tags, autores unificados. Links internos: 145 inseridos — todo artigo recebe e aponta pelo
+  menos um link, nenhum recebe mais de 5, 11 via "Leia também:" (relatório em `links.json`).
+- **Build**: D1 com `"remote": true` — o build pré-gera artigos e listagens com os dados reais (antes
+  saíam vazios até a primeira revalidação, e a primeira visita a frio levava até 10 s e às vezes 503).
+  Atenção: `next dev` local agora lê e grava no banco de produção. `postcss` passou a ser empacotado
+  (`transpilePackages`): no Windows o OpenNext não conseguia criar o link simbólico (EPERM).
+- Auditoria (`seo-audit.mjs`) agora lê também o sitemap do blog e confere `BlogPosting` e link
+  interno no texto: **92/92 páginas sem problemas**. Referências `blog.html` e `blog-article.html`
+  no System.
+
+**Pendências:** TODO(conteúdo) revisão humana dos 48 textos (muitos têm 300–450 palavras; o
+checklist do editor aponta o que falta, inclusive a palavra-chave no texto); TODO(empresa) bio e
+perfis públicos de Eduardo Henrique e confirmar se os artigos da "Equipe PitchYes" são do Pedro
+Henrique (as capas mostram a foto dele); capas antigas têm menos de 1200px de largura.
+
+---
+
 ## 2026-10-25: Nova meta description da home
 
 Commit `b6af186` · Cloudflare `ccd1e058`
