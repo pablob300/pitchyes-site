@@ -23,7 +23,7 @@ Leia antes de qualquer alteração no site:
 | Como esse texto vira layout | `project/src/components/blocks/ContentPage.tsx` (`content/types.ts` lista os blocos) |
 | Home | `project/src/components/home/` (textos em `home/content.ts`) |
 | Campos que o editor visual mostra | `project/src/lib/content/schema/` |
-| Quais páginas já têm editor de conteúdo | `project/src/lib/content/pages.ts` |
+| Quais páginas já têm editor de conteúdo | `project/src/lib/content/pages.ts` (internas: `src/content/registry.ts`) |
 | Cabeçalho, rodapé, faixa de CTA | `project/src/components/layout/` |
 | Endereço, telefone, e-mail, redes sociais, selo Reclame Aqui | `project/src/lib/company.ts` (fonte única; alimenta o rodapé, o JSON-LD da Organization e o `/llms.txt`) |
 | Domínio e regra de indexação | `project/src/lib/site.ts` (`SITE_URL`, `SITE_ENV`) |
@@ -39,10 +39,11 @@ em `routes.ts` — só assim ela entra no sitemap e na indexação.
 
 ## Editor visual de conteúdo
 
-A home já é editável no painel (`/admin/paginas` → "Editar Conteúdo"). Três regras que
-economizam depuração:
+A home e as 15 páginas internas são editáveis no painel (`/admin/paginas` → "Editar Conteúdo").
+Três regras que economizam depuração:
 
-- **`content.ts` deixa de mandar sozinho na home depois da primeira publicação.** O que o
+- **O arquivo de conteúdo (`content.ts` da home, `src/content/<pagina>.ts`) deixa de mandar
+  sozinho depois da primeira publicação daquela página.** O que o
   site mostra é o padrão do código fundido com a sobreposição do D1: objeto mescla por
   chave, **lista substitui inteira**. Ou seja, uma FAQ nova acrescentada no código **não
   aparece** se alguém já editou a lista pelo painel — use o "voltar ao padrão" da gaveta.
@@ -54,8 +55,14 @@ economizam depuração:
   dentro de um componente de seção — os contornos e as alças moram no painel, por cima do
   iframe. Confira com `curl -s <home> | grep -c data-edit`: tem que dar zero.
 
-Página nova no editor: escreva o schema dela em `lib/content/schema/`, espalhe os
-`edit()` nos componentes e acrescente o caminho em `lib/content/pages.ts`.
+Páginas internas (feitas com `ContentPage`): o editor sai sozinho dos blocos. Página interna nova
+entra no editor com uma linha em `src/content/registry.ts` e a rota lendo
+`getInnerPageContent(path)` (`lib/content/inner.ts`); a gaveta é gerada por `schema/inner.ts`.
+A edição é bloco a bloco (`blocos.b<n>`, pela posição no arquivo): **mudar a ordem ou apagar um
+bloco no código desalinha as edições já publicadas daquela página** — confira a página no painel
+depois. A estrutura (quais blocos, a ordem, o tipo) continua no código; o painel edita texto,
+listas, planos, tabela e imagens. Página com layout próprio: schema em `lib/content/schema/`,
+`edit()` nos componentes e o caminho em `lib/content/pages.ts`.
 
 ### Rotina: todo conteúdo criado, alterado ou apagado passa pelo Page Editor
 

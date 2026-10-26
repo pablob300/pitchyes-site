@@ -14,7 +14,13 @@ export type FieldType =
   | "imagem"
   /** AAAA-MM-DD. */
   | "data"
-  | "booleano";
+  | "booleano"
+  /** Várias linhas, texto puro (sem marcação) — páginas internas. */
+  | "multilinha"
+  /** Lista de textos, um por linha (parágrafos, itens de checklist, recursos de um plano). */
+  | "linhas"
+  /** Linhas de tabela: "Rótulo | valor 1 | valor 2". */
+  | "tabela";
 
 export type Field = {
   /** Ponteiro relativo à seção ("lead") ou ao item da lista ("controlTitle"). */

@@ -3,19 +3,22 @@ import Link from "next/link";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { ButtonLink } from "@/components/ui/Button";
 import type { Block, PageContent } from "@/content/types";
+import { editFn, scoped, type EditFn } from "@/lib/content/edit";
 import { getLeadForm } from "@/lib/leads";
 import styles from "./blocks.module.css";
 
-function Blocks({ block }: { block: Block }) {
+// No editor visual, cada bloco recebe `e` com o prefixo "blocos.b<n>" (lib/content/inner.ts):
+// só atributos data-edit, nunca elemento novo. No site público, `e` devolve {}.
+function Blocks({ block, e }: { block: Block; e: EditFn }) {
   switch (block.kind) {
     case "prose":
       return (
         <section className="section" id={block.id}>
           <div className={`container ${styles.prose}`}>
-            {block.eyebrow && <p className="eyebrow" data-reveal>{block.eyebrow}</p>}
-            {block.title && <h2 data-reveal>{block.title}</h2>}
+            {block.eyebrow && <p className="eyebrow" data-reveal {...e("eyebrow")}>{block.eyebrow}</p>}
+            {block.title && <h2 data-reveal {...e("title")}>{block.title}</h2>}
             {block.paragraphs.map((p) => (
-              <p key={p} data-reveal>
+              <p key={p} data-reveal {...e("paragraphs")}>
                 {p}
               </p>
             ))}
@@ -28,13 +31,13 @@ function Blocks({ block }: { block: Block }) {
         <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
-              {block.eyebrow && <p className="eyebrow">{block.eyebrow}</p>}
-              <h2>{block.title}</h2>
-              {block.lead && <p className="lead">{block.lead}</p>}
+              {block.eyebrow && <p className="eyebrow" {...e("eyebrow")}>{block.eyebrow}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
             <ul className={styles.grid} data-columns={block.columns ?? 3}>
-              {block.items.map((item) => (
-                <li key={item.title} className={styles.card} data-reveal>
+              {block.items.map((item, j) => (
+                <li key={item.title} className={styles.card} data-reveal {...e(`items.${j}`)}>
                   <h3>{item.href ? <Link href={item.href}>{item.title}</Link> : item.title}</h3>
                   <p>{item.text}</p>
                 </li>
@@ -49,12 +52,12 @@ function Blocks({ block }: { block: Block }) {
         <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
-              <h2>{block.title}</h2>
-              {block.lead && <p className="lead">{block.lead}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
             <ol className={styles.steps}>
-              {block.steps.map((step) => (
-                <li key={step.title} data-reveal>
+              {block.steps.map((step, j) => (
+                <li key={step.title} data-reveal {...e(`steps.${j}`)}>
                   <p className={styles.stepLabel}>{step.label}</p>
                   <h3>{step.title}</h3>
                   <p className={styles.stepText}>{step.text}</p>
@@ -71,13 +74,13 @@ function Blocks({ block }: { block: Block }) {
           <div className="container">
             {block.title && (
               <div className="section-head" data-reveal>
-                <h2>{block.title}</h2>
-                {block.lead && <p className="lead">{block.lead}</p>}
+                <h2 {...e("title")}>{block.title}</h2>
+                {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
               </div>
             )}
             <dl className={styles.stats}>
-              {block.items.map((item) => (
-                <div key={item.label} data-reveal>
+              {block.items.map((item, j) => (
+                <div key={item.label} data-reveal {...e(`items.${j}`)}>
                   <dt>{item.value}</dt>
                   <dd>{item.label}</dd>
                 </div>
@@ -92,12 +95,12 @@ function Blocks({ block }: { block: Block }) {
         <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
-              <h2>{block.title}</h2>
-              {block.lead && <p className="lead">{block.lead}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
             <ul className={styles.checklist}>
               {block.items.map((item) => (
-                <li key={item} data-reveal>
+                <li key={item} data-reveal {...e("items")}>
                   {item}
                 </li>
               ))}
@@ -111,12 +114,12 @@ function Blocks({ block }: { block: Block }) {
         <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
-              <h2>{block.title}</h2>
-              {block.lead && <p className="lead">{block.lead}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
             <ul className={styles.grid} data-columns={3}>
-              {block.items.map((item) => (
-                <li key={item.company} className={styles.case} data-reveal>
+              {block.items.map((item, j) => (
+                <li key={item.company} className={styles.case} data-reveal {...e(`items.${j}`)}>
                   <p className="eyebrow">{item.sector}</p>
                   <h3>{item.company}</h3>
                   <p className={styles.caseHeadline}>{item.headline}</p>
@@ -138,7 +141,7 @@ function Blocks({ block }: { block: Block }) {
       return (
         <section className="section" id={block.id}>
           <div className="container">
-            <h2 className={styles.logosTitle} data-reveal>
+            <h2 className={styles.logosTitle} data-reveal {...e("title")}>
               {block.title}
             </h2>
             <ul className={styles.logos}>
@@ -166,12 +169,12 @@ function Blocks({ block }: { block: Block }) {
         <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head section-head--center" data-reveal>
-              <h2>{block.title}</h2>
-              {block.lead && <p className="lead">{block.lead}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
             <ul className={styles.plans} data-count={block.plans.length}>
-              {block.plans.map((plan) => (
-                <li key={plan.name} className={styles.plan} data-highlight={plan.highlight} data-reveal>
+              {block.plans.map((plan, j) => (
+                <li key={plan.name} className={styles.plan} data-highlight={plan.highlight} data-reveal {...e(`plans.${j}`)}>
                   <p className="eyebrow">{plan.audience}</p>
                   <h3>{plan.name}</h3>
                   <p className={styles.price}>
@@ -194,7 +197,7 @@ function Blocks({ block }: { block: Block }) {
                 </li>
               ))}
             </ul>
-            {block.note && <p className={styles.note} data-reveal>{block.note}</p>}
+            {block.note && <p className={styles.note} data-reveal {...e("note")}>{block.note}</p>}
           </div>
         </section>
       );
@@ -204,10 +207,10 @@ function Blocks({ block }: { block: Block }) {
         <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
-              <h2>{block.title}</h2>
-              {block.lead && <p className="lead">{block.lead}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
-            <div className={styles.tableWrap} data-reveal>
+            <div className={styles.tableWrap} data-reveal {...e("groups")}>
               <table className={styles.table}>
                 <thead>
                   <tr>
@@ -248,7 +251,7 @@ function Blocks({ block }: { block: Block }) {
       return (
         <section className="section" id="formulario">
           <div className={`container ${styles.contact}`}>
-            <div data-reveal>
+            <div data-reveal {...e("title")}>
               <LeadForm
                 form={form}
                 title={block.title}
@@ -265,8 +268,8 @@ function Blocks({ block }: { block: Block }) {
             </div>
             <div className={styles.contactAside}>
               <ul className={styles.channels}>
-                {block.channels.map((channel) => (
-                  <li key={channel.label} data-reveal>
+                {block.channels.map((channel, j) => (
+                  <li key={channel.label} data-reveal {...e(`channels.${j}`)}>
                     <p className={styles.channelLabel}>{channel.label}</p>
                     <p className={styles.channelValue}>
                       {channel.href ? <a href={channel.href}>{channel.value}</a> : channel.value}
@@ -276,7 +279,7 @@ function Blocks({ block }: { block: Block }) {
                 ))}
               </ul>
               {block.highlight && (
-                <div className={styles.highlight} data-reveal>
+                <div className={styles.highlight} data-reveal {...e("highlight.title")}>
                   <h3>{block.highlight.title}</h3>
                   <p>{block.highlight.text}</p>
                   {block.highlight.stats && (
@@ -301,12 +304,12 @@ function Blocks({ block }: { block: Block }) {
       return (
         <section className="section" id={block.id}>
           <div className="container">
-            <h2 className={styles.faqTitle} data-reveal>
+            <h2 className={styles.faqTitle} data-reveal {...e("title")}>
               {block.title}
             </h2>
             <div className={styles.faqList}>
-              {block.items.map((item) => (
-                <details key={item.q} name="faq-page" className={styles.faqItem} data-reveal>
+              {block.items.map((item, j) => (
+                <details key={item.q} name="faq-page" className={styles.faqItem} data-reveal {...e(`items.${j}`)}>
                   <summary>
                     {item.q}
                     <span className={styles.faqIcon} aria-hidden="true" />
@@ -324,12 +327,12 @@ function Blocks({ block }: { block: Block }) {
         <section className="section" id={block.id}>
           <div className="container">
             <div className="section-head" data-reveal>
-              <h2>{block.title}</h2>
-              {block.lead && <p className="lead">{block.lead}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
             <ul className={styles.grid} data-columns={2}>
-              {block.items.map((item) => (
-                <li key={item.href} className={styles.card} data-reveal>
+              {block.items.map((item, j) => (
+                <li key={item.href} className={styles.card} data-reveal {...e(`items.${j}`)}>
                   <h3>
                     <Link href={item.href}>{item.title} →</Link>
                   </h3>
@@ -344,7 +347,7 @@ function Blocks({ block }: { block: Block }) {
     case "image":
       return (
         <section className="section" id={block.id}>
-          <figure className={`container ${styles.figure}`} data-reveal>
+          <figure className={`container ${styles.figure}`} data-reveal {...e("src")}>
             <Image src={block.src} alt={block.alt} width={1600} height={900} />
             {block.caption && <figcaption>{block.caption}</figcaption>}
           </figure>
@@ -353,23 +356,33 @@ function Blocks({ block }: { block: Block }) {
   }
 }
 
-export function ContentPage({ content, breadcrumb }: { content: PageContent; breadcrumb?: React.ReactNode }) {
+export function ContentPage({
+  content,
+  breadcrumb,
+  editable,
+}: {
+  content: PageContent;
+  breadcrumb?: React.ReactNode;
+  /** Pré-visualização do editor visual: acrescenta os data-edit (lib/content/edit.ts). */
+  editable?: boolean;
+}) {
+  const edit = editFn(editable);
   return (
     <>
       <section className={styles.hero}>
         <div className="container">
           {content.eyebrow && (
-            <p className="eyebrow" data-reveal>
+            <p className="eyebrow" data-reveal {...edit("eyebrow")}>
               {content.eyebrow}
             </p>
           )}
-          <h1 data-reveal>{content.h1}</h1>
-          <p className={`lead ${styles.heroLead}`} data-reveal>
+          <h1 data-reveal {...edit("h1")}>{content.h1}</h1>
+          <p className={`lead ${styles.heroLead}`} data-reveal {...edit("lead")}>
             {content.lead}
           </p>
           {content.cta && (
             <div data-reveal>
-              <ButtonLink href={content.cta.href} size="lg">
+              <ButtonLink href={content.cta.href} size="lg" {...edit("cta.label")}>
                 {content.cta.label}
               </ButtonLink>
             </div>
@@ -378,7 +391,7 @@ export function ContentPage({ content, breadcrumb }: { content: PageContent; bre
         </div>
       </section>
       {content.blocks.map((block, i) => (
-        <Blocks key={`${block.kind}-${i}`} block={block} />
+        <Blocks key={`${block.kind}-${i}`} block={block} e={scoped(edit, `blocos.b${i}`)} />
       ))}
     </>
   );

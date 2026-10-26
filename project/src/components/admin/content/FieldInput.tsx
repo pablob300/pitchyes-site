@@ -20,9 +20,12 @@ export function FieldInput({
   onChange: (value: unknown, meta?: ImageMeta) => void;
 }) {
   const id = useId();
-  const text = typeof value === "string" ? value : value === undefined ? "" : String(value);
+  const list = field.type === "linhas" || field.type === "tabela";
+  const text = typeof value === "string" ? value : value === undefined || list ? "" : String(value);
   const long = field.max ? text.length > field.max : false;
-  const empty = !field.optional && text.trim() === "" && field.type !== "booleano";
+  const empty = list
+    ? !field.optional && (!Array.isArray(value) || value.length === 0)
+    : !field.optional && text.trim() === "" && field.type !== "booleano";
 
   return (
     <div className={styles.campo}>
@@ -47,6 +50,12 @@ export function FieldInput({
         </label>
       ) : field.type === "paragrafo" ? (
         <RichText id={id} value={text} onChange={onChange} invalid={empty} />
+      ) : field.type === "multilinha" ? (
+        <textarea id={id} rows={4} value={text} aria-invalid={empty || undefined} onChange={(e) => onChange(e.target.value)} />
+      ) : field.type === "linhas" ? (
+        <LinesInput id={id} value={value} invalid={empty} onChange={onChange} />
+      ) : field.type === "tabela" ? (
+        <TableInput id={id} value={value} invalid={empty} onChange={onChange} />
       ) : field.type === "imagem" ? (
         <ImageInput id={id} value={text} aspect={field.aspect} onChange={onChange} />
       ) : (
@@ -221,4 +230,76 @@ function proporcao(aspect: number): string {
     Math.abs(a[0] - aspect) < Math.abs(b[0] - aspect) ? a : b,
   );
   return melhor[1];
+}
+
+/**
+ * Lista de textos, um por linha. O rascunho do textarea fica local para a linha vazia que
+ * a pessoa está digitando não sumir; para fora sai só a lista sem linhas em branco.
+ */
+function LinesInput({
+  id,
+  value,
+  invalid,
+  onChange,
+}: {
+  id: string;
+  value: unknown;
+  invalid: boolean;
+  onChange: (value: unknown) => void;
+}) {
+  const [draft, setDraft] = useState(() => (Array.isArray(value) ? (value as string[]).join("\n") : ""));
+  return (
+    <>
+      <textarea
+        id={id}
+        rows={Math.min(12, Math.max(4, draft.split("\n").length + 1))}
+        value={draft}
+        aria-invalid={invalid || undefined}
+        onChange={(e) => {
+          setDraft(e.target.value);
+          onChange(e.target.value.split("\n").map((line) => line.trim()).filter(Boolean));
+        }}
+      />
+      <small>Um item por linha.</small>
+    </>
+  );
+}
+
+type TableRow = { label: string; values: string[] };
+
+/** Linhas de tabela no formato "Rótulo | valor 1 | valor 2 | valor 3". */
+function TableInput({
+  id,
+  value,
+  invalid,
+  onChange,
+}: {
+  id: string;
+  value: unknown;
+  invalid: boolean;
+  onChange: (value: unknown) => void;
+}) {
+  const [draft, setDraft] = useState(() =>
+    Array.isArray(value) ? (value as TableRow[]).map((row) => [row.label, ...row.values].join(" | ")).join("\n") : "",
+  );
+  return (
+    <>
+      <textarea
+        id={id}
+        rows={Math.min(14, Math.max(4, draft.split("\n").length + 1))}
+        value={draft}
+        aria-invalid={invalid || undefined}
+        onChange={(e) => {
+          setDraft(e.target.value);
+          const rows = e.target.value
+            .split("\n")
+            .map((line) => line.split("|").map((cell) => cell.trim()))
+            .filter((cells) => cells[0])
+            .map(([label, ...values]) => ({ label, values }));
+          onChange(rows);
+        }}
+      />
+      <small>Uma linha por item: Rótulo | coluna 1 | coluna 2 | coluna 3</small>
+    </>
+  );
 }

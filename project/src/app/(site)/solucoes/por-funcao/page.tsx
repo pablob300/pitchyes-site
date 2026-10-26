@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { ContentPage } from "@/components/blocks/ContentPage";
 import { JsonLd } from "@/components/JsonLd";
+import { getInnerPageContent } from "@/lib/content/inner";
 import { solucoesPorFuncao } from "@/content/solucoes-por-funcao";
 import { faqItems } from "@/content/types";
 import { breadcrumbSchema, pageMetadataWithOverrides, serviceSchema, webPageSchema } from "@/lib/seo";
 
-const content = solucoesPorFuncao;
+const defaults = solucoesPorFuncao;
 const path = "/solucoes/por-funcao";
 
 // Os metadados podem ser editados no Page Editor: a página se reconstrói a cada
@@ -13,10 +14,12 @@ const path = "/solucoes/por-funcao";
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  return pageMetadataWithOverrides({ title: content.seoTitle, description: content.seoDescription, path });
+  return pageMetadataWithOverrides({ title: defaults.seoTitle, description: defaults.seoDescription, path });
 }
 
-export default function Page() {
+export default async function Page() {
+  // Texto do código com o que foi publicado no editor visual por cima (lib/content/inner.ts).
+  const content = await getInnerPageContent(path);
   const faq = faqItems(content);
   return (
     <>

@@ -1,11 +1,15 @@
 import { notFound } from "next/navigation";
 import { ContentEditor } from "@/components/admin/content/ContentEditor";
+import { innerPageDefaults } from "@/content/registry";
 import { SITE_CONTENT_PATH } from "@/content/site";
 import { openDraft } from "@/lib/admin/content";
 import { requireSession } from "@/lib/admin/session";
 import { pathFromEditorSegments, isContentEditable } from "@/lib/content/pages";
+import { innerEditorView, resolveInnerPage } from "@/lib/content/inner";
 import { resolveHome, resolveSite } from "@/lib/content/resolve";
 import { homeSchema } from "@/lib/content/schema/home";
+import { buildInnerSchema } from "@/lib/content/schema/inner";
+import { getPage } from "@/lib/routes";
 
 // Tela do editor visual. O trabalho pesado é do cliente (iframe + gaveta); aqui só
 // abrimos o rascunho e resolvemos o conteúdo que a gaveta vai mostrar.
@@ -32,15 +36,30 @@ export default async function EditarConteudo({
     openDraft(SITE_CONTENT_PATH, actor),
   ]);
 
+  // Home: schema escrito à mão. Página interna: schema gerado a partir dos blocos dela, mais
+  // os blocos globais da home (faixa final), que aparecem em todas as páginas.
+  const defaults = path === "/" ? null : innerPageDefaults(path);
+  const schema = defaults
+    ? {
+        ...buildInnerSchema(path, getPage(path)?.title ?? path, defaults),
+      }
+    : homeSchema;
+  if (defaults) {
+    schema.sections = [...schema.sections, ...homeSchema.sections.filter((s) => s.scope === "site" && s.key !== "clients")];
+  }
+  const resolvedPage = defaults
+    ? innerEditorView(resolveInnerPage(defaults, pagina.data))
+    : (resolveHome(pagina.data) as unknown as Record<string, unknown>);
+
   return (
     <ContentEditor
-      schema={homeSchema}
+      schema={schema}
       pagePath={path}
       sitePath={SITE_CONTENT_PATH}
       inicial={{
         pagina: {
           rev: pagina.rev,
-          resolved: resolveHome(pagina.data) as unknown as Record<string, unknown>,
+          resolved: resolvedPage,
           override: (pagina.data ?? {}) as Record<string, unknown>,
         },
         site: {

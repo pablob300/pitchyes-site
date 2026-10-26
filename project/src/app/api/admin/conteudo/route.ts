@@ -21,6 +21,7 @@ import {
 import { requireApiSession } from "@/lib/admin/session";
 import { can } from "@/lib/admin/users";
 import { SITE_CONTENT_PATH } from "@/content/site";
+import { invalidInnerSections } from "@/lib/content/inner";
 import { invalidHomeSections, invalidSiteSections } from "@/lib/content/resolve";
 import { parseOverride } from "@/lib/content/merge";
 import { writableContentPaths } from "@/lib/content/pages";
@@ -55,11 +56,16 @@ const SECTION_LABELS: Record<string, string> = {
 };
 
 function label(section: string): string {
+  // Páginas internas: "topo" e "b3" (4º bloco da página).
+  if (section === "topo") return "Topo";
+  const block = /^b(\d+)$/.exec(section);
+  if (block) return `bloco ${Number(block[1]) + 1}`;
   return SECTION_LABELS[section] ?? section;
 }
 
 function invalidSections(path: string, data: unknown): string[] {
-  return path === SITE_CONTENT_PATH ? invalidSiteSections(data) : invalidHomeSections(data);
+  if (path === SITE_CONTENT_PATH) return invalidSiteSections(data);
+  return path === "/" ? invalidHomeSections(data) : invalidInnerSections(path, data);
 }
 
 /** O conteúdo global aparece em todas as páginas, então a revalidação é do layout. */

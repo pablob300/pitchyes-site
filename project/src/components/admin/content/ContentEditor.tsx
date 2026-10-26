@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { editorHref } from "@/lib/content/pages";
 import type { PageSchema, SectionSpec } from "@/lib/content/schema/types";
 import { FieldInput } from "./FieldInput";
 import { ListEditor } from "./ListEditor";
@@ -74,7 +75,8 @@ export function ContentEditor({
           if (s.scope !== scope) return false;
           if (s.lists?.some((l) => ponteiro === l.pointer || ponteiro.startsWith(`${l.pointer}.`)))
             return true;
-          if (!s.prefix) return false;
+          // Seção sem prefixo (topo das páginas internas): os campos dela estão na raiz.
+          if (!s.prefix) return s.fields.some((f) => ponteiro === f.pointer || ponteiro.startsWith(`${f.pointer}.`));
           return ponteiro === s.prefix || ponteiro.startsWith(`${s.prefix}.`);
         }) ?? null
       );
@@ -175,7 +177,7 @@ export function ContentEditor({
   async function voltarAoPadrao(secaoAlvo: SectionSpec) {
     const scope: Scope = secaoAlvo.scope === "site" ? "site" : "pagina";
     const ponteiros = [
-      ...(secaoAlvo.prefix ? [secaoAlvo.prefix] : []),
+      ...(secaoAlvo.prefix ? [secaoAlvo.prefix] : secaoAlvo.fields.map((f) => f.pointer)),
       ...(secaoAlvo.lists ?? []).map((l) => l.pointer),
     ];
     setEstado({ tipo: "salvando" });
@@ -291,8 +293,8 @@ export function ContentEditor({
         <div className={styles.moldura}>
           <iframe
             ref={iframe}
-            src="/editor"
-            title="Pré-visualização do rascunho da página inicial"
+            src={editorHref(pagePath)}
+            title={`Pré-visualização do rascunho: ${schema.label}`}
             className={styles.frame}
           />
         </div>
@@ -313,15 +315,25 @@ export function ContentEditor({
                 Clique em qualquer texto ou imagem da página ao lado para editar. Os blocos
                 editáveis aparecem contornados.
               </p>
-              <SectionOrder
-                schema={schema}
-                sections={
-                  (getAt(dados.pagina.resolved, "sections") as { key: string; hidden?: boolean }[]) ??
-                  []
-                }
-                onChange={(lista) => alterar("pagina", "sections", lista, true)}
-                onSelecionar={setSelecionada}
-              />
+              {Array.isArray(getAt(dados.pagina.resolved, "sections")) ? (
+                <SectionOrder
+                  schema={schema}
+                  sections={getAt(dados.pagina.resolved, "sections") as { key: string; hidden?: boolean }[]}
+                  onChange={(lista) => alterar("pagina", "sections", lista, true)}
+                  onSelecionar={setSelecionada}
+                />
+              ) : (
+                <ul className={styles.blocos}>
+                  {schema.sections.map((s) => (
+                    <li key={s.key}>
+                      <button type="button" onClick={() => setSelecionada(s.key)}>
+                        {s.label}
+                        {s.scope === "site" && <span> · site inteiro</span>}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
         </aside>
@@ -361,7 +373,7 @@ function SectionDrawer({
   // "Editada" quer dizer que esta seção tem sobreposição gravada — e, portanto, que uma
   // mudança feita no código não aparece mais nela até alguém voltar ao padrão.
   const editada = [
-    ...(secao.prefix ? [secao.prefix] : []),
+    ...(secao.prefix ? [secao.prefix] : secao.fields.map((f) => f.pointer)),
     ...(secao.lists ?? []).map((l) => l.pointer),
   ].some((ponteiro) => getAt(dados[scope].override, ponteiro) !== undefined);
 

@@ -71,7 +71,9 @@
   color: var(--color-text);
 }
 
-.corpo { display: grid; grid-template-columns: minmax(0, 1fr) 420px; min-height: 0; }
+/* Sempre na linha flexível: sem o aviso de conflito, cairia na linha "auto" e o iframe
+   ficaria com a altura da gaveta. */
+.corpo { grid-row: 3; display: grid; grid-template-columns: minmax(0, 1fr) 420px; min-height: 0; }
 
 .moldura { padding: var(--space-4); min-width: 0; }
 .frame {
@@ -122,6 +124,7 @@
   overflow-y: auto;
   padding: var(--space-5);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
   align-content: start;
 }
@@ -385,3 +388,20 @@
   color: var(--color-text);
 }
 .padrao button:hover { border-color: var(--color-text); }
+
+/* Lista de blocos das páginas internas (atalho para abrir a gaveta de cada um) */
+.blocos { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: 4px; }
+.blocos button {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+}
+.blocos button:hover { border-color: var(--color-border); }
+.blocos span { color: var(--color-text-muted); font-size: 12px; }
