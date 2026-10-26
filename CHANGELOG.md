@@ -8,6 +8,35 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-26: Planos Blitz, Starter, Pro e Enterprise e estabilidade do Worker
+
+Commits `645f766`, `7bdfc96` · Cloudflare `cb9ed769`
+
+- **Planos** (`/planos`), da tabela comercial (`docs/Planos----5b70aef1-….jpg`): a seção "Escolha o
+  plano" tem quatro cards — **Blitz** pré-pago (R$ 250 por 100 minutos, R$ 2,50/min, termo de
+  aceite), **Starter** (R$ 1.249, minutos avulsos a R$ 2,00), **Pro** (R$ 2.449, 700 min a R$ 1,80,
+  em destaque) e **Enterprise** (R$ 3.997, 1.000 min a R$ 1,40). O comparativo completo cobre só
+  Starter, Pro e Enterprise: os grupos "Plano e minutos" e "Integração, atendimento e contrato"
+  saem da tabela (ICP, minutos, simultâneas, assistentes, cadências, CS, brinde, número dedicado,
+  contrato, pagamento); os demais grupos só trocaram Start/Build por Starter/Pro. FAQ com o
+  Blitz e a permanência; `/llms.txt` com os quatro planos. Grade de cards aceita quatro colunas.
+- **Validação do blog**: auditoria 92/92, 301 dos endereços antigos, schema, RSS, sitemap,
+  imagens responsivas, editor (visual ↔ HTML sem perda, checklist, sugestões, rascunho, prévia,
+  exclusão) testados no ar. Corrigidos: editor que não carregava (`useEditorState` preso),
+  sugestão de link casando no meio da palavra ("URA" em "procura"), falso aviso de
+  palavra-chave no endereço, capas em pé empurrando o texto (altura limitada) e listagens
+  geradas sob demanda (agora pré-geradas no build).
+- **Estabilidade**: numa varredura do site, metade das páginas respondia 503 "Worker exceeded
+  resource limits" — o cache de páginas em memória do Next (50 MB) enchia o isolate de 128 MB.
+  `cacheMaxMemorySize: 0` (o cache real é o R2) e o editor TipTap só no navegador
+  (`dynamic(..., { ssr: false })`, pacote de 3,55 → 3,37 MB). Duas varreduras seguidas: 184/184.
+
+**Pendências:** TODO(comercial) confirmar se R$ 1.249 / 2.449 / 3.997 são mensais (a tabela não
+diz) e se os grupos de infraestrutura, recursos, segurança e suporte do comparativo valem para
+os planos novos.
+
+---
+
 ## 2026-10-26: Blog próprio, editor no painel e os 49 artigos importados
 
 Commit `e0f47cd` · Cloudflare `54a2651e`
