@@ -8,6 +8,45 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-26: Editor visual em todas as páginas internas
+
+Commits `2c1d392`, `984e08f` · Cloudflare `5f3ac197`
+
+- **Page Editor → "Editar Conteúdo"** passa a abrir as 15 páginas internas (Soluções e as quatro
+  filhas, Clientes, Cases, Planos, Integrações, Novidades, Sobre, Carreiras, Contato, Privacidade,
+  Termos), além da home. A gaveta é gerada a partir dos blocos de cada página
+  (`lib/content/schema/inner.ts`): topo (rótulo, h1, linha de apoio, botão) e um item por bloco —
+  textos, cards, etapas, números, cases, planos (preço, itens, botão), tabela comparativa (colunas
+  e linhas no formato `Rótulo | valor | valor`), FAQ, canais de contato, imagens. A estrutura
+  (quais blocos e em que ordem) continua no código; a parede de logos e a faixa final são as do
+  site inteiro.
+- Rascunho, prévia, publicar, histórico e "voltar ao padrão" iguais aos da home. Bloco editado que
+  perde o formato (lista vazia, linha da tabela sem um valor por coluna) é recusado na gravação e,
+  se chegar ao site, volta ao padrão do código.
+- Páginas internas leem a sobreposição publicada do D1 (`getInnerPageContent`), continuam
+  estáticas com revalidação de 60 s e sem nenhum `data-edit` no HTML público. Teste no ar:
+  título de um bloco de `/solucoes` editado, publicado, visto no site e revertido.
+- Painel: a prévia do editor ocupa a altura da janela (antes ficava com a altura da gaveta) e a
+  gaveta não rola mais na horizontal.
+- **Página vencida respondia em até 10 s**: com `enableCacheInterception`, o OpenNext espera o
+  `queue.send` antes de devolver a página vencida, e a regeneração (chamada ao próprio Worker)
+  às vezes só terminava no limite de 10 s da `memoryQueue`. A fila agora joga a regeneração no
+  `waitUntil` (`open-next.config.ts`): a versão vencida sai na hora e a nova é gerada depois.
+  Teste de páginas vencidas (varredura, 75 s de espera, duas varreduras): nenhuma resposta acima
+  de 3 s (antes, várias de ~10,5 s).
+
+Auditoria no ar: páginas internas todas aprovadas; entre as rodadas, 2 a 14 páginas do blog ou o
+próprio `sitemap-paginas.xml` responderam 503/500 e passaram ao repetir.
+
+**Pendência — limite de CPU do plano gratuito do Workers.** O `wrangler tail` mostra a causa
+desses 503/500: "Worker exceeded CPU time limit" com 10 ms de CPU (limite do plano Free). Pedidos
+comuns gastam 4–14 ms, com picos de 100–500 ms no primeiro render; ora a Cloudflare tolera, ora
+derruba — e o isolado derrubado responde 500/405 ("handler is not a function") logo em seguida.
+A versão anterior (`5e613309`) e esta gastam a mesma CPU; não é regressão do código. Solução:
+plano **Workers Paid** (US$ 5/mês, limite padrão de 30 s de CPU) — decisão comercial pendente.
+
+---
+
 ## 2026-10-26: Revalidação do ISR consertada e faixa final com o fundo da marca
 
 Commits `e2e075d`, `7c154fb` · Cloudflare `5e613309`
