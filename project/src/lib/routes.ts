@@ -51,6 +51,16 @@ export function getPage(path: string): SitePage | undefined {
 // Primary CTA target: the "talk to an agent" widget in the homepage hero.
 export const TALK_TO_AI_HREF = "/#fale-com-a-ia";
 
+/**
+ * No blog, "Fale com nossa IA" leva ao contato: quem chega por um artigo veio buscar
+ * informação e quer conversar com o time, não ouvir a amostra do player da home.
+ */
+export const BLOG_CTA_HREF = "/contato";
+
+export function talkToAiHref(pathname: string): string {
+  return pathname === "/blog" || pathname.startsWith("/blog/") ? BLOG_CTA_HREF : TALK_TO_AI_HREF;
+}
+
 export type NavLink = { label: string; href: PagePath };
 export type NavItem = NavLink | { label: string; children: NavLink[] };
 

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { mainNav, TALK_TO_AI_HREF } from "@/lib/routes";
+import { mainNav, talkToAiHref } from "@/lib/routes";
 import { Logo } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import styles from "./SiteHeader.module.css";
@@ -135,7 +135,7 @@ export function SiteHeader() {
               )}
             </ul>
           </nav>
-          <ButtonLink href={TALK_TO_AI_HREF} className={styles.cta}>
+          <ButtonLink href={talkToAiHref(pathname)} className={styles.cta}>
             Fale com nossa IA
           </ButtonLink>
         </div>

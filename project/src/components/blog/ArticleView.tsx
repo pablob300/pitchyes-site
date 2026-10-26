@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
 import { blogPaths, formatPostDate, type BlogPost, type BlogPostSummary, type BlogTermRef } from "@/lib/blog";
 import type { TocItem } from "@/lib/blog/html";
-import { getPage, TALK_TO_AI_HREF } from "@/lib/routes";
+import { BLOG_CTA_HREF, getPage } from "@/lib/routes";
 import { BlogImage } from "./BlogImage";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { PostCard } from "./PostCard";
@@ -132,7 +132,7 @@ export function ArticleView({
               )}
               .
             </p>
-            <ButtonLink href={TALK_TO_AI_HREF}>Fale com nossa IA</ButtonLink>
+            <ButtonLink href={BLOG_CTA_HREF}>Fale com nossa IA</ButtonLink>
           </aside>
 
           {author && (
