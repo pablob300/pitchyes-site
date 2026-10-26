@@ -85,6 +85,9 @@ Antes de publicar qualquer mudança de texto, seção, lista ou página, confira
 
 ## Fluxo de trabalho
 
+**"Publicar" sempre significa o ciclo inteiro:** commit, push e deploy (com os passos abaixo).
+Nunca só um deles.
+
 1. Alterar o código em `project/`, usando os tokens e componentes de `System/`.
 2. Conferir tipos e lint: `cd project && npx tsc --noEmit && npm run lint`.
 3. Publicar (`npm run deploy`, já roda o build) e **testar no ambiente online**, não só localmente.
