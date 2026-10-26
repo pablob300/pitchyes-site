@@ -16,7 +16,7 @@ System/
 │   ├── motion.css
 │   └── tokens.css            ← importa os 4 acima, é o único arquivo que precisa linkar
 ├── brand/                     ← logo oficial (escura, branca e símbolo)
-├── textures/                  ← texturas originais (cta-texture.webp) e o script que as gera
+├── textures/                  ← fundos: cta-fundo-pitchyes (faixa final) e a textura antiga com o script que a gera
 ├── components/                ← cada componente é um .html standalone (abre sozinho no navegador)
 ├── fonts/sohne/               ← pesos da Söhne (Test) usados, copiados de /sohne-font-family
 └── reference-screenshots/     ← screenshots reais das páginas, só para consulta (não redistribuir)
@@ -94,7 +94,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 | `timeline.html` | Implantação em dias, último passo em destaque | `home/Rollout.tsx` |
 | `security-compliance.html` | Selos de certificação + controles | `home/Security.tsx` |
 | `cards-use-case.html` | Grade compacta de casos de uso | `home/UseCases.tsx` |
-| `cta-band.html` | Faixa "Fale com nossa IA" antes do footer, **em todas as páginas**: textura verde em movimento + véu preto 32%, título branco, botão dourado | `layout/FinalCta.tsx` |
+| `cta-band.html` | Faixa "Fale com nossa IA" antes do footer, **em todas as páginas**: fundo da marca (azul-marinho com os pontos violeta do logotipo, `textures/cta-fundo-pitchyes.svg`), título branco, botão violeta | `layout/FinalCta.tsx` |
 | `page-headline.html` | Topo das páginas internas | `PageHeadline.tsx` |
 | `blog.html` | Blog: listagens (blog, categoria, tag, autor) e card de artigo | `blog/BlogListing.tsx`, `blog/PostCard.tsx` |
 | `blog-article.html` | Blog: página do artigo (sumário, blocos de CTA/FAQ do editor, faixa final, autor) | `blog/ArticleView.tsx` |

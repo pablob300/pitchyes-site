@@ -1,20 +1,15 @@
 /* PitchYes component — documented in System/components/cta-band.html.
-   Background: original motion-blur texture (System/textures/make_cta_texture.py)
-   under a 32% black scrim, same treatment as the vapi.ai/customers pre-footer band. */
+   Fundo da marca (docs/FUNDO 3.svg, rasterizado em WebP): azul-marinho #001239 → #0C2764
+   com os pontos violeta (#7F53FF) do logotipo à direita. Texto branco a ~16:1 sobre o
+   azul; o botão violeta com borda branca se destaca sem véu escuro por cima.
+   Arquivo trocado ganha nome novo: /images/* tem cache imutável de 1 ano. */
 .band {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: #000 url("/images/cta-texture.webp") center / cover no-repeat;
+  background: #041949 url("/images/cta-fundo-pitchyes.webp") right center / cover no-repeat;
   color: var(--color-text-inverse);
   padding-block: 112px;
-}
-.band::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: rgba(0, 0, 0, 0.32);
 }
 
 .inner {
@@ -29,6 +24,14 @@
   line-height: 44px;
   letter-spacing: -0.8px;
   max-width: 20ch;
+}
+
+@media (max-width: 768px) {
+  /* Versão menor; os pontos ficam no canto direito, atrás do fim do título. */
+  .band {
+    background-image: url("/images/cta-fundo-pitchyes-960.webp");
+    background-position: 78% center;
+  }
 }
 
 @media (max-width: 640px) {
