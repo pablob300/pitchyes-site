@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
     // ele, o Next pulava de 256 para 384 (PageSpeed "Improve image delivery").
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 320, 384],
   },
+  // O Next trata o postcss (dependência do sanitize-html, que limpa o HTML do blog) como
+  // pacote externo do servidor; no Windows o OpenNext não consegue criar o link simbólico
+  // dele (EPERM). Empacotado junto, o problema some e nada muda em produção.
+  transpilePackages: ["sanitize-html", "postcss"],
   // URL que mudou ganha 301 para sempre (SEO.md §1.8): backlinks e buscadores seguem.
   async redirects() {
     return [{ source: "/precos", destination: "/planos", statusCode: 301 }];

@@ -1,0 +1,864 @@
+{
+  "_sobre": "Mapa da importação do blog antigo (pitchyes.com.br/blog, Lovable + Supabase) para o blog próprio. Revisado à mão: categorias novas, slugs de SEO, tags limpas, palavra-chave, título e descrição para o Google e alt de cada capa. O texto dos artigos vem como está (revisão humana depois). Usado por scripts/blog-import.mjs.",
+  "autores": [
+    {
+      "slug": "equipe-pitchyes",
+      "name": "Equipe PitchYes",
+      "role": "Conteúdo da PitchYes",
+      "bio": "Artigos da equipe da PitchYes sobre IA de voz aplicada a vendas, prospecção e atendimento: como empresas brasileiras automatizam ligações sem perder a conversa humana.",
+      "origem": [
+        "PitchYes",
+        "Equipe PitchYes"
+      ]
+    },
+    {
+      "slug": "eduardo-henrique",
+      "name": "Eduardo Henrique",
+      "role": null,
+      "bio": "Escreve no blog da PitchYes sobre inteligência artificial aplicada a vendas, prospecção e atendimento ao cliente.",
+      "origem": [
+        "Eduardo Henrique"
+      ]
+    }
+  ],
+  "categorias": [
+    {
+      "slug": "prospeccao-e-vendas",
+      "name": "Prospecção e vendas",
+      "cta": "/solucoes/ativo",
+      "description": "Como a IA de voz muda a prospecção: ligações frias, qualificação de leads, roteiros, follow-up e agendamento de reuniões feitos em escala, com o vendedor entrando só quando a conversa está pronta.",
+      "seoTitle": "Prospecção e vendas com IA de voz",
+      "meta": "Artigos sobre prospecção com IA de voz: ligações frias, qualificação de leads, roteiros que convertem, follow-up e agendamento de reuniões em escala.",
+      "antigas": [
+        "vendas",
+        "casos-de-sucesso"
+      ]
+    },
+    {
+      "slug": "atendimento-ao-cliente",
+      "name": "Atendimento ao cliente",
+      "cta": "/solucoes/receptivo",
+      "description": "Atendimento que responde na hora, 24 horas por dia: o fim da URA de teclado, a velocidade como vantagem e o que muda quando cada ligação é atendida com contexto.",
+      "seoTitle": "Atendimento ao cliente com IA de voz",
+      "meta": "Artigos sobre atendimento com IA de voz: resposta imediata, atendimento 24 horas, o fim da URA tradicional e a experiência do cliente em cada ligação.",
+      "antigas": []
+    },
+    {
+      "slug": "ia-de-voz",
+      "name": "IA de voz",
+      "cta": "/solucoes",
+      "description": "Por dentro da tecnologia: como uma voz de IA soa natural em português, entende a intenção do cliente, se integra aos sistemas da empresa e respeita limites éticos.",
+      "seoTitle": "IA de voz: tecnologia, naturalidade e ética",
+      "meta": "Como funciona a IA de voz: vozes naturais em português, inteligência de contexto, integração com CRM, ética nas ligações e o que os clientes acham.",
+      "antigas": [
+        "tecnologia"
+      ]
+    },
+    {
+      "slug": "gestao-comercial",
+      "name": "Gestão comercial",
+      "cta": "/solucoes/por-funcao",
+      "description": "Para quem lidera times de vendas: o papel do vendedor quando a IA assume a rotina, como escalar sem multiplicar a equipe, reativar clientes e reduzir churn.",
+      "seoTitle": "Gestão comercial na era da IA",
+      "meta": "Artigos para líderes comerciais: o novo papel do vendedor com IA, escala sem aumentar o time, reativação de clientes, retenção e as profissões que surgem.",
+      "antigas": []
+    },
+    {
+      "slug": "ia-nos-negocios",
+      "name": "IA nos negócios",
+      "cta": "/solucoes",
+      "description": "Tendências e aplicações da inteligência artificial além do telefone: IA generativa, marketing, redes sociais, ética no uso de dados e os conceitos que todo gestor precisa conhecer.",
+      "seoTitle": "IA nos negócios: tendências e aplicações",
+      "meta": "Tendências de IA nos negócios: IA generativa em vendas, anúncios e redes sociais, ética no uso de dados e os termos que todo gestor deve conhecer.",
+      "antigas": [
+        "inteligencia-artificial"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "slug": "ligacoes-frias",
+      "name": "Ligações frias",
+      "description": "Ligações frias com IA: como abordar quem ainda não conhece a sua empresa, com roteiro, timing e personalização que transformam a primeira ligação em conversa."
+    },
+    {
+      "slug": "prospeccao-outbound",
+      "name": "Prospecção outbound",
+      "description": "Prospecção ativa em escala: como a IA de voz faz o outbound sem desgastar o time, com cadência, personalização e dados para decidir quem merece atenção."
+    },
+    {
+      "slug": "qualificacao-de-leads",
+      "name": "Qualificação de leads",
+      "description": "Como qualificar leads com IA: perguntas certas, critérios claros e a passagem para o vendedor só quando o contato está pronto para avançar."
+    },
+    {
+      "slug": "follow-up-e-agendamento",
+      "name": "Follow-up e agendamento",
+      "description": "Follow-up e agendamento de reuniões com IA: o contato certo depois da primeira conversa e a reunião marcada direto na agenda do time comercial."
+    },
+    {
+      "slug": "roteiros-de-vendas",
+      "name": "Roteiros de vendas",
+      "description": "Roteiros e scripts de vendas que soam naturais: como estruturar a conversa, responder objeções e usar IA para testar e melhorar cada abordagem."
+    },
+    {
+      "slug": "sdr-e-pre-vendas",
+      "name": "SDR e pré-vendas",
+      "description": "O papel do SDR e da pré-venda quando a IA assume as ligações repetitivas: o que muda na rotina, nas metas e na carreira de quem prospecta."
+    },
+    {
+      "slug": "funil-de-vendas",
+      "name": "Funil de vendas",
+      "description": "IA em cada etapa do funil de vendas: da atração de leads à fidelização, com dados que mostram onde a oportunidade está sendo perdida."
+    },
+    {
+      "slug": "velocidade-de-resposta",
+      "name": "Velocidade de resposta",
+      "description": "Por que a velocidade de resposta decide vendas: o custo de cada minuto sem retorno e como a IA de voz responde o lead no momento do interesse."
+    },
+    {
+      "slug": "atendimento-24-horas",
+      "name": "Atendimento 24 horas",
+      "description": "Atendimento 24 horas com IA de voz: como cobrir noites, fins de semana e picos de demanda sem fila de espera e sem aumentar a equipe."
+    },
+    {
+      "slug": "ura-e-chatbots",
+      "name": "URA e chatbots",
+      "description": "URA, chatbots e IA de voz: a diferença entre cada tecnologia, onde cada uma funciona e por que o menu de teclado está virando conversa."
+    },
+    {
+      "slug": "experiencia-do-cliente",
+      "name": "Experiência do cliente",
+      "description": "Experiência do cliente nas ligações: atendimento rápido, contexto preservado e conversas naturais que fazem a automação parecer cuidado."
+    },
+    {
+      "slug": "voz-natural",
+      "name": "Voz natural",
+      "description": "O que faz uma voz de IA soar natural: tom, ritmo, pausas, sotaque e a capacidade de entender o que o cliente quis dizer, não só o que falou."
+    },
+    {
+      "slug": "etica-e-lgpd",
+      "name": "Ética e LGPD",
+      "description": "Ética e LGPD na automação de ligações: transparência com quem atende, consentimento, proteção de dados e os limites do uso de IA em vendas."
+    },
+    {
+      "slug": "crm-e-integracoes",
+      "name": "CRM e integrações",
+      "description": "IA de voz integrada ao CRM e às ferramentas de vendas: dados atualizados sozinhos, histórico completo e próximos passos sem digitação manual."
+    },
+    {
+      "slug": "analise-de-dados",
+      "name": "Análise de dados",
+      "description": "Como a análise de dados orienta vendas e atendimento: previsões, padrões de comportamento e decisões baseadas no que as ligações revelam."
+    },
+    {
+      "slug": "gestao-de-vendas",
+      "name": "Gestão de vendas",
+      "description": "Gestão de vendas na era da IA: metas, rotina e papel do time quando a tecnologia assume o volume e o vendedor foca no fechamento."
+    },
+    {
+      "slug": "escala-comercial",
+      "name": "Escala comercial",
+      "description": "Como escalar a operação comercial sem multiplicar a equipe: automação de ligações, processos replicáveis e crescimento com custo previsível."
+    },
+    {
+      "slug": "futuro-do-trabalho",
+      "name": "Futuro do trabalho",
+      "description": "O futuro do trabalho em vendas com IA: as tarefas que a tecnologia assume, as que continuam humanas e as novas funções do comercial."
+    },
+    {
+      "slug": "retencao-de-clientes",
+      "name": "Retenção de clientes",
+      "description": "Retenção de clientes com IA: como identificar risco de cancelamento, reativar quem parou de comprar e manter o relacionamento depois da venda."
+    },
+    {
+      "slug": "b2b",
+      "name": "B2B",
+      "description": "Vendas B2B com IA de voz: prospecção de empresas, reativação de contas, ciclos de venda mais longos e conversas com quem decide a compra."
+    },
+    {
+      "slug": "ia-generativa",
+      "name": "IA generativa",
+      "description": "IA generativa aplicada a vendas: criação de roteiros e textos, assistentes de vendas e as tendências que mudam a forma de vender."
+    },
+    {
+      "slug": "marketing-digital",
+      "name": "Marketing digital",
+      "description": "Inteligência artificial no marketing digital: anúncios com mais retorno, redes sociais, tráfego pago e a ponte entre geração de leads e vendas."
+    }
+  ],
+  "artigos": [
+    {
+      "old": "a-mina-de-ouro-esquecida-o-faturamento-oculto-na-base-de-inativos-do-seu-b2b",
+      "slug": "reativacao-clientes-inativos-b2b-ia",
+      "category": "gestao-comercial",
+      "tags": [
+        "b2b",
+        "retencao-de-clientes",
+        "gestao-de-vendas",
+        "analise-de-dados"
+      ],
+      "focus": "reativação de clientes inativos",
+      "seoTitle": "Reativação de clientes inativos no B2B com IA de voz",
+      "meta": "Clientes B2B que pararam de comprar há 90 dias são receita parada. Veja como a IA de voz liga para milhares de inativos e recupera pedidos sem novo time.",
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, ao lado do título “A mina de ouro esquecida: o faturamento oculto na base de inativos do seu B2B”"
+    },
+    {
+      "old": "o-gargalo-invisivel-por-que-a-expansao-da-sua-franquia-morre-no-atendimento-humano",
+      "slug": "atendimento-franquias-expansao-ia-de-voz",
+      "category": "atendimento-ao-cliente",
+      "tags": [
+        "escala-comercial",
+        "experiencia-do-cliente",
+        "atendimento-24-horas"
+      ],
+      "focus": "atendimento de franquias",
+      "seoTitle": "Atendimento de franquias: o gargalo que trava a expansão",
+      "meta": null,
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, sorrindo à mesa ao lado do título “O gargalo invisível: por que a expansão da sua franquia morre no atendimento humano”"
+    },
+    {
+      "old": "a-morte-do-horario-comercial-sua-empresa-dorme-enquanto-o-lead-decide-comprar",
+      "slug": "atendimento-24-horas-leads-fora-horario-comercial",
+      "category": "atendimento-ao-cliente",
+      "tags": [
+        "atendimento-24-horas",
+        "velocidade-de-resposta",
+        "marketing-digital"
+      ],
+      "focus": "atendimento 24 horas",
+      "seoTitle": "Atendimento 24 horas: o lead compra fora do expediente",
+      "meta": null,
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, ao lado do título “A morte do horário comercial: sua empresa dorme enquanto o lead decide comprar?”"
+    },
+    {
+      "old": "o-algoritmo-que-fala-brasileiro-por-que-a-traducao-literal-mata-a-sua-venda",
+      "slug": "ia-de-voz-em-portugues-localizacao-vendas",
+      "category": "ia-de-voz",
+      "tags": [
+        "voz-natural",
+        "experiencia-do-cliente"
+      ],
+      "focus": "IA de voz em português",
+      "seoTitle": "IA de voz em português: por que tradução literal não vende",
+      "meta": null,
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, ao lado da pergunta “Sua IA fala português ou ela só traduz o inglês?”"
+    },
+    {
+      "old": "ia-nao-vai-substituir-o-vendedor-vai-substituir-o-tirador-de-pedido",
+      "slug": "ia-substitui-vendedor-tirador-de-pedido",
+      "category": "gestao-comercial",
+      "tags": [
+        "futuro-do-trabalho",
+        "sdr-e-pre-vendas",
+        "gestao-de-vendas"
+      ],
+      "focus": "IA vai substituir o vendedor",
+      "seoTitle": "A IA vai substituir o vendedor? Só o tirador de pedido",
+      "meta": null,
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, ao lado da frase “A IA não vai substituir o vendedor, vai substituir o tirador de pedido”"
+    },
+    {
+      "old": "diferenca-entre-automacao-engessada-e-inteligencia-de-contexto",
+      "slug": "automacao-engessada-vs-inteligencia-de-contexto",
+      "category": "ia-de-voz",
+      "tags": [
+        "ura-e-chatbots",
+        "voz-natural",
+        "experiencia-do-cliente"
+      ],
+      "focus": "inteligência de contexto",
+      "seoTitle": "Automação engessada x inteligência de contexto na voz",
+      "meta": "Bots de voz que travam quando o cliente sai do roteiro afastam vendas. Entenda a diferença entre automação engessada e IA de voz com inteligência de contexto.",
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, ao lado do título “A diferença entre automação engessada e inteligência de contexto”"
+    },
+    {
+      "old": "fim-do-vendedor-heroi-e-a-era-da-infraestrutura-de-conversacao",
+      "slug": "fim-do-vendedor-heroi-infraestrutura-de-conversacao",
+      "category": "gestao-comercial",
+      "tags": [
+        "gestao-de-vendas",
+        "escala-comercial"
+      ],
+      "focus": "infraestrutura de conversação",
+      "seoTitle": "O fim do vendedor herói e a infraestrutura de conversação",
+      "meta": null,
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, em um escritório ao lado do título “O fim do vendedor herói e a era da infraestrutura de conversação”"
+    },
+    {
+      "old": "era-da-gratificacao-imediata-por-que-sua-marca-nao-pode-mais-retornar-depois",
+      "slug": "gratificacao-imediata-tempo-de-resposta-ao-cliente",
+      "category": "atendimento-ao-cliente",
+      "tags": [
+        "velocidade-de-resposta",
+        "experiencia-do-cliente",
+        "escala-comercial"
+      ],
+      "focus": "tempo de resposta ao cliente",
+      "seoTitle": "Gratificação imediata: o cliente não espera o retorno",
+      "meta": null,
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, ao lado do título “A era da gratificação imediata: por que sua marca não pode mais se dar ao luxo de retornar depois”"
+    },
+    {
+      "old": "o-seu-lucro-esta-na-conversa-que-voce-ainda-nao-teve",
+      "slug": "atendimento-unificado-contexto-do-cliente",
+      "category": "atendimento-ao-cliente",
+      "tags": [
+        "experiencia-do-cliente",
+        "crm-e-integracoes",
+        "gestao-de-vendas"
+      ],
+      "focus": "atendimento unificado",
+      "seoTitle": "O lucro está na conversa: atendimento com contexto",
+      "meta": "Atendimento remendado entre canais perde contexto e receita. Veja como unificar o histórico do cliente, eliminar o retrabalho e transformar conversas em venda.",
+      "alt": "Banner azul da PitchYes com o título “O seu lucro está na conversa que você ainda não teve” e a foto de Pedro Henrique, fundador e CEO"
+    },
+    {
+      "old": "ciencia-da-urgencia-por-que-5-minutos-separam-o-lucro-do-prejuizo",
+      "slug": "tempo-de-resposta-ao-lead-5-minutos",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "velocidade-de-resposta",
+        "qualificacao-de-leads",
+        "atendimento-24-horas"
+      ],
+      "focus": "tempo de resposta ao lead",
+      "seoTitle": "Tempo de resposta ao lead: por que 5 minutos importam",
+      "meta": null,
+      "alt": "Pedro Henrique, fundador e CEO da PitchYes, ao lado do título “A ciência da urgência: por que 5 minutos separam o lucro do prejuízo”"
+    },
+    {
+      "old": "revolucionando-a-prospeccao-o-uso-da-ia-nas-ligacoes-frias",
+      "slug": "ia-ligacoes-frias-cold-calling",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "ligacoes-frias",
+        "qualificacao-de-leads",
+        "crm-e-integracoes",
+        "etica-e-lgpd"
+      ],
+      "focus": "IA para ligações frias",
+      "seoTitle": "IA para ligações frias: como funciona o cold calling",
+      "meta": "Como a IA automatiza ligações frias: personaliza a abordagem, qualifica leads, integra com o CRM e responde se é legal usar cold calling com IA no Brasil.",
+      "alt": "Infográfico “IA revoluciona ligações frias”: ligações ineficientes passam pela implementação de IA e viram prospecção otimizada e direcionada"
+    },
+    {
+      "old": "a-implementacao-da-inteligencia-artificial-no-metodo-spin-selling-como-usar-ia-para-vendas",
+      "slug": "spin-selling-com-inteligencia-artificial",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "funil-de-vendas",
+        "roteiros-de-vendas",
+        "analise-de-dados"
+      ],
+      "focus": "SPIN Selling com IA",
+      "seoTitle": "SPIN Selling com inteligência artificial: como aplicar",
+      "meta": "Como unir o SPIN Selling à inteligência artificial: perguntas mais precisas, atendimento personalizado, previsões de compra e vendedores focados no que importa.",
+      "alt": "Diagrama de Venn em que a metodologia SPIN Selling e a inteligência artificial em vendas se encontram em vendas personalizadas e eficazes"
+    },
+    {
+      "old": "a-inteligencia-artificial-e-o-funil-de-vendas-a-parceria-que-potencializa-resultados",
+      "slug": "inteligencia-artificial-funil-de-vendas",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "funil-de-vendas",
+        "analise-de-dados",
+        "qualificacao-de-leads"
+      ],
+      "focus": "inteligência artificial no funil de vendas",
+      "seoTitle": "Inteligência artificial no funil de vendas, etapa a etapa",
+      "meta": "Como a inteligência artificial melhora cada etapa do funil de vendas: atração de leads qualificados, nutrição, fechamento e fidelização no pós-venda.",
+      "alt": "Infográfico com análise de dados, otimização de marketing e personalização do cliente alimentando o funil de vendas com IA"
+    },
+    {
+      "old": "os-beneficios-da-inteligencia-artificial-na-prospeccao-empresarial",
+      "slug": "beneficios-inteligencia-artificial-prospeccao",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "prospeccao-outbound",
+        "analise-de-dados",
+        "b2b"
+      ],
+      "focus": "IA na prospecção empresarial",
+      "seoTitle": "Benefícios da inteligência artificial na prospecção B2B",
+      "meta": "Os benefícios da IA na prospecção empresarial: previsões mais precisas, novas oportunidades, simulação de cenários e decisões mais rápidas para o comercial.",
+      "alt": "Diagrama de fluxo em que dados passam por análise em tempo real, automação de processos e personalização de marketing"
+    },
+    {
+      "old": "a-inteligencia-artificial-bolha-ou-revolucao-sustentavel",
+      "slug": "inteligencia-artificial-bolha-ou-revolucao",
+      "category": "ia-nos-negocios",
+      "tags": [
+        "ia-generativa",
+        "prospeccao-outbound"
+      ],
+      "focus": "IA é bolha",
+      "seoTitle": "A inteligência artificial é uma bolha ou uma revolução?",
+      "meta": "A IA é bolha ou revolução sustentável? Entenda o que define uma bolha tecnológica, por que a IA vai além da moda e como levá-la ao planejamento da prospecção.",
+      "alt": "Funil de etapas da IA na prospecção: análise de dados, identificação de leads, otimização de tempo e aumento de conversões"
+    },
+    {
+      "old": "como-expandir-sua-equipe-de-vendas-com-o-poder-da-inteligencia-artificial",
+      "slug": "expandir-equipe-de-vendas-com-ia",
+      "category": "gestao-comercial",
+      "tags": [
+        "escala-comercial",
+        "gestao-de-vendas",
+        "analise-de-dados"
+      ],
+      "focus": "expandir equipe de vendas",
+      "seoTitle": "Como expandir a equipe de vendas com IA sem inflar custos",
+      "meta": "Como expandir a equipe de vendas com IA: menos tarefas repetitivas, decisões com base em dados e crescimento sem aumentar os custos na mesma proporção.",
+      "alt": "Funil horizontal de etapas: otimizar processos, analisar dados de clientes, prever tendências de compra, automatizar tarefas e personalizar o atendimento"
+    },
+    {
+      "old": "etica-na-inteligencia-artificial-para-vendas-como-usar-a-ia-sem-ser-invasivo-com-o-cliente",
+      "slug": "etica-inteligencia-artificial-vendas-privacidade",
+      "category": "ia-nos-negocios",
+      "tags": [
+        "etica-e-lgpd",
+        "experiencia-do-cliente"
+      ],
+      "focus": "ética na IA para vendas",
+      "seoTitle": "Ética na IA para vendas: personalizar sem invadir",
+      "meta": "Como usar IA em vendas sem ser invasivo: o limite entre personalização e privacidade, transparência, consentimento e boas práticas para manter o toque humano.",
+      "alt": "Diagrama circular entre atendimento genérico, personalização ética, personalização invasiva e risco de privacidade no uso de IA"
+    },
+    {
+      "old": "estrategias-de-ia-para-aumento-de-vendas-",
+      "slug": "estrategias-de-ia-para-aumentar-vendas",
+      "category": "ia-nos-negocios",
+      "tags": [
+        "experiencia-do-cliente",
+        "analise-de-dados",
+        "marketing-digital"
+      ],
+      "focus": "estratégias de IA para vendas",
+      "seoTitle": "Estratégias de IA para vender mais: Amazon, Netflix e mais",
+      "meta": "O que Amazon, Netflix, McDonald’s e Spotify ensinam sobre IA nas vendas: personalização, recomendações e fidelização que você pode aplicar no seu negócio.",
+      "alt": "Ilustração de uma ponte com o rótulo “Implementar IA” ligando os problemas atuais de vendas à experiência personalizada do cliente"
+    },
+    {
+      "old": "cold-call-nao-morreu-como-a-ia-esta-renovando-as-ligacoes-frias",
+      "slug": "cold-call-com-ia-ligacoes-frias",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "ligacoes-frias",
+        "prospeccao-outbound",
+        "qualificacao-de-leads"
+      ],
+      "focus": "cold call com IA",
+      "seoTitle": "Cold call não morreu: como a IA renova as ligações frias",
+      "meta": "O cold call não morreu: com IA, a ligação fria vira prospecção personalizada, com menos volume sem propósito e mais tempo do vendedor com leads qualificados.",
+      "alt": "Quadro de prós e contras das chamadas frias com IA: conexões eficazes e abordagens personalizadas contra impessoalidade e preocupações com privacidade"
+    },
+    {
+      "old": "os-mitos-e-verdades-sobre-ia-nas-vendas-ela-vai-mesmo-substituir-os-vendedores",
+      "slug": "mitos-e-verdades-ia-nas-vendas",
+      "category": "gestao-comercial",
+      "tags": [
+        "futuro-do-trabalho",
+        "sdr-e-pre-vendas",
+        "gestao-de-vendas"
+      ],
+      "focus": "IA nas vendas mitos e verdades",
+      "seoTitle": "Mitos e verdades da IA nas vendas: e o vendedor?",
+      "meta": "A IA vai substituir os vendedores? Os mitos e as verdades sobre inteligência artificial em vendas, do tamanho da empresa à preferência dos clientes.",
+      "alt": "Comparativo “IA como substituição” versus “IA como aliada” na integração da inteligência artificial às vendas"
+    },
+    {
+      "old": "como-usar-ia-para-criar-roteiros-de-ligacao-que-realmente-convertem-o-papel-da-automacao-na-abordagem-comercial",
+      "slug": "roteiros-de-ligacao-com-ia-que-convertem",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "roteiros-de-vendas",
+        "ligacoes-frias",
+        "analise-de-dados"
+      ],
+      "focus": "roteiro de ligação de vendas",
+      "seoTitle": "Roteiro de ligação de vendas com IA: como criar",
+      "meta": "Como criar roteiros de ligação de vendas com IA: personalização em escala, otimização contínua, respostas a objeções e um tom humano do início ao fim.",
+      "alt": "Funil de etapas para roteiros de ligação com IA: identificação de padrões, personalização de mensagens, otimização de tom e melhoria da experiência"
+    },
+    {
+      "old": "como-pequenas-empresas-podem-usar-ia-nas-vendas-sem-gastar-uma-fortuna",
+      "slug": "ia-nas-vendas-para-pequenas-empresas",
+      "category": "gestao-comercial",
+      "tags": [
+        "escala-comercial",
+        "qualificacao-de-leads",
+        "atendimento-24-horas"
+      ],
+      "focus": "IA para pequenas empresas",
+      "seoTitle": "IA nas vendas para pequenas empresas, sem gastar muito",
+      "meta": "Como pequenas empresas podem usar IA nas vendas com pouco investimento: atendimento automatizado, geração de leads e estratégias que vendem mais.",
+      "alt": "Funil de etapas da IA em pequenas empresas: análise de dados, personalização de ofertas, melhoria do atendimento e recomendações"
+    },
+    {
+      "old": "ia-e-redes-sociais-nas-vendas-como-a-inteligencia-artificial-esta-transformando-o-engajamento-e-a-geracao-de-oportunidades",
+      "slug": "ia-redes-sociais-vendas-engajamento",
+      "category": "ia-nos-negocios",
+      "tags": [
+        "marketing-digital",
+        "qualificacao-de-leads",
+        "follow-up-e-agendamento"
+      ],
+      "focus": "IA nas redes sociais",
+      "seoTitle": "IA e redes sociais nas vendas: engajamento e leads",
+      "meta": "Como a IA transforma as redes sociais em canal de vendas: identifica oportunidades, automatiza conversas e agendamentos e personaliza cada abordagem.",
+      "alt": "Diagrama de Venn em que inteligência artificial e redes sociais se encontram em vendas aceleradas"
+    },
+    {
+      "old": "otimizacao-de-anuncios-e-melhor-roi-como-a-ia-esta-revolucionando-a-publicidade-digital",
+      "slug": "ia-otimizacao-de-anuncios-roi",
+      "category": "ia-nos-negocios",
+      "tags": [
+        "marketing-digital",
+        "analise-de-dados"
+      ],
+      "focus": "IA para anúncios",
+      "seoTitle": "IA na otimização de anúncios: mais ROI na mídia paga",
+      "meta": null,
+      "alt": "Funil que transforma dados brutos de anúncios, com análise de dados e otimização de conteúdo, em ROI melhorado"
+    },
+    {
+      "old": "ia-de-voz-e-vendas-o-que-os-clientes-realmente-acham",
+      "slug": "ia-de-voz-o-que-os-clientes-acham",
+      "category": "ia-de-voz",
+      "tags": [
+        "voz-natural",
+        "experiencia-do-cliente",
+        "etica-e-lgpd"
+      ],
+      "focus": "IA de voz em vendas",
+      "seoTitle": "IA de voz em vendas: o que os clientes realmente acham",
+      "meta": "O que os clientes acham de falar com IA de voz em vendas: naturalidade, transparência, velocidade e contexto definem se a ligação ajuda ou atrapalha.",
+      "alt": "Infográfico sobre a percepção dos clientes: conveniência e eficiência da IA de voz e a resolução de preocupações com personalização"
+    },
+    {
+      "old": "ia-e-copywriting-persuasivo-como-gerar-scripts-de-vendas-altamente-eficazes",
+      "slug": "ia-generativa-scripts-de-vendas-copywriting",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "roteiros-de-vendas",
+        "ia-generativa"
+      ],
+      "focus": "scripts de vendas com IA",
+      "seoTitle": "Scripts de vendas com IA generativa: copywriting que vende",
+      "meta": "Como criar scripts de vendas persuasivos com IA generativa, passo a passo: objetivo, instruções claras para a IA e o ajuste humano que faz o texto converter.",
+      "alt": "Funil que mostra a entrada de IA generativa levando à geração de conteúdo, aumento da eficácia e vantagem competitiva"
+    },
+    {
+      "old": "vendas-saas-e-ia-como-aumentar-a-retencao-e-reduzir-o-churn-com-tecnologia",
+      "slug": "reduzir-churn-saas-com-ia",
+      "category": "gestao-comercial",
+      "tags": [
+        "retencao-de-clientes",
+        "analise-de-dados",
+        "b2b"
+      ],
+      "focus": "reduzir churn com IA",
+      "seoTitle": "Como reduzir o churn em SaaS com inteligência artificial",
+      "meta": "Como a IA ajuda empresas SaaS a reduzir o churn: previsão de cancelamento, personalização do engajamento e automação do contato com quem está em risco.",
+      "alt": "Ilustração em que clientes que estavam saindo passam por estratégias baseadas em IA e permanecem engajados"
+    },
+    {
+      "old": "da-para-prever-se-um-cliente-vai-comprar-so-pelo-tom-de-voz-a-ia-acha-que-sim",
+      "slug": "analise-de-sentimento-tom-de-voz-vendas",
+      "category": "ia-de-voz",
+      "tags": [
+        "analise-de-dados",
+        "voz-natural",
+        "qualificacao-de-leads"
+      ],
+      "focus": "análise de sentimento na voz",
+      "seoTitle": "Tom de voz prevê a compra? Análise de sentimento com IA",
+      "meta": "Dá para prever uma compra pelo tom de voz? Como a IA usa análise de sentimento e processamento de linguagem para identificar interesse e orientar o vendedor.",
+      "alt": "Funil de análise de sentimento: identificação de emoções, compreensão de intenções e ajuste de estratégias até resultados potencializados"
+    },
+    {
+      "old": "o-vendedor-do-futuro-como-a-ia-esta-criando-profissionais-mais-estrategicos",
+      "duplicateOf": "vendedor-do-futuro-ia-profissionais-estrategicos",
+      "alt": "Comparativo entre vendas tradicionais e vendas estratégicas com IA"
+    },
+    {
+      "old": "como-a-inteligencia-artificial-e-a-prospeccao-automatizada-salvaram-um-mes-de-vendas-case-real-com-aumento-de-conversoes-em-72h",
+      "slug": "case-prospeccao-automatizada-ia-72-horas",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "prospeccao-outbound",
+        "qualificacao-de-leads",
+        "follow-up-e-agendamento"
+      ],
+      "focus": "prospecção automatizada",
+      "seoTitle": "Case: prospecção automatizada com IA salva o mês em 72h",
+      "meta": "Case de prospecção automatizada com IA de voz: como um time saiu de leads frios para reuniões e contratos fechados em três dias de ligações automáticas.",
+      "alt": "Ilustração de uma ponte rotulada “Implementar IA” ligando processos manuais limitados à satisfação do cliente"
+    },
+    {
+      "old": "o-impacto-da-ia-de-voz-nas-abordagens-outbound-o-que-mudou-em-12-meses",
+      "slug": "ia-de-voz-prospeccao-outbound",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "prospeccao-outbound",
+        "ligacoes-frias",
+        "sdr-e-pre-vendas"
+      ],
+      "focus": "IA de voz no outbound",
+      "seoTitle": "IA de voz no outbound: o que mudou em 12 meses",
+      "meta": "O que a IA de voz mudou na prospecção outbound em um ano: fim da prospecção repetitiva, personalização em escala, pitch consistente e dados para decidir.",
+      "alt": "Diagrama de setas saindo da IA de voz para eficiência aprimorada, personalização mais profunda e resultados impressionantes"
+    },
+    {
+      "old": "conheca-a-ia-de-voz-que-faz-mil-ligacoes-por-dia-por-voce",
+      "slug": "ia-de-voz-para-vendas-mil-ligacoes-por-dia",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "prospeccao-outbound",
+        "qualificacao-de-leads",
+        "voz-natural"
+      ],
+      "focus": "IA de voz para vendas",
+      "seoTitle": "IA de voz para vendas: mil ligações por dia por você",
+      "meta": "O que é IA de voz para vendas e como ela faz milhares de ligações por dia: prospecta, qualifica leads e entrega ao vendedor só quem está pronto para conversar.",
+      "alt": "Funil de ligações com IA: interações iniciais com o cliente, interações personalizadas, foco estratégico do vendedor e aumento das taxas de conversão"
+    },
+    {
+      "old": "domine-a-linguagem-da-ia-20-termos-de-inteligencia-artificial-que-vao-turbinar-suas-vendas",
+      "slug": "termos-de-inteligencia-artificial-para-vendas",
+      "category": "ia-nos-negocios",
+      "tags": [
+        "ia-generativa",
+        "analise-de-dados"
+      ],
+      "focus": "termos de inteligência artificial",
+      "seoTitle": "20 termos de inteligência artificial para quem vende",
+      "meta": "Glossário de inteligência artificial para vendas: machine learning, modelo de linguagem, prompt, chatbot e outros 16 termos explicados para quem vende.",
+      "alt": "Torre de discos coloridos ao lado da lista de benefícios da IA: estratégias eficazes, personalização do cliente e otimização de processos"
+    },
+    {
+      "old": "conversas-que-vendem-o-que-esta-por-tras-da-voz-de-ia-da-pitchyes",
+      "slug": "como-funciona-voz-de-ia-que-vende",
+      "category": "ia-de-voz",
+      "tags": [
+        "voz-natural",
+        "roteiros-de-vendas",
+        "analise-de-dados"
+      ],
+      "focus": "voz de IA",
+      "seoTitle": "Conversas que vendem: como funciona a voz de IA",
+      "meta": "O que faz uma voz de IA vender: fluxo conversacional além do script, inteligência semântica, treino com vendas reais e tom, ritmo e pausas naturais.",
+      "alt": "Comparativo entre vendas tradicionais, baseadas em relacionamento pessoal, e vendas baseadas em IA, com mais alcance e eficiência"
+    },
+    {
+      "old": "como-usar-inteligencia-artificial-para-vender-mais-estrategias-praticas-que-funcionam",
+      "slug": "como-usar-inteligencia-artificial-para-vender-mais",
+      "category": "ia-nos-negocios",
+      "tags": [
+        "funil-de-vendas",
+        "prospeccao-outbound",
+        "experiencia-do-cliente"
+      ],
+      "focus": "usar IA para vender mais",
+      "seoTitle": "Como usar inteligência artificial para vender mais",
+      "meta": "Estratégias práticas para vender mais com IA: conhecer o cliente, automatizar a prospecção por voz, criar textos que convertem e ajustar o funil de vendas.",
+      "alt": "Funil de vendas com IA: coleta de dados do consumidor, análise, personalização de ofertas, atendimento ao cliente e automação de tarefas"
+    },
+    {
+      "old": "a-inteligencia-artificial-ja-esta-substituindo-sdrs",
+      "slug": "inteligencia-artificial-substitui-sdr",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "sdr-e-pre-vendas",
+        "qualificacao-de-leads",
+        "futuro-do-trabalho"
+      ],
+      "focus": "IA substituindo SDR",
+      "seoTitle": "A inteligência artificial já está substituindo SDRs?",
+      "meta": "A IA já faz parte do trabalho do SDR: qualificação de leads, agendamento e ligações com voz sintética. Veja o que muda e onde o toque humano continua decisivo.",
+      "alt": "Comparativo entre inteligência artificial, que automatiza tarefas e analisa dados, e SDRs, que trazem o toque humano e constroem relacionamento"
+    },
+    {
+      "old": "o-poder-do-followup-o-que-fazer-apos-uma-ligacao-com-um-lead-com-apoio-da-ia",
+      "slug": "follow-up-de-vendas-apos-ligacao-com-ia",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "follow-up-e-agendamento",
+        "crm-e-integracoes",
+        "qualificacao-de-leads"
+      ],
+      "focus": "follow-up de vendas",
+      "seoTitle": "Follow-up de vendas: o que fazer depois da ligação",
+      "meta": "O que fazer depois de ligar para um lead: registrar tudo, enviar um e-mail com valor, reforçar com ligações automáticas e planejar o próximo passo com a IA.",
+      "alt": "Funil de follow-up: interação inicial com o lead, reforço de interesse e aumento da conversão até o cliente leal"
+    },
+    {
+      "old": "o-futuro-da-prospeccao-o-papel-da-inteligencia-artificial-nos-proximos-anos",
+      "slug": "futuro-da-prospeccao-com-inteligencia-artificial",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "prospeccao-outbound",
+        "b2b",
+        "ligacoes-frias"
+      ],
+      "focus": "futuro da prospecção",
+      "seoTitle": "O futuro da prospecção B2B com inteligência artificial",
+      "meta": "Como a inteligência artificial vai redefinir a prospecção B2B nos próximos anos: da força bruta das ligações frias para a prospecção por voz automatizada.",
+      "alt": "Funil de prospecção com IA: coleta de dados, análise, previsão de comportamento, abordagem personalizada e otimização de processos"
+    },
+    {
+      "old": "como-criamos-vozes-realistas-para-engajar-leads-frios",
+      "slug": "vozes-realistas-ia-leads-frios",
+      "category": "ia-de-voz",
+      "tags": [
+        "voz-natural",
+        "ligacoes-frias",
+        "roteiros-de-vendas"
+      ],
+      "focus": "voz realista com IA",
+      "seoTitle": "Como criamos vozes realistas de IA para leads frios",
+      "meta": "Como a PitchYes cria vozes de IA realistas para engajar leads frios: tom entre o profissional e o acessível, pausas naturais, roteiros com contexto e testes.",
+      "alt": "Funil de engajamento de leads frios: personalização, técnicas de comunicação, conteúdo relevante e abordagens empáticas"
+    },
+    {
+      "old": "como-a-inteligencia-artificial-esta-revolucionando-as-vendas-e-aumentando-a-conversao",
+      "slug": "ia-aumenta-conversao-de-leads-em-vendas",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "qualificacao-de-leads",
+        "velocidade-de-resposta",
+        "funil-de-vendas"
+      ],
+      "focus": "aumentar conversão de leads",
+      "seoTitle": "Como a IA aumenta a conversão de leads em vendas",
+      "meta": "Leads que não atendem viram conversa quando a IA de voz liga na hora certa. Veja o passo a passo para transformar leads em ligações e mais vendas.",
+      "alt": "Infográfico com personalização de ofertas, otimização de processos de vendas e engajamento aprimorado do cliente"
+    },
+    {
+      "old": "como-automatizar-o-agendamento-de-reunioes-e-transformar-leads-em-reunioes-qualificadas",
+      "slug": "automatizar-agendamento-de-reunioes-com-ia",
+      "category": "prospeccao-e-vendas",
+      "tags": [
+        "follow-up-e-agendamento",
+        "qualificacao-de-leads",
+        "crm-e-integracoes"
+      ],
+      "focus": "automatizar agendamento de reuniões",
+      "seoTitle": "Como automatizar o agendamento de reuniões com IA",
+      "meta": "Como automatizar o agendamento de reuniões com IA de voz: contato imediato com o lead, reunião marcada na agenda do vendedor e menos oportunidades perdidas.",
+      "alt": "Linha do tempo do agendamento de reuniões: do processo manual à implementação de ferramentas automatizadas e agendamento simplificado"
+    },
+    {
+      "old": "e-etico-automatizar-ligacoes-com-ia-uma-visao-tecnica-e-humana-do-atendimento-automatizado",
+      "slug": "etica-automatizar-ligacoes-com-ia",
+      "category": "ia-de-voz",
+      "tags": [
+        "etica-e-lgpd",
+        "futuro-do-trabalho",
+        "experiencia-do-cliente"
+      ],
+      "focus": "ética em ligações com IA",
+      "seoTitle": "É ético automatizar ligações com IA? Limites e cuidados",
+      "meta": "É ético automatizar ligações com IA? Transparência, proteção de dados, empatia e o novo papel dos vendedores em um atendimento automatizado responsável.",
+      "alt": "Quadro de prós e contras da automação do atendimento: eficiência, agilidade e disponibilidade 24/7 contra impacto humano e substituição de empregos"
+    },
+    {
+      "old": "diferenca-entre-chatbot-ura-e-ia-de-voz-o-que-cada-um-resolve",
+      "slug": "diferenca-chatbot-ura-ia-de-voz",
+      "category": "atendimento-ao-cliente",
+      "tags": [
+        "ura-e-chatbots",
+        "atendimento-24-horas",
+        "experiencia-do-cliente"
+      ],
+      "focus": "diferença entre chatbot, URA e IA de voz",
+      "seoTitle": "Chatbot, URA ou IA de voz: o que cada um resolve",
+      "meta": "Diferença entre chatbot, URA e IA de voz: o que cada um resolve, quando usar e quando evitar cada tecnologia no atendimento e nas vendas da sua empresa.",
+      "alt": "Comparativo entre chatbot para atendimento por texto, URA para direcionar chamadas e IA de voz para conversas naturais"
+    },
+    {
+      "old": "como-integrar-automacao-por-voz-com-suas-ferramentas-de-vendas-e-marketing-para-multiplicar-resultados",
+      "slug": "integrar-automacao-por-voz-crm-marketing",
+      "category": "ia-de-voz",
+      "tags": [
+        "crm-e-integracoes",
+        "analise-de-dados",
+        "marketing-digital"
+      ],
+      "focus": "integração de automação por voz",
+      "seoTitle": "Como integrar a automação por voz ao CRM e ao marketing",
+      "meta": "Como integrar automação por voz às ferramentas de vendas e marketing: dados de leads atualizados, interações centralizadas e relatórios para decidir rápido.",
+      "alt": "Mapa da automação por voz conectada a otimização de processos, experiência do cliente, eficiência e informações em tempo real"
+    },
+    {
+      "old": "ia-nas-vendas-como-a-inteligencia-artificial-esta-moldando-o-novo-perfil-do-consumidor",
+      "slug": "ia-nas-vendas-novo-perfil-do-consumidor",
+      "category": "atendimento-ao-cliente",
+      "tags": [
+        "experiencia-do-cliente",
+        "retencao-de-clientes",
+        "voz-natural"
+      ],
+      "focus": "IA e perfil do consumidor",
+      "seoTitle": "IA nas vendas e o novo perfil do consumidor",
+      "meta": "Como a IA molda o novo consumidor: personalização que decide a compra, interações por voz, decisões mais rápidas e exigentes e a compra como ciclo contínuo.",
+      "alt": "Funil horizontal do novo consumidor: análise de dados, compreensão do comportamento, personalização e otimização de vendas"
+    },
+    {
+      "old": "5-profissoes-do-futuro-que-vao-bombar-com-a-ia-nas-vendas",
+      "slug": "profissoes-do-futuro-em-vendas-com-ia",
+      "category": "gestao-comercial",
+      "tags": [
+        "futuro-do-trabalho",
+        "ia-generativa",
+        "gestao-de-vendas"
+      ],
+      "focus": "profissões do futuro em vendas",
+      "seoTitle": "5 profissões do futuro em vendas com inteligência artificial",
+      "meta": "As profissões que crescem com a IA nas vendas: estrategista de IA, vendedor por prompts, designer de voicebots, arquiteto de automação e analista de dados.",
+      "alt": "Lâmpada dividida em quatro competências das profissões do futuro em vendas com IA: habilidades técnicas, tendências, comportamento do consumidor e adaptação"
+    },
+    {
+      "old": "automacao-de-ligacoes-vantagens-e-cuidados-para-nao-perder-o-toque-humano",
+      "slug": "automacao-de-ligacoes-vantagens-e-cuidados",
+      "category": "ia-de-voz",
+      "tags": [
+        "voz-natural",
+        "experiencia-do-cliente",
+        "etica-e-lgpd"
+      ],
+      "focus": "automação de ligações",
+      "seoTitle": "Automação de ligações: vantagens e cuidados humanos",
+      "meta": "As vantagens da automação de ligações com IA e os cuidados para não perder o toque humano: eficiência e escala sem conversas frias ou impessoais.",
+      "alt": "Gráfico de como a automação de ligações impacta a comunicação empresarial: eficiência, redução de custos e risco de perda humana"
+    },
+    {
+      "old": "-o-que-esperar-da-ia-generativa-nas-vendas-ate-2026-tendencias-gigantes-do-mercado-e-oportunidades-reais",
+      "slug": "ia-generativa-em-vendas-tendencias",
+      "category": "ia-nos-negocios",
+      "tags": [
+        "ia-generativa",
+        "crm-e-integracoes",
+        "voz-natural"
+      ],
+      "focus": "IA generativa em vendas",
+      "seoTitle": "IA generativa em vendas: tendências e oportunidades",
+      "meta": "O que esperar da IA generativa nas vendas: assistentes autônomos, a voz como nova interface, CRMs inteligentes e o que os gigantes do mercado estão fazendo.",
+      "alt": "Ciclo em cinco etapas para aplicar IA generativa em vendas: identificar tendências, analisar o mercado, descobrir oportunidades, implementar e avaliar"
+    },
+    {
+      "old": "vendedor-do-futuro-ia-profissionais-estrategicos",
+      "slug": "vendedor-do-futuro-com-inteligencia-artificial",
+      "category": "gestao-comercial",
+      "tags": [
+        "futuro-do-trabalho",
+        "gestao-de-vendas",
+        "analise-de-dados"
+      ],
+      "focus": "vendedor do futuro",
+      "seoTitle": "O vendedor do futuro: mais estratégico com a IA",
+      "meta": "Como a IA está criando vendedores mais estratégicos: análises preditivas, automação das tarefas repetitivas e mais tempo para relacionamento e negociação.",
+      "alt": "Funil roxo do vendedor do futuro: análise preditiva, automação inteligente, personalização em escala e feedback em tempo real"
+    }
+  ]
+}

@@ -6,6 +6,8 @@ export type AdminNavItem = {
   label: string;
   /** Marca o item como ativo também nas rotas filhas. */
   match?: "exact" | "prefix";
+  /** Quando "exact"/"prefix" não bastam (ex.: Artigos ativo também no editor de um artigo). */
+  pattern?: RegExp;
   /** Capacidade exigida (ver lib/admin/users.ts). Tudo é "admin" hoje. */
   capability?: string;
   /** Some do menu, mas a rota continua existindo — para seção em construção. */
@@ -30,6 +32,17 @@ export type AdminNavEntry = AdminNavItem | AdminNavGroup;
 export const adminNav: AdminNavEntry[] = [
   { href: "/admin/paginas", label: "Page Editor", match: "prefix", group: "topo" },
   {
+    label: "Blog",
+    group: "topo",
+    children: [
+      { href: "/admin/blog/novo", label: "Novo Artigo", match: "exact" },
+      // Ativo na lista e no editor de qualquer artigo (/admin/blog/<id>), não em categorias/tags.
+      { href: "/admin/blog", label: "Artigos", pattern: /^\/admin\/blog(?:\/(?!novo$|categorias|tags)[^/]+(?:\/.*)?)?$/ },
+      { href: "/admin/blog/categorias", label: "Categorias", match: "prefix" },
+      { href: "/admin/blog/tags", label: "Tags", match: "prefix" },
+    ],
+  },
+  {
     label: "Análise",
     group: "topo",
     children: [
@@ -50,6 +63,7 @@ export function isNavGroup(entry: AdminNavEntry): entry is AdminNavGroup {
 }
 
 export function isActive(item: AdminNavItem, pathname: string): boolean {
+  if (item.pattern) return item.pattern.test(pathname);
   return item.match === "prefix" ? pathname.startsWith(item.href) : pathname === item.href;
 }
 

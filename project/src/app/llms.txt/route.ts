@@ -1,4 +1,5 @@
 import { company, socials } from "@/lib/company";
+import { blogPaths, getAllPosts } from "@/lib/blog";
 import { getHomeContent } from "@/lib/content/resolve";
 import { pages } from "@/lib/routes";
 import { absoluteUrl } from "@/lib/sitemap";
@@ -46,7 +47,20 @@ function rolloutFact(steps: { day: string; title: string }[]): string {
 }
 
 export async function GET() {
-  const home = await getHomeContent("publicado");
+  const [home, posts] = await Promise.all([getHomeContent("publicado"), getAllPosts()]);
+  const articles = posts.filter((post) => !post.noindex);
+  const blog = articles.length
+    ? [
+        `Artigos publicados em ${absoluteUrl("/blog")} (mais novos primeiro):`,
+        "",
+        ...articles.map(
+          (post) =>
+            `- [${post.title}](${absoluteUrl(blogPaths.post(post.slug))})${
+              post.excerpt ? `: ${post.excerpt.replace(/\s+/g, " ").trim()}` : ""
+            }`,
+        ),
+      ].join("\n")
+    : `Ainda sem artigos publicados em ${absoluteUrl("/blog")}.`;
   const section = (title: string, prefix: string) => {
     const items = pages
       .filter((p) => p.path !== "/" && p.path.startsWith(prefix))
@@ -94,7 +108,7 @@ ${rolloutFact(home.rollout.steps)}
 ${section("Soluções", "/solucoes")}${section("Clientes", "/clientes")}${section("Planos", "/planos")}${section("Recursos", "/recursos")}${section("Empresa", "/sobre")}
 ## Blog
 
-Em construção. Será publicado em ${absoluteUrl("/blog")} com artigos, categorias e tags.
+${blog}
 
 ## Contato
 

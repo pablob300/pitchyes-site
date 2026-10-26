@@ -3,8 +3,9 @@
 //
 //   node scripts/seo-audit.mjs [base-url]
 //
-// Lê /sitemap-paginas.xml, baixa cada página e confere o que as regras do SEO.md exigem:
-// título, descrição, canonical, um único <h1>, dados estruturados e volume de texto.
+// Lê /sitemap-paginas.xml e /sitemap-blog.xml, baixa cada página e confere o que as regras
+// do SEO.md exigem: título, descrição, canonical, um único <h1>, dados estruturados, alt das
+// imagens e volume de texto. Nos artigos do blog, também BlogPosting e link interno no texto.
 // Só olha o HTML do servidor — é exatamente o que o robô lê.
 
 const base = (process.argv[2] ?? "https://pitchyes-site.borges-filho.workers.dev").replace(/\/$/, "");
@@ -57,7 +58,21 @@ async function audit(path) {
   if (h1s.length !== 1) problems.push(`${h1s.length} <h1>`);
   for (let i = 1; i < levels.length; i++)
     if (levels[i] - levels[i - 1] > 1) { problems.push(`salto h${levels[i - 1]} → h${levels[i]}`); break; }
-  if (!schemas.includes("WebPage")) problems.push("sem WebPage em JSON-LD");
+  const article = /^\/blog\/(?!pagina\/|categoria|categorias$|tag\/|autor\/)[^/]+$/.test(path);
+  const pageType = ["WebPage", "CollectionPage", "BlogPosting", "ProfilePage"].find((t) => schemas.includes(t));
+  if (!pageType) problems.push("sem WebPage/CollectionPage/BlogPosting em JSON-LD");
+  if (article) {
+    if (!schemas.includes("BlogPosting")) problems.push("artigo sem BlogPosting");
+    // Links internos dentro do texto do artigo (antes das tags, do autor e do "Leia também").
+    const body = html.match(/<article[\s\S]*?<\/article>/i)?.[0] ?? "";
+    const content = body.split('aria-label="Assuntos deste artigo"')[0].split('aria-label="Neste artigo"').pop();
+    const internal = new Set(
+      [...content.matchAll(/<a [^>]*href="(\/[^"#]+)"/g)]
+        .map((m) => m[1])
+        .filter((h) => !/^\/blog\/(categoria|tag|autor)\//.test(h) && h !== "/blog" && h !== "/"),
+    );
+    if (internal.size < 1) problems.push("artigo sem link interno no texto");
+  }
   if (path !== "/" && !schemas.includes("BreadcrumbList")) problems.push("sem BreadcrumbList");
   // alt precisa existir E ter texto: alt="" some do leitor de tela e do buscador.
   for (const img of imgs) {
@@ -70,7 +85,9 @@ async function audit(path) {
   return { path, title, desc, h1: h1s[0] ?? "", words, schemas: [...new Set(schemas)], problems };
 }
 
-const sitemap = await (await fetch(`${base}/sitemap-paginas.xml`)).text();
+const sitemap = (
+  await Promise.all(["/sitemap-paginas.xml", "/sitemap-blog.xml"].map(async (s) => (await fetch(`${base}${s}`)).text()))
+).join("\n");
 const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
 if (!paths.length) { console.error("sitemap-paginas.xml vazio ou inacessível:", base); process.exit(1); }
 

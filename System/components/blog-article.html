@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blog: artigo — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
+  header { max-width: 880px; margin: 0 auto var(--space-6); display: grid; gap: var(--space-4); }
+  .cat { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent-secondary-ink); }
+  h1 { font-size: 44px; line-height: 1.12; margin: 0; }
+  .meta { font-size: 14px; color: var(--color-text-muted); margin: 0; }
+  .cover { max-width: 880px; margin: 0 auto; aspect-ratio: 1200/630; max-height: 560px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--color-bg-inverse), var(--color-accent-primary)); }
+  .layout { display: grid; grid-template-columns: 200px minmax(0, 640px); gap: var(--space-8); justify-content: center; padding-block: var(--space-8); }
+  .toc { font-size: 14px; } .toc p { font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--color-text-muted); }
+  .toc ol { list-style: none; padding: 0 0 0 var(--space-3); border-left: 1px solid var(--color-border-subtle); display: grid; gap: var(--space-2); }
+  .content { font-size: 18px; line-height: 1.7; } .content p { color: var(--color-text-secondary); }
+  .content a { color: var(--color-accent-secondary-ink); }
+  .content blockquote { margin: 0; padding-left: var(--space-5); border-left: 3px solid var(--color-accent-secondary); font-size: 20px; }
+  .cta-block { padding: var(--space-6); border-radius: var(--radius-md); background: var(--color-bg-subtle); border: 1px solid var(--color-border-subtle); }
+  .cta-block a { display: inline-flex; margin-top: var(--space-4); padding: 10px 18px; border-radius: var(--radius-sm); background: var(--color-accent-primary-strong); color: var(--color-accent-primary-contrast); text-decoration: none; }
+  .end { margin-top: var(--space-7); padding: var(--space-6); border-radius: var(--radius-lg); background: var(--color-bg-inverse); color: var(--color-text-inverse); }
+  @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <p class="note">PitchYes · Página do artigo: trilha, categoria, H1, autor e datas, capa (LCP, sem revelação, altura limitada), sumário dos H2, texto, blocos do editor (CTA e FAQ), tags, faixa final ligada à página comercial da categoria, autor, anterior/próximo e "Leia também". React: components/blog/ArticleView.tsx (Article.module.css).</p>
+  <header>
+    <span class="cat">Prospecção e vendas</span>
+    <h1>SPIN Selling com inteligência artificial</h1>
+    <p class="meta">Por Eduardo Henrique · 19 de março de 2026 · Atualizado em 26 de março de 2026 · 4 min de leitura</p>
+  </header>
+  <div class="cover"></div>
+  <div class="layout">
+    <nav class="toc"><p>Neste artigo</p><ol><li>Atendimento mais preciso</li><li>Agilidade e produtividade</li><li>Previsões e decisões</li></ol></nav>
+    <div class="content">
+      <p>O SPIN Selling é uma das metodologias de vendas mais respeitadas. Com a IA, cada pergunta chega no momento certo — e a <a href="#">qualificação de leads</a> acontece antes do vendedor entrar.</p>
+      <h2>Atendimento mais preciso</h2>
+      <blockquote>Citação em destaque, com a barra menta da marca.</blockquote>
+      <div class="cta-block"><p>Bloco de chamada inserido pelo editor (CTA).</p><a href="#">Fale com nossa IA</a></div>
+      <div class="end"><strong>Quer ver a IA de voz da PitchYes na sua operação?</strong></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -19,9 +19,12 @@
 		{ "binding": "MEDIA_BUCKET", "bucket_name": "pitchyes-site-midia" }
 	],
 	"images": { "binding": "IMAGES" },
-	// Leads submitted through the site forms (see src/lib/leads.ts and /admin/leads).
+	// Banco do site: leads, painel, Page Editor e blog (see src/lib/leads.ts and /admin).
+	// "remote": true faz o BUILD (e o next dev) lerem o D1 real: as páginas que dependem do
+	// banco — blog, metadados do Page Editor — já saem do build com o conteúdo publicado, em
+	// vez de vazias até a primeira revalidação. Atenção: o next dev local grava em produção.
 	"d1_databases": [
-		{ "binding": "LEADS_DB", "database_name": "pitchyes-leads", "database_id": "6ba46baf-df22-49c6-8012-dd31c9ec6619" }
+		{ "binding": "LEADS_DB", "database_name": "pitchyes-leads", "database_id": "6ba46baf-df22-49c6-8012-dd31c9ec6619", "remote": true }
 	],
 	// ADMIN_AUTH_MODE: "session" (login por e-mail e senha) ou "basic" (senha única
 	// antiga, ADMIN_PASSWORD) — válvula de escape se o login novo falhar.

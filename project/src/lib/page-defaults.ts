@@ -43,6 +43,17 @@ const byPath: Record<string, PageDefault> = {
   "/contato": { title: contato.seoTitle, description: contato.seoDescription },
   "/privacidade": { title: privacidade.seoTitle, description: privacidade.seoDescription },
   "/termos": { title: termos.seoTitle, description: termos.seoDescription },
+  // Blog: o texto das listagens mora em lib/blog/listing.tsx; aqui só o padrão de SEO.
+  "/blog": {
+    title: "Blog sobre IA de voz, vendas e atendimento",
+    description:
+      "Artigos sobre IA de voz, prospecção, atendimento e gestão comercial: como empresas usam ligações automatizadas para vender mais e atender na hora.",
+  },
+  "/blog/categorias": {
+    title: "Categorias do blog",
+    description:
+      "Todos os temas do blog da PitchYes: prospecção e vendas, atendimento, IA de voz e gestão comercial, com os artigos de cada assunto reunidos.",
+  },
 };
 
 /** Padrão da página; cai para os valores de routes.ts em endereço sem conteúdo próprio. */

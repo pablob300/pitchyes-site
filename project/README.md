@@ -16,11 +16,25 @@ npm run deploy    # build + deploy para produção
   Para construir uma delas: crie `src/app/<caminho>/page.tsx` (tem prioridade sobre a rota coringa) e marque `placeholder: false` em `routes.ts`.
 - Visual: sempre pelos tokens e componentes de `../System`. Componente novo aqui → `.html` de referência em `System/components` + entrada no `style-guide.html`.
 
-## Blog (standby)
+## Blog
 
-WordPress headless, servido em `/blog`. As URLs já estão definidas em `src/lib/blog.ts`
-(`/blog`, `/blog/pagina/N`, `/blog/[slug]`, `/blog/categorias`, `/blog/categoria/[slug]`, `/blog/tag/[slug]`)
-e `sitemap-blog.xml` já monta listagens paginadas, artigos, categorias e tags — hoje vazio, até ligar a API do WordPress.
+Blog próprio, sem WordPress: artigos, categorias, tags, autores, versões, mídia e 301 no D1
+(`migrations/0008_blog.sql`), imagens no R2 (servidas em `/midia/blog/...`, com variantes `?w=`).
+Editado no painel em **Blog › Novo Artigo / Artigos / Categorias / Tags** (editor visual + HTML).
+
+- **URLs** (`src/lib/blog.ts`): `/blog`, `/blog/pagina/N`, `/blog/[slug]`, `/blog/categorias`,
+  `/blog/categoria/[slug]`, `/blog/tag/[slug]`, `/blog/autor/[slug]` (todas paginadas) e o RSS em `/feed.xml`.
+- **Código:** leitura pública em `src/lib/blog.ts`; painel em `src/lib/blog/admin.ts`; HTML dos
+  artigos (sanitização, âncoras, imagens) em `src/lib/blog/html.ts`; metadados e schema em
+  `src/lib/blog/schema.ts`; checklist de SEO (editor e API) em `src/lib/blog/checks.ts`.
+- **SEO:** `BlogPosting` + `Person` + `BreadcrumbList` nos artigos, `CollectionPage` + `ItemList`
+  nas listagens, `FAQPage` quando o artigo tem bloco de perguntas. Tag com menos de 5 artigos e
+  páginas 2+ de tag/autor ficam `noindex, follow` e fora do sitemap.
+- **Trocar o slug** de um artigo publicado (ou fundir/renomear categoria e tag) grava 301 sozinho.
+- **Importação** do blog antigo: `node scripts/blog-import.mjs` (só relatório) e `--aplicar`
+  (grava). Decisões editoriais em `scripts/blog-import/mapa.json`; links inseridos em `links.json`.
+- O D1 tem `"remote": true` no `wrangler.jsonc`: o build pré-gera o blog com os dados reais
+  (e o `next dev` local lê e grava no banco de produção).
 
 `/sitemap.xml` é um índice que aponta para `sitemap-paginas.xml` e `sitemap-blog.xml`.
 

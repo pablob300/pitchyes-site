@@ -11,8 +11,9 @@ import styles from "./page.module.css";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
+  // O blog tem rotas próprias em app/(site)/blog: o curinga não pode pré-gerar /blog.
   return pages
-    .filter((p) => p.placeholder)
+    .filter((p) => p.placeholder && !p.path.startsWith("/blog"))
     .map((p) => ({ slug: p.path.slice(1).split("/") }));
 }
 

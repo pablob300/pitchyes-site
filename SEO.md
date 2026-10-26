@@ -76,7 +76,9 @@ Orçamento por página, medido no site publicado:
 
 - `lib/routes.ts` é a fonte única: menu, rodapé, páginas e sitemap saem dele. Página que não
   está lá não existe para o site nem para o sitemap.
-- `/sitemap.xml` é um índice: `sitemap-paginas.xml` (site) e `sitemap-blog.xml` (WordPress).
+- `/sitemap.xml` é um índice: `sitemap-paginas.xml` (site) e `sitemap-blog.xml` (blog, lido do D1).
+- Blog (próprio, no D1, editado em `/admin/blog`): o editor só publica sem erro no checklist de
+  SEO (`lib/blog/checks.ts`) e gera `BlogPosting`, `Person` e `BreadcrumbList` sozinho.
 - Blog: cada artigo precisa de `Article` (autor, data, imagem), canonical próprio e links para
   as páginas comerciais relacionadas. As URLs já estão definidas em `lib/blog.ts`.
 - Página 404 responde 404 de verdade (não redirecione erro para a home).

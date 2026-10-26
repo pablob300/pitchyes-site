@@ -96,6 +96,8 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 | `cards-use-case.html` | Grade compacta de casos de uso | `home/UseCases.tsx` |
 | `cta-band.html` | Faixa "Fale com nossa IA" antes do footer, **em todas as páginas**: textura verde em movimento + véu preto 32%, título branco, botão dourado | `layout/FinalCta.tsx` |
 | `page-headline.html` | Topo das páginas internas | `PageHeadline.tsx` |
+| `blog.html` | Blog: listagens (blog, categoria, tag, autor) e card de artigo | `blog/BlogListing.tsx`, `blog/PostCard.tsx` |
+| `blog-article.html` | Blog: página do artigo (sumário, blocos de CTA/FAQ do editor, faixa final, autor) | `blog/ArticleView.tsx` |
 
 `navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Planos · Integrações · Blog · Contato, sem submenu desde 25/10/2026; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
 

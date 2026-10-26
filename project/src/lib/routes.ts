@@ -29,9 +29,10 @@ export const pages = [
   { path: "/recursos/integracoes", title: "Integrações", description: "A PitchYes conecta com sua telefonia, CRM e agenda atuais.", placeholder: false, updated: "2026-09-19" },
   { path: "/recursos/novidades", title: "Novidades", description: "Lançamentos e atualizações da plataforma PitchYes.", placeholder: false, updated: "2026-09-19" },
 
-  // Blog: standby — will be served from the headless WordPress (see lib/blog.ts).
-  { path: "/blog", title: "Blog", description: "Artigos sobre IA de voz, vendas e atendimento.", placeholder: true, updated: "2026-09-19" },
-  { path: "/blog/categorias", title: "Categorias do blog", description: "Todas as categorias de artigos do blog da PitchYes.", placeholder: true, updated: "2026-09-19" },
+  // Blog próprio (D1, editado em /admin/blog). As URLs de artigos, categorias e tags vêm do
+  // banco e entram em sitemap-blog.xml; aqui ficam só as duas páginas fixas.
+  { path: "/blog", title: "Blog", description: "Artigos sobre IA de voz, vendas e atendimento.", placeholder: false, updated: "2026-10-26" },
+  { path: "/blog/categorias", title: "Categorias do blog", description: "Todas as categorias de artigos do blog da PitchYes.", placeholder: false, updated: "2026-10-26" },
 
   { path: "/sobre", title: "Sobre a PitchYes", description: "Empresa brasileira de voz conversacional com IA para contato, vendas, suporte e atendimento.", placeholder: false, updated: "2026-10-25" },
   { path: "/carreiras", title: "Carreiras", description: "Trabalhe na PitchYes.", placeholder: false, updated: "2026-09-19" },

@@ -26,7 +26,15 @@ export type AuditAction =
   | "conteudo.publicado"
   | "conteudo.descartado"
   | "conteudo.restaurado"
-  | "pagespeed.analisada";
+  | "pagespeed.analisada"
+  | "blog.artigo.salvo"
+  | "blog.artigo.publicado"
+  | "blog.artigo.excluido"
+  | "blog.artigo.restaurado"
+  | "blog.termo.salvo"
+  | "blog.termo.fundido"
+  | "blog.termo.excluido"
+  | "blog.autor.salvo";
 
 export async function audit({
   action,

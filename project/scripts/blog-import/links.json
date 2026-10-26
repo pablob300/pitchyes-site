@@ -1,0 +1,833 @@
+[
+  {
+    "artigo": "/blog/reativacao-clientes-inativos-b2b-ia",
+    "links": [
+      {
+        "para": "/blog/integrar-automacao-por-voz-crm-marketing",
+        "ancora": "CRM"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/atendimento-franquias-expansao-ia-de-voz",
+    "links": [
+      {
+        "para": "/blog/gratificacao-imediata-tempo-de-resposta-ao-cliente",
+        "ancora": "A era da gratificação imediata: por que sua marca não pode mais se dar ao luxo de \"retornar depois\"",
+        "tipo": "leia-tambem"
+      },
+      {
+        "para": "/solucoes/receptivo",
+        "ancora": "atendimento"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/atendimento-24-horas-leads-fora-horario-comercial",
+    "links": [
+      {
+        "para": "/blog/ia-otimizacao-de-anuncios-roi",
+        "ancora": "tráfego pago"
+      },
+      {
+        "para": "/solucoes/receptivo",
+        "ancora": "atendimento"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-de-voz-em-portugues-localizacao-vendas",
+    "links": [
+      {
+        "para": "/blog/ia-de-voz-o-que-os-clientes-acham",
+        "ancora": "IA de voz e vendas: o que os clientes realmente acham?",
+        "tipo": "leia-tambem"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "IA de voz"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-substitui-vendedor-tirador-de-pedido",
+    "links": [
+      {
+        "para": "/blog/profissoes-do-futuro-em-vendas-com-ia",
+        "ancora": "5 Profissões do Futuro que Vão Bombar com a IA nas Vendas",
+        "tipo": "leia-tambem"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/automacao-engessada-vs-inteligencia-de-contexto",
+    "links": [
+      {
+        "para": "/blog/ia-de-voz-em-portugues-localizacao-vendas",
+        "ancora": "sotaque"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/fim-do-vendedor-heroi-infraestrutura-de-conversacao",
+    "links": [
+      {
+        "para": "/blog/expandir-equipe-de-vendas-com-ia",
+        "ancora": "Como Expandir sua Equipe de Vendas com o Poder da Inteligência Artificial",
+        "tipo": "leia-tambem"
+      },
+      {
+        "para": "/solucoes/por-funcao",
+        "ancora": "IA de voz"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/gratificacao-imediata-tempo-de-resposta-ao-cliente",
+    "links": [
+      {
+        "para": "/blog/atendimento-24-horas-leads-fora-horario-comercial",
+        "ancora": "horário comercial"
+      },
+      {
+        "para": "/blog/ia-nas-vendas-novo-perfil-do-consumidor",
+        "ancora": "comportamento do consumidor"
+      },
+      {
+        "para": "/blog/inteligencia-artificial-substitui-sdr",
+        "ancora": "SDRs"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/atendimento-unificado-contexto-do-cliente",
+    "links": [
+      {
+        "para": "/blog/follow-up-de-vendas-apos-ligacao-com-ia",
+        "ancora": "follow-up"
+      },
+      {
+        "para": "/blog/ia-aumenta-conversao-de-leads-em-vendas",
+        "ancora": "taxa de conversão"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/tempo-de-resposta-ao-lead-5-minutos",
+    "links": [
+      {
+        "para": "/blog/ia-otimizacao-de-anuncios-roi",
+        "ancora": "tráfego pago"
+      },
+      {
+        "para": "/blog/integrar-automacao-por-voz-crm-marketing",
+        "ancora": "CRM"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-ligacoes-frias-cold-calling",
+    "links": [
+      {
+        "para": "/blog/automatizar-agendamento-de-reunioes-com-ia",
+        "ancora": "agendamento de reuniões"
+      },
+      {
+        "para": "/blog/etica-inteligencia-artificial-vendas-privacidade",
+        "ancora": "dados pessoais"
+      },
+      {
+        "para": "/blog/expandir-equipe-de-vendas-com-ia",
+        "ancora": "equipe de vendas"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "prospecção"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/spin-selling-com-inteligencia-artificial",
+    "links": [
+      {
+        "para": "/blog/estrategias-de-ia-para-aumentar-vendas",
+        "ancora": "recomendações personalizadas"
+      },
+      {
+        "para": "/blog/analise-de-sentimento-tom-de-voz-vendas",
+        "ancora": "tom de voz"
+      },
+      {
+        "para": "/blog/automatizar-agendamento-de-reunioes-com-ia",
+        "ancora": "agendamento de reuniões"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/inteligencia-artificial-funil-de-vendas",
+    "links": [
+      {
+        "para": "/blog/ia-aumenta-conversao-de-leads-em-vendas",
+        "ancora": "taxas de conversão"
+      },
+      {
+        "para": "/blog/tempo-de-resposta-ao-lead-5-minutos",
+        "ancora": "no momento certo"
+      },
+      {
+        "para": "/blog/estrategias-de-ia-para-aumentar-vendas",
+        "ancora": "recomendações personalizadas"
+      },
+      {
+        "para": "/blog/spin-selling-com-inteligencia-artificial",
+        "ancora": "A Implementação da Inteligência Artificial no Método SPIN Selling: Como Usar IA para Vendas",
+        "tipo": "leia-tambem"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/beneficios-inteligencia-artificial-prospeccao",
+    "links": [
+      {
+        "para": "/blog/inteligencia-artificial-bolha-ou-revolucao",
+        "ancora": "moda passageira"
+      },
+      {
+        "para": "/blog/analise-de-sentimento-tom-de-voz-vendas",
+        "ancora": "análise de sentimentos"
+      },
+      {
+        "para": "/blog/ia-redes-sociais-vendas-engajamento",
+        "ancora": "redes sociais"
+      },
+      {
+        "para": "/blog/futuro-da-prospeccao-com-inteligencia-artificial",
+        "ancora": "O Futuro da Prospecção: O Papel da Inteligência Artificial nos Próximos Anos",
+        "tipo": "leia-tambem"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/inteligencia-artificial-bolha-ou-revolucao",
+    "links": [
+      {
+        "para": "/blog/beneficios-inteligencia-artificial-prospeccao",
+        "ancora": "novas oportunidades"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "Inteligência Artificial"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/expandir-equipe-de-vendas-com-ia",
+    "links": [
+      {
+        "para": "/blog/ia-ligacoes-frias-cold-calling",
+        "ancora": "ligações frias"
+      },
+      {
+        "para": "/blog/atendimento-24-horas-leads-fora-horario-comercial",
+        "ancora": "24 horas por dia"
+      },
+      {
+        "para": "/blog/integrar-automacao-por-voz-crm-marketing",
+        "ancora": "CRM"
+      },
+      {
+        "para": "/blog/fim-do-vendedor-heroi-infraestrutura-de-conversacao",
+        "ancora": "O fim do \"vendedor herói\" e a era da Infraestrutura de Conversação",
+        "tipo": "leia-tambem"
+      },
+      {
+        "para": "/solucoes/por-funcao",
+        "ancora": "equipe de vendas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/etica-inteligencia-artificial-vendas-privacidade",
+    "links": [
+      {
+        "para": "/blog/etica-automatizar-ligacoes-com-ia",
+        "ancora": "ética"
+      },
+      {
+        "para": "/blog/automacao-de-ligacoes-vantagens-e-cuidados",
+        "ancora": "toque humano"
+      },
+      {
+        "para": "/blog/diferenca-chatbot-ura-ia-de-voz",
+        "ancora": "Chatbots"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "ligações automatizadas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/estrategias-de-ia-para-aumentar-vendas",
+    "links": [
+      {
+        "para": "/blog/como-usar-inteligencia-artificial-para-vender-mais",
+        "ancora": "vender mais"
+      },
+      {
+        "para": "/blog/automacao-de-ligacoes-vantagens-e-cuidados",
+        "ancora": "automação de ligações"
+      },
+      {
+        "para": "/blog/tempo-de-resposta-ao-lead-5-minutos",
+        "ancora": "no momento certo"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "Inteligência Artificial"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/cold-call-com-ia-ligacoes-frias",
+    "links": [
+      {
+        "para": "/blog/vozes-realistas-ia-leads-frios",
+        "ancora": "leads frios"
+      },
+      {
+        "para": "/blog/ia-ligacoes-frias-cold-calling",
+        "ancora": "ligações frias"
+      },
+      {
+        "para": "/blog/ia-aumenta-conversao-de-leads-em-vendas",
+        "ancora": "taxa de conversão"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "prospecção"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/mitos-e-verdades-ia-nas-vendas",
+    "links": [
+      {
+        "para": "/blog/vendedor-do-futuro-com-inteligencia-artificial",
+        "ancora": "vendedor do futuro"
+      },
+      {
+        "para": "/blog/diferenca-chatbot-ura-ia-de-voz",
+        "ancora": "Chatbots"
+      },
+      {
+        "para": "/blog/integrar-automacao-por-voz-crm-marketing",
+        "ancora": "CRM"
+      },
+      {
+        "para": "/blog/ia-substitui-vendedor-tirador-de-pedido",
+        "ancora": "A IA não vai substituir o vendedor, vai substituir o \"tirador de pedido\"",
+        "tipo": "leia-tambem"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/roteiros-de-ligacao-com-ia-que-convertem",
+    "links": [
+      {
+        "para": "/blog/ia-de-voz-para-vendas-mil-ligacoes-por-dia",
+        "ancora": "qualificação de leads"
+      },
+      {
+        "para": "/blog/automatizar-agendamento-de-reunioes-com-ia",
+        "ancora": "agendamento de reuniões"
+      },
+      {
+        "para": "/blog/como-usar-inteligencia-artificial-para-vender-mais",
+        "ancora": "vender mais"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "prospecção"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-nas-vendas-para-pequenas-empresas",
+    "links": [
+      {
+        "para": "/blog/tempo-de-resposta-ao-lead-5-minutos",
+        "ancora": "no momento certo"
+      },
+      {
+        "para": "/blog/ia-generativa-scripts-de-vendas-copywriting",
+        "ancora": "scripts de vendas"
+      },
+      {
+        "para": "/blog/como-usar-inteligencia-artificial-para-vender-mais",
+        "ancora": "vender mais"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-redes-sociais-vendas-engajamento",
+    "links": [
+      {
+        "para": "/blog/inteligencia-artificial-funil-de-vendas",
+        "ancora": "funil de vendas"
+      },
+      {
+        "para": "/blog/ia-otimizacao-de-anuncios-roi",
+        "ancora": "anúncios pagos"
+      },
+      {
+        "para": "/blog/follow-up-de-vendas-apos-ligacao-com-ia",
+        "ancora": "follow-up"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "ligações automatizadas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-otimizacao-de-anuncios-roi",
+    "links": [
+      {
+        "para": "/blog/termos-de-inteligencia-artificial-para-vendas",
+        "ancora": "machine learning"
+      },
+      {
+        "para": "/blog/inteligencia-artificial-funil-de-vendas",
+        "ancora": "funil de vendas"
+      },
+      {
+        "para": "/blog/ia-nas-vendas-novo-perfil-do-consumidor",
+        "ancora": "comportamento do consumidor"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "Inteligência Artificial"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-de-voz-o-que-os-clientes-acham",
+    "links": [
+      {
+        "para": "/blog/ia-generativa-em-vendas-tendencias",
+        "ancora": "IA generativa"
+      },
+      {
+        "para": "/blog/ia-de-voz-para-vendas-mil-ligacoes-por-dia",
+        "ancora": "qualificação de leads"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "IA de voz"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-generativa-scripts-de-vendas-copywriting",
+    "links": [
+      {
+        "para": "/blog/roteiros-de-ligacao-com-ia-que-convertem",
+        "ancora": "roteiro de ligação"
+      },
+      {
+        "para": "/blog/ia-nas-vendas-para-pequenas-empresas",
+        "ancora": "pequenas empresas"
+      },
+      {
+        "para": "/blog/ia-generativa-em-vendas-tendencias",
+        "ancora": "IA generativa"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "prospecção"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/reduzir-churn-saas-com-ia",
+    "links": [
+      {
+        "para": "/blog/estrategias-de-ia-para-aumentar-vendas",
+        "ancora": "recomendações personalizadas"
+      },
+      {
+        "para": "/blog/termos-de-inteligencia-artificial-para-vendas",
+        "ancora": "machine learning"
+      },
+      {
+        "para": "/blog/reativacao-clientes-inativos-b2b-ia",
+        "ancora": "A mina de ouro esquecida: o faturamento oculto na base de inativos do seu B2B",
+        "tipo": "leia-tambem"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/analise-de-sentimento-tom-de-voz-vendas",
+    "links": [
+      {
+        "para": "/blog/ia-redes-sociais-vendas-engajamento",
+        "ancora": "redes sociais"
+      },
+      {
+        "para": "/blog/inteligencia-artificial-funil-de-vendas",
+        "ancora": "funil de vendas"
+      },
+      {
+        "para": "/blog/termos-de-inteligencia-artificial-para-vendas",
+        "ancora": "Machine Learning"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/case-prospeccao-automatizada-ia-72-horas",
+    "links": [
+      {
+        "para": "/blog/ia-de-voz-prospeccao-outbound",
+        "ancora": "outbound"
+      },
+      {
+        "para": "/blog/follow-up-de-vendas-apos-ligacao-com-ia",
+        "ancora": "follow-up"
+      },
+      {
+        "para": "/blog/automacao-engessada-vs-inteligencia-de-contexto",
+        "ancora": "robótico"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "ligações automatizadas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-de-voz-prospeccao-outbound",
+    "links": [
+      {
+        "para": "/blog/cold-call-com-ia-ligacoes-frias",
+        "ancora": "ligação fria"
+      },
+      {
+        "para": "/blog/inteligencia-artificial-substitui-sdr",
+        "ancora": "SDRs"
+      },
+      {
+        "para": "/blog/tempo-de-resposta-ao-lead-5-minutos",
+        "ancora": "no momento certo"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "ligações automatizadas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-de-voz-para-vendas-mil-ligacoes-por-dia",
+    "links": [
+      {
+        "para": "/blog/inteligencia-artificial-substitui-sdr",
+        "ancora": "SDR"
+      },
+      {
+        "para": "/blog/vozes-realistas-ia-leads-frios",
+        "ancora": "leads frios"
+      },
+      {
+        "para": "/blog/diferenca-chatbot-ura-ia-de-voz",
+        "ancora": "chatbots"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "ligações automatizadas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/termos-de-inteligencia-artificial-para-vendas",
+    "links": [
+      {
+        "para": "/blog/diferenca-chatbot-ura-ia-de-voz",
+        "ancora": "chatbots"
+      },
+      {
+        "para": "/blog/ia-nas-vendas-novo-perfil-do-consumidor",
+        "ancora": "comportamento do consumidor"
+      },
+      {
+        "para": "/blog/inteligencia-artificial-funil-de-vendas",
+        "ancora": "funil de vendas"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "Inteligência Artificial"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/como-funciona-voz-de-ia-que-vende",
+    "links": [
+      {
+        "para": "/blog/cold-call-com-ia-ligacoes-frias",
+        "ancora": "ligação fria"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/como-usar-inteligencia-artificial-para-vender-mais",
+    "links": [
+      {
+        "para": "/blog/inteligencia-artificial-funil-de-vendas",
+        "ancora": "funil de vendas"
+      },
+      {
+        "para": "/blog/roteiros-de-ligacao-com-ia-que-convertem",
+        "ancora": "roteiros de vendas"
+      },
+      {
+        "para": "/blog/atendimento-24-horas-leads-fora-horario-comercial",
+        "ancora": "24/7"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "inteligência artificial"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/inteligencia-artificial-substitui-sdr",
+    "links": [
+      {
+        "para": "/blog/ia-de-voz-o-que-os-clientes-acham",
+        "ancora": "vozes sintéticas"
+      },
+      {
+        "para": "/blog/ia-de-voz-para-vendas-mil-ligacoes-por-dia",
+        "ancora": "Qualificar leads"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "prospecção"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/follow-up-de-vendas-apos-ligacao-com-ia",
+    "links": [
+      {
+        "para": "/blog/automacao-de-ligacoes-vantagens-e-cuidados",
+        "ancora": "toque humano"
+      },
+      {
+        "para": "/blog/case-prospeccao-automatizada-ia-72-horas",
+        "ancora": "Como a Inteligência Artificial e a Prospecção Automatizada Salvaram um Mês de Vendas: Case Real com Aumento de Conversões em 72h",
+        "tipo": "leia-tambem"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "ligações automatizadas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/futuro-da-prospeccao-com-inteligencia-artificial",
+    "links": [
+      {
+        "para": "/blog/ia-de-voz-prospeccao-outbound",
+        "ancora": "Personalização em escala"
+      },
+      {
+        "para": "/blog/ia-de-voz-para-vendas-mil-ligacoes-por-dia",
+        "ancora": "milhares de ligações"
+      },
+      {
+        "para": "/blog/ia-redes-sociais-vendas-engajamento",
+        "ancora": "redes sociais"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "prospecção"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/vozes-realistas-ia-leads-frios",
+    "links": [
+      {
+        "para": "/blog/automacao-engessada-vs-inteligencia-de-contexto",
+        "ancora": "robóticas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-aumenta-conversao-de-leads-em-vendas",
+    "links": [
+      {
+        "para": "/blog/tempo-de-resposta-ao-lead-5-minutos",
+        "ancora": "Contato Imediato"
+      },
+      {
+        "para": "/blog/inteligencia-artificial-substitui-sdr",
+        "ancora": "SDRs"
+      },
+      {
+        "para": "/blog/follow-up-de-vendas-apos-ligacao-com-ia",
+        "ancora": "Follow Up"
+      },
+      {
+        "para": "/solucoes/ativo",
+        "ancora": "IA de voz"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/automatizar-agendamento-de-reunioes-com-ia",
+    "links": [
+      {
+        "para": "/blog/follow-up-de-vendas-apos-ligacao-com-ia",
+        "ancora": "Follow-up"
+      },
+      {
+        "para": "/blog/ia-aumenta-conversao-de-leads-em-vendas",
+        "ancora": "taxa de conversão"
+      },
+      {
+        "para": "/blog/inteligencia-artificial-substitui-sdr",
+        "ancora": "SDRs"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/etica-automatizar-ligacoes-com-ia",
+    "links": [
+      {
+        "para": "/blog/como-funciona-voz-de-ia-que-vende",
+        "ancora": "voz de IA"
+      },
+      {
+        "para": "/blog/automacao-de-ligacoes-vantagens-e-cuidados",
+        "ancora": "automação de ligações"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "IA de voz"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/diferenca-chatbot-ura-ia-de-voz",
+    "links": [
+      {
+        "para": "/blog/atendimento-franquias-expansao-ia-de-voz",
+        "ancora": "O gargalo invisível: por que a expansão da sua franquia morre no atendimento humano",
+        "tipo": "leia-tambem"
+      },
+      {
+        "para": "/solucoes/receptivo",
+        "ancora": "atendimento"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/integrar-automacao-por-voz-crm-marketing",
+    "links": [
+      {
+        "para": "/blog/atendimento-unificado-contexto-do-cliente",
+        "ancora": "retrabalho"
+      },
+      {
+        "para": "/blog/ia-de-voz-para-vendas-mil-ligacoes-por-dia",
+        "ancora": "qualificar leads"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-nas-vendas-novo-perfil-do-consumidor",
+    "links": [
+      {
+        "para": "/blog/diferenca-chatbot-ura-ia-de-voz",
+        "ancora": "chatbots"
+      },
+      {
+        "para": "/blog/automacao-engessada-vs-inteligencia-de-contexto",
+        "ancora": "robóticas"
+      },
+      {
+        "para": "/blog/estrategias-de-ia-para-aumentar-vendas",
+        "ancora": "Amazon"
+      },
+      {
+        "para": "/solucoes/receptivo",
+        "ancora": "atendimento"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/profissoes-do-futuro-em-vendas-com-ia",
+    "links": [
+      {
+        "para": "/blog/ia-generativa-scripts-de-vendas-copywriting",
+        "ancora": "copywriting"
+      },
+      {
+        "para": "/blog/vendedor-do-futuro-com-inteligencia-artificial",
+        "ancora": "vendedor do futuro"
+      },
+      {
+        "para": "/blog/beneficios-inteligencia-artificial-prospeccao",
+        "ancora": "novas oportunidades"
+      },
+      {
+        "para": "/solucoes/por-funcao",
+        "ancora": "IA de voz"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/automacao-de-ligacoes-vantagens-e-cuidados",
+    "links": [
+      {
+        "para": "/blog/vozes-realistas-ia-leads-frios",
+        "ancora": "vozes realistas"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/ia-generativa-em-vendas-tendencias",
+    "links": [
+      {
+        "para": "/blog/reduzir-churn-saas-com-ia",
+        "ancora": "churn"
+      },
+      {
+        "para": "/blog/estrategias-de-ia-para-aumentar-vendas",
+        "ancora": "Amazon"
+      },
+      {
+        "para": "/solucoes",
+        "ancora": "IA de voz"
+      }
+    ]
+  },
+  {
+    "artigo": "/blog/vendedor-do-futuro-com-inteligencia-artificial",
+    "links": [
+      {
+        "para": "/blog/mitos-e-verdades-ia-nas-vendas",
+        "ancora": "substituir os vendedores"
+      },
+      {
+        "para": "/blog/integrar-automacao-por-voz-crm-marketing",
+        "ancora": "CRM"
+      },
+      {
+        "para": "/blog/ia-aumenta-conversao-de-leads-em-vendas",
+        "ancora": "taxas de conversão"
+      }
+    ]
+  }
+]
