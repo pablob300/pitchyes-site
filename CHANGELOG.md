@@ -8,6 +8,18 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-26: "Fale com nossa IA" do blog leva ao contato
+
+Commit `8a4f389` · Cloudflare `7684cf74`
+
+- Nas páginas do blog, os três "Fale com nossa IA" (cabeçalho, caixa no fim do artigo e faixa final)
+  apontam para `/contato`; no resto do site continuam no player da home. Regra única em
+  `talkToAiHref()` (`lib/routes.ts`), usada pelo cabeçalho e pelo novo `TalkToAiButton` da faixa.
+
+Auditoria no ar: 92/92; home estática, zero `data-edit`.
+
+---
+
 ## 2026-10-26: Planos Blitz, Starter, Pro e Enterprise e estabilidade do Worker
 
 Commits `645f766`, `7bdfc96` · Cloudflare `cb9ed769`
