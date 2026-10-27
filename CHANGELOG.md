@@ -8,6 +8,25 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-26: Logos de clientes editáveis na página /clientes
+
+Commit `bd3bc3f` · Cloudflare `e48238cf`
+
+- A gaveta de `/clientes` ganha a seção **"Clientes (logos)"** (antes "Parede de logos", só na
+  home): adicionar, remover, reordenar e editar marca a marca (nome e logo). É a mesma lista
+  global (`/_site`) da faixa da home — publicar em qualquer uma das duas páginas muda as duas.
+  Clicar na grade de logos do preview abre a seção.
+- Logo novo vai como PNG ou WebP com fundo transparente; largura e altura se acertam ao enviar.
+  SVG continua fora do upload (pode carregar script e seria servido pelo próprio domínio); os
+  logos atuais em `/public/logos` seguem funcionando.
+- **Corrigido no editor (todas as páginas):** quando o preview terminava de carregar antes de o
+  painel montar (página lenta), nenhum campo ficava clicável. O painel agora liga o preview na hora
+  se ele já carregou, e liga cada documento uma vez só (antes, toda recarga ligava duas vezes).
+- Teste no ar: "MidHaus" renomeado em `/clientes`, publicado, visto na home e em `/clientes`,
+  revertido; a sobreposição de `/_site` voltou a `{}` (o código continua mandando na lista).
+  Zero `data-edit` no HTML público; auditoria 92/92 (numa rodada, uma página deu 503 do limite
+  de CPU do plano Free e passou ao repetir).
+
 ## 2026-10-26: Editor visual em todas as páginas internas
 
 Commits `2c1d392`, `984e08f` · Cloudflare `5f3ac197`
