@@ -30,7 +30,8 @@ Leia antes de qualquer alteração no site:
 | Menu do painel (seções e submenus) | `project/src/lib/admin/nav.ts` |
 | PageSpeed no painel (chamada ao Google, relatório, textos em português) | `project/src/lib/admin/pagespeed/` (`guide.ts` traduz cada auditoria) |
 | Blog (artigos, categorias, tags, autores) | Painel `/admin/blog`; código em `project/src/lib/blog.ts` e `project/src/lib/blog/` |
-| Resumo do site para IAs | `project/src/app/llms.txt/route.ts` |
+| Resumo do site para IAs | `project/src/app/llms.txt/route.ts` (texto completo: `llms-full.txt/route.ts`; afirmações ainda sem prova que ficam fora deles: `lib/content/claims.ts`) |
+| JSON-LD das páginas internas | `project/src/lib/content/jsonld.ts` (`innerPageGraph`) |
 | Cores, tipografia, espaçamento, motion | `project/src/styles/tokens/` (espelham `System/tokens/`) |
 
 **Página nova com conteúdo real:** crie `project/src/app/<caminho>/page.tsx` (tem prioridade

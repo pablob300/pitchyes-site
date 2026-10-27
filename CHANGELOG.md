@@ -8,6 +8,31 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-26: SEO para buscas de IA de voz (técnico) e relatório de texto
+
+Commit `581ae5d` · Cloudflare `b39ec08e` · Relatório: `docs/Analise-SEO-PitchYes.docx` e `.pdf`
+
+- **Títulos e H1:** 14 títulos (código e `page_meta`) e 11 H1 passam a começar pelo termo que se
+  busca (“IA de voz para empresas”, “URA inteligente”, “prospecção e SDR”, “preços de IA de voz”).
+  Home: “IA de voz para empresas: agentes de ligação | PitchYes”. Datas de revisão atualizadas.
+- **Estrutura:** rodapé deixa de gerar seis `h2` em toda página; home sai de 1 para 8 links
+  internos no conteúdo (cards de casos de uso, com campo “Link” no editor); 10 cards das páginas de
+  solução ligados à página que aprofunda o assunto.
+- **Schema:** Organization com CNPJ, área e `knowsAbout`; `SoftwareApplication` na home e em
+  /planos (ofertas lidas da tabela de planos); `Service` com tipo próprio por página de solução;
+  AboutPage, ContactPage, CollectionPage; ItemList de clientes; breadcrumb com nomes do menu e
+  hierarquia; `dateModified`. As 15 rotas internas usam um gerador só (`lib/content/jsonld.ts`).
+  og:title da home sem “| PitchYes” repetido.
+- **IA:** `/llms.txt` com categoria e sinônimos, descrições reais, FAQ da home e link para o novo
+  `/llms-full.txt` (texto completo das páginas). Certificações da home (SOC 2, HIPAA, PCI DSS,
+  FedRAMP) ficam fora dos dois até serem comprovadas. `/llms.txt` virou ISR de 5 min (dava 1102) e
+  é revalidado ao publicar no painel. `robots.txt` com mais robôs de IA.
+- **Auditoria:** confere `/llms.txt`, `/llms-full.txt` e `robots.txt`; aceita AboutPage/ContactPage.
+  Resultado no ar: 92/92 páginas e os três arquivos aprovados.
+- **Relatório (texto, a fazer pela equipe):** afirmações a confirmar (certificações, latência 800 ms
+  × 400 ms, 400+/94%/3x, 40 idiomas, setores divergentes), o que escrever em cada página, páginas
+  novas (uma por setor, guias de IA de voz, preço, comparação, cases), blog e autoridade externa.
+
 ## 2026-10-26: Logos de clientes editáveis na página /clientes
 
 Commit `bd3bc3f` · Cloudflare `e48238cf`
@@ -999,6 +1024,9 @@ Commit `c25ca10`
 
 - [ ] Validar com o jurídico as certificações (SOC 2, HIPAA, PCI DSS, FedRAMP) e a menção à LGPD.
 - [ ] Revisar as respostas adaptadas do FAQ: prazo de implantação e "mais de 40 idiomas".
+- [ ] Unificar a latência (home 800 ms × receptivo 400 ms) e dar fonte ou retirar 400+ / 94% / 3x
+      (Sobre, Contato) — ver `docs/Analise-SEO-PitchYes.pdf`, cap. 5.
+- [ ] Texto das páginas conforme o relatório de SEO (cap. 6–8): páginas por setor, guias, cases.
 - [ ] Validar os valores dos planos na página de Preços (hoje são referência, não tabela aprovada).
 - [ ] Publicar e-mail, telefone/WhatsApp e endereço na página de Contato.
 - [ ] Confirmar a lista de integrações nativas.

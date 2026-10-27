@@ -49,6 +49,8 @@ Estado atual e histórico das versões: [CHANGELOG.md](CHANGELOG.md).
 
 - `/llms.txt` é o resumo oficial do site para modelos: o que a empresa faz, os fatos citáveis
   e o mapa de páginas. **Mantenha sincronizado com o site.** Divergência gera citação errada.
+  `/llms-full.txt` traz o texto completo das páginas comerciais, gerado do conteúdo publicado.
+  Afirmação ainda sem comprovação fica fora dos dois (`lib/content/claims.ts`); a auditoria confere.
 - `robots.txt` (`project/src/app/robots.ts`) libera explicitamente os robôs de IA
   (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended, CCBot e outros).
   Remover um nome dessa lista é uma decisão de negócio, não de código.
