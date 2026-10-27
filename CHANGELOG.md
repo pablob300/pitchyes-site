@@ -8,6 +8,18 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-27: Landing pages — espaço dos botões e âncoras que rolam sempre
+
+Commit `6e665bf` · Cloudflare `8c94be38`
+
+- Os botões de chamada abaixo dos blocos estavam a ~8px do conteúdo de cima; agora ficam a 40px
+  (e a 80px do bloco seguinte).
+- Âncoras da landing page (menu, "Testar agora" e botões para o formulário) passam a rolar a cada
+  clique. Antes, com o endereço já em `#formulario`, o segundo clique não fazia nada: os botões
+  usavam o `<Link>` do Next. Agora são `<a>` comuns, e `landing/AnchorScroll.tsx` faz a rolagem.
+- Testado no ar com cliques reais: botões do meio e do fim da página, item do menu e
+  "Testar agora" duas vezes seguidas.
+
 ## 2026-10-27: Landing Pages, Configurações (GTM) e perfil comercial dos leads
 
 Commit `25449bd` · Cloudflare `4134c1be` · Migração `0009_landing_pages.sql` aplicada no D1 remoto
