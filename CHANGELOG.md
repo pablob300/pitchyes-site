@@ -8,6 +8,21 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-27: Landing pages — 25Mi+ ligações e eficiência da IA em barras
+
+Commit `e5990a4` · Cloudflare `3a764e55`
+
+- "20Mi+ ligações" virou "25Mi+ ligações" no topo, igual ao bloco de números, no modelo
+  (`content/landing/modelo.ts`) e na LP "Cadastro".
+- "Eficiência da IA: 94,7%" agora é um box com duas barras de 0 a 100%: Qualificação 92% e
+  Conversão 76%. As barras são uma opção nova do bloco de números ("Mostrar como barras de 0 a
+  100%, dentro de um box", no editor), no mesmo visual das barras de latência da home: trilho
+  neutro, preenchimento menta (`--color-accent-secondary`), número por cima. Referência em
+  `System/components/landing-page.html`.
+- LP "Cadastro": o rascunho foi ajustado no banco (era igual ao publicado) e publicado pelo
+  editor, com a versão guardada no histórico. Conferido no ar: 25Mi+ nos dois lugares e as
+  barras em 92% e 76%.
+
 ## 2026-10-27: Landing pages — espaço dos botões e âncoras que rolam sempre
 
 Commit `6e665bf` · Cloudflare `8c94be38`
@@ -1088,8 +1103,7 @@ Commit `c25ca10`
 - [ ] Dar fonte ou retirar 400+ / 94% / 3x (Sobre, Contato) — ver
       `docs/Analise-SEO-PitchYes.pdf`, cap. 5. (Latência unificada em 800 ms em 2026-10-27.)
 - [ ] Texto das páginas conforme o relatório de SEO (cap. 6–8): páginas por setor, guias, cases.
-- [ ] Landing page "Cadastro": dar fonte ou retirar os números do modelo (20Mi+ e 25Mi+ ligações
-      divergem, 400+, 85%, 98%, 94,7%, funil, 300%/70%, 4.9/5, 99,9%), validar com o jurídico o
+- [ ] Landing page "Cadastro": dar fonte ou retirar os números do modelo (25Mi+ ligações, 400+, 85%, 98%, 94,7%, funil, 300%/70%, 4.9/5, 99,9%), validar com o jurídico o
       comparativo com concorrentes citados pelo nome e confirmar o depoimento "Marina Rodriguez,
       GrowthCore" — `TODO` em `content/landing/modelo.ts`.
 - [ ] Criar no GTM (`GTM-5RJVHV3F`, cadastrado em Configurações em 2026-10-27) a tag de conversão
