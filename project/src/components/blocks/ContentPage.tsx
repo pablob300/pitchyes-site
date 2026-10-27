@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LeadForm } from "@/components/forms/LeadForm";
-import { ButtonLink } from "@/components/ui/Button";
+import { buttonClass, ButtonLink } from "@/components/ui/Button";
 import { FORM_ANCHOR } from "@/content/landing/modelo";
 import type { Block, PageContent } from "@/content/types";
 import { editFn, scoped, type EditFn } from "@/lib/content/edit";
@@ -553,9 +553,10 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
               ))}
             </ul>
             <div data-reveal>
-              <ButtonLink href={`#${FORM_ANCHOR}`} size="lg" {...e("button")}>
+              {/* <a> e não <Link>: âncora para a mesma página precisa rolar a cada clique. */}
+              <a href={`#${FORM_ANCHOR}`} className={buttonClass("solid", "lg")} {...e("button")}>
                 {block.button} →
-              </ButtonLink>
+              </a>
             </div>
           </div>
         </section>

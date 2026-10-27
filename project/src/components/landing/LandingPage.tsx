@@ -1,11 +1,12 @@
 import { ContentBlock } from "@/components/blocks/ContentPage";
 import { Logo } from "@/components/Logo";
-import { ButtonLink } from "@/components/ui/Button";
+import { buttonClass } from "@/components/ui/Button";
 import { FORM_ANCHOR } from "@/content/landing/modelo";
 import type { Block } from "@/content/types";
 import { editFn, scoped } from "@/lib/content/edit";
 import { company } from "@/lib/company";
 import type { BrandImage } from "@/lib/site-settings";
+import { AnchorScroll } from "./AnchorScroll";
 import styles from "./LandingPage.module.css";
 
 // Landing page (/conteudo/<slug>): os blocos do conteúdo, com topo e rodapé próprios.
@@ -13,6 +14,10 @@ import styles from "./LandingPage.module.css";
 // Regra da landing page: quem chega fica. Nenhum link leva para outra página do site — o
 // menu é de âncoras para os blocos e todo botão de chamada leva ao formulário (#formulario).
 // A única saída é a Política de Privacidade, aberta em outra aba ao lado do formulário (LGPD).
+//
+// Os botões para o formulário são <a> comuns, não o <Link> do Next, e o clique nas âncoras é
+// tratado por AnchorScroll: com o endereço já em "#formulario" (depois do primeiro clique),
+// o navegador não rolaria de novo.
 //
 // Mesmos componentes no site e no editor: `editable` só acrescenta os data-edit.
 
@@ -34,6 +39,7 @@ export function LandingPage({
 
   return (
     <>
+      <AnchorScroll />
       <a className="skip-link" href="#conteudo">
         Pular para o conteúdo
       </a>
@@ -54,9 +60,9 @@ export function LandingPage({
               </ul>
             </nav>
           )}
-          <ButtonLink href={`#${FORM_ANCHOR}`} className={styles.headerCta}>
+          <a href={`#${FORM_ANCHOR}`} className={buttonClass("solid", "md", styles.headerCta)}>
             Testar agora
-          </ButtonLink>
+          </a>
         </div>
       </header>
 
@@ -68,9 +74,9 @@ export function LandingPage({
               <ContentBlock block={block} e={e} slug={slug} />
               {block.cta?.trim() && (
                 <div className={`container ${styles.blockCta}`} data-reveal>
-                  <ButtonLink href={`#${FORM_ANCHOR}`} size="lg" {...e("cta")}>
+                  <a href={`#${FORM_ANCHOR}`} className={buttonClass("solid", "lg")} {...e("cta")}>
                     {block.cta} →
-                  </ButtonLink>
+                  </a>
                 </div>
               )}
             </div>

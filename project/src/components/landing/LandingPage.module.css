@@ -47,11 +47,12 @@
 /* Âncora não fica escondida atrás do topo fixo. */
 .block :global([id]) { scroll-margin-top: calc(var(--nav-height) + var(--space-4)); }
 
-/* Botão de chamada abaixo de um bloco: sobe para dentro do respiro inferior da seção. */
+/* Botão de chamada abaixo de um bloco: ocupa metade do respiro inferior da seção, então
+   fica a 40px do conteúdo de cima e a 80px do bloco seguinte. */
 .blockCta {
   display: flex;
   justify-content: center;
-  margin-top: calc(-1 * var(--section-lg) + var(--space-2));
+  margin-top: calc(-0.5 * var(--section-lg));
   padding-bottom: var(--section-lg);
 }
 
