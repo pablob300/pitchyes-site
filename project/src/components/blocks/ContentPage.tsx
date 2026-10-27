@@ -10,6 +10,13 @@ import { getLeadForm, landingForm } from "@/lib/leads";
 import styles from "./blocks.module.css";
 import { VideoFacade } from "./VideoFacade";
 
+/** "92%" ou "94,7 %" → 92 / 94.7 (entre 0 e 100); o que não for percentual → null. */
+function percentOf(value: string): number | null {
+  const match = value.trim().match(/^(\d+(?:[.,]\d+)?)\s*%$/);
+  if (!match) return null;
+  return Math.min(100, Math.max(0, Number(match[1].replace(",", "."))));
+}
+
 /** Aviso de privacidade abaixo dos formulários. Na landing page abre em outra aba: a pessoa não sai da página. */
 function PrivacyNote({ newTab }: { newTab?: boolean }) {
   return (
@@ -90,6 +97,39 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
       );
 
     case "stats":
+      if (block.bars) {
+        return (
+          <section className="section" id={block.id}>
+            <div className="container">
+              <div className={styles.barsBox} data-reveal>
+                {block.title && <h2 {...e("title")}>{block.title}</h2>}
+                {block.lead && (
+                  <p className="lead" {...e("lead")}>
+                    {block.lead}
+                  </p>
+                )}
+                <dl className={styles.bars} {...e("items")}>
+                  {block.items.map((item, j) => {
+                    const percent = percentOf(item.value);
+                    return (
+                      <div key={`${j}-${item.label}`} className={styles.barRow}>
+                        <dt>{item.label}</dt>
+                        <dd className={styles.barTrack}>
+                          {percent !== null && (
+                            // Largura final já no HTML do servidor: sem JavaScript a barra aparece igual.
+                            <span className={styles.barFill} style={{ width: `${percent}%` }} aria-hidden="true" />
+                          )}
+                          <span className={styles.barValue}>{item.value}</span>
+                        </dd>
+                      </div>
+                    );
+                  })}
+                </dl>
+              </div>
+            </div>
+          </section>
+        );
+      }
       return (
         <section className="section" id={block.id}>
           <div className="container">

@@ -7,7 +7,7 @@ import type { Block } from "@/content/types";
 // modelo para o banco — mudar algo aqui só afeta as páginas criadas depois.
 //
 // TODO(comercial): os números abaixo vieram da página de referência e ainda não têm fonte
-// (SEO.md §1.5): 20Mi+/25Mi+ ligações (divergem entre si), 400+ empresas, 85% de eficiência,
+// (SEO.md §1.5): 25Mi+ ligações, 400+ empresas, 85% de eficiência,
 // 6h/dia, 98%, 5 min, funil de 1.000 ligações, 300%/70%/85%/ROI em 30 dias, 94,7%/92%/76%,
 // 4.9/5, 99,9% de disponibilidade. Por isso as landing pages ficam fora do /llms.txt.
 // TODO(jurídico): comparativo com concorrentes citados pelo nome e o depoimento de
@@ -41,7 +41,7 @@ const blocks: [string, Block][] = [
         "Atendimento ao cliente 24 horas por dia, 7 dias por semana",
         "Integração com WhatsApp e e-mail",
       ],
-      proof: "20Mi+ ligações · 400+ empresas · 85% de eficiência",
+      proof: "25Mi+ ligações · 400+ empresas · 85% de eficiência",
       formTitle: "Fale com a PitchYes",
       submitLabel: "Quero conhecer",
       formNote: "Sem compromisso. Resposta em até 2 horas úteis.",
@@ -194,6 +194,7 @@ const blocks: [string, Block][] = [
       kind: "stats",
       id: "eficiencia",
       title: "Eficiência da IA: 94,7%",
+      bars: true,
       items: [
         { value: "92%", label: "Qualificação" },
         { value: "76%", label: "Conversão" },

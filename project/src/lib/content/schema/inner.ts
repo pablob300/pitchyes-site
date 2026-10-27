@@ -74,7 +74,13 @@ export function blockSection(block: Block, prefix: string, label: string): Secti
     case "stats":
       return {
         ...base,
-        fields: [{ ...titleField, optional: true }, leadField],
+        fields: [
+          { ...titleField, optional: true },
+          leadField,
+          f("bars", "Mostrar como barras de 0 a 100%, dentro de um box", "booleano", {
+            help: "Cada número precisa ser um percentual, como 92%.",
+          }),
+        ],
         lists: [list(p("items"), "Números", "label", [f("value", "Número", "texto", { max: 16, help: "Só número com fonte (SEO.md §1.5)." }), f("label", "Legenda", "texto", { max: 80 })], { value: "0", label: "Legenda" })],
       };
     case "checklist":

@@ -34,6 +34,14 @@
   .funnel strong { font-size: 28px; }
   .funnel em { font-style: normal; font-weight: 600; color: var(--color-accent-secondary-ink); }
 
+  /* Números em barras de 0 a 100%, dentro de um box (bloco "stats" com bars) */
+  .barsBox { max-width: 820px; margin: var(--space-7) auto; padding: var(--space-7) var(--space-6); background: var(--color-bg-subtle); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); display: grid; gap: var(--space-5); }
+  .barsBox h2 { margin: 0; }
+  .barRow { display: grid; grid-template-columns: 160px 1fr; align-items: center; gap: var(--space-5); font-size: 15px; font-weight: 500; }
+  .barTrack { position: relative; height: 48px; background: var(--color-bg); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); overflow: hidden; }
+  .barTrack span { position: absolute; inset: 0 auto 0 0; background: var(--color-accent-secondary); border-radius: var(--radius-sm); }
+  .barTrack b { position: absolute; top: 50%; left: var(--space-4); transform: translateY(-50%); font-weight: 600; }
+
   /* Botão de chamada abaixo de um bloco */
   .cta { display: flex; justify-content: center; padding-bottom: 80px; }
 
@@ -73,6 +81,11 @@
       <li style="width:80%"><strong>200</strong><span>Boas conversas</span><em>66%</em></li>
     </ol>
     <div class="cta"><a class="btn" href="#">Solicitar demonstração →</a></div>
+    <div class="barsBox">
+      <h2>Eficiência da IA: 94,7%</h2>
+      <div class="barRow">Qualificação<div class="barTrack"><span style="width:92%"></span><b>92%</b></div></div>
+      <div class="barRow">Conversão<div class="barTrack"><span style="width:76%"></span><b>76%</b></div></div>
+    </div>
   </section>
 
   <section class="final">

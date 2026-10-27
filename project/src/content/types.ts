@@ -14,7 +14,18 @@ export type Block = (
       items: { title: string; text: string; href?: string }[];
     }
   | { kind: "steps"; title: string; lead?: string; steps: { label: string; title: string; text: string }[] }
-  | { kind: "stats"; title?: string; lead?: string; items: { value: string; label: string }[] }
+  | {
+      kind: "stats";
+      title?: string;
+      lead?: string;
+      items: { value: string; label: string }[];
+      /**
+       * Percentuais em barras de 0 a 100%, dentro de um box (ex.: "Eficiência da IA" das
+       * landing pages). Cada `value` precisa ser um percentual ("92%"); o que não for número
+       * aparece só como texto.
+       */
+      bars?: boolean;
+    }
   | { kind: "checklist"; title: string; lead?: string; items: string[] }
   | {
       kind: "cases";
