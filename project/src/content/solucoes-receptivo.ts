@@ -41,7 +41,7 @@ export const solucoesReceptivo: PageContent = {
         { value: "24/7", label: "Cobertura de atendimento, incluindo feriados e madrugada" },
         { value: "0", label: "Tempo de fila: toda chamada é atendida no primeiro toque" },
         { value: "100%", label: "Das ligações transcritas, avaliadas e pesquisáveis" },
-        { value: "400ms", label: "Latência média de resposta na conversa" },
+        { value: "800ms", label: "Latência média de resposta na conversa" },
       ],
     },
     {

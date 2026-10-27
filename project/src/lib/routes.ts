@@ -16,7 +16,7 @@ export const pages = [
 
   { path: "/solucoes", title: "Soluções", description: "Como a IA de voz da PitchYes atende ligações ativas e receptivas em escala.", placeholder: false, updated: "2026-10-26" },
   { path: "/solucoes/ativo", title: "Ligações ativas", description: "Prospecção, qualificação de leads, confirmação de reuniões e follow-up com IA de voz.", placeholder: false, updated: "2026-10-26" },
-  { path: "/solucoes/receptivo", title: "Atendimento receptivo", description: "Todo cliente atendido, qualificado e direcionado, 24 horas por dia.", placeholder: false, updated: "2026-10-26" },
+  { path: "/solucoes/receptivo", title: "Atendimento receptivo", description: "Todo cliente atendido, qualificado e direcionado, 24 horas por dia.", placeholder: false, updated: "2026-10-27" },
   { path: "/solucoes/por-setor", title: "Soluções por setor", description: "IA de voz para saúde, seguros, serviços financeiros, imobiliário e mais.", placeholder: false, updated: "2026-10-26" },
   { path: "/solucoes/por-funcao", title: "Soluções por função", description: "IA de voz para vendas, atendimento, cobrança e operações.", placeholder: false, updated: "2026-10-26" },
 
