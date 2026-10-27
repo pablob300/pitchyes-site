@@ -8,6 +8,14 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-27: Latência unificada em 800 ms
+
+Commit `f19a952` · Cloudflare `287c51f3`
+
+- `/solucoes/receptivo` dizia 400 ms; passa a 800 ms, o número da home (confirmado como o correto).
+  Era a única divergência: blog, sobreposições do painel e `/llms.txt` já usavam 800 ms.
+  Data de revisão da página atualizada em `routes.ts` e `page_meta`. Auditoria: 92/92.
+
 ## 2026-10-26: SEO para buscas de IA de voz (técnico) e relatório de texto
 
 Commit `581ae5d` · Cloudflare `b39ec08e` · Relatório: `docs/Analise-SEO-PitchYes.docx` e `.pdf`
@@ -1024,8 +1032,8 @@ Commit `c25ca10`
 
 - [ ] Validar com o jurídico as certificações (SOC 2, HIPAA, PCI DSS, FedRAMP) e a menção à LGPD.
 - [ ] Revisar as respostas adaptadas do FAQ: prazo de implantação e "mais de 40 idiomas".
-- [ ] Unificar a latência (home 800 ms × receptivo 400 ms) e dar fonte ou retirar 400+ / 94% / 3x
-      (Sobre, Contato) — ver `docs/Analise-SEO-PitchYes.pdf`, cap. 5.
+- [ ] Dar fonte ou retirar 400+ / 94% / 3x (Sobre, Contato) — ver
+      `docs/Analise-SEO-PitchYes.pdf`, cap. 5. (Latência unificada em 800 ms em 2026-10-27.)
 - [ ] Texto das páginas conforme o relatório de SEO (cap. 6–8): páginas por setor, guias, cases.
 - [ ] Validar os valores dos planos na página de Preços (hoje são referência, não tabela aprovada).
 - [ ] Publicar e-mail, telefone/WhatsApp e endereço na página de Contato.
