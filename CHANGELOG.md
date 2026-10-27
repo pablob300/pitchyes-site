@@ -1080,8 +1080,8 @@ Commit `c25ca10`
       divergem, 400+, 85%, 98%, 94,7%, funil, 300%/70%, 4.9/5, 99,9%), validar com o jurídico o
       comparativo com concorrentes citados pelo nome e confirmar o depoimento "Marina Rodriguez,
       GrowthCore" — `TODO` em `content/landing/modelo.ts`.
-- [ ] Cadastrar o ID do Google Tag Manager em Configurações e criar no GTM a tag de conversão do
-      evento `lead`.
+- [ ] Criar no GTM (`GTM-5RJVHV3F`, cadastrado em Configurações em 2026-10-27) a tag de conversão
+      do evento `lead`.
 - [ ] Validar os valores dos planos na página de Preços (hoje são referência, não tabela aprovada).
 - [ ] Publicar e-mail, telefone/WhatsApp e endereço na página de Contato.
 - [ ] Confirmar a lista de integrações nativas.
