@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { PROFILE_LABEL, type LeadProfile } from "@/lib/leads";
 import styles from "./LeadsBrowser.module.css";
 
 // Lista de leads: clicar numa linha abre a ficha completa numa barra à direita.
@@ -14,7 +15,18 @@ export type LeadItem = {
   company: string | null;
   form: string;
   fields: Record<string, string>;
+  profile: LeadProfile | null;
 };
+
+/** Etiqueta do perfil comercial: verde "Perfil comercial", vermelha "Sem perfil". */
+function ProfileTag({ profile }: { profile: LeadProfile | null }) {
+  if (!profile) return null;
+  return (
+    <span className={styles.profile} data-profile={profile}>
+      {PROFILE_LABEL[profile]}
+    </span>
+  );
+}
 
 export function LeadsBrowser({ items, labels }: { items: LeadItem[]; labels: Record<string, string> }) {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -49,6 +61,7 @@ export function LeadsBrowser({ items, labels }: { items: LeadItem[]; labels: Rec
             <th scope="col">E-mail</th>
             <th scope="col">Empresa</th>
             <th scope="col">Formulário</th>
+            <th scope="col">Perfil</th>
             <th scope="col">
               <span className={styles.srOnly}>Abrir ficha</span>
             </th>
@@ -68,6 +81,9 @@ export function LeadsBrowser({ items, labels }: { items: LeadItem[]; labels: Rec
               <td className={styles.email}>{item.company ?? "—"}</td>
               <td>
                 <span className={styles.form}>{item.form}</span>
+              </td>
+              <td>
+                <ProfileTag profile={item.profile} />
               </td>
               <td className={styles.actionCell}>
                 <button type="button" className={styles.rowLink} onClick={() => setOpenId(item.id)}>
@@ -94,6 +110,7 @@ export function LeadsBrowser({ items, labels }: { items: LeadItem[]; labels: Rec
                   Formulário: {selected.form} · {selected.date} às {selected.time}
                 </p>
                 <h2>{selected.name || "(sem nome)"}</h2>
+                <ProfileTag profile={selected.profile} />
               </div>
               <button type="button" className={styles.close} onClick={() => setOpenId(null)} aria-label="Fechar">
                 ×

@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, message: "Envio grande demais." }, { status: 413 });
   }
 
-  let payload: { form?: unknown; values?: unknown };
+  let payload: { form?: unknown; values?: unknown; pagina?: unknown };
   try {
     payload = JSON.parse(raw);
   } catch {
@@ -34,6 +34,12 @@ export async function POST(request: Request) {
       { ok: false, errors: result.errors, message: "Confira os campos destacados." },
       { status: 422 },
     );
+  }
+
+  // Landing page de origem: só o slug, conferido pelo formato (a página pode ter sido
+  // renomeada depois; o lead guarda o endereço do momento do envio).
+  if (form.id === "landing" && typeof payload.pagina === "string" && /^[a-z0-9-]{1,80}$/.test(payload.pagina)) {
+    result.values.pagina = payload.pagina;
   }
 
   const sourceUrl = request.headers.get("referer") ?? undefined;

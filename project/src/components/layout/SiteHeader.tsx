@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { mainNav, talkToAiHref } from "@/lib/routes";
 import { Logo } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
+import type { BrandImage } from "@/lib/site-settings";
 import styles from "./SiteHeader.module.css";
 
 const isActive = (pathname: string, href: string) =>
@@ -21,7 +22,7 @@ function Label({ text }: { text: string }) {
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ logo }: { logo?: BrandImage | null }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -67,7 +68,7 @@ export function SiteHeader() {
     <header className={styles.header}>
       <div className={`container ${styles.bar}`}>
         <Link href="/" className={styles.logo} aria-label="PitchYes — página inicial">
-          <Logo height={28} priority />
+          <Logo height={28} priority brand={logo} />
         </Link>
 
         <button

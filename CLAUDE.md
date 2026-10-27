@@ -32,6 +32,9 @@ Leia antes de qualquer alteração no site:
 | Blog (artigos, categorias, tags, autores) | Painel `/admin/blog`; código em `project/src/lib/blog.ts` e `project/src/lib/blog/` |
 | Resumo do site para IAs | `project/src/app/llms.txt/route.ts` (texto completo: `llms-full.txt/route.ts`; afirmações ainda sem prova que ficam fora deles: `lib/content/claims.ts`) |
 | JSON-LD das páginas internas | `project/src/lib/content/jsonld.ts` (`innerPageGraph`) |
+| Landing pages (/conteudo/&lt;slug&gt;) | Painel `/admin/landing-pages`; modelo padrão em `project/src/content/landing/modelo.ts`; banco em `lib/landing-db.ts`; conteúdo em `lib/content/landing.ts`; página em `app/(lp)/conteudo/[slug]` |
+| Nome do site, logo, favicon, Google Tag Manager | Painel `/admin/configuracoes`; código em `project/src/lib/settings.ts` (tipos: `site-settings.ts`) |
+| Formulários: perfil comercial e evento `lead` do dataLayer | `project/src/lib/leads.ts` (`TEAM_OPTIONS`, `leadProfile`) e `lib/tracking.ts` (`pushLead`) |
 | Cores, tipografia, espaçamento, motion | `project/src/styles/tokens/` (espelham `System/tokens/`) |
 
 **Página nova com conteúdo real:** crie `project/src/app/<caminho>/page.tsx` (tem prioridade
@@ -66,6 +69,22 @@ listas, planos, tabela e imagens. A lista de clientes (logo + nome) é global (`
 seção "Clientes (logos)"): aparece na gaveta da home e na de `/clientes`, e publicar em
 qualquer uma muda as duas. Página com layout próprio: schema em `lib/content/schema/`,
 `edit()` nos componentes e o caminho em `lib/content/pages.ts`.
+
+### Landing pages, configurações e formulários
+
+- **Landing page guarda o documento inteiro no banco** (`page_content`, caminho `/_lp/<id>`), não
+  uma sobreposição: "Criar página" copia o modelo de `content/landing/modelo.ts`, e mudar o
+  modelo depois só afeta as páginas novas. Os blocos têm chave estável (`blocos.<chave>`), então
+  o editor adiciona, remove e reordena sem desalinhar nada. A página precisa de exatamente um
+  "Topo com formulário" visível (é o `h1` e o `#formulario`).
+- **Landing page não tem link para o resto do site**: menu de âncoras (`menuLabel` dos blocos) e
+  botões para `#formulario` (`cta`). Só a Política de Privacidade abre, em outra aba.
+- **Salvar em Configurações revalida o site inteiro.** No plano gratuito do Workers isso derruba
+  com 500/503 por alguns minutos as páginas que ainda não se remontaram; evite salvar à toa.
+- **Perfil comercial:** os formulários que perguntam o tamanho do time usam `TEAM_OPTIONS`.
+  "Sem time comercial" e "1 vendedor" gravam o lead com a etiqueta "Sem perfil" e **não** disparam
+  o evento `lead`; as outras faixas, "Perfil comercial" e disparam. O evento só sai depois que o
+  servidor aceita o envio.
 
 ### Rotina: todo conteúdo criado, alterado ou apagado passa pelo Page Editor
 

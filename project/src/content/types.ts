@@ -27,6 +27,11 @@ export type Block = (
       kind: "logos";
       title: string;
       lead?: string;
+      /**
+       * "clientes" (padrão): a lista global de clientes (/_site), a mesma da home — `items`
+       * é ignorado. "proprio": os logos deste bloco (ex.: "Na imprensa" das landing pages).
+       */
+      source?: "clientes" | "proprio";
       items: { name: string; logo: string; width: number; height: number }[];
     }
   | {
@@ -66,7 +71,72 @@ export type Block = (
   | { kind: "faq"; title: string; items: { q: string; a: string }[] }
   | { kind: "image"; src: string; alt: string; caption?: string }
   | { kind: "links"; title: string; lead?: string; items: { title: string; text: string; href: string }[] }
-) & { id?: string };
+  // --- Blocos das landing pages (/conteudo/<slug>) ---------------------------------
+  | {
+      /** Topo da landing page: chamada, marcadores e o formulário ao lado. Leva o único <h1>. */
+      kind: "heroForm";
+      eyebrow?: string;
+      title: string;
+      lead: string;
+      bullets: string[];
+      /** Linha curta de prova abaixo dos marcadores ("20Mi+ ligações · 400+ empresas"). */
+      proof?: string;
+      formTitle: string;
+      submitLabel: string;
+      /** Linha abaixo do botão de envio ("Sem compromisso…"). */
+      formNote?: string;
+    }
+  | {
+      /** Vídeo do YouTube: capa primeiro, o player só carrega no clique. */
+      kind: "video";
+      eyebrow?: string;
+      title: string;
+      lead?: string;
+      /** Id do vídeo (o trecho depois de "v=" ou de "youtu.be/"). */
+      videoId: string;
+      /** Texto alternativo da capa. */
+      alt: string;
+      /** Capa servida pelo próprio site; sem ela, usa a capa do YouTube. */
+      poster?: string;
+      stepsTitle?: string;
+      steps?: string[];
+      stats?: { value: string; label: string }[];
+      quote?: string;
+      person?: string;
+    }
+  | {
+      /** Funil de resultados: cada etapa com o número, o percentual e o nome. */
+      kind: "funnel";
+      eyebrow?: string;
+      title: string;
+      lead?: string;
+      steps: { value: string; percent: string; label: string }[];
+      note?: string;
+    }
+  | {
+      /** Depoimentos em texto, com nota em estrelas. */
+      kind: "testimonials";
+      eyebrow?: string;
+      title: string;
+      lead?: string;
+      stats?: { value: string; label: string }[];
+      items: { quote: string; name: string; role: string; company: string }[];
+    }
+  | {
+      /** Faixa final da landing page: título, marcadores e o botão para o formulário. */
+      kind: "ctaFinal";
+      title: string;
+      lead?: string;
+      items: string[];
+      button: string;
+    }
+) & {
+  id?: string;
+  /** Landing pages: texto do item no menu de âncoras do topo (sem isto, o bloco não entra no menu). */
+  menuLabel?: string;
+  /** Landing pages: texto do botão abaixo do bloco, que leva ao formulário. */
+  cta?: string;
+};
 
 export type PageContent = {
   /** <title> (without the “| PitchYes” suffix) — keep under ~60 characters. */

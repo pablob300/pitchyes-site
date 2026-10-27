@@ -78,7 +78,13 @@ Orçamento por página, medido no site publicado:
 
 - `lib/routes.ts` é a fonte única: menu, rodapé, páginas e sitemap saem dele. Página que não
   está lá não existe para o site nem para o sitemap.
-- `/sitemap.xml` é um índice: `sitemap-paginas.xml` (site) e `sitemap-blog.xml` (blog, lido do D1).
+- `/sitemap.xml` é um índice: `sitemap-paginas.xml` (site), `sitemap-blog.xml` (blog, lido do D1) e
+  `sitemap-conteudo.xml` (landing pages ativas e sem noindex, lidas do D1).
+- Landing pages (`/conteudo/<slug>`) nascem do mesmo modelo: **várias indexadas com o mesmo texto
+  são conteúdo duplicado** (§7). Antes de ligar uma cópia, troque o texto ou marque "Fora do
+  Google" nas Configurações da página. Elas ficam fora do `/llms.txt` e do `/llms-full.txt`
+  (texto de campanha, com números ainda sem fonte). Trocar o endereço gera redirecionamento
+  permanente sozinho.
 - Blog (próprio, no D1, editado em `/admin/blog`): o editor só publica sem erro no checklist de
   SEO (`lib/blog/checks.ts`) e gera `BlogPosting`, `Person` e `BreadcrumbList` sozinho.
 - Blog: cada artigo precisa de `Article` (autor, data, imagem), canonical próprio e links para

@@ -382,3 +382,206 @@
 @media (max-width: 900px) {
   .contact { grid-template-columns: 1fr; gap: var(--space-6); }
 }
+
+/* --- Landing pages (/conteudo/<slug>) — referência em System/components/landing-page.html --- */
+
+.logosLead {
+  max-width: 60ch;
+  margin: calc(-1 * var(--space-4)) auto var(--space-6);
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+/* Logos próprios (imprensa): sem grade de células, só as marcas em linha. */
+.logos[data-source="proprio"] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-6) var(--space-8, 48px);
+  border: 0;
+}
+.logos[data-source="proprio"] li { border: 0; min-height: 0; padding: 0; }
+.logos[data-source="proprio"] .logoImage { height: 40px; }
+
+.lpHero {
+  padding: 72px 0 var(--section-lg);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: linear-gradient(180deg, var(--color-bg-subtle), var(--color-bg));
+}
+.lpHeroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: start;
+}
+.lpHeroText > * + * { margin-top: var(--space-4); }
+.lpHeroText h1 { max-width: 18ch; }
+
+.lpBullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.lpBullets li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.lpBullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 14px;
+  height: 8px;
+  border-left: 2px solid var(--color-accent-secondary-ink);
+  border-bottom: 2px solid var(--color-accent-secondary-ink);
+  transform: rotate(-45deg);
+}
+.lpProof {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-accent-secondary-ink);
+}
+
+/* Vídeo: capa 16:9 com botão de play; o iframe só entra no clique (VideoFacade). */
+.video {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-inverse);
+  cursor: pointer;
+}
+.video img,
+.video iframe { width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+.play {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  border-radius: 50%;
+  background: var(--color-accent-primary-strong);
+  border: 1px solid var(--color-accent-primary-contrast);
+  transition: transform var(--duration-normal) var(--ease);
+}
+.play::after {
+  content: "";
+  position: absolute;
+  left: 29px;
+  top: 23px;
+  border-style: solid;
+  border-width: 13px 0 13px 21px;
+  border-color: transparent transparent transparent var(--color-accent-primary-contrast);
+}
+.video:hover .play,
+.video:focus-visible .play { transform: scale(1.08); }
+
+.lpVideoGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: start;
+}
+.lpVideoAside { display: grid; gap: var(--space-6); }
+.lpVideoAside h3 { font-size: 18px; margin-bottom: var(--space-3); }
+.lpNumbered {
+  margin: 0;
+  padding-left: 22px;
+  display: grid;
+  gap: var(--space-2);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+.lpMiniStats {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+.lpMiniStats dt {
+  font-size: 32px;
+  font-weight: var(--text-stat-weight);
+  line-height: 1;
+  color: var(--color-accent-secondary-ink);
+}
+.lpMiniStats dd { margin: var(--space-2) 0 0; font-size: 13px; color: var(--color-text-secondary); }
+.lpQuote {
+  margin: 0;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-accent-primary);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+.lpQuote cite,
+.lpPerson span { display: block; margin-top: var(--space-2); font-style: normal; font-size: 13px; color: var(--color-text-muted); }
+
+/* Funil: degraus centralizados, cada um mais estreito que o anterior. */
+.lpFunnel {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 760px;
+  display: grid;
+  gap: var(--space-2);
+}
+.lpFunnel li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--space-4);
+  width: calc(100% - var(--degrau, 0) * 10%);
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-pastel-green);
+  border: 1px solid var(--color-border-subtle);
+}
+.lpFunnel strong { font-size: 28px; font-weight: var(--text-stat-weight); line-height: 1; }
+.lpFunnel span { font-size: 15px; }
+.lpFunnel em { font-style: normal; font-size: 14px; font-weight: 600; color: var(--color-accent-secondary-ink); }
+
+.lpTestimonialStats { margin-bottom: var(--space-7); }
+.lpStars { color: var(--color-badge); letter-spacing: 2px; font-size: 16px; }
+.lpPerson { margin-top: auto; padding-top: var(--space-3); font-size: 14px; }
+.lpPerson strong { display: block; }
+
+/* Faixa final: o mesmo fundo da marca da faixa de CTA do site (FinalCta). */
+.lpCtaFinal {
+  background: #041949 url("/images/cta-fundo-pitchyes.webp") right center / cover no-repeat;
+  color: var(--color-text-inverse);
+  padding-block: 96px;
+}
+.lpCtaInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+}
+.lpCtaInner h2 { max-width: 22ch; }
+.lpCtaInner .lead { color: var(--color-text-inverse-muted); }
+.lpCtaInner .lpBullets { text-align: left; }
+.lpCtaInner .lpBullets li::before { border-color: var(--color-accent-secondary); }
+
+@media (max-width: 900px) {
+  .lpHeroGrid,
+  .lpVideoGrid { grid-template-columns: 1fr; }
+  .lpFunnel li { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .lpHero { padding-top: 48px; }
+  .lpCtaFinal { padding-block: 64px; }
+}

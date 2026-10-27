@@ -15,7 +15,11 @@ const nextConfig: NextConfig = {
   transpilePackages: ["sanitize-html", "postcss"],
   // URL que mudou ganha 301 para sempre (SEO.md §1.8): backlinks e buscadores seguem.
   async redirects() {
-    return [{ source: "/precos", destination: "/planos", statusCode: 301 }];
+    return [
+      { source: "/precos", destination: "/planos", statusCode: 301 },
+      // Usuários virou uma aba de Configurações no painel.
+      { source: "/admin/usuarios", destination: "/admin/configuracoes/usuarios", statusCode: 301 },
+    ];
   },
 };
 

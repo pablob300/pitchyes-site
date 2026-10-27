@@ -50,12 +50,22 @@ export const adminNav: AdminNavEntry[] = [
       // { href: "/admin/analise/seo", label: "SEO", match: "prefix" },
     ],
   },
+  {
+    label: "Landing Pages",
+    group: "topo",
+    children: [
+      // Ativo na lista e no editor/configurações de qualquer LP, não em "Criar página".
+      { href: "/admin/landing-pages", label: "Ver todas", pattern: /^\/admin\/landing-pages(?:\/(?!nova$)[^/]+(?:\/.*)?)?$/ },
+      { href: "/admin/landing-pages/nova", label: "Criar página", match: "exact" },
+    ],
+  },
   // Próximas seções do CMS entram aqui, no grupo "topo":
   // { href: "/admin/midia", label: "Mídia", match: "prefix", group: "topo" },
 
   { href: "/admin/leads", label: "Central de leads", match: "prefix", group: "base" },
   { href: "/admin/newsletter", label: "Newsletter", match: "prefix", group: "base" },
-  { href: "/admin/usuarios", label: "Usuários", match: "prefix", group: "base" },
+  // Configuração geral e Usuários são abas dentro da tela (configuracoes/layout.tsx).
+  { href: "/admin/configuracoes", label: "Configurações", match: "prefix", group: "base" },
 ];
 
 export function isNavGroup(entry: AdminNavEntry): entry is AdminNavGroup {

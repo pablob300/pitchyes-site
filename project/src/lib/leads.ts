@@ -26,14 +26,48 @@ export type LeadFormDef = {
   /** Campo usado como nome, e-mail, telefone e empresa na listagem de /admin/leads. */
   identity: { name?: string; email: string; phone?: string; company?: string };
   fields: LeadField[];
+  /** Campo do tamanho do time comercial, que decide o perfil do lead (ver leadProfile). */
+  profileField?: string;
 };
 
 export const MAX_TEXT = 2000;
+
+// --- Perfil comercial ---------------------------------------------------------
+
+/**
+ * Faixas do tamanho do time comercial, iguais em todos os formulários que perguntam isso.
+ * As duas primeiras marcam o lead como "Sem perfil": ele vai para a Central de leads, mas
+ * o evento "lead" do dataLayer não é disparado (o Google Ads não aprende com ele).
+ */
+export const TEAM_OPTIONS = [
+  "Sem time comercial",
+  "1 vendedor",
+  "2 a 5 vendedores",
+  "6 a 10 vendedores",
+  "11 a 20 vendedores",
+  "Mais de 20 vendedores",
+];
+const NO_PROFILE = new Set(TEAM_OPTIONS.slice(0, 2));
+
+export type LeadProfile = "comercial" | "sem_perfil";
+
+export const PROFILE_LABEL: Record<LeadProfile, string> = {
+  comercial: "Perfil comercial",
+  sem_perfil: "Sem perfil",
+};
+
+/** Perfil do lead pelo tamanho do time; formulário sem esse campo não tem perfil. */
+export function leadProfile(form: LeadFormDef, values: Record<string, string | undefined>): LeadProfile | null {
+  const team = form.profileField ? values[form.profileField]?.trim() : undefined;
+  if (!team) return null;
+  return NO_PROFILE.has(team) ? "sem_perfil" : "comercial";
+}
 
 export const contatoForm: LeadFormDef = {
   id: "contato",
   label: "Contato",
   identity: { name: "nome", email: "email", phone: "telefone", company: "empresa" },
+  profileField: "equipe",
   fields: [
     { name: "nome", label: "Nome Completo", type: "text", required: true, placeholder: "Seu nome completo", half: true, autoComplete: "name" },
     { name: "email", label: "Email Corporativo", type: "email", required: true, placeholder: "seu.email@empresa.com", half: true, autoComplete: "email" },
@@ -76,13 +110,48 @@ export const contatoForm: LeadFormDef = {
     },
     {
       name: "equipe",
-      label: "Quantas pessoas você tem na equipe de vendas?",
+      label: "Tamanho do time comercial",
       type: "select",
+      required: true,
       half: true,
-      options: ["1 a 3 pessoas", "4 a 10 pessoas", "11 a 30 pessoas", "31 a 100 pessoas", "Mais de 100 pessoas"],
+      options: TEAM_OPTIONS,
     },
     { name: "data", label: "Data Preferida para Demonstração", type: "date" },
     { name: "desafio", label: "Conte-nos sobre seu desafio atual", type: "textarea", placeholder: "Descreva brevemente seus principais desafios em vendas..." },
+  ],
+};
+
+/**
+ * Formulário das landing pages (/conteudo/<slug>). O mesmo em todas elas; a página de
+ * origem vai junto no campo oculto "pagina" (o slug), para a Central de leads mostrar de
+ * qual LP o lead veio.
+ */
+export const landingForm: LeadFormDef = {
+  id: "landing",
+  label: "Landing page",
+  identity: { name: "nome", email: "email", phone: "telefone", company: "empresa" },
+  profileField: "time",
+  fields: [
+    { name: "nome", label: "Nome completo", type: "text", required: true, placeholder: "Seu nome completo", autoComplete: "name" },
+    { name: "email", label: "E-mail", type: "email", required: true, placeholder: "seu.email@empresa.com", half: true, autoComplete: "email" },
+    { name: "telefone", label: "Telefone", type: "tel", required: true, placeholder: "(11) 99999-9999", half: true, autoComplete: "tel" },
+    { name: "empresa", label: "Empresa", type: "text", required: true, placeholder: "Nome da sua empresa", autoComplete: "organization" },
+    {
+      name: "interesse",
+      label: "Interesse principal",
+      type: "select",
+      required: true,
+      half: true,
+      options: [
+        "Prospecção e vendas ativas",
+        "Qualificação de leads inbound",
+        "Atendimento ao cliente automatizado",
+        "Reativação de leads frios",
+        "Convites e confirmação de eventos",
+        "Todos os usos acima",
+      ],
+    },
+    { name: "time", label: "Tamanho do time", type: "select", required: true, half: true, options: TEAM_OPTIONS },
   ],
 };
 
@@ -100,6 +169,7 @@ export const newsletterForm: LeadFormDef = {
 export const leadForms: Record<string, LeadFormDef> = {
   [contatoForm.id]: contatoForm,
   [newsletterForm.id]: newsletterForm,
+  [landingForm.id]: landingForm,
 };
 
 export function getLeadForm(id: string): LeadFormDef | undefined {

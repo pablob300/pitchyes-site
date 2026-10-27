@@ -8,6 +8,8 @@ export type LeadFilters = {
   from?: string;
   to?: string;
   q?: string;
+  /** Perfil comercial (lib/leads.ts, leadProfile). */
+  profile?: "comercial" | "sem_perfil";
   page: number;
 };
 
@@ -32,6 +34,7 @@ export function parseLeadFilters(params: RawParams): LeadFilters {
     from: from && DATE.test(from) ? from : undefined,
     to: to && DATE.test(to) ? to : undefined,
     q: one(params.busca)?.slice(0, 80),
+    profile: one(params.perfil) === "comercial" || one(params.perfil) === "sem_perfil" ? (one(params.perfil) as LeadFilters["profile"]) : undefined,
     page: Number.isFinite(page) && page > 0 ? Math.floor(page) : 1,
   };
 }
@@ -43,12 +46,13 @@ export function toSearchParams(filters: LeadFilters, overrides: Partial<LeadFilt
   if (merged.from) params.set("de", merged.from);
   if (merged.to) params.set("ate", merged.to);
   if (merged.q) params.set("busca", merged.q);
+  if (merged.profile) params.set("perfil", merged.profile);
   if (merged.page > 1) params.set("pagina", String(merged.page));
   return params.toString();
 }
 
 export function hasFilters(filters: LeadFilters): boolean {
-  return Boolean(filters.form || filters.from || filters.to || filters.q);
+  return Boolean(filters.form || filters.from || filters.to || filters.q || filters.profile);
 }
 
 /**

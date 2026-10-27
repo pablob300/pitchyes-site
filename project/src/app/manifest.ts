@@ -13,7 +13,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#ffffff",
     icons: [
       { src: "/brand/pitchyes-symbol.svg", sizes: "any", type: "image/svg+xml" },
-      { src: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      { src: "/brand/apple-icon.png", sizes: "180x180", type: "image/png" },
     ],
   };
 }

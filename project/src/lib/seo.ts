@@ -120,14 +120,15 @@ export const VOICE_AI_TOPICS = [
   "cobrança por telefone com IA",
 ] as const;
 
-export function organizationSchema(): Thing {
+/** `brand`: nome e logo de Configurações › Configuração geral (lib/settings.ts), quando houver. */
+export function organizationSchema(brand?: { siteName: string | null; logo: { src: string } | null }): Thing {
   const url = getSiteUrl().origin;
   return {
     "@type": "Organization",
     "@id": `${url}/#organization`,
-    name: SITE_NAME,
+    name: brand?.siteName ?? SITE_NAME,
     url,
-    logo: `${url}/brand/pitchyes-logo.svg`,
+    logo: `${url}${brand?.logo?.src ?? "/brand/pitchyes-logo.svg"}`,
     description: SITE_DESCRIPTION,
     slogan: SITE_TAGLINE,
     taxID: company.cnpj,

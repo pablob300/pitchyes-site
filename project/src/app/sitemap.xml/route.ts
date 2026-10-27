@@ -4,5 +4,5 @@ import { sitemapIndexResponse } from "@/lib/sitemap";
 export const dynamic = "force-dynamic";
 
 export function GET() {
-  return sitemapIndexResponse(["/sitemap-paginas.xml", "/sitemap-blog.xml"]);
+  return sitemapIndexResponse(["/sitemap-paginas.xml", "/sitemap-blog.xml", "/sitemap-conteudo.xml"]);
 }

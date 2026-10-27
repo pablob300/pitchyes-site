@@ -1,6 +1,6 @@
 import "server-only";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
-import { foldForSearch, type LeadFormDef, type LeadValues } from "./leads";
+import { foldForSearch, leadProfile, type LeadFormDef, type LeadProfile, type LeadValues } from "./leads";
 import { dayBoundsUtc, PER_PAGE, type LeadFilters } from "./leads-filters";
 
 // Acesso ao banco dos leads (D1, binding LEADS_DB — ver wrangler.jsonc e migrations/).
@@ -15,6 +15,8 @@ export type LeadRow = {
   phone: string | null;
   company: string | null;
   fields: string;
+  /** Pelo tamanho do time (lib/leads.ts, leadProfile); NULL quando o formulário não pergunta. */
+  profile: LeadProfile | null;
 };
 
 export type Lead = Omit<LeadRow, "fields"> & { fields: LeadValues };
@@ -60,12 +62,13 @@ export async function saveLead({
     phone: (phone && values[phone]) || null,
     company: companyValue,
     fields: JSON.stringify(values),
+    profile: leadProfile(form, values),
   };
 
   await (await db())
     .prepare(
-      `INSERT INTO leads (id, created_at, form, name, email, phone, company, fields, source_url, user_agent, search_text)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO leads (id, created_at, form, name, email, phone, company, fields, source_url, user_agent, search_text, profile)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     )
     .bind(
       row.id,
@@ -79,6 +82,7 @@ export async function saveLead({
       sourceUrl ?? null,
       userAgent ?? null,
       foldForSearch(`${nameValue} ${row.email} ${companyValue ?? ""}`),
+      row.profile,
     )
     .run();
 
@@ -91,16 +95,17 @@ function likeTerm(value: string): string {
   return `%${escaped}%`;
 }
 
-const SELECT_COLUMNS = "id, created_at, form, name, email, phone, company, fields";
+const SELECT_COLUMNS = "id, created_at, form, name, email, phone, company, fields, profile";
 
 const WHERE = `WHERE (?1 IS NULL OR form = ?1)
    AND (?2 IS NULL OR created_at >= ?2)
    AND (?3 IS NULL OR created_at <  ?3)
-   AND (?4 IS NULL OR search_text LIKE ?4 ESCAPE '\')`;
+   AND (?4 IS NULL OR search_text LIKE ?4 ESCAPE '\\')
+   AND (?5 IS NULL OR profile = ?5)`;
 
 function bindings(filters: LeadFilters) {
   const { start, end } = dayBoundsUtc(filters.from, filters.to);
-  return [filters.form ?? null, start ?? null, end ?? null, filters.q ? likeTerm(filters.q) : null];
+  return [filters.form ?? null, start ?? null, end ?? null, filters.q ? likeTerm(filters.q) : null, filters.profile ?? null];
 }
 
 /** Página da listagem, com o total para a paginação. */
@@ -114,7 +119,7 @@ export async function listLeads(
 
   const [page, count] = await database.batch<LeadRow | { total: number }>([
     database
-      .prepare(`SELECT ${SELECT_COLUMNS} FROM leads ${WHERE} ORDER BY created_at DESC LIMIT ?5 OFFSET ?6`)
+      .prepare(`SELECT ${SELECT_COLUMNS} FROM leads ${WHERE} ORDER BY created_at DESC LIMIT ?6 OFFSET ?7`)
       .bind(...args, perPage, offset),
     database.prepare(`SELECT COUNT(*) AS total FROM leads ${WHERE}`).bind(...args),
   ]);
@@ -128,7 +133,7 @@ export async function listLeads(
 export async function listLeadsForExport(filters: LeadFilters, limit = 5000): Promise<Lead[]> {
   const database = await db();
   const { results } = await database
-    .prepare(`SELECT ${SELECT_COLUMNS} FROM leads ${WHERE} ORDER BY created_at DESC LIMIT ?5`)
+    .prepare(`SELECT ${SELECT_COLUMNS} FROM leads ${WHERE} ORDER BY created_at DESC LIMIT ?6`)
     .bind(...bindings(filters), limit)
     .all<LeadRow>();
   return (results ?? []).map(parse);

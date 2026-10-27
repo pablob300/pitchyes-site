@@ -63,6 +63,10 @@ function block(b: Block): string {
       return b.caption ? plain(b.caption) : "";
     case "links":
       return [heading(b.title, b.lead), b.items.map((i) => `- [${plain(i.title)}](${link(i.href)}): ${plain(i.text)}`).join("\n")].join("\n\n");
+    // Blocos das landing pages: elas não entram no /llms-full.txt (texto de campanha, com
+    // números ainda sem fonte — lib/content/claims.ts).
+    default:
+      return "";
   }
 }
 

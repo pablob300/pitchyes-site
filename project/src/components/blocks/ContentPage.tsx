@@ -2,14 +2,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { ButtonLink } from "@/components/ui/Button";
+import { FORM_ANCHOR } from "@/content/landing/modelo";
 import type { Block, PageContent } from "@/content/types";
 import { editFn, scoped, type EditFn } from "@/lib/content/edit";
-import { getLeadForm } from "@/lib/leads";
+import { youtubeId } from "@/lib/content/landing";
+import { getLeadForm, landingForm } from "@/lib/leads";
 import styles from "./blocks.module.css";
+import { VideoFacade } from "./VideoFacade";
 
-// No editor visual, cada bloco recebe `e` com o prefixo "blocos.b<n>" (lib/content/inner.ts):
-// só atributos data-edit, nunca elemento novo. No site público, `e` devolve {}.
-function Blocks({ block, e }: { block: Block; e: EditFn }) {
+/** Aviso de privacidade abaixo dos formulários. Na landing page abre em outra aba: a pessoa não sai da página. */
+function PrivacyNote({ newTab }: { newTab?: boolean }) {
+  return (
+    <>
+      Ao enviar este formulário, você concorda em receber comunicações da PitchYes. Tratamos os seus dados conforme a{" "}
+      {newTab ? (
+        <a href="/privacidade" target="_blank" rel="noopener">
+          Política de Privacidade
+        </a>
+      ) : (
+        <Link href="/privacidade">Política de Privacidade</Link>
+      )}
+      .
+    </>
+  );
+}
+
+// No editor visual, cada bloco recebe `e` com o prefixo "blocos.b<n>" (lib/content/inner.ts)
+// ou "blocos.<chave>" (landing pages): só atributos data-edit, nunca elemento novo. No site
+// público, `e` devolve {}. `slug` existe só nas landing pages (vai junto com o lead).
+export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug?: string }) {
   switch (block.kind) {
     case "prose":
       return (
@@ -144,7 +165,16 @@ function Blocks({ block, e }: { block: Block; e: EditFn }) {
             <h2 className={styles.logosTitle} data-reveal {...e("title")}>
               {block.title}
             </h2>
-            <ul className={styles.logos} {...e("@site.clients")}>
+            {block.lead && (
+              <p className={styles.logosLead} data-reveal {...e("lead")}>
+                {block.lead}
+              </p>
+            )}
+            <ul
+              className={styles.logos}
+              data-source={block.source ?? "clientes"}
+              {...e(block.source === "proprio" ? "items" : "@site.clients")}
+            >
               {block.items.map((item, i) => (
                 <li key={`${i}-${item.name}`} data-reveal>
                   <Image
@@ -257,13 +287,7 @@ function Blocks({ block, e }: { block: Block; e: EditFn }) {
                 title={block.title}
                 benefits={block.benefits}
                 submitLabel={block.submitLabel}
-                note={
-                  <>
-                    Ao enviar este formulário, você concorda em receber comunicações da PitchYes.
-                    Tratamos os seus dados conforme a{" "}
-                    <Link href="/privacidade">Política de Privacidade</Link>.
-                  </>
-                }
+                note={<PrivacyNote />}
               />
             </div>
             <div className={styles.contactAside}>
@@ -353,6 +377,189 @@ function Blocks({ block, e }: { block: Block; e: EditFn }) {
           </figure>
         </section>
       );
+
+    // --- Landing pages ------------------------------------------------------------
+    case "heroForm":
+      return (
+        <section className={styles.lpHero} id={block.id}>
+          <div className={`container ${styles.lpHeroGrid}`}>
+            <div className={styles.lpHeroText}>
+              {block.eyebrow && (
+                <p className="eyebrow" data-reveal {...e("eyebrow")}>
+                  {block.eyebrow}
+                </p>
+              )}
+              <h1 data-reveal {...e("title")}>{block.title}</h1>
+              <p className={`lead ${styles.heroLead}`} data-reveal {...e("lead")}>
+                {block.lead}
+              </p>
+              <ul className={styles.lpBullets} data-reveal {...e("bullets")}>
+                {block.bullets.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {block.proof && (
+                <p className={styles.lpProof} data-reveal {...e("proof")}>
+                  {block.proof}
+                </p>
+              )}
+            </div>
+            <div data-reveal {...e("formTitle")}>
+              <LeadForm
+                form={landingForm}
+                id={FORM_ANCHOR}
+                title={block.formTitle}
+                submitLabel={block.submitLabel}
+                pagina={slug}
+                note={
+                  <>
+                    {block.formNote && <strong>{block.formNote} </strong>}
+                    <PrivacyNote newTab />
+                  </>
+                }
+              />
+            </div>
+          </div>
+        </section>
+      );
+
+    case "video": {
+      const id = youtubeId(block.videoId);
+      return (
+        <section className="section" id={block.id}>
+          <div className="container">
+            <div className="section-head" data-reveal>
+              {block.eyebrow && <p className="eyebrow" {...e("eyebrow")}>{block.eyebrow}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
+            </div>
+            <div className={styles.lpVideoGrid}>
+              <div data-reveal {...e("videoId")}>
+                {id && <VideoFacade id={id} alt={block.alt} poster={block.poster} />}
+              </div>
+              <div className={styles.lpVideoAside}>
+                {block.steps && block.steps.length > 0 && (
+                  <div data-reveal {...e("steps")}>
+                    {block.stepsTitle && <h3>{block.stepsTitle}</h3>}
+                    <ol className={styles.lpNumbered}>
+                      {block.steps.map((step) => (
+                        <li key={step}>{step}</li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+                {block.stats && block.stats.length > 0 && (
+                  <dl className={styles.lpMiniStats} data-reveal {...e("stats")}>
+                    {block.stats.map((stat) => (
+                      <div key={stat.label}>
+                        <dt>{stat.value}</dt>
+                        <dd>{stat.label}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+                {block.quote && (
+                  <blockquote className={styles.lpQuote} data-reveal {...e("quote")}>
+                    “{block.quote}”{block.person && <cite>{block.person}</cite>}
+                  </blockquote>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    case "funnel":
+      return (
+        <section className="section" id={block.id}>
+          <div className="container">
+            <div className="section-head" data-reveal>
+              {block.eyebrow && <p className="eyebrow" {...e("eyebrow")}>{block.eyebrow}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
+            </div>
+            <ol className={styles.lpFunnel} data-reveal {...e("steps")}>
+              {block.steps.map((step, j) => (
+                // Cada degrau é mais estreito que o anterior: o desenho é do funil, não do número.
+                <li key={`${j}-${step.label}`} style={{ "--degrau": j } as React.CSSProperties}>
+                  <strong>{step.value}</strong>
+                  <span>{step.label}</span>
+                  <em>{step.percent}</em>
+                </li>
+              ))}
+            </ol>
+            {block.note && (
+              <p className={styles.note} data-reveal {...e("note")}>
+                {block.note}
+              </p>
+            )}
+          </div>
+        </section>
+      );
+
+    case "testimonials":
+      return (
+        <section className="section" id={block.id}>
+          <div className="container">
+            <div className="section-head" data-reveal>
+              {block.eyebrow && <p className="eyebrow" {...e("eyebrow")}>{block.eyebrow}</p>}
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
+            </div>
+            {block.stats && block.stats.length > 0 && (
+              <dl className={`${styles.stats} ${styles.lpTestimonialStats}`} data-reveal {...e("stats")}>
+                {block.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <dt>{stat.value}</dt>
+                    <dd>{stat.label}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            <ul className={styles.grid} data-columns={3}>
+              {block.items.map((item, j) => (
+                <li key={`${j}-${item.name}`} className={styles.case} data-reveal {...e(`items.${j}`)}>
+                  <p className={styles.lpStars} role="img" aria-label="Avaliação: 5 de 5 estrelas">
+                    ★★★★★
+                  </p>
+                  <blockquote>“{item.quote}”</blockquote>
+                  <p className={styles.lpPerson}>
+                    <strong>{item.name}</strong>
+                    <span>
+                      {item.role} · {item.company}
+                    </span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      );
+
+    case "ctaFinal":
+      return (
+        <section className={styles.lpCtaFinal} id={block.id}>
+          <div className={`container ${styles.lpCtaInner}`}>
+            <h2 data-reveal {...e("title")}>{block.title}</h2>
+            {block.lead && (
+              <p className="lead" data-reveal {...e("lead")}>
+                {block.lead}
+              </p>
+            )}
+            <ul className={styles.lpBullets} data-reveal {...e("items")}>
+              {block.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <div data-reveal>
+              <ButtonLink href={`#${FORM_ANCHOR}`} size="lg" {...e("button")}>
+                {block.button} →
+              </ButtonLink>
+            </div>
+          </div>
+        </section>
+      );
   }
 }
 
@@ -391,7 +598,7 @@ export function ContentPage({
         </div>
       </section>
       {content.blocks.map((block, i) => (
-        <Blocks key={`${block.kind}-${i}`} block={block} e={scoped(edit, `blocos.b${i}`)} />
+        <ContentBlock key={`${block.kind}-${i}`} block={block} e={scoped(edit, `blocos.b${i}`)} />
       ))}
     </>
   );

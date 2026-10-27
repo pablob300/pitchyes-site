@@ -24,7 +24,9 @@ import { SITE_CONTENT_PATH } from "@/content/site";
 import { invalidInnerSections } from "@/lib/content/inner";
 import { invalidHomeSections, invalidSiteSections } from "@/lib/content/resolve";
 import { parseOverride } from "@/lib/content/merge";
-import { writableContentPaths } from "@/lib/content/pages";
+import { isWritableContentPath, landingIdOf } from "@/lib/admin/content-paths";
+import { invalidLandingSections } from "@/lib/content/landing";
+import { getLandingById, landingPath, touchLanding } from "@/lib/landing-db";
 
 // Salva, publica, descarta e restaura o conteúdo de uma página.
 //
@@ -55,7 +57,9 @@ const SECTION_LABELS: Record<string, string> = {
   clients: "Clientes (logos)",
 };
 
-function label(section: string): string {
+function label(section: string, path = ""): string {
+  // Landing page: precisa de exatamente um "Topo com formulário" visível (h1 + formulário).
+  if (section === "topo" && landingIdOf(path)) return "Topo com formulário (a página precisa de um, visível)";
   // Páginas internas: "topo" e "b3" (4º bloco da página).
   if (section === "topo") return "Topo";
   const block = /^b(\d+)$/.exec(section);
@@ -65,11 +69,19 @@ function label(section: string): string {
 
 function invalidSections(path: string, data: unknown): string[] {
   if (path === SITE_CONTENT_PATH) return invalidSiteSections(data);
+  if (landingIdOf(path)) return invalidLandingSections(data);
   return path === "/" ? invalidHomeSections(data) : invalidInnerSections(path, data);
 }
 
 /** O conteúdo global aparece em todas as páginas, então a revalidação é do layout. */
-function revalidate(path: string): void {
+async function revalidate(path: string): Promise<void> {
+  const landingId = landingIdOf(path);
+  if (landingId) {
+    // Landing page: só a página dela (e ela não entra nos arquivos para IA).
+    const page = await getLandingById(landingId);
+    if (page) revalidatePath(landingPath(page.slug));
+    return;
+  }
   if (path === SITE_CONTENT_PATH) revalidatePath("/", "layout");
   else revalidatePath(path);
   // Os arquivos para IA saem do mesmo conteúdo publicado (FAQ da home, texto das páginas).
@@ -92,7 +104,7 @@ export async function POST(request: Request) {
   if (!body) return jsonError("Envio inválido ou grande demais.", 400);
 
   const path = String(body.caminho ?? "");
-  if (!writableContentPaths().includes(path)) return jsonError("Página desconhecida.", 404);
+  if (!(await isWritableContentPath(path))) return jsonError("Página desconhecida.", 404);
 
   const done = async (action: AuditAction, detail: Record<string, unknown>) => {
     await audit({
@@ -149,7 +161,7 @@ export async function POST(request: Request) {
       const invalid = invalidSections(path, candidate);
       if (invalid.length > 0) {
         return jsonError(
-          `Faltou preencher algo em: ${invalid.map(label).join(", ")}.`,
+          `Faltou preencher algo em: ${invalid.map((s) => label(s, path)).join(", ")}.`,
           422,
           { errors: Object.fromEntries(invalid.map((s) => [s, "Seção incompleta."])) },
         );
@@ -179,19 +191,22 @@ export async function POST(request: Request) {
       const state = await openDraft(path, actor);
       const invalid = invalidSections(path, state.data);
       if (invalid.length > 0) {
-        return jsonError(`Corrija antes de publicar: ${invalid.map(label).join(", ")}.`, 422);
+        return jsonError(`Corrija antes de publicar: ${invalid.map((s) => label(s, path)).join(", ")}.`, 422);
       }
 
       const { published } = await publishDraft(path, actor);
       if (!published) return jsonError("Não há rascunho para publicar.", 400);
 
-      revalidate(path);
       // A data de revisão alimenta o <lastmod> do sitemap: publicar texto novo sem
       // mexer nela faria o site dizer que a página não muda desde sempre.
-      if (path !== SITE_CONTENT_PATH) {
+      const landingId = landingIdOf(path);
+      if (landingId) {
+        await touchLanding(landingId, { id: actor.id, name: actor.name });
+      } else if (path !== SITE_CONTENT_PATH) {
         await stampPageUpdated(path, today(), { id: actor.id, name: actor.name });
       }
 
+      await revalidate(path);
       await done("conteudo.publicado", {});
       return jsonOk({ message: "Conteúdo publicado." });
     }
@@ -224,7 +239,7 @@ export async function GET(request: Request) {
   if (!can(user, "conteudo.editar")) return jsonError("Sem permissão.", 403);
 
   const path = new URL(request.url).searchParams.get("caminho") ?? "";
-  if (!writableContentPaths().includes(path)) return jsonError("Página desconhecida.", 404);
+  if (!(await isWritableContentPath(path))) return jsonError("Página desconhecida.", 404);
 
   const state = await openDraft(path, {
     id: user.id,

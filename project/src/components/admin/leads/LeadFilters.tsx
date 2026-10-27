@@ -33,6 +33,15 @@ export function LeadFilters({
       </label>
 
       <label className={styles.field}>
+        <span>Perfil</span>
+        <select name="perfil" defaultValue={filters.profile ?? ""}>
+          <option value="">Todos</option>
+          <option value="comercial">Perfil comercial</option>
+          <option value="sem_perfil">Sem perfil</option>
+        </select>
+      </label>
+
+      <label className={styles.field}>
         <span>De</span>
         <input type="date" name="de" defaultValue={filters.from ?? ""} />
       </label>

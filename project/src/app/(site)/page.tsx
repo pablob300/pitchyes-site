@@ -4,6 +4,7 @@ import { HomePage } from "@/components/home/HomePage";
 import { getHomeContent, getSiteContent } from "@/lib/content/resolve";
 import { toPlainText } from "@/lib/content/richtext";
 import { getPage } from "@/lib/routes";
+import { getSiteSettings } from "@/lib/settings";
 import {
   HOME_TITLE,
   organizationSchema,
@@ -31,12 +32,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const content = await getHomeContent("publicado");
   const { clients } = await getSiteContent("publicado");
+  const settings = await getSiteSettings();
 
   return (
     <>
       <JsonLd
         graph={[
-          organizationSchema(),
+          organizationSchema(settings),
           webSiteSchema(),
           softwareApplicationSchema(),
           webPageSchema({

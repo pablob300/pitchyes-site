@@ -405,3 +405,35 @@
 }
 .blocos button:hover { border-color: var(--color-border); }
 .blocos span { color: var(--color-text-muted); font-size: 12px; }
+
+/* ---- estrutura das landing pages: remover e adicionar blocos ---- */
+
+.itemAcoes button[data-confirmar] {
+  width: auto;
+  padding: 0 6px;
+  color: var(--color-danger);
+  border-color: var(--color-danger-border);
+}
+.novoBloco { display: grid; gap: var(--space-2); margin-top: var(--space-3); }
+.novoBloco label { font-size: 13px; }
+.novoBloco > div { display: flex; gap: var(--space-2); }
+.novoBloco select {
+  flex: 1;
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+.novoBloco button {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-bg);
+  cursor: pointer;
+}
+.novoBloco button:disabled { opacity: 0.4; cursor: default; }

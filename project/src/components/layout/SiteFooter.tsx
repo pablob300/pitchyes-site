@@ -3,6 +3,7 @@ import { footerNav, legalNav } from "@/lib/routes";
 import { Logo } from "@/components/Logo";
 import { company, socials } from "@/lib/company";
 import { NewsletterForm } from "./NewsletterForm";
+import type { BrandImage } from "@/lib/site-settings";
 import styles from "./SiteFooter.module.css";
 
 const { address, phone, email } = company;
@@ -10,14 +11,14 @@ const { address, phone, email } = company;
 /** External links always open in a new tab, without handing the page to the other site. */
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-export function SiteFooter() {
+export function SiteFooter({ logo }: { logo?: BrandImage | null }) {
   return (
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.top}>
           <div className={styles.brand}>
             <Link href="/" className={styles.logo} aria-label="PitchYes — página inicial">
-              <Logo height={32} />
+              <Logo height={32} brand={logo} />
             </Link>
             <address className={styles.contact}>
               <span>{address.full}</span>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Landing page — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); color: var(--color-text); background: var(--color-bg); }
+  .note { font-size: 12px; color: var(--color-text-muted); margin: 0; padding: var(--space-5) var(--margin); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--space-5); }
+  .btn { display: inline-flex; font-size: 15px; font-weight: 500; padding: 12px 20px; border-radius: 8px; background: var(--color-accent-primary-strong); color: var(--color-accent-primary-contrast); border: 1px solid var(--color-accent-primary-contrast); text-decoration: none; }
+
+  /* Topo: logo sem link, âncoras, um botão para o formulário */
+  .top { position: sticky; top: 0; background: rgba(255,255,255,.92); border-bottom: 1px solid var(--color-border-subtle); }
+  .top .wrap { height: 64px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--space-5); }
+  .top nav { justify-self: center; display: flex; gap: var(--space-5); font-size: 14px; }
+  .top nav a { color: var(--color-text-secondary); text-decoration: none; }
+
+  /* Topo com formulário (heroForm) */
+  .hero { padding: 72px 0 80px; background: linear-gradient(180deg, var(--color-bg-subtle), var(--color-bg)); border-bottom: 1px solid var(--color-border-subtle); }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-7); align-items: start; }
+  .hero h1 { font-size: 48px; line-height: 1.05; margin: var(--space-3) 0; max-width: 18ch; }
+  .bullets { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+  .bullets li { position: relative; padding-left: 28px; }
+  .bullets li::before { content: ""; position: absolute; left: 0; top: 8px; width: 14px; height: 8px; border-left: 2px solid var(--color-accent-secondary-ink); border-bottom: 2px solid var(--color-accent-secondary-ink); transform: rotate(-45deg); }
+  .proof { font-size: 14px; font-weight: 500; color: var(--color-accent-secondary-ink); }
+  .form { background: var(--color-bg); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: var(--space-6); display: grid; gap: var(--space-3); }
+  .form input, .form select { font: inherit; font-size: 14px; padding: 10px 12px; border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); }
+
+  /* Funil */
+  .funnel { list-style: none; padding: 0; max-width: 760px; margin: var(--space-7) auto; display: grid; gap: var(--space-2); }
+  .funnel li { display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-4); align-items: baseline; margin-inline: auto; padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); background: var(--color-pastel-green); border: 1px solid var(--color-border-subtle); }
+  .funnel strong { font-size: 28px; }
+  .funnel em { font-style: normal; font-weight: 600; color: var(--color-accent-secondary-ink); }
+
+  /* Botão de chamada abaixo de um bloco */
+  .cta { display: flex; justify-content: center; padding-bottom: 80px; }
+
+  /* Faixa final */
+  .final { background: #041949 url("../textures/cta-fundo-pitchyes.webp") right center / cover no-repeat; color: var(--color-text-inverse); padding: 96px 0; text-align: center; }
+  .final .wrap { display: grid; justify-items: center; gap: var(--space-5); }
+  .final h2 { max-width: 22ch; margin: 0; }
+</style>
+</head>
+<body>
+  <p class="note">PitchYes · Landing page (/conteudo/&lt;slug&gt;), criada no painel em Landing Pages a partir do modelo padrão. Sem o menu, o rodapé e a faixa de CTA do site: o topo tem só o logo (sem link), as âncoras dos blocos e "Testar agora"; todo botão leva ao formulário (#formulario). Blocos próprios: topo com formulário, vídeo (capa + play), funil, depoimentos em texto e faixa final; os demais são os mesmos das páginas internas. React: project/src/components/landing/LandingPage.tsx (topo e rodapé) e components/blocks/ContentPage.tsx (blocos).</p>
+
+  <header class="top">
+    <div class="wrap">
+      <img src="../brand/pitchyes-logo.svg" alt="PitchYes" height="26" />
+      <nav><a href="#">Início</a><a href="#">Comparativo</a><a href="#">Demonstração</a><a href="#">Soluções</a><a href="#">Contato</a></nav>
+      <a class="btn" href="#">Testar agora</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">IA de voz para ligações</p>
+        <h1>Sua empresa trabalha enquanto nossa IA liga por você.</h1>
+        <ul class="bullets"><li>Qualificação de leads em tempo real</li><li>Atendimento 24/7</li></ul>
+        <p class="proof">20Mi+ ligações · 400+ empresas</p>
+      </div>
+      <form class="form"><strong>Fale com a PitchYes</strong><input placeholder="Nome completo" /><input placeholder="E-mail" /><select><option>Tamanho do time</option></select><a class="btn" href="#">Quero conhecer</a></form>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <ol class="funnel">
+      <li style="width:100%"><strong>1.000</strong><span>Ligações</span><em>100%</em></li>
+      <li style="width:90%"><strong>300</strong><span>Atendidas</span><em>30%</em></li>
+      <li style="width:80%"><strong>200</strong><span>Boas conversas</span><em>66%</em></li>
+    </ol>
+    <div class="cta"><a class="btn" href="#">Solicitar demonstração →</a></div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Sua concorrência já está usando IA. O que você está esperando?</h2>
+      <a class="btn" href="#">Quero conhecer agora →</a>
+    </div>
+  </section>
+</body>
+</html>

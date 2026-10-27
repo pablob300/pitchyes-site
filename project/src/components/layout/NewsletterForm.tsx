@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { buttonClass } from "@/components/ui/Button";
+import { pushLead } from "@/lib/tracking";
 import styles from "./SiteFooter.module.css";
 
 // Assinatura da newsletter. Grava pelo mesmo caminho do formulário de contato
@@ -45,6 +46,7 @@ export function NewsletterForm() {
             setMessage(result.errors?.email ?? result.message ?? "Não foi possível assinar agora.");
             return;
           }
+          pushLead({ email });
           setStatus("done");
           setMessage("Pronto — você vai receber as novidades por e-mail.");
         } catch {

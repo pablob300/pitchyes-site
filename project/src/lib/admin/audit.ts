@@ -34,7 +34,10 @@ export type AuditAction =
   | "blog.termo.salvo"
   | "blog.termo.fundido"
   | "blog.termo.excluido"
-  | "blog.autor.salvo";
+  | "blog.autor.salvo"
+  | "configuracoes.salvas"
+  | "landing.criada"
+  | "landing.editada";
 
 export async function audit({
   action,

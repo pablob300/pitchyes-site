@@ -43,6 +43,7 @@ export default async function Page({
   for (const form of Object.values(leadForms)) {
     for (const field of form.fields) labels[field.name] = field.label;
   }
+  labels.pagina = "Landing page (slug)";
 
   const items: LeadItem[] = leads.map((lead) => {
     const when = new Date(lead.created_at);
@@ -55,6 +56,7 @@ export default async function Page({
       company: lead.company,
       form: leadForms[lead.form]?.label ?? lead.form,
       fields: lead.fields,
+      profile: lead.profile,
     };
   });
 

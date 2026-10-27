@@ -2,11 +2,13 @@
 
 import { useId, useState } from "react";
 import { buttonClass } from "@/components/ui/Button";
-import { formatPhone, validateField, type LeadFormDef, type LeadValues } from "@/lib/leads";
+import { formatPhone, leadProfile, validateField, type LeadFormDef, type LeadValues } from "@/lib/leads";
+import { pushLead } from "@/lib/tracking";
 import styles from "./LeadForm.module.css";
 
 // Formulário genérico: os campos vêm da definição em lib/leads.ts, a validação é a mesma
-// que /api/leads roda no servidor. O envio grava o lead (visível em /admin/leads).
+// que /api/leads roda no servidor. O envio grava o lead (visível em /admin/leads) e, se o
+// lead tem perfil comercial, dispara o evento "lead" no dataLayer (lib/tracking.ts).
 
 type Status = "idle" | "sending" | "done" | "error";
 
@@ -16,12 +18,18 @@ export function LeadForm({
   benefits,
   submitLabel,
   note,
+  pagina,
+  id,
 }: {
   form: LeadFormDef;
   title: string;
   benefits?: string[];
   submitLabel: string;
   note?: React.ReactNode;
+  /** Slug da landing page de origem, gravado junto com o lead. */
+  pagina?: string;
+  /** Âncora do formulário (os botões da landing page levam até ele). */
+  id?: string;
 }) {
   const uid = useId();
   const [values, setValues] = useState<LeadValues>({});
@@ -63,7 +71,7 @@ export function LeadForm({
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ form: form.id, values }),
+        body: JSON.stringify({ form: form.id, values, pagina }),
       });
       const data = (await response.json()) as { ok: boolean; message?: string; errors?: Record<string, string> };
       if (!response.ok || !data.ok) {
@@ -71,6 +79,12 @@ export function LeadForm({
         setStatus("error");
         setMessage(data.message ?? "Não foi possível enviar agora. Tente novamente.");
         return;
+      }
+      // Lead sem perfil comercial (sem time ou 1 vendedor) entra na Central, mas não vira
+      // conversão no GTM.
+      if (leadProfile(form, values) !== "sem_perfil") {
+        const { name, email, phone } = form.identity;
+        pushLead({ nome: name && values[name], email: values[email], telefone: phone && values[phone] });
       }
       setStatus("done");
       setMessage("Recebemos seus dados. Nosso time entra em contato em até 2 horas úteis.");
@@ -83,7 +97,7 @@ export function LeadForm({
 
   if (status === "done") {
     return (
-      <div className={styles.card}>
+      <div className={styles.card} id={id}>
         <h2 className={styles.title}>Recebemos seu contato.</h2>
         <p className={styles.success} role="status">
           {message}
@@ -96,7 +110,7 @@ export function LeadForm({
   }
 
   return (
-    <form className={styles.card} onSubmit={onSubmit} noValidate>
+    <form className={styles.card} id={id} onSubmit={onSubmit} noValidate>
       <h2 className={styles.title}>{title}</h2>
       {benefits && (
         <ul className={styles.benefits}>

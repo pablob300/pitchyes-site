@@ -2,7 +2,7 @@ import { listVersions } from "@/lib/admin/content";
 import { jsonError, jsonOk } from "@/lib/admin/request";
 import { requireApiSession } from "@/lib/admin/session";
 import { can } from "@/lib/admin/users";
-import { writableContentPaths } from "@/lib/content/pages";
+import { isWritableContentPath } from "@/lib/admin/content-paths";
 
 // Histórico de publicações de uma página: data, hora e quem publicou.
 // É o que o link discreto "Histórico", ao lado do botão Publicar, abre.
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   if (!can(auth.session.user, "conteudo.editar")) return jsonError("Sem permissão.", 403);
 
   const path = new URL(request.url).searchParams.get("caminho") ?? "";
-  if (!writableContentPaths().includes(path)) return jsonError("Página desconhecida.", 404);
+  if (!(await isWritableContentPath(path))) return jsonError("Página desconhecida.", 404);
 
   const versions = await listVersions(path);
   return jsonOk({

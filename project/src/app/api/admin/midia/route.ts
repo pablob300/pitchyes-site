@@ -21,7 +21,7 @@ const MAX_BYTES = 3 * 1024 * 1024;
 const MAX_BLOG_BYTES = 8 * 1024 * 1024;
 
 /** Pastas aceitas no bucket. Nome livre viraria caminho livre. */
-const FOLDERS = new Set(["social", "conteudo", "blog"]);
+const FOLDERS = new Set(["social", "conteudo", "blog", "marca"]);
 const TYPES: Record<string, { ext: string; magic: number[][] }> = {
   "image/jpeg": { ext: "jpg", magic: [[0xff, 0xd8, 0xff]] },
   "image/png": { ext: "png", magic: [[0x89, 0x50, 0x4e, 0x47]] },

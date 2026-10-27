@@ -13,7 +13,7 @@ export function generateMetadata(): Metadata {
   return pageMetadata({
     title: "Usuários",
     description: "Área interna da PitchYes: quem tem acesso ao painel.",
-    path: "/admin/usuarios",
+    path: "/admin/configuracoes/usuarios",
     noindex: true,
   });
 }

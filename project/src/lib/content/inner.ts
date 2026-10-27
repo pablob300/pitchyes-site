@@ -33,6 +33,11 @@ const REQUIRED: Partial<Record<Block["kind"], string[]>> = {
   faq: ["title"],
   links: ["title"],
   image: ["src", "alt"],
+  heroForm: ["title", "lead", "formTitle", "submitLabel"],
+  video: ["title", "videoId", "alt"],
+  funnel: ["title"],
+  testimonials: ["title"],
+  ctaFinal: ["title", "button"],
 };
 
 /** Listas de cada bloco que precisam ter itens (e itens com os campos de texto do molde). */
@@ -48,10 +53,17 @@ const LISTS: Partial<Record<Block["kind"], string[]>> = {
   contact: ["channels"],
   faq: ["items"],
   links: ["items"],
+  heroForm: ["bullets"],
+  funnel: ["steps"],
+  testimonials: ["items"],
+  ctaFinal: ["items"],
 };
 
-/** O bloco editado ainda tem o formato que o componente espera? */
-function validBlock(block: Block, fallback: Block): boolean {
+/**
+ * O bloco editado ainda tem o formato que o componente espera? `fallback` é um bloco do
+ * mesmo tipo que serve de molde (o padrão do código, ou o exemplo da paleta nas landing pages).
+ */
+export function validBlock(block: Block, fallback: Block): boolean {
   if (block.kind !== fallback.kind) return false;
   const record = block as unknown as Record<string, unknown>;
   const original = fallback as unknown as Record<string, unknown>;

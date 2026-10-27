@@ -3,7 +3,7 @@
 //
 //   node scripts/seo-audit.mjs [base-url]
 //
-// Lê /sitemap-paginas.xml e /sitemap-blog.xml, baixa cada página e confere o que as regras
+// Lê /sitemap-paginas.xml, /sitemap-blog.xml e /sitemap-conteudo.xml (landing pages), baixa cada página e confere o que as regras
 // do SEO.md exigem: título, descrição, canonical, um único <h1>, dados estruturados, alt das
 // imagens e volume de texto. Nos artigos do blog, também BlogPosting e link interno no texto.
 // Só olha o HTML do servidor — é exatamente o que o robô lê.
@@ -88,7 +88,7 @@ async function audit(path) {
 }
 
 const sitemap = (
-  await Promise.all(["/sitemap-paginas.xml", "/sitemap-blog.xml"].map(async (s) => (await fetch(`${base}${s}`)).text()))
+  await Promise.all(["/sitemap-paginas.xml", "/sitemap-blog.xml", "/sitemap-conteudo.xml"].map(async (s) => (await fetch(`${base}${s}`)).text()))
 ).join("\n");
 const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
 if (!paths.length) { console.error("sitemap-paginas.xml vazio ou inacessível:", base); process.exit(1); }

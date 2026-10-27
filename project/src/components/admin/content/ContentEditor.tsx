@@ -31,6 +31,29 @@ export type ScopeData = {
 
 type Scope = "pagina" | "site";
 
+/**
+ * Landing pages: a página guarda o documento inteiro (não há "padrão do código" para onde
+ * voltar) e a estrutura é editável — blocos entram pela paleta e saem pelo "×".
+ */
+export type LandingMode = {
+  /** Endereço da pré-visualização no iframe ("/editor/conteudo/<id>"). */
+  preview: string;
+  voltar: { href: string; label: string };
+  /** Endereço público, para o link "Ver página" no topo. */
+  publicUrl: string | null;
+  paleta: { kind: string; label: string }[];
+  /** Exemplo de cada tipo de bloco (content/landing/modelo.ts). */
+  modelos: Record<string, unknown>;
+};
+
+/** Chave nova de bloco: letra + 6 caracteres (o ponteiro recusa parte só com números). */
+function novaChave(existentes: string[]): string {
+  for (;;) {
+    const key = `b${Math.random().toString(36).slice(2, 8)}`;
+    if (!existentes.includes(key)) return key;
+  }
+}
+
 export function ContentEditor({
   schema,
   pagePath,
@@ -38,6 +61,7 @@ export function ContentEditor({
   inicial,
   editadoPor,
   trancadoPor,
+  landing,
 }: {
   schema: PageSchema;
   pagePath: string;
@@ -45,6 +69,7 @@ export function ContentEditor({
   inicial: Record<Scope, ScopeData>;
   editadoPor: string | null;
   trancadoPor: string | null;
+  landing?: LandingMode;
 }) {
   const [dados, setDados] = useState(inicial);
   const [sujos, setSujos] = useState<Record<Scope, string[]>>({ pagina: [], site: [] });
@@ -201,6 +226,42 @@ export function ContentEditor({
     window.location.reload();
   }
 
+  /** Landing page: muda a estrutura (bloco novo ou removido) e recarrega a tela inteira —
+   *  a gaveta é gerada no servidor a partir dos blocos. */
+  async function mudarEstrutura(campos: { ponteiro: string; valor: unknown }[]) {
+    if (pendentes > 0) {
+      setEstado({ tipo: "erro", mensagem: "Salve as alterações antes de adicionar ou remover blocos." });
+      return;
+    }
+    setEstado({ tipo: "salvando" });
+    const json = await chamar({ caminho: pagePath, acao: "salvar", rev: dados.pagina.rev, campos });
+    if (!json.ok) {
+      setEstado({ tipo: "erro", mensagem: json.message ?? "Não foi possível mudar os blocos." });
+      return;
+    }
+    window.location.reload();
+  }
+
+  const secoesAtuais = (getAt(dados.pagina.resolved, "sections") as { key: string; hidden?: boolean }[] | undefined) ?? [];
+
+  function adicionarBloco(kind: string) {
+    const modelo = landing?.modelos[kind];
+    if (!modelo) return;
+    const key = novaChave(secoesAtuais.map((s) => s.key));
+    void mudarEstrutura([
+      { ponteiro: `blocos.${key}`, valor: { ...(modelo as Record<string, unknown>), id: key } },
+      { ponteiro: "sections", valor: [...secoesAtuais, { key }] },
+    ]);
+  }
+
+  function removerBloco(key: string) {
+    void mudarEstrutura([
+      { ponteiro: "sections", valor: secoesAtuais.filter((s) => s.key !== key) },
+      // O bloco sai do documento também: nada de texto órfão guardado sem aparecer.
+      { ponteiro: `blocos.${key}`, valor: null },
+    ]);
+  }
+
   async function salvar() {
     setEstado({ tipo: "salvando" });
     for (const scope of ["pagina", "site"] as Scope[]) {
@@ -256,8 +317,8 @@ export function ContentEditor({
     <div className={styles.tela}>
       <header className={styles.barra}>
         <div className={styles.esquerda}>
-          <Link href="/admin/paginas" className={styles.voltar}>
-            ← Páginas
+          <Link href={landing?.voltar.href ?? "/admin/paginas"} className={styles.voltar}>
+            ← {landing?.voltar.label ?? "Páginas"}
           </Link>
           <div>
             <h1>{schema.label}</h1>
@@ -266,6 +327,11 @@ export function ContentEditor({
         </div>
 
         <div className={styles.acoes}>
+          {landing?.publicUrl && (
+            <a className={styles.discreto} href={landing.publicUrl} target="_blank" rel="noopener">
+              Ver página
+            </a>
+          )}
           <button type="button" className={styles.discreto} onClick={() => setHistorico(true)}>
             Histórico
           </button>
@@ -299,7 +365,7 @@ export function ContentEditor({
         <div className={styles.moldura}>
           <iframe
             ref={iframe}
-            src={editorHref(pagePath)}
+            src={landing?.preview ?? editorHref(pagePath)}
             title={`Pré-visualização do rascunho: ${schema.label}`}
             className={styles.frame}
           />
@@ -313,6 +379,7 @@ export function ContentEditor({
               onChange={alterar}
               onFechar={() => setSelecionada(null)}
               onVoltarAoPadrao={() => void voltarAoPadrao(secao)}
+              semPadrao={Boolean(landing) && secao.scope === "pagina"}
             />
           ) : (
             <div className={styles.vazio}>
@@ -327,6 +394,15 @@ export function ContentEditor({
                   sections={getAt(dados.pagina.resolved, "sections") as { key: string; hidden?: boolean }[]}
                   onChange={(lista) => alterar("pagina", "sections", lista, true)}
                   onSelecionar={setSelecionada}
+                  estrutura={
+                    landing
+                      ? {
+                          paleta: landing.paleta,
+                          onAdicionar: adicionarBloco,
+                          onRemover: removerBloco,
+                        }
+                      : undefined
+                  }
                 />
               ) : (
                 <ul className={styles.blocos}>
@@ -365,12 +441,15 @@ function SectionDrawer({
   onChange,
   onFechar,
   onVoltarAoPadrao,
+  semPadrao,
 }: {
   secao: SectionSpec;
   dados: Record<Scope, ScopeData>;
   onChange: (scope: Scope, ponteiro: string, valor: unknown, estrutural?: boolean) => void;
   onFechar: () => void;
   onVoltarAoPadrao: () => void;
+  /** Landing page: o conteúdo é todo do banco, então não existe "Editada" nem "voltar ao padrão". */
+  semPadrao?: boolean;
 }) {
   const scope = secao.scope === "site" ? "site" : "pagina";
   const raiz = dados[scope].resolved;
@@ -378,7 +457,7 @@ function SectionDrawer({
 
   // "Editada" quer dizer que esta seção tem sobreposição gravada — e, portanto, que uma
   // mudança feita no código não aparece mais nela até alguém voltar ao padrão.
-  const editada = [
+  const editada = !semPadrao && [
     ...(secao.prefix ? [secao.prefix] : secao.fields.map((f) => f.pointer)),
     ...(secao.lists ?? []).map((l) => l.pointer),
   ].some((ponteiro) => getAt(dados[scope].override, ponteiro) !== undefined);

@@ -3,7 +3,7 @@ import { csvResponse, toCsv } from "@/lib/admin/csv";
 import { jsonError } from "@/lib/admin/request";
 import { requireApiSession } from "@/lib/admin/session";
 import { can } from "@/lib/admin/users";
-import { leadForms } from "@/lib/leads";
+import { leadForms, PROFILE_LABEL } from "@/lib/leads";
 import { listLeadsForExport } from "@/lib/leads-db";
 import { parseLeadFilters } from "@/lib/leads-filters";
 
@@ -37,10 +37,11 @@ export async function GET(request: Request) {
   }
   const extra = [...new Set(leads.flatMap((lead) => Object.keys(lead.fields)))];
 
-  const headers = ["Data", "Formulário", "Nome", "E-mail", "Telefone", "Empresa", ...extra.map((key) => labels[key] ?? key)];
+  const headers = ["Data", "Formulário", "Perfil", "Nome", "E-mail", "Telefone", "Empresa", ...extra.map((key) => labels[key] ?? key)];
   const rows = leads.map((lead) => [
     dateFmt.format(new Date(lead.created_at)),
     leadForms[lead.form]?.label ?? lead.form,
+    lead.profile ? PROFILE_LABEL[lead.profile] : "",
     lead.name,
     lead.email,
     lead.phone,
