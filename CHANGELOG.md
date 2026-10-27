@@ -8,6 +8,29 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-27: Logos reais dos clientes
+
+Commit `7b7bc9e` · Cloudflare `f2d8770c`
+
+- Saíram os 12 logos de marcação e entraram os 13 clientes da lista do comercial, com o logo de
+  cada um tirado do site ou do perfil da própria empresa (`public/logos/clientes/`):
+  - **SVG:** Senior Sistemas, OPEN Datacenter, Autoglass, Thomson Reuters, Moura Dubeux,
+    RE/MAX e Laboratório Duarte;
+  - **WebP sem perdas:** Tenda, Método 12P, Prospecta Global, Grupo NewChase, Vantage Energia
+    e Grupo Navesa.
+- Ajustes feitos nos arquivos:
+  - **Só versão branca publicada:** em Tenda, Grupo Navesa, NewChase e Método 12P, o branco foi
+    pintado com a cor da marca (Tenda `#E20721`, Navesa `#244E83`) ou grafite, para aparecer no
+    fundo claro.
+  - **Senior:** o nome por extenso só existe em branco; o símbolo levou o verde-água do site da
+    Senior (`#00AF9C`) e o nome, grafite.
+  - **Fontes externas:** RE/MAX e Thomson Reuters vêm das versões 2025/2024 publicadas na Wikipédia.
+  - **Limpeza dos SVGs:** sem script nem link externo, e cores em atributo.
+- Mesma lista na faixa da home, na grade de `/clientes`, nas landing pages e no `/llms-full.txt`;
+  a sobreposição do painel (`/_site`) estava vazia, então o código vale direto.
+- **Qualidade limitada:** OPEN Datacenter (o site só publica o símbolo), Prospecta Global (avatar
+  do LinkedIn, 200×200) e Grupo Navesa (208×50) são as versões de menor qualidade disponíveis.
+
 ## 2026-10-27: Landing pages — 25Mi+ ligações e eficiência da IA em barras
 
 Commit `e5990a4` · Cloudflare `3a764e55`
