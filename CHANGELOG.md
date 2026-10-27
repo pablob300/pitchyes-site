@@ -8,6 +8,47 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-27: Landing Pages, Configurações (GTM) e perfil comercial dos leads
+
+Commit `25449bd` · Cloudflare `4134c1be` · Migração `0009_landing_pages.sql` aplicada no D1 remoto
+
+- **Landing Pages** (painel › Landing Pages › Ver todas / Criar página):
+  - páginas em `/conteudo/<slug>` criadas a partir de um modelo padrão (`content/landing/modelo.ts`),
+    que reproduz a estrutura e o texto de converse.pitchyes.com.br/cadastro no visual do site;
+  - editadas no editor visual, que agora adiciona, remove e reordena blocos;
+  - lista com nome, endereço e chave Ativa/Inativa, mais Configurações e Duplicar;
+  - inativa responde 404 e sai do sitemap; endereço antigo redireciona de forma permanente.
+- **Visual das LPs:** sem o menu, o rodapé e a faixa de CTA do site. Topo com logo, âncoras e
+  "Testar agora"; todo botão leva ao formulário. Blocos novos: topo com formulário, vídeo (capa
+  local, player no clique), funil, depoimentos em texto e faixa final; logos com lista própria
+  (imprensa).
+- **SEO das LPs:** novo `sitemap-conteudo.xml`, ISR, JSON-LD (WebPage, BreadcrumbList, FAQPage,
+  Organization), `noindex` por página. A auditoria também lê as LPs.
+- **Primeira LP criada:** "Cadastro" em `/conteudo/cadastro`, ativa, com o modelo e o título
+  "Sua empresa vende enquanto nossa IA liga por você."
+- **Configurações** (no lugar de Usuários, com abas Configuração geral | Usuários):
+  - nome do site, logo e favicon, robots.txt para consulta e ID do Google Tag Manager;
+  - o GTM entra no site e nas LPs, nunca no painel nem na pré-visualização do editor;
+  - os ícones saíram de `app/` para `public/`, para o favicon do painel poder ser aplicado;
+  - `/admin/usuarios` redireciona para `/admin/configuracoes/usuarios`.
+- **Formulários:**
+  - evento `lead` no dataLayer (nome, e-mail e telefone que existirem) depois do envio aceito;
+  - "Sem time comercial" e "1 vendedor" não disparam o evento e gravam o lead com a etiqueta
+    vermelha "Sem perfil"; as outras faixas gravam a etiqueta verde "Perfil comercial";
+  - `/contato` passou a usar as mesmas faixas de time (campo obrigatório);
+  - a Central de leads ganhou a coluna Perfil, um filtro por perfil e a etiqueta na exportação.
+- **Correção:** a busca da Central de leads dava erro (`ESCAPE ''` no SQL); voltou a funcionar.
+- **Testado no ar:**
+  - criar, editar, adicionar e remover bloco, publicar, ativar e desativar;
+  - trocar o slug (redirecionamento permanente);
+  - formulário da LP com "1 vendedor" (sem evento, etiqueta vermelha) e com "6 a 10" (evento com
+    nome, e-mail e telefone, etiqueta verde); os dois leads de teste foram apagados;
+  - GTM de teste visível em `/`, `/contato`, `/blog` e na LP, ausente em `/admin`, e removido.
+- **Auditoria:** `/conteudo/cadastro`, `/llms.txt`, `/llms-full.txt` e `robots.txt` aprovados.
+  Muitos artigos do blog responderam 500/503 durante a auditoria: é o limite de CPU do plano
+  gratuito ("ComponentMod.handler is not a function"), agravado porque salvar as Configurações
+  revalida o site inteiro; as mesmas páginas respondem 200 quando pedidas de novo.
+
 ## 2026-10-27: Latência unificada em 800 ms
 
 Commit `f19a952` · Cloudflare `287c51f3`
@@ -1035,6 +1076,12 @@ Commit `c25ca10`
 - [ ] Dar fonte ou retirar 400+ / 94% / 3x (Sobre, Contato) — ver
       `docs/Analise-SEO-PitchYes.pdf`, cap. 5. (Latência unificada em 800 ms em 2026-10-27.)
 - [ ] Texto das páginas conforme o relatório de SEO (cap. 6–8): páginas por setor, guias, cases.
+- [ ] Landing page "Cadastro": dar fonte ou retirar os números do modelo (20Mi+ e 25Mi+ ligações
+      divergem, 400+, 85%, 98%, 94,7%, funil, 300%/70%, 4.9/5, 99,9%), validar com o jurídico o
+      comparativo com concorrentes citados pelo nome e confirmar o depoimento "Marina Rodriguez,
+      GrowthCore" — `TODO` em `content/landing/modelo.ts`.
+- [ ] Cadastrar o ID do Google Tag Manager em Configurações e criar no GTM a tag de conversão do
+      evento `lead`.
 - [ ] Validar os valores dos planos na página de Preços (hoje são referência, não tabela aprovada).
 - [ ] Publicar e-mail, telefone/WhatsApp e endereço na página de Contato.
 - [ ] Confirmar a lista de integrações nativas.
