@@ -17,7 +17,13 @@ const AI_AGENTS = [
   "Perplexity-User",
   "Google-Extended", // Gemini / AI Overviews grounding
   "Applebot-Extended",
-  "Bingbot",
+  "Applebot", // Siri / Spotlight
+  "Bingbot", // Bing e Copilot
+  "DuckAssistBot", // respostas com IA do DuckDuckGo
+  "Amazonbot", // Alexa
+  "MistralAI-User", // Le Chat
+  "cohere-ai",
+  "YouBot",
   "CCBot", // Common Crawl, feeds many models
   "meta-externalagent",
 ];

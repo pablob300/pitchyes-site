@@ -267,6 +267,13 @@ export const homeSchema: PageSchema = {
           fields: [
             { pointer: "title", label: "Título", type: "texto", max: 40 },
             { pointer: "text", label: "Texto", type: "paragrafo", max: 120 },
+            {
+              pointer: "href",
+              label: "Link (opcional)",
+              type: "texto",
+              optional: true,
+              help: "Página que aprofunda o caso, ex.: /solucoes/ativo. Link interno ajuda o Google a entender o site.",
+            },
           ],
         },
       ],

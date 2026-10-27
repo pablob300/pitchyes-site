@@ -1,20 +1,28 @@
+import { innerPages } from "@/content/registry";
 import { company, socials } from "@/lib/company";
 import { blogPaths, getAllPosts } from "@/lib/blog";
+import { citesUnverifiedClaim } from "@/lib/content/claims";
 import { getHomeContent } from "@/lib/content/resolve";
+import { toPlainText } from "@/lib/content/richtext";
+import { getAllPageMeta } from "@/lib/page-meta";
 import { pages } from "@/lib/routes";
 import { absoluteUrl } from "@/lib/sitemap";
-import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
+import { SITE_DESCRIPTION, SITE_NAME, VOICE_AI_TOPICS } from "@/lib/seo";
 import { isIndexable } from "@/lib/site";
 
 // /llms.txt — plain-text summary for answer engines (llmstxt.org). Same content as the
 // site, written so a model can quote it: what we do, which pages exist, what is factual.
 //
 // Os NÚMEROS saem do conteúdo publicado da home, não deste arquivo: latência, total de
-// ligações, certificações e prazo de implantação são exatamente os que alguém pode trocar
+// ligações e prazo de implantação são exatamente os que alguém pode trocar
 // no editor visual, e são os que ficariam divergindo em silêncio (SEO.md §3). A prosa e os
 // fatos que não existem como campo (CNPJ, endereço, planos) continuam escritos aqui, à
 // mão — gerá-los seria inventar texto, e texto errado citado por uma IA não se desfaz.
-export const dynamic = "force-dynamic";
+//
+// Regenera a cada 5 minutos, e na hora quando o painel publica um artigo, uma página ou uma
+// descrição (revalidatePath("/llms.txt")). Era gerado a cada pedido, e o arquivo cresceu o
+// bastante para estourar o limite de CPU por pedido do Worker.
+export const revalidate = 300;
 
 /** "20.000.000+ ligações realizadas até hoje" a partir do número em destaque do topo. */
 function callsFact(stat: { value: string; label: string }): string {
@@ -32,10 +40,8 @@ function latencyFact(rows: { label: string; value: number }[], unit: string): st
   }.`;
 }
 
-function certificationsFact(items: { name: string; detail: string }[]): string {
-  const list = items.map((item) => `${item.name}${item.detail ? ` ${item.detail}` : ""}`);
-  return `- Certificações ${list.join(", ")}; operação em conformidade com a LGPD.`;
-}
+// As certificações da seção de segurança da home NÃO entram aqui, nem a pergunta da FAQ que
+// as cita: este arquivo é o que uma IA pode citar como fato (lib/content/claims.ts).
 
 function rolloutFact(steps: { day: string; title: string }[]): string {
   const etapas = steps.map((step) => step.title.toLowerCase()).join(", ");
@@ -47,7 +53,11 @@ function rolloutFact(steps: { day: string; title: string }[]): string {
 }
 
 export async function GET() {
-  const [home, posts] = await Promise.all([getHomeContent("publicado"), getAllPosts()]);
+  const [home, posts, meta] = await Promise.all([getHomeContent("publicado"), getAllPosts(), getAllPageMeta()]);
+  // A mesma descrição que a página serve no <meta name="description">: a editada no painel,
+  // senão a do arquivo de conteúdo, senão a curta do menu.
+  const describe = (path: string, fallback: string) =>
+    meta.get(path)?.description || innerPages[path]?.seoDescription || fallback;
   const articles = posts.filter((post) => !post.noindex);
   const blog = articles.length
     ? [
@@ -64,14 +74,23 @@ export async function GET() {
   const section = (title: string, prefix: string) => {
     const items = pages
       .filter((p) => p.path !== "/" && p.path.startsWith(prefix))
-      .map((p) => `- [${p.title}](${absoluteUrl(p.path)}): ${p.description}`);
+      .map((p) => `- [${p.title}](${absoluteUrl(p.path)}): ${describe(p.path, p.description)}`);
     return items.length ? `
 ## ${title}\n\n${items.join("\n")}\n` : "";
   };
 
+  // Pergunta e resposta prontas para citar — o mesmo FAQPage da home, em texto.
+  const faq = home.faq.items
+    .filter((item) => !citesUnverifiedClaim(item.a))
+    .map((item) => `### ${toPlainText(item.q)}\n\n${toPlainText(item.a)}`)
+    .join("\n\n");
+
   const body = `# ${SITE_NAME}
 
 > ${SITE_DESCRIPTION}
+
+Categoria: IA de voz para empresas (agentes de voz com inteligência artificial que fazem e
+recebem ligações telefônicas). Também procurada como: ${VOICE_AI_TOPICS.slice(1).join(", ")}.
 
 A PitchYes é uma plataforma de IA de voz para empresas: cria, opera e monitora agentes de
 telefone que conduzem conversas reais em escala, em ligações ativas, receptivas e operacionais. Roda em
@@ -82,7 +101,6 @@ franquias e empresas de telecomunicação.
 Fatos que podem ser citados:
 ${latencyFact(home.latency.rows, home.latency.unit)}
 ${callsFact(home.hero.stat)}
-${certificationsFact(home.security.items)}
 ${rolloutFact(home.rollout.steps)}
 - Atendimento nativo em mais de 40 idiomas, com tradução em tempo real em 23 deles.
 - Cobrança por minuto, cobrindo modelo de linguagem, transcrição, síntese de voz e telefonia.
@@ -90,7 +108,7 @@ ${rolloutFact(home.rollout.steps)}
 
 ## Dados da empresa
 
-- Razão social: PitchYes — CNPJ 58.177.364/0001-21.
+- Razão social: PitchYes — CNPJ ${company.cnpj}.
 - Sede: ${company.address.full}, Brasil. Atendimento em todo o Brasil.
 - Comercial: comercial@pitchyes.com.br e +55 (11) 5196-9381, de segunda a sexta, das 8h às 20h (horário de Brasília).
 - Privacidade e LGPD: privacidade@pitchyes.com.br.
@@ -106,6 +124,10 @@ ${rolloutFact(home.rollout.steps)}
 
 - [Início](${absoluteUrl("/")}): ${SITE_DESCRIPTION}
 ${section("Soluções", "/solucoes")}${section("Clientes", "/clientes")}${section("Planos", "/planos")}${section("Recursos", "/recursos")}${section("Empresa", "/sobre")}
+## Perguntas frequentes
+
+${faq}
+
 ## Blog
 
 ${blog}
@@ -122,6 +144,7 @@ ${blog}
 
 - Idioma do site: português do Brasil.
 - Conteúdo canônico: ${absoluteUrl("/")}
+- Texto completo das páginas em Markdown: ${absoluteUrl("/llms-full.txt")}
 ${isIndexable() ? "" : "- Ambiente de homologação: não indexar nem citar até a publicação no domínio definitivo.\n"}`;
 
   return new Response(body, {

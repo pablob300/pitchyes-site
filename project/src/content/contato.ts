@@ -4,11 +4,11 @@ import type { PageContent } from "./types";
 // Canais oficiais e campos do formulário conforme a página de contato do pitchyes.com.br.
 // Os envios são gravados pelo /api/leads e ficam visíveis em /admin/leads.
 export const contato: PageContent = {
-  seoTitle: "Contato",
+  seoTitle: "Contato: demonstração de IA de voz",
   seoDescription:
     "Agende uma demonstração gratuita da PitchYes: 30 minutos, análise do seu processo atual e proposta customizada para a sua operação.",
   eyebrow: "Empresa",
-  h1: "Pronto para transformar suas vendas?",
+  h1: "Agende uma demonstração da IA de voz da PitchYes.",
   lead: "Agende uma demonstração gratuita e descubra como a PitchYes pode revolucionar seus resultados de vendas em apenas 30 dias.",
   blocks: [
     {

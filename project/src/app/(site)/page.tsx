@@ -3,10 +3,13 @@ import { JsonLd } from "@/components/JsonLd";
 import { HomePage } from "@/components/home/HomePage";
 import { getHomeContent, getSiteContent } from "@/lib/content/resolve";
 import { toPlainText } from "@/lib/content/richtext";
+import { getPage } from "@/lib/routes";
 import {
+  HOME_TITLE,
   organizationSchema,
   pageMetadataWithOverrides,
   SITE_DESCRIPTION,
+  softwareApplicationSchema,
   videoSchema,
   webPageSchema,
   webSiteSchema,
@@ -17,7 +20,7 @@ import {
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  return pageMetadataWithOverrides({ description: SITE_DESCRIPTION, path: "/" });
+  return pageMetadataWithOverrides({ title: HOME_TITLE, description: SITE_DESCRIPTION, path: "/" });
 }
 
 // Section order follows docs/PitchYes — Wireframe Homepage (Desktop).pdf (01 → 09);
@@ -35,10 +38,12 @@ export default async function Home() {
         graph={[
           organizationSchema(),
           webSiteSchema(),
+          softwareApplicationSchema(),
           webPageSchema({
-            title: "PitchYes — IA de voz para empresas",
+            title: HOME_TITLE,
             description: SITE_DESCRIPTION,
             path: "/",
+            dateModified: getPage("/")?.updated,
           }),
           {
             "@type": "FAQPage",

@@ -132,7 +132,8 @@ export type Security = {
 
 export type UseCases = {
   title: string;
-  items: { title: string; text: string }[];
+  /** `href`: página do site que aprofunda o caso — vira link interno no título do card. */
+  items: { title: string; text: string; href?: string }[];
 };
 
 export type Faq = {

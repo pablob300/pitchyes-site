@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // Termos-alvo: "automatizar prospecção", "reduzir custo de call center",
 // "agente de voz para cobrança", "agendamento automático por telefone".
 export const solucoesPorFuncao: PageContent = {
-  seoTitle: "IA de voz por função",
+  seoTitle: "IA de voz para vendas, cobrança e atendimento",
   seoDescription:
     "Vendas, atendimento, cobrança, agendamento e operações: veja o que muda em cada área quando as ligações repetitivas passam a ser feitas por IA de voz.",
   eyebrow: "Soluções",
-  h1: "Cada área ganha de volta o tempo que gastava no telefone.",
+  h1: "IA de voz por função: cada área ganha de volta o tempo do telefone.",
   lead: "A ligação repetitiva é a mesma em quase toda empresa: confirmar, cobrar, agendar, avisar. Quando o agente assume esse volume, cada área passa a usar as pessoas no que exige julgamento.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [

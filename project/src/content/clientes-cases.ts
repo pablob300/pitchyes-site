@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // TODO(conteúdo): cada case precisa de números autorizados pelo cliente antes de publicar.
 // Hoje só o depoimento da OPEN Datacenter está confirmado; os demais estão marcados.
 export const clientesCases: PageContent = {
-  seoTitle: "Cases de clientes",
+  seoTitle: "Cases de IA de voz: resultados de clientes",
   seoDescription:
     "Casos reais de operações que automatizaram ligações com IA de voz: o contexto, o que foi automatizado e o que mudou no indicador acompanhado.",
   eyebrow: "Clientes",
-  h1: "O que aconteceu depois que a IA assumiu o telefone.",
+  h1: "Cases de IA de voz: o que aconteceu depois que a IA assumiu o telefone.",
   lead: "Cada case segue a mesma estrutura: o problema da operação, a ligação que foi automatizada, como foi a implantação e o indicador acompanhado antes e depois.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [

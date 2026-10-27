@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/blocks/ContentPage";
 import { JsonLd } from "@/components/JsonLd";
 import { getInnerPageContent } from "@/lib/content/inner";
+import { innerPageGraph } from "@/lib/content/jsonld";
 import { solucoesReceptivo } from "@/content/solucoes-receptivo";
-import { faqItems } from "@/content/types";
-import { breadcrumbSchema, pageMetadataWithOverrides, serviceSchema, webPageSchema } from "@/lib/seo";
+import { pageMetadataWithOverrides } from "@/lib/seo";
 
 const defaults = solucoesReceptivo;
 const path = "/solucoes/receptivo";
@@ -20,32 +20,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   // Texto do código com o que foi publicado no editor visual por cima (lib/content/inner.ts).
   const content = await getInnerPageContent(path);
-  const faq = faqItems(content);
   return (
     <>
-      <JsonLd
-        graph={[
-          webPageSchema({ title: content.seoTitle, description: content.seoDescription, path }),
-          serviceSchema({ name: content.h1, description: content.seoDescription, path }),
-          breadcrumbSchema([
-            { name: "Início", path: "/" },
-            { name: "Soluções", path: "/solucoes" },
-            { name: content.seoTitle, path },
-          ]),
-          ...(faq.length
-            ? [
-                {
-                  "@type": "FAQPage",
-                  mainEntity: faq.map((item) => ({
-                    "@type": "Question",
-                    name: item.q,
-                    acceptedAnswer: { "@type": "Answer", text: item.a },
-                  })),
-                },
-              ]
-            : []),
-        ]}
-      />
+      <JsonLd graph={innerPageGraph(path, content)} />
       <ContentPage content={content} />
     </>
   );

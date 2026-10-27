@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { UseCases as UseCasesContent } from "@/content/home.schema";
 import { editFn } from "@/lib/content/edit";
 import { rich } from "@/lib/content/richtext";
@@ -14,7 +15,8 @@ export function UseCases({ content, editable }: { content: UseCasesContent; edit
         <ul className={styles.grid}>
           {content.items.map((item, i) => (
             <li key={item.title} className={styles.card} data-reveal {...edit(`useCases.items.${i}`)}>
-              <h3>{item.title}</h3>
+              {/* O link cobre o card inteiro (::after), mas o texto dele é o título. */}
+              <h3>{item.href ? <Link href={item.href}>{item.title}</Link> : item.title}</h3>
               <p>{rich(item.text)}</p>
             </li>
           ))}

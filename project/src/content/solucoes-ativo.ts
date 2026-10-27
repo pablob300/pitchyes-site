@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // Termos-alvo: "prospecção ativa com IA", "qualificação de leads por telefone",
 // "discador com inteligência artificial", "confirmação de reunião automática".
 export const solucoesAtivo: PageContent = {
-  seoTitle: "Ligações ativas com IA de voz",
+  seoTitle: "Ligações ativas com IA de voz: prospecção e SDR",
   seoDescription:
     "Prospecção, qualificação de leads, confirmação de reuniões e cobrança com agentes de voz que ligam em escala e entregam só o que está pronto para o time.",
   eyebrow: "Soluções",
-  h1: "Ligações ativas que chegam antes do concorrente.",
+  h1: "Ligações ativas com IA de voz que chegam antes do concorrente.",
   lead: "Lead que espera esfria. O agente da PitchYes liga minutos depois do cadastro, qualifica pelo seu critério e passa a conversa para o vendedor com o contexto pronto — em dezenas de ligações simultâneas.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [
@@ -17,10 +17,10 @@ export const solucoesAtivo: PageContent = {
       lead: "O agente assume o volume repetitivo e devolve para a equipe o tempo que ela deveria gastar vendendo.",
       items: [
         { title: "Resposta imediata a leads", text: "Assim que o formulário é enviado, o agente liga, confirma interesse e agenda. Quem responde primeiro conversa com quem ainda está com o assunto na cabeça." },
-        { title: "Qualificação por critério", text: "Perfil, orçamento, autoridade e prazo conferidos na conversa, com as respostas gravadas no CRM em campos estruturados." },
+        { title: "Qualificação por critério", text: "Perfil, orçamento, autoridade e prazo conferidos na conversa, com as respostas gravadas no CRM em campos estruturados.", href: "/recursos/integracoes" },
         { title: "Confirmação de reuniões", text: "Lembrete no dia anterior, confirmação na hora certa e reagendamento automático quando a pessoa não puder." },
         { title: "Reativação de base", text: "Retoma contatos parados há meses, identifica quem voltou a ter interesse e devolve a lista já filtrada." },
-        { title: "Cobrança amigável", text: "Lembra vencimentos, oferece as condições aprovadas e envia link de pagamento, sem constranger o cliente." },
+        { title: "Cobrança amigável", text: "Lembra vencimentos, oferece as condições aprovadas e envia link de pagamento, sem constranger o cliente.", href: "/solucoes/por-funcao" },
         { title: "Pesquisa e pós-venda", text: "Mede satisfação logo após a entrega, com respostas estruturadas para acompanhar a evolução mês a mês." },
       ],
     },

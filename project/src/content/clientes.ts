@@ -4,7 +4,7 @@ import { clients } from "./clients";
 // TODO(conteúdo): métricas e citações por cliente precisam ser fornecidas e autorizadas.
 // Só o depoimento do Leandro Vasconcelos (OPEN Datacenter) está confirmado (wireframe).
 export const clientes: PageContent = {
-  seoTitle: "Clientes",
+  seoTitle: "Clientes: empresas que usam IA de voz",
   seoDescription:
     "Empresas de energia, tecnologia, serviços e educação que automatizam ligações com a PitchYes — e o que mudou na operação de cada uma.",
   eyebrow: "Clientes",

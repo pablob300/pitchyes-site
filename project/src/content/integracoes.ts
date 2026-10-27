@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // TODO(produto): confirmar a lista de integrações nativas antes da publicação no domínio.
 // O texto fala em conectar "por API" onde não há integração pronta confirmada.
 export const integracoes: PageContent = {
-  seoTitle: "Integrações",
+  seoTitle: "Integrações de IA de voz com CRM e telefonia",
   seoDescription:
     "A PitchYes conecta com a telefonia, o CRM, a agenda e o WhatsApp que a sua empresa já usa — por integração nativa ou API, sem trocar de sistema.",
   eyebrow: "Recursos",
-  h1: "O agente trabalha dentro das suas ferramentas.",
+  h1: "Integrações da IA de voz: o agente trabalha dentro das suas ferramentas.",
   lead: "Uma ligação só resolve quando escreve no sistema certo: a agenda marcada, o lead atualizado, o chamado aberto. A PitchYes se conecta ao que já existe na sua empresa, em vez de pedir que você troque de ferramenta.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [

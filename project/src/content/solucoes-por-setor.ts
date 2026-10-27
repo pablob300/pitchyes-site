@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // Termos-alvo: "ia de voz para clínicas", "atendimento automatizado seguros",
 // "cobrança automatizada financeiro", "agente de voz imobiliária".
 export const solucoesPorSetor: PageContent = {
-  seoTitle: "IA de voz por setor",
+  seoTitle: "IA de voz por setor: saúde, seguros e imóveis",
   seoDescription:
     "Como a IA de voz da PitchYes atende saúde, seguros, serviços financeiros, imobiliário, energia e tecnologia, respeitando as regras de cada setor.",
   eyebrow: "Soluções",
-  h1: "Cada setor tem uma ligação crítica. Começamos por ela.",
+  h1: "IA de voz por setor: cada um tem uma ligação crítica. Começamos por ela.",
   lead: "A conversa que não pode dar errado muda conforme o negócio: uma confirmação de consulta, um aviso de sinistro, uma negociação de dívida. O agente é configurado para o vocabulário, as regras e os sistemas do seu setor.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [

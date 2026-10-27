@@ -72,6 +72,9 @@ function invalidSections(path: string, data: unknown): string[] {
 function revalidate(path: string): void {
   if (path === SITE_CONTENT_PATH) revalidatePath("/", "layout");
   else revalidatePath(path);
+  // Os arquivos para IA saem do mesmo conteúdo publicado (FAQ da home, texto das páginas).
+  revalidatePath("/llms.txt");
+  revalidatePath("/llms-full.txt");
 }
 
 const today = () => new Date().toISOString().slice(0, 10);

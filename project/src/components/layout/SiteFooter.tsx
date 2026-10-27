@@ -40,10 +40,14 @@ export function SiteFooter() {
         </div>
 
         <nav className={styles.cols} aria-label="Rodapé">
-          {footerNav.map((col) => (
+          {/* Rótulo de coluna, não título de seção: como <h2> ele somava seis títulos
+              ("Soluções", "Planos"…) ao esqueleto de toda página que o Google e as IAs leem. */}
+          {footerNav.map((col, i) => (
             <div key={col.title} className={styles.col}>
-              <h2 className={styles.colTitle}>{col.title}</h2>
-              <ul>
+              <p id={`rodape-col-${i}`} className={styles.colTitle}>
+                {col.title}
+              </p>
+              <ul aria-labelledby={`rodape-col-${i}`}>
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <Link href={link.href}>{link.label}</Link>

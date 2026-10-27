@@ -7,11 +7,11 @@ import type { PageContent } from "./types";
 // diz o período) e se os grupos "Infraestrutura", "Recursos", "Segurança" e "Suporte" do
 // comparativo — herdados da estrutura de referência — valem para os planos novos.
 export const planos: PageContent = {
-  seoTitle: "Planos e preços",
+  seoTitle: "Preços de IA de voz: planos por minuto",
   seoDescription:
     "Uma tarifa por minuto que já inclui modelo de linguagem, transcrição, síntese de voz e telefonia. Sem cobrança por token, sem sobretaxa por funcionalidade.",
   eyebrow: "Planos",
-  h1: "Um valor por minuto. Sem surpresa na fatura.",
+  h1: "Planos de IA de voz: um valor por minuto, sem surpresa na fatura.",
   lead: "A tarifa cobre o modelo de linguagem, a transcrição, a síntese de voz e a telefonia. Você não paga por token, não recebe fatura de terceiros e não descobre custo novo ao ligar uma funcionalidade.",
   blocks: [
     {

@@ -6,11 +6,11 @@ import type { PageContent } from "./types";
 // própria assinatura da PitchYes (pitchyes.com.br).
 // TODO(empresa): ano de fundação, tamanho do time e nomes da liderança para a seção final.
 export const sobre: PageContent = {
-  seoTitle: "Sobre a PitchYes",
+  seoTitle: "Sobre: empresa brasileira de IA de voz",
   seoDescription:
     "Empresa brasileira de tecnologia que desenvolve voz conversacional com IA para contato, vendas, suporte e atendimento. Conheça o que fazemos e como trabalhamos.",
   eyebrow: "Empresa",
-  h1: "Fale com todos. Converse com cada um.",
+  h1: "PitchYes, IA de voz brasileira: fale com todos, converse com cada um.",
   lead: "A PitchYes é uma empresa brasileira de tecnologia que desenvolve voz conversacional com inteligência artificial para contato, vendas, suporte e atendimento. Colocamos no telefone um agente que entende, decide e resolve — no volume de um discador e no cuidado de um bom atendente.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [

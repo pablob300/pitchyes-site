@@ -13,7 +13,7 @@ import { solucoesPorFuncao } from "@/content/solucoes-por-funcao";
 import { solucoesPorSetor } from "@/content/solucoes-por-setor";
 import { solucoesReceptivo } from "@/content/solucoes-receptivo";
 import { termos } from "@/content/termos";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "./seo";
+import { HOME_TITLE, SITE_DESCRIPTION } from "./seo";
 
 // Título e descrição que cada página mostra quando NADA foi editado no painel.
 //
@@ -26,8 +26,8 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "./seo";
 export type PageDefault = { title: string; description: string };
 
 const byPath: Record<string, PageDefault> = {
-  // A home é a única cujo título é o próprio nome do site, sem o sufixo.
-  "/": { title: `${SITE_NAME} — ${SITE_TAGLINE}`, description: SITE_DESCRIPTION },
+  // A home é a única cujo título já traz a marca: vai sem o sufixo.
+  "/": { title: HOME_TITLE, description: SITE_DESCRIPTION },
   "/solucoes": { title: solucoes.seoTitle, description: solucoes.seoDescription },
   "/solucoes/ativo": { title: solucoesAtivo.seoTitle, description: solucoesAtivo.seoDescription },
   "/solucoes/receptivo": { title: solucoesReceptivo.seoTitle, description: solucoesReceptivo.seoDescription },

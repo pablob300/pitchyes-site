@@ -59,7 +59,9 @@ async function audit(path) {
   for (let i = 1; i < levels.length; i++)
     if (levels[i] - levels[i - 1] > 1) { problems.push(`salto h${levels[i - 1]} → h${levels[i]}`); break; }
   const article = /^\/blog\/(?!pagina\/|categoria|categorias$|tag\/|autor\/)[^/]+$/.test(path);
-  const pageType = ["WebPage", "CollectionPage", "BlogPosting", "ProfilePage"].find((t) => schemas.includes(t));
+  const pageType = ["WebPage", "CollectionPage", "AboutPage", "ContactPage", "BlogPosting", "ProfilePage"].find((t) =>
+    schemas.includes(t),
+  );
   if (!pageType) problems.push("sem WebPage/CollectionPage/BlogPosting em JSON-LD");
   if (article) {
     if (!schemas.includes("BlogPosting")) problems.push("artigo sem BlogPosting");
@@ -103,4 +105,23 @@ for (const path of paths) {
   for (const p of r.problems) console.log(`   → ${p}`);
 }
 console.log(`\n${paths.length - failed}/${paths.length} páginas sem problemas · ${total} palavras · média ${Math.round(total / paths.length)}`);
+// Arquivos lidos pelos mecanismos de IA e pelos robôs (SEO.md §3): existem, falam do que a
+// empresa faz e não repetem afirmação sem comprovação (lib/content/claims.ts).
+const aiFiles = [
+  ["/llms.txt", (t) => /IA de voz/.test(t) && t.includes("/llms-full.txt")],
+  ["/llms-full.txt", (t) => t.length > 5000 && /## /.test(t)],
+  ["/robots.txt", (t) => (staging ? /Disallow: \//.test(t) : /Sitemap:/.test(t) && /GPTBot/.test(t))],
+];
+console.log("");
+for (const [path, ok] of aiFiles) {
+  const res = await fetch(base + path);
+  const text = await res.text();
+  const problems = [];
+  if (res.status !== 200) problems.push(`HTTP ${res.status}`);
+  else if (!ok(text)) problems.push("conteúdo esperado não encontrado");
+  if (path.startsWith("/llms") && /\b(SOC ?2|HIPAA|PCI[ -]?DSS|FedRAMP)\b/i.test(text)) problems.push("cita certificação ainda não comprovada");
+  if (problems.length) failed++;
+  console.log(`${problems.length ? "✗" : "✓"} ${path} · ${text.length} caracteres`);
+  for (const p of problems) console.log(`   → ${p}`);
+}
 process.exit(failed ? 1 : 0);

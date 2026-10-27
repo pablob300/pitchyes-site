@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // Hub de Soluções. Termos-alvo: "ia de voz para empresas", "agente de voz",
 // "automatizar ligações", "call center com inteligência artificial".
 export const solucoes: PageContent = {
-  seoTitle: "Soluções de IA de voz",
+  seoTitle: "Soluções de IA de voz para empresas",
   seoDescription:
     "Agentes de voz que fazem e recebem ligações em escala: prospecção, atendimento, agendamento e cobrança, integrados à sua telefonia e ao seu CRM.",
   eyebrow: "Soluções",
-  h1: "Atendimento instantâneo e o fim do funil engessado.",
+  h1: "Soluções de IA de voz: atendimento instantâneo e o fim do funil engessado.",
   lead: "Agentes de voz autônomos que executam o ciclo completo da chamada: resolução de 100% dos chamados na primeira tentativa, sem intervenção humana.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [
@@ -41,12 +41,12 @@ export const solucoes: PageContent = {
       title: "O que o agente faz numa ligação real.",
       lead: "Cada caso abaixo é uma conversa completa: identificação, consulta em sistema, decisão e registro.",
       items: [
-        { title: "Qualificação de leads", text: "Liga em minutos após o cadastro, confirma perfil, orçamento e urgência, e transfere só o que está pronto para o vendedor." },
-        { title: "Agendamento e confirmação", text: "Marca, confirma e reagenda compromissos direto na agenda da equipe, com lembrete por WhatsApp e redução de faltas." },
-        { title: "Substituição de URA", text: "Troca o menu de teclado por conversa: a pessoa diz o que precisa e o agente resolve ou direciona na hora." },
-        { title: "Suporte de primeiro nível", text: "Responde dúvidas recorrentes com base na sua documentação, abre chamado e transfere casos complexos com o histórico." },
-        { title: "Cobrança e negociação", text: "Lembra vencimentos, apresenta condições aprovadas e envia o link de pagamento, sempre dentro do script autorizado." },
-        { title: "Pesquisa e pós-venda", text: "Coleta avaliação, mede satisfação e devolve os dados estruturados para o seu CRM, sem planilha no meio do caminho." },
+        { title: "Qualificação de leads", text: "Liga em minutos após o cadastro, confirma perfil, orçamento e urgência, e transfere só o que está pronto para o vendedor.", href: "/solucoes/ativo" },
+        { title: "Agendamento e confirmação", text: "Marca, confirma e reagenda compromissos direto na agenda da equipe, com lembrete por WhatsApp e redução de faltas.", href: "/solucoes/ativo" },
+        { title: "Substituição de URA", text: "Troca o menu de teclado por conversa: a pessoa diz o que precisa e o agente resolve ou direciona na hora.", href: "/solucoes/receptivo" },
+        { title: "Suporte de primeiro nível", text: "Responde dúvidas recorrentes com base na sua documentação, abre chamado e transfere casos complexos com o histórico.", href: "/solucoes/receptivo" },
+        { title: "Cobrança e negociação", text: "Lembra vencimentos, apresenta condições aprovadas e envia o link de pagamento, sempre dentro do script autorizado.", href: "/solucoes/por-funcao" },
+        { title: "Pesquisa e pós-venda", text: "Coleta avaliação, mede satisfação e devolve os dados estruturados para o seu CRM, sem planilha no meio do caminho.", href: "/solucoes/por-funcao" },
       ],
     },
     {

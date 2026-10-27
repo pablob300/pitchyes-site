@@ -44,6 +44,7 @@ export async function POST(request: Request) {
     // Derruba a versão em cache na hora: a página volta ao padrão do código no
     // próximo acesso, sem esperar a revalidação de um minuto.
     revalidatePath(path);
+    revalidatePath("/llms.txt"); // a lista de páginas de lá usa esta descrição
     await audit({
       action: "pagina.meta.editada",
       actorId: actor.id,
@@ -93,6 +94,7 @@ export async function POST(request: Request) {
 
   // O que foi salvo entra na página publicada imediatamente.
   revalidatePath(path);
+  revalidatePath("/llms.txt"); // a lista de páginas de lá usa esta descrição
 
   await audit({
     action: "pagina.meta.editada",

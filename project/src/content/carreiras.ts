@@ -3,7 +3,7 @@ import type { PageContent } from "./types";
 // TODO(RH): substituir por vagas reais quando houver processo aberto; hoje a página
 // descreve como trabalhamos e recebe candidaturas espontâneas.
 export const carreiras: PageContent = {
-  seoTitle: "Carreiras",
+  seoTitle: "Carreiras em IA de voz",
   seoDescription:
     "Trabalhe com IA de voz aplicada a operações reais de vendas e atendimento. Veja como trabalhamos, o que procuramos e como enviar sua candidatura.",
   eyebrow: "Empresa",

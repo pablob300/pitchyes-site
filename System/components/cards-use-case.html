@@ -13,12 +13,15 @@
   .card:hover { border-color: var(--color-border-strong); background: var(--color-bg-subtle); }
   .card h3 { font-size: 16px; line-height: 1.25; margin: 0 0 var(--space-2); }
   .card p { font-size: 13px; color: var(--color-text-secondary); margin: 0; }
+  .card { position: relative; }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a::after { content: ""; position: absolute; inset: 0; }
 </style>
 </head>
 <body>
-  <p class="note">PitchYes · Grade compacta de casos de uso (5 colunas → 3 → 2). React: UseCases.tsx</p>
+  <p class="note">PitchYes · Grade compacta de casos de uso (5 colunas → 3 → 2). React: UseCases.tsx. Card com link: o título vira link interno e a área inteira do card é clicável.</p>
   <ul class="grid">
-    <li class="card"><h3>Substituição de URA</h3><p>Troque o menu de teclado por conversa em linguagem natural.</p></li>
+    <li class="card"><h3><a href="#">Substituição de URA</a></h3><p>Troque o menu de teclado por conversa em linguagem natural.</p></li>
     <li class="card"><h3>Atendimento receptivo</h3><p>Todo cliente atendido, qualificado e direcionado, 24 horas por dia.</p></li>
     <li class="card"><h3>Prospecção ativa</h3><p>Qualifica leads, confirma reuniões e faz follow-up, em escala.</p></li>
     <li class="card"><h3>Inteligência de chamadas</h3><p>Toda ligação transcrita, avaliada e pesquisável.</p></li>

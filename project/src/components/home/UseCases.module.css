@@ -28,6 +28,11 @@
   line-height: 1.25;
   letter-spacing: -0.02em;
 }
+.card { position: relative; }
+.card h3 a { color: inherit; text-decoration: none; }
+.card h3 a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.card h3 a:focus-visible { outline: none; }
+.card:has(a:focus-visible) { outline: 2px solid var(--color-accent-primary); outline-offset: 2px; }
 .card p {
   font-size: 13px;
   line-height: 1.45;

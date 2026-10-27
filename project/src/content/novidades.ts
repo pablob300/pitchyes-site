@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // TODO(produto): esta página descreve capacidades já disponíveis, sem datas de lançamento.
 // Quando houver um registro real de releases, trocar por entradas datadas.
 export const novidades: PageContent = {
-  seoTitle: "Novidades da plataforma",
+  seoTitle: "Novidades da plataforma de IA de voz",
   seoDescription:
     "O que já está disponível na plataforma de IA de voz da PitchYes: canais, testes de cenário, observabilidade, integrações e controles de segurança.",
   eyebrow: "Recursos",
-  h1: "O que já está disponível na plataforma.",
+  h1: "O que já está disponível na plataforma de IA de voz.",
   lead: "Esta página acompanha a evolução da PitchYes. Abaixo, as capacidades disponíveis hoje para quem está com uma operação no ar — e o que estamos construindo em seguida.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [

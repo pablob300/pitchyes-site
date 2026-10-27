@@ -3,11 +3,11 @@ import type { PageContent } from "./types";
 // Termos-alvo: "substituir URA", "URA conversacional", "atendimento telefônico 24 horas",
 // "central de atendimento com IA", "atendimento receptivo automatizado".
 export const solucoesReceptivo: PageContent = {
-  seoTitle: "Atendimento receptivo com IA de voz",
+  seoTitle: "Atendimento telefônico com IA e URA inteligente",
   seoDescription:
     "Troque a URA por conversa: o agente atende na primeira chamada, resolve o pedido ou direciona com contexto, 24 horas por dia e sem fila de espera.",
   eyebrow: "Soluções",
-  h1: "Ninguém mais espera na fila para ser atendido.",
+  h1: "Atendimento receptivo com IA de voz: ninguém mais espera na fila.",
   lead: "O agente da PitchYes atende toda chamada no primeiro toque, entende o pedido em linguagem natural, consulta seus sistemas e resolve — ou transfere para a pessoa certa com o histórico pronto.",
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [
@@ -17,8 +17,8 @@ export const solucoesReceptivo: PageContent = {
       lead: "Os pedidos que enchem a fila são também os mais previsíveis. São eles que saem do caminho da sua equipe.",
       items: [
         { title: "Triagem e direcionamento", text: "Identifica o cliente, entende o motivo da ligação e leva direto à área certa, sem menu de teclado." },
-        { title: "Agendamento e remarcação", text: "Marca, confirma e remarca compromissos na agenda da equipe, com confirmação por mensagem." },
-        { title: "Status e segunda via", text: "Consulta pedido, contrato ou fatura no seu sistema e envia o documento por WhatsApp ou e-mail." },
+        { title: "Agendamento e remarcação", text: "Marca, confirma e remarca compromissos na agenda da equipe, com confirmação por mensagem.", href: "/recursos/integracoes" },
+        { title: "Status e segunda via", text: "Consulta pedido, contrato ou fatura no seu sistema e envia o documento por WhatsApp ou e-mail.", href: "/recursos/integracoes" },
         { title: "Dúvidas recorrentes", text: "Responde com base na sua documentação, sempre com a informação oficial, sem inventar resposta." },
         { title: "Abertura de chamado", text: "Registra a ocorrência com os dados obrigatórios e informa o prazo no mesmo atendimento." },
         { title: "Picos e fora do horário", text: "Absorve noites, fins de semana e picos sazonais sem contratar temporários." },

@@ -5,6 +5,8 @@
 // /contato e /privacidade: mudou, confira lá também.
 
 export const company = {
+  /** CNPJ público (já citado no /llms.txt); vai para `taxID` da Organization. */
+  cnpj: "58.177.364/0001-21",
   phone: { display: "+55 (11) 5196-9381", tel: "+551151969381" },
   email: "comercial@pitchyes.com.br",
   address: {
