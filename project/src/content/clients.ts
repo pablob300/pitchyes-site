@@ -1,27 +1,34 @@
-// Fonte única dos clientes: a home (slider) e /clientes (grade) leem daqui.
-// TODO(marca): as imagens em /public/logos são de MARCAÇÃO, geradas por código, só para
-// validar o comportamento (cinza que ganha cor no hover). Substituir pelos arquivos reais
-// das marcas — mesmo nome de arquivo, proporção parecida (260x80) e fundo transparente.
+// Fonte única dos clientes: a home (slider), /clientes (grade) e as landing pages leem daqui.
+// Os logos vêm dos sites e perfis das próprias empresas (outubro de 2026), em
+// /public/logos/clientes: SVG quando a empresa publica um, senão WebP sem perdas com a borda
+// transparente cortada. Tenda, Grupo Navesa, NewChase e Método 12P só publicam a versão
+// branca do logo; aqui o branco foi pintado com a cor da marca (Tenda #E20721, Navesa
+// #244E83) ou grafite, para aparecer no fundo claro. Logo novo: mesmo padrão, altura 48 no
+// `height` e a largura proporcional.
+//
+// Esta lista é o PADRÃO: o painel pode sobrescrever (conteúdo global "/_site", seção
+// "Clientes (logos)").
 
 export type Client = {
   name: string;
-  /** SVG em /public/logos, com fundo transparente. */
+  /** SVG ou WebP em /public/logos/clientes, com fundo transparente. */
   logo: string;
   width: number;
   height: number;
 };
 
 export const clients: Client[] = [
-  { name: "Sofia Energia", logo: "/logos/sofia-energia.svg", width: 250, height: 48 },
-  { name: "Vantage Energia", logo: "/logos/vantage-energia.svg", width: 279, height: 48 },
-  { name: "MaxNet", logo: "/logos/maxnet.svg", width: 158, height: 48 },
-  { name: "Plaza", logo: "/logos/plaza.svg", width: 142, height: 48 },
-  { name: "Grupo Hellu's Prime", logo: "/logos/grupo-hellu-s-prime.svg", width: 302, height: 48 },
-  { name: "OPEN Datacenter", logo: "/logos/open-datacenter.svg", width: 279, height: 48 },
-  { name: "Employability", logo: "/logos/employability.svg", width: 250, height: 48 },
-  { name: "Senior Sistemas", logo: "/logos/senior-sistemas.svg", width: 279, height: 48 },
-  { name: "Prospecta Global", logo: "/logos/prospecta-global.svg", width: 294, height: 48 },
-  { name: "Método 12P", logo: "/logos/metodo-12p.svg", width: 225, height: 48 },
-  { name: "MidHaus", logo: "/logos/midhaus.svg", width: 175, height: 48 },
-  { name: "Cooperativa Uirapuru", logo: "/logos/cooperativa-uirapuru.svg", width: 314, height: 48 },
+  { name: "Senior Sistemas", logo: "/logos/clientes/senior-sistemas.svg", width: 151, height: 48 },
+  { name: "OPEN Datacenter", logo: "/logos/clientes/open-datacenter.svg", width: 73, height: 48 },
+  { name: "Autoglass", logo: "/logos/clientes/autoglass.svg", width: 104, height: 48 },
+  { name: "Tenda", logo: "/logos/clientes/tenda.webp", width: 200, height: 48 },
+  { name: "Thomson Reuters", logo: "/logos/clientes/thomson-reuters.svg", width: 338, height: 48 },
+  { name: "Moura Dubeux", logo: "/logos/clientes/moura-dubeux.svg", width: 87, height: 48 },
+  { name: "Método 12P", logo: "/logos/clientes/metodo-12p.webp", width: 115, height: 48 },
+  { name: "Prospecta Global", logo: "/logos/clientes/prospecta-global.webp", width: 48, height: 48 },
+  { name: "Grupo NewChase", logo: "/logos/clientes/grupo-newchase.webp", width: 140, height: 48 },
+  { name: "Vantage Energia", logo: "/logos/clientes/vantage-energia.webp", width: 218, height: 48 },
+  { name: "RE/MAX", logo: "/logos/clientes/remax.svg", width: 175, height: 48 },
+  { name: "Grupo Navesa", logo: "/logos/clientes/grupo-navesa.webp", width: 200, height: 48 },
+  { name: "Laboratório Duarte", logo: "/logos/clientes/laboratorio-duarte.svg", width: 167, height: 48 },
 ];
