@@ -52,7 +52,7 @@ const SECTION_LABELS: Record<string, string> = {
   useCases: "Casos de uso",
   faq: "Perguntas frequentes",
   finalCta: "Faixa de CTA",
-  clients: "Parede de logos",
+  clients: "Clientes (logos)",
 };
 
 function label(section: string): string {

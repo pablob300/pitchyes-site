@@ -88,7 +88,9 @@ export function ContentEditor({
   // origem, então o painel enxerga o documento dele diretamente.
   const ligarIframe = useCallback(() => {
     const doc = iframe.current?.contentDocument;
-    if (!doc) return;
+    // Pode ser chamada mais de uma vez para o mesmo documento (load + montagem): liga só uma.
+    if (!doc || doc.documentElement.dataset.editLigado) return;
+    doc.documentElement.dataset.editLigado = "1";
     const alvos = Array.from(doc.querySelectorAll<HTMLElement>("[data-edit]"));
     for (const alvo of alvos) {
       alvo.dataset.editAtivo = "1";
@@ -132,6 +134,10 @@ export function ContentEditor({
   useEffect(() => {
     const frame = iframe.current;
     if (!frame) return;
+    // O iframe pode terminar de carregar antes de o painel montar (página lenta): aí o
+    // "load" já passou e nada ficaria clicável. Liga na hora se o documento já está pronto.
+    const doc = frame.contentDocument;
+    if (doc?.readyState === "complete" && doc.location.href !== "about:blank") ligarIframe();
     frame.addEventListener("load", ligarIframe);
     return () => frame.removeEventListener("load", ligarIframe);
   }, [ligarIframe]);

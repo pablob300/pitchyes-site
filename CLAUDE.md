@@ -61,7 +61,9 @@ entra no editor com uma linha em `src/content/registry.ts` e a rota lendo
 A edição é bloco a bloco (`blocos.b<n>`, pela posição no arquivo): **mudar a ordem ou apagar um
 bloco no código desalinha as edições já publicadas daquela página** — confira a página no painel
 depois. A estrutura (quais blocos, a ordem, o tipo) continua no código; o painel edita texto,
-listas, planos, tabela e imagens. Página com layout próprio: schema em `lib/content/schema/`,
+listas, planos, tabela e imagens. A lista de clientes (logo + nome) é global (`/_site`,
+seção "Clientes (logos)"): aparece na gaveta da home e na de `/clientes`, e publicar em
+qualquer uma muda as duas. Página com layout próprio: schema em `lib/content/schema/`,
 `edit()` nos componentes e o caminho em `lib/content/pages.ts`.
 
 ### Rotina: todo conteúdo criado, alterado ou apagado passa pelo Page Editor

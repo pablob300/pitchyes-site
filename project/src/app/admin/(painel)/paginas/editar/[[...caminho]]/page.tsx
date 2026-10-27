@@ -37,7 +37,8 @@ export default async function EditarConteudo({
   ]);
 
   // Home: schema escrito à mão. Página interna: schema gerado a partir dos blocos dela, mais
-  // os blocos globais da home (faixa final), que aparecem em todas as páginas.
+  // os blocos globais da home (faixa final), que aparecem em todas as páginas. A lista de
+  // clientes também é global, mas só entra na gaveta da página que mostra os logos.
   const defaults = path === "/" ? null : innerPageDefaults(path);
   const schema = defaults
     ? {
@@ -45,7 +46,11 @@ export default async function EditarConteudo({
       }
     : homeSchema;
   if (defaults) {
-    schema.sections = [...schema.sections, ...homeSchema.sections.filter((s) => s.scope === "site" && s.key !== "clients")];
+    const hasLogos = defaults.blocks.some((b) => b.kind === "logos");
+    schema.sections = [
+      ...schema.sections,
+      ...homeSchema.sections.filter((s) => s.scope === "site" && (s.key !== "clients" || hasLogos)),
+    ];
   }
   const resolvedPage = defaults
     ? innerEditorView(resolveInnerPage(defaults, pagina.data))

@@ -86,7 +86,7 @@ function blockSection(block: Block, index: number): SectionSpec {
         ],
       };
     case "logos":
-      return { ...base, fields: [titleField, leadField], note: "Os logos vêm da parede de logos do site inteiro (editável na home, em “Parede de logos”)." };
+      return { ...base, fields: [titleField, leadField], note: "Os logos ficam na seção “Clientes (logos)”, no fim desta gaveta — a mesma lista da home." };
     case "pricing":
       return {
         ...base,

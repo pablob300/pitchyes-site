@@ -144,9 +144,9 @@ function Blocks({ block, e }: { block: Block; e: EditFn }) {
             <h2 className={styles.logosTitle} data-reveal {...e("title")}>
               {block.title}
             </h2>
-            <ul className={styles.logos}>
-              {block.items.map((item) => (
-                <li key={item.name} data-reveal>
+            <ul className={styles.logos} {...e("@site.clients")}>
+              {block.items.map((item, i) => (
+                <li key={`${i}-${item.name}`} data-reveal>
                   <Image
                     src={item.logo}
                     alt={`Logo da ${item.name}`}

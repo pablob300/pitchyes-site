@@ -21,7 +21,8 @@ export function editFn(editable: boolean | undefined): EditFn {
   return editable ? markEdit : noEdit;
 }
 
-/** Prefixa um ponteiro, para uma seção não precisar repetir o próprio nome. */
+/** Prefixa um ponteiro, para uma seção não precisar repetir o próprio nome. Conteúdo global
+ * ("@site.clients") passa sem prefixo: ele não pertence à seção que o mostra. */
 export function scoped(edit: EditFn, prefix: string): EditFn {
-  return (pointer) => edit(pointer ? `${prefix}.${pointer}` : prefix);
+  return (pointer) => edit(pointer.startsWith("@site.") ? pointer : pointer ? `${prefix}.${pointer}` : prefix);
 }

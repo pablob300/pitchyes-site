@@ -310,10 +310,10 @@ export const homeSchema: PageSchema = {
     },
     {
       key: "clients",
-      label: "Parede de logos",
+      label: "Clientes (logos)",
       scope: "site",
       prefix: "",
-      note: "Os mesmos logos aparecem na home e na página /clientes.",
+      note: "A mesma lista aparece na home (faixa) e na página /clientes (grade). Publicar aqui muda as duas.",
       fields: [],
       lists: [
         {
@@ -322,7 +322,7 @@ export const homeSchema: PageSchema = {
           titleField: "name",
           min: 1,
           template: { name: "Nova empresa", logo: "", width: 260, height: 48 },
-          help: "O nome da empresa vira o texto alternativo do logo — sem nome, o logo fica invisível para leitor de tela e buscador.",
+          help: "Logo em PNG ou WebP com fundo transparente; largura e altura se acertam ao enviar. O nome da empresa vira o texto alternativo do logo — sem nome, o logo fica invisível para leitor de tela e buscador.",
           fields: [
             { pointer: "name", label: "Empresa", type: "texto" },
             { pointer: "logo", label: "Logo", type: "imagem" },
