@@ -24,7 +24,22 @@ Commit `99dfe1b` · Cloudflare `9dbf0134`
   página interna com link externo ganha `target="_blank"`).
 - `updated` 2026-10-28 em `/`, `/sobre`, `/carreiras` e `/contato` (`routes.ts` e `page_meta`).
 - Auditoria: 92/93; a LP `/conteudo/cadastro` respondeu 503 logo após o deploy (remontagem do
-  cache) e tem título de 85 caracteres, que é revisado na etapa 6.
+  cache; o "título de 85 caracteres" é o da página de erro) e voltou com 200.
+
+## 2026-10-28: Ajustes em massa, etapa 2 — logos dos clientes
+
+Commit `da36454` · Cloudflare `4c0273ad`
+
+- **Mesma altura para todos os logos:** a grade de clientes passa para 5 colunas e 28px de
+  altura. Em 6 colunas, a célula não comportava o Thomson Reuters, que encolhia.
+- **Arquivos corrigidos** (nome novo por causa do cache de 1 ano em `/logos/*`):
+  - `open-datacenter-v2.svg`: o arquivo declarava 32×32 com desenho 53×35 e ficava encaixotado.
+  - `prospecta-global-v2.webp`: o avatar azul do LinkedIn virou o símbolo em azul sobre fundo
+    transparente, recortado rente ao desenho.
+- **Box "+400 empresas no Brasil"** fecha a grade de clientes (`/clientes` e o bloco de clientes
+  das landing pages). O texto pode ser trocado na gaveta ("Texto do último box"); a faixa
+  rolante da home não muda.
+- Auditoria: tudo certo, exceto um 503 passageiro logo após o deploy (voltou com 200).
 
 ## 2026-10-27: Logos reais dos clientes
 
