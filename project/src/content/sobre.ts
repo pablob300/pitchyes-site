@@ -58,8 +58,6 @@ export const sobre: PageContent = {
       lead: "Números divulgados pela PitchYes a partir da sua carteira de clientes.",
       items: [
         { value: "400+", label: "Empresas atendidas" },
-        { value: "94%", label: "Taxa de sucesso" },
-        { value: "3x", label: "Mais leads qualificados" },
       ],
     },
     {

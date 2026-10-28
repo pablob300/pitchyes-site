@@ -630,7 +630,13 @@ export function ContentPage({
           </p>
           {content.cta && (
             <div data-reveal>
-              <ButtonLink href={content.cta.href} size="lg" {...edit("cta.label")}>
+              <ButtonLink
+                href={content.cta.href}
+                size="lg"
+                // Link para fora do site (ex.: LinkedIn em /carreiras) abre em outra aba.
+                {...(/^https?:/.test(content.cta.href) ? { target: "_blank", rel: "noopener" } : {})}
+                {...edit("cta.label")}
+              >
                 {content.cta.label}
               </ButtonLink>
             </div>

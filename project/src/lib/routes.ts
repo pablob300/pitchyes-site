@@ -12,7 +12,7 @@ export type SitePage = {
 };
 
 export const pages = [
-  { path: "/", title: "Início", description: "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.", placeholder: false, updated: "2026-10-26" },
+  { path: "/", title: "Início", description: "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.", placeholder: false, updated: "2026-10-28" },
 
   { path: "/solucoes", title: "Soluções", description: "Como a IA de voz da PitchYes atende ligações ativas e receptivas em escala.", placeholder: false, updated: "2026-10-26" },
   { path: "/solucoes/ativo", title: "Ligações ativas", description: "Prospecção, qualificação de leads, confirmação de reuniões e follow-up com IA de voz.", placeholder: false, updated: "2026-10-26" },
@@ -34,9 +34,9 @@ export const pages = [
   { path: "/blog", title: "Blog", description: "Artigos sobre IA de voz, vendas e atendimento.", placeholder: false, updated: "2026-10-26" },
   { path: "/blog/categorias", title: "Categorias do blog", description: "Todas as categorias de artigos do blog da PitchYes.", placeholder: false, updated: "2026-10-26" },
 
-  { path: "/sobre", title: "Sobre a PitchYes", description: "Empresa brasileira de voz conversacional com IA para contato, vendas, suporte e atendimento.", placeholder: false, updated: "2026-10-26" },
-  { path: "/carreiras", title: "Carreiras", description: "Trabalhe na PitchYes.", placeholder: false, updated: "2026-10-26" },
-  { path: "/contato", title: "Contato", description: "Agende uma demonstração gratuita de 30 minutos com o time da PitchYes.", placeholder: false, updated: "2026-10-26" },
+  { path: "/sobre", title: "Sobre a PitchYes", description: "Empresa brasileira de voz conversacional com IA para contato, vendas, suporte e atendimento.", placeholder: false, updated: "2026-10-28" },
+  { path: "/carreiras", title: "Carreiras", description: "Trabalhe na PitchYes.", placeholder: false, updated: "2026-10-28" },
+  { path: "/contato", title: "Contato", description: "Agende uma demonstração gratuita de 30 minutos com o time da PitchYes.", placeholder: false, updated: "2026-10-28" },
 
   { path: "/privacidade", title: "Política de Privacidade", description: "Como a PitchYes coleta, usa e protege dados pessoais.", placeholder: false, updated: "2026-10-25" },
   { path: "/termos", title: "Termos de Uso", description: "Termos de uso do site e da plataforma PitchYes.", placeholder: false, updated: "2026-09-19" },

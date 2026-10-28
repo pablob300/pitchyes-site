@@ -104,7 +104,7 @@ ${callsFact(home.hero.stat)}
 ${rolloutFact(home.rollout.steps)}
 - Atendimento nativo em mais de 40 idiomas, com tradução em tempo real em 23 deles.
 - Cobrança por minuto, cobrindo modelo de linguagem, transcrição, síntese de voz e telefonia.
-- Números divulgados pela empresa: mais de 400 empresas atendidas, 94% de taxa de sucesso e 3x mais leads qualificados.
+- Números divulgados pela empresa: mais de 400 empresas atendidas.
 
 ## Dados da empresa
 

@@ -31,10 +31,6 @@ export const contato: PageContent = {
       highlight: {
         title: "Junte-se a 400+ empresas",
         text: "Que já transformaram suas vendas com a PitchYes e obtiveram resultados excepcionais em menos de 30 dias.",
-        stats: [
-          { value: "94%", label: "Taxa de sucesso" },
-          { value: "3x", label: "Mais leads qualificados" },
-        ],
       },
     },
     {
@@ -70,14 +66,6 @@ export const contato: PageContent = {
         {
           q: "Em quanto tempo vocês respondem?",
           a: "O time comercial responde os contatos por e-mail em até 2 horas dentro do horário de atendimento, de segunda a sexta, das 8h às 20h.",
-        },
-        {
-          q: "Vocês atendem empresas fora do Brasil?",
-          a: "Sim. A plataforma atende nativamente em mais de 40 idiomas, com tradução em tempo real em 23 deles. As condições comerciais para operações internacionais são tratadas caso a caso.",
-        },
-        {
-          q: "Como faço para trabalhar na PitchYes?",
-          a: "Envie sua candidatura por este mesmo formulário, contando no que você quer trabalhar e o que já construiu. A página de carreiras explica como trabalhamos.",
         },
       ],
     },

@@ -80,7 +80,7 @@ export function LeadForm({
         setMessage(data.message ?? "Não foi possível enviar agora. Tente novamente.");
         return;
       }
-      // Lead sem perfil comercial (sem time ou 1 vendedor) entra na Central, mas não vira
+      // Lead sem perfil comercial (sem time ou 1 pessoa) entra na Central, mas não vira
       // conversão no GTM.
       if (leadProfile(form, values) !== "sem_perfil") {
         const { name, email, phone } = form.identity;

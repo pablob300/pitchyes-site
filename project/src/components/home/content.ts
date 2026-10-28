@@ -130,7 +130,7 @@ export const homeDefaults: HomeContent = {
   rollout: {
     title: "Sua operação com IA de voz, ao vivo em poucos dias.",
     steps: [
-      { day: "Dia 01", title: "Descoberta", text: "Entendimento do seu processo comercial" },
+      { day: "Dia 01", title: "Descoberta", text: "Entendimento dos processos da sua empresa" },
       { day: "Dia 03", title: "Construção", text: "Script, voz e integrações configuradas" },
       { day: "Dia 05", title: "Testes", text: "Cenários reais validados antes do ar" },
       { day: "Dia 07 · Ao vivo", title: "Em produção", text: "Sua equipe acompanha ligações diariamente", live: true },

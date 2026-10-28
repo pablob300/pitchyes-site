@@ -41,11 +41,11 @@ export const MAX_TEXT = 2000;
  */
 export const TEAM_OPTIONS = [
   "Sem time comercial",
-  "1 vendedor",
-  "2 a 5 vendedores",
-  "6 a 10 vendedores",
-  "11 a 20 vendedores",
-  "Mais de 20 vendedores",
+  "1 pessoa",
+  "2 a 5 pessoas",
+  "6 a 10 pessoas",
+  "11 a 20 pessoas",
+  "Mais de 20 pessoas",
 ];
 const NO_PROFILE = new Set(TEAM_OPTIONS.slice(0, 2));
 

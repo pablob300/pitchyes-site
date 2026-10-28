@@ -9,7 +9,7 @@ export const carreiras: PageContent = {
   eyebrow: "Empresa",
   h1: "Construa a IA que atende milhões de ligações.",
   lead: "Trabalhar na PitchYes é lidar com produção desde o primeiro dia: agentes que falam com clientes reais, em operações que não podem parar. Quem entra aqui vê o efeito do próprio trabalho na mesma semana.",
-  cta: { label: "Enviar candidatura", href: "/contato" },
+  cta: { label: "Enviar candidatura", href: "https://www.linkedin.com/company/pitchyes" },
   blocks: [
     {
       kind: "features",
@@ -37,7 +37,7 @@ export const carreiras: PageContent = {
       title: "Áreas com que trabalhamos.",
       paragraphs: [
         "Engenharia de software e de voz, implantação e sucesso do cliente, vendas e operações. Mesmo nas funções não técnicas, todo mundo convive com o produto: ouvir ligações faz parte da rotina.",
-        "Não temos vagas abertas publicadas neste momento. Ainda assim, recebemos candidaturas espontâneas e olhamos todas — conte no que você quer trabalhar e o que já construiu.",
+        "Não temos vagas abertas publicadas neste momento. Ainda assim, recebemos candidaturas espontâneas e olhamos todas — envie a sua pelo LinkedIn da PitchYes, contando no que você quer trabalhar e o que já construiu.",
       ],
     },
     {
@@ -45,7 +45,7 @@ export const carreiras: PageContent = {
       title: "Continue por aqui.",
       items: [
         { title: "Sobre a PitchYes", text: "Por que escolhemos voz e como conduzimos as implantações.", href: "/sobre" },
-        { title: "Contato", text: "Envie sua candidatura ou fale com o time.", href: "/contato" },
+        { title: "Contato", text: "Fale com o time comercial da PitchYes.", href: "/contato" },
       ],
     },
   ],
