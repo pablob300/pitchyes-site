@@ -25,6 +25,10 @@ Leia antes de qualquer alteração no site:
 | Campos que o editor visual mostra | `project/src/lib/content/schema/` |
 | Quais páginas já têm editor de conteúdo | `project/src/lib/content/pages.ts` (internas: `src/content/registry.ts`) |
 | Cabeçalho, rodapé, faixa de CTA | `project/src/components/layout/` |
+| Setores atendidos (lista global, como a de clientes) | `project/src/content/sectors.ts`; painel: seção "Setores" (`/_site`). Bloco de cards com `source: "setores"` mostra a lista |
+| Cases empilhados (vídeo/foto + texto) e case da home | Bloco `caseStories` / seção `caseHighlight`; componente `components/blocks/CaseStory.tsx` |
+| Novidades datadas | Bloco `timeline` em `content/novidades.ts` (`sample: true` = conteúdo de modelo, fora do `/llms-full.txt`) |
+| Hero: palavras do título + cards do player | `hero.titleWords` (texto + áudio); relógio único em `components/home/HeroSync.tsx` |
 | Endereço, telefone, e-mail, redes sociais, selo Reclame Aqui | `project/src/lib/company.ts` (fonte única; alimenta o rodapé, o JSON-LD da Organization e o `/llms.txt`) |
 | Domínio e regra de indexação | `project/src/lib/site.ts` (`SITE_URL`, `SITE_ENV`) |
 | Menu do painel (seções e submenus) | `project/src/lib/admin/nav.ts` |

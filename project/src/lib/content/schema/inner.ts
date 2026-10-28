@@ -14,6 +14,7 @@ const KIND_LABEL: Record<Block["kind"], string> = {
   cases: "Cases",
   caseStories: "Cases",
   timeline: "Novidades",
+  useCases: "Casos de uso",
   logos: "Logos",
   pricing: "Planos",
   table: "Tabela",
@@ -111,6 +112,12 @@ export function blockSection(block: Block, prefix: string, label: string): Secti
           ),
         ],
       };
+    case "useCases":
+      return {
+        ...base,
+        fields: [titleField],
+        lists: [list(p("items"), "Casos", "title", [f("title", "Título", "texto", { max: 40 }), f("text", "Texto", "multilinha", { max: 120 })], { title: "Novo caso", text: "O que o agente resolve." })],
+      };
     case "timeline":
       return {
         ...base,
@@ -203,8 +210,14 @@ export function blockSection(block: Block, prefix: string, label: string): Secti
     case "table":
       return {
         ...base,
-        fields: [titleField, leadField, f("columns", "Colunas (planos)", "linhas", { help: "Na ordem da tabela." })],
-        lists: [list(p("groups"), "Grupos da tabela", "title", [f("title", "Nome do grupo", "texto", { max: 60 }), f("rows", "Linhas", "tabela")], { title: "Novo grupo", rows: [{ label: "Item", values: ["—", "—", "—"] }] })],
+        fields: [
+          titleField,
+          leadField,
+          f("columns", "Colunas", "linhas", { help: "Na ordem da tabela." }),
+          f("rowHeader", "Cabeçalho da primeira coluna", "texto", { optional: true, max: 30, help: "Vazio = “Recurso”." }),
+          f("compare", "Tabela comparativa", "booleano", { help: "Destaca a primeira coluna; “Sim” e “Não” viram ícones e [rótulo](https://…) vira link externo." }),
+        ],
+        lists: [list(p("groups"), "Grupos da tabela", "title", [f("title", "Nome do grupo", "texto", { optional: true, max: 60, help: "Vazio = sem linha de grupo." }), f("rows", "Linhas", "tabela")], { title: "Novo grupo", rows: [{ label: "Item", values: ["—", "—", "—"] }] })],
         note: "Cada linha precisa ter um valor por coluna.",
       };
     case "contact":

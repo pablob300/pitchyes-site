@@ -68,6 +68,12 @@ export type Block = (
       sample?: boolean;
     }
   | {
+      /** Grade compacta de casos de uso, a mesma "Como as empresas usam a PitchYes" da home (sem links). */
+      kind: "useCases";
+      title: string;
+      items: { title: string; text: string }[];
+    }
+  | {
       /** Cases empilhados, um container com borda suave para cada (components/blocks/CaseStory.tsx). */
       kind: "caseStories";
       title?: string;
@@ -109,7 +115,16 @@ export type Block = (
       title: string;
       lead?: string;
       columns: string[];
+      /** Grupo com `title` vazio não ganha a linha de grupo (tabela sem divisões). */
       groups: { title: string; rows: { label: string; values: string[] }[] }[];
+      /** Cabeçalho da primeira coluna (padrão "Recurso"). */
+      rowHeader?: string;
+      /**
+       * Tabela comparativa: a primeira coluna de valores (a PitchYes) fica em destaque, "Sim" e
+       * "Não" viram ícones (o texto continua no HTML, para leitor de tela e robôs) e
+       * "[rótulo](https://…)" vira link externo, em outra aba.
+       */
+      compare?: boolean;
     }
   | {
       /** Formulário de contato com os canais oficiais ao lado (ver components/forms/LeadForm). */

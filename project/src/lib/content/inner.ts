@@ -51,6 +51,7 @@ const REQUIRED: Partial<Record<Block["kind"], string[]>> = {
   testimonials: ["title"],
   ctaFinal: ["title", "button"],
   timeline: ["title"],
+  useCases: ["title"],
 };
 
 /** Listas de cada bloco que precisam ter itens (e itens com os campos de texto do molde). */
@@ -72,6 +73,7 @@ const LISTS: Partial<Record<Block["kind"], string[]>> = {
   testimonials: ["items"],
   ctaFinal: ["items"],
   timeline: ["items"],
+  useCases: ["items"],
 };
 
 /**
@@ -86,6 +88,8 @@ export function validBlock(block: Block, fallback: Block): boolean {
   for (const key of LISTS[block.kind] ?? []) {
     const list = record[key];
     if (!Array.isArray(list) || list.length === 0) return false;
+    // Grupos da tabela têm conferência própria (abaixo): o título do grupo pode ficar vazio.
+    if (block.kind === "table" && key === "groups") continue;
     const template = (original[key] as unknown[] | undefined)?.[0];
     if (typeof template === "string") {
       if (!list.every(text)) return false;
@@ -106,7 +110,7 @@ export function validBlock(block: Block, fallback: Block): boolean {
   // Tabela: cada linha com um valor por coluna.
   if (block.kind === "table") {
     const columns = block.columns.length;
-    if (!block.groups.every((g) => text(g.title) && Array.isArray(g.rows) && g.rows.length > 0 && g.rows.every((r) => text(r.label) && Array.isArray(r.values) && r.values.length === columns))) {
+    if (!block.groups.every((g) => typeof (g.title ?? "") === "string" && Array.isArray(g.rows) && g.rows.length > 0 && g.rows.every((r) => text(r.label) && Array.isArray(r.values) && r.values.length === columns))) {
       return false;
     }
   }

@@ -8,6 +8,7 @@ import { editFn, scoped, type EditFn } from "@/lib/content/edit";
 import { youtubeId } from "@/lib/content/landing";
 import { getLeadForm, landingForm } from "@/lib/leads";
 import styles from "./blocks.module.css";
+import useCaseStyles from "@/components/home/UseCases.module.css";
 import { CaseStory } from "./CaseStory";
 import { VideoFacade } from "./VideoFacade";
 
@@ -23,6 +24,31 @@ function longDate(date: string): string {
   return new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
     new Date(`${date}T00:00:00Z`),
   );
+}
+
+/**
+ * Célula da tabela comparativa: "Sim"/"Não" viram ícone, com a palavra no HTML para leitor de
+ * tela e robôs; "[rótulo](https://…)" vira link externo, em outra aba.
+ */
+function CompareCell({ value }: { value: string }) {
+  const v = value.trim();
+  if (/^sim$/i.test(v) || /^n[ãa]o$/i.test(v)) {
+    const yes = /^sim$/i.test(v);
+    return (
+      <span className={yes ? styles.cellYes : styles.cellNo}>
+        <span className="visually-hidden">{yes ? "Sim" : "Não"}</span>
+      </span>
+    );
+  }
+  const link = v.match(/^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/);
+  if (link) {
+    return (
+      <a href={link[2]} target="_blank" rel="nofollow noopener noreferrer" className={styles.cellLink}>
+        {link[1]}
+      </a>
+    );
+  }
+  return <>{v}</>;
 }
 
 /** Aviso de privacidade abaixo dos formulários. Na landing page abre em outra aba: a pessoa não sai da página. */
@@ -237,6 +263,27 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
       );
     }
 
+    case "useCases":
+      // Mesmo visual da seção "Como as empresas usam a PitchYes" da home, sem links (a
+      // landing page não leva para o resto do site).
+      return (
+        <section className="section" id={block.id}>
+          <div className="container">
+            <h2 className={useCaseStyles.title} data-reveal {...e("title")}>
+              {block.title}
+            </h2>
+            <ul className={useCaseStyles.grid} {...e("items")}>
+              {block.items.map((item, j) => (
+                <li key={`${j}-${item.title}`} className={useCaseStyles.card} data-reveal>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      );
+
     case "caseStories":
       return (
         <section className="section" id={block.id}>
@@ -345,10 +392,10 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
               {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
             <div className={styles.tableWrap} data-reveal {...e("groups")}>
-              <table className={styles.table}>
+              <table className={styles.table} data-compare={block.compare || undefined}>
                 <thead>
                   <tr>
-                    <th scope="col">Recurso</th>
+                    <th scope="col">{block.rowHeader || "Recurso"}</th>
                     {block.columns.map((c) => (
                       <th key={c} scope="col">
                         {c}
@@ -356,18 +403,20 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
                     ))}
                   </tr>
                 </thead>
-                {block.groups.map((group) => (
-                  <tbody key={group.title}>
-                    <tr className={styles.groupRow}>
-                      <th scope="colgroup" colSpan={block.columns.length + 1}>
-                        {group.title}
-                      </th>
-                    </tr>
+                {block.groups.map((group, g) => (
+                  <tbody key={`${g}-${group.title}`}>
+                    {group.title && (
+                      <tr className={styles.groupRow}>
+                        <th scope="colgroup" colSpan={block.columns.length + 1}>
+                          {group.title}
+                        </th>
+                      </tr>
+                    )}
                     {group.rows.map((row) => (
                       <tr key={row.label}>
                         <th scope="row">{row.label}</th>
                         {row.values.map((v, i) => (
-                          <td key={`${row.label}-${block.columns[i]}`}>{v}</td>
+                          <td key={`${row.label}-${block.columns[i]}`}>{block.compare ? <CompareCell value={v} /> : v}</td>
                         ))}
                       </tr>
                     ))}

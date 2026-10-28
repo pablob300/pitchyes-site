@@ -64,30 +64,46 @@ const blocks: [string, Block][] = [
   [
     "comparativo",
     {
+      // Mesma tabela do converse.pitchyes.com.br ("Por que escolher a PitchYes?"). As fontes de
+      // "Meses quando entregue" são reclamações públicas no Reclame Aqui, linkadas na célula.
       kind: "table",
       id: "comparativo",
       menuLabel: "Comparativo",
       title: "Por que escolher a PitchYes?",
-      lead: "Compare a PitchYes com outras plataformas de IA para vendas.",
+      lead: "Compare nossa solução com outras plataformas de IA para vendas e veja por que somos a melhor opção.",
       cta: "Comece agora com a PitchYes",
+      compare: true,
+      rowHeader: "Recursos",
       columns: ["PitchYes", "Prospct.ai", "3C", "Viver de IA"],
       groups: [
         {
-          title: "Investimento e prazo",
+          title: "",
           rows: [
             { label: "Preço inicial", values: ["$$", "$$$$", "$$$", "$$$$"] },
-            { label: "Velocidade para o retorno", values: ["Dias", "Meses", "Meses", "Meses"] },
-          ],
-        },
-        {
-          title: "O que está incluído",
-          rows: [
+            {
+              label: "Reputação no Reclame Aqui",
+              values: [
+                "[Reclame Aqui](https://www.reclameaqui.com.br/empresa/pitchyes-desenvolvimento/lista-reclamacoes/)",
+                "[Reclame Aqui](https://www.reclameaqui.com.br/empresa/growth-machine-consultoria/)",
+                "[Reclame Aqui](https://www.reclameaqui.com.br/empresa/3c-plus-tecnologia-da-informacao/)",
+                "[Reclame Aqui](https://www.reclameaqui.com.br/empresa/viver-de-ia/)",
+              ],
+            },
+            {
+              label: "Velocidade para ROI",
+              values: [
+                "Dias",
+                "[Meses quando entregue](https://www.reclameaqui.com.br/growth-machine-consultoria/ia-sdr-growth-machine-pessimo-servico_6S_cCTSaMPMw_dyU/)",
+                "[Meses quando entregue](https://www.reclameaqui.com.br/3c-plus-tecnologia-da-informacao/nao-recebi-o-agente-de-ia-e-o-discador-da-3c-plus-apresenta-falhas_-s5qTILyFYHPBk-a/)",
+                "[Meses quando entregue](https://www.reclameaqui.com.br/viver-de-ia/viver-de-ia-nao-cancelou-meu-servico-e-continua-me-cobrando_XzanPZ2efvJx_czZ/)",
+              ],
+            },
             { label: "Suporte dedicado vitalício", values: ["Sim", "Não", "Não", "Não"] },
-            { label: "Implantação rápida, feita junto com a sua equipe", values: ["Sim", "Não", "Não", "Não"] },
-            { label: "Ligações com números de celular exclusivos", values: ["Sim", "Não", "Não", "Não"] },
+            { label: "Implantação rápida a 4 mãos", values: ["Sim", "Não", "Não", "Não"] },
+            { label: "Ligações com números de celular exclusivos", values: ["Sim", "Sim", "Sim", "Não"] },
             { label: "Grupo de WhatsApp para acompanhamento diário", values: ["Sim", "Não", "Não", "Não"] },
-            { label: "Cobra só por conversas reais (não por tentativa ou caixa postal)", values: ["Sim", "Não", "Não", "Não"] },
-            { label: "Cadências de contato personalizadas", values: ["Sim", "Não", "Não", "Não"] },
+            { label: "Cobra apenas por conversas reais (não por tentativas/caixa postal)", values: ["Sim", "Não", "Sim", "Não"] },
+            { label: "Personalização de cadências de contato", values: ["Sim", "Sim", "Não", "Não"] },
           ],
         },
       ],
@@ -135,56 +151,25 @@ const blocks: [string, Block][] = [
     },
   ],
   [
-    "resultados",
-    {
-      kind: "funnel",
-      id: "resultados",
-      eyebrow: "Resultados esperados",
-      title: "Veja os resultados reais dos nossos clientes",
-      lead: "Funil de conversão baseado na média de resultados dos nossos clientes. A cada 1.000 ligações, veja o que você pode esperar:",
-      steps: [
-        { value: "1.000", percent: "100%", label: "Ligações" },
-        { value: "300", percent: "30%", label: "Atendidas" },
-        { value: "200", percent: "66%", label: "Boas conversas" },
-        { value: "80", percent: "40%", label: "Interesse qualificado" },
-        { value: "50", percent: "63%", label: "Negociações ativas" },
-      ],
-      note:
-        "Importante: os resultados apresentados são baseados na média dos nossos clientes e podem variar bastante. A qualidade da sua lista de contatos, a segmentação do público e a estratégia de abordagem são fatores determinantes. Estes dados não são garantia de resultado para o seu negócio.",
-      cta: "Solicitar demonstração",
-    },
-  ],
-  [
     "solucoes",
     {
-      kind: "features",
+      // Mesma grade "Como as empresas usam a PitchYes" da home, sem links: a landing page não
+      // leva para o resto do site.
+      kind: "useCases",
       id: "solucoes",
       menuLabel: "Soluções",
-      eyebrow: "Soluções",
-      title: "Soluções que transformam vendas",
-      lead: "Descubra como a IA de voz automatiza a prospecção e o atendimento, com resultado para a sua empresa.",
+      title: "Como as empresas usam a PitchYes",
       items: [
-        { title: "IA de voz conversacional", text: "Simula conversas humanas naturais e se adapta ao tom e ao ritmo de cada contato para manter o interesse." },
-        { title: "Otimização baseada em dados", text: "Cada interação é analisada para orientar melhorias na abordagem de venda, refinada continuamente." },
-        { title: "Prospecção inteligente", text: "Identifica e prioriza leads qualificados automaticamente, com foco nos contatos de maior potencial." },
-        { title: "Análises em tempo real", text: "Relatórios detalhados sobre desempenho, engajamento e retorno das campanhas de prospecção." },
-        { title: "Automação 24/7", text: "Trabalha sem parar, liga nos melhores horários e aumenta o volume de contatos qualificados." },
-        { title: "Ligações para celular", text: "As ligações saem de números de celular, o que aumenta muito a taxa de atendimento em relação ao telefone fixo." },
-      ],
-    },
-  ],
-  [
-    "comprovados",
-    {
-      kind: "checklist",
-      id: "comprovados",
-      title: "Resultados comprovados",
-      lead: "Empresas que usam a IA de voz da PitchYes obtêm resultados expressivos em suas operações de vendas.",
-      items: [
-        "Aumento de 300% no volume de ligações",
-        "Redução de 70% no tempo de prospecção",
-        "Melhoria de 85% na qualificação de leads",
-        "Retorno positivo em menos de 30 dias",
+        { title: "Substituição de URA", text: "Troque o menu de teclado por conversa em linguagem natural." },
+        { title: "Central de atendimento com IA", text: "Milhares de ligações simultâneas, o dia inteiro, sem aumentar equipe." },
+        { title: "Atendimento receptivo", text: "Todo cliente atendido, qualificado e direcionado, 24 horas por dia." },
+        { title: "Ligações em qualquer escala", text: "Do primeiro teste a milhões de ligações, sem trocar de plataforma." },
+        { title: "Prospecção ativa", text: "Qualifica leads, confirma reuniões e faz follow-up, em escala." },
+        { title: "Inteligência de chamadas", text: "Toda ligação transcrita, avaliada e pesquisável." },
+        { title: "Atendimento automático 24/7", text: "Cobre noites, fins de semana e picos de volume." },
+        { title: "Agente de telefone com IA", text: "Segue seu roteiro à risca e usa os sistemas que sua equipe já tem." },
+        { title: "IA de voz conversacional", text: "Lida com interrupção, sotaque e mudança de assunto como um humano." },
+        { title: "Central de contato omnichannel", text: "Telefone, WhatsApp e chat em um só lugar, tudo registrado." },
       ],
     },
   ],
@@ -386,5 +371,6 @@ export const landingBlockTemplates: Partial<Record<Block["kind"], Block>> = {
   funnel: { kind: "funnel", title: "Funil", steps: [{ value: "100", percent: "100%", label: "Etapa" }] },
   testimonials: { kind: "testimonials", title: "Depoimentos", items: [{ quote: "Depoimento.", name: "Nome", role: "Cargo", company: "Empresa" }] },
   logos: { kind: "logos", source: "proprio", title: "Logos", items: [{ name: "Empresa", logo: "/brand/pitchyes-symbol.svg", width: 120, height: 40 }] },
+  useCases: { kind: "useCases", title: "Como as empresas usam a PitchYes", items: [{ title: "Caso de uso", text: "O que o agente resolve." }] },
   ctaFinal: { kind: "ctaFinal", title: "Chamada final", items: ["Benefício"], button: "Quero conhecer" },
 };

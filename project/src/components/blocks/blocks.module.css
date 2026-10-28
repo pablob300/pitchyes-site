@@ -427,6 +427,9 @@
   align-items: start;
 }
 .lpHeroText > * + * { margin-top: var(--space-4); }
+/* Respiro entre o texto corrido e as listas: título → parágrafo → marcadores → prova */
+.lpHeroText > :global(.lead) + .lpBullets { margin-top: var(--space-6); }
+.lpHeroText > .lpBullets + .lpProof { margin-top: var(--space-5); }
 .lpHeroText h1 { max-width: 18ch; }
 
 .lpBullets {
@@ -583,7 +586,9 @@
   text-align: center;
 }
 .lpCtaInner h2 { max-width: 22ch; }
-.lpCtaInner .lead { color: var(--color-text-inverse-muted); }
+/* .lead é classe global: sem :global, o seletor não casava e o texto ficava escuro no fundo escuro */
+.lpCtaInner :global(.lead) { color: var(--color-text-inverse-muted); }
+.lpCtaInner :global(.lead) + .lpBullets { margin-top: var(--space-3); }
 .lpCtaInner .lpBullets { text-align: left; }
 .lpCtaInner .lpBullets li::before { border-color: var(--color-accent-secondary); }
 
@@ -720,3 +725,69 @@
 }
 .card[data-highlight] h3 { color: var(--color-text-inverse); }
 .card[data-highlight] p { color: var(--color-text-inverse-muted); }
+
+/* Tabela comparativa (landing pages) — mirrors System/components/table-comparison.html.
+   A primeira coluna de valores é a PitchYes: em destaque, entre bordas menta. */
+.table[data-compare] thead th:not(:first-child),
+.table[data-compare] td { text-align: center; vertical-align: middle; }
+.table[data-compare] tbody th { vertical-align: middle; }
+.table[data-compare] thead th:nth-child(2),
+.table[data-compare] td:nth-child(2) {
+  background: var(--color-accent-secondary-glow);
+  border-inline: 2px solid var(--color-accent-secondary);
+  color: var(--color-text);
+  font-weight: 700;
+}
+.table[data-compare] thead th:nth-child(2) { color: var(--color-accent-secondary-ink); }
+.cellYes,
+.cellNo {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+/* ✓ desenhado com bordas, como os marcadores das landing pages */
+.cellYes::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 12px;
+  height: 7px;
+  border-left: 2px solid var(--color-accent-secondary-ink);
+  border-bottom: 2px solid var(--color-accent-secondary-ink);
+  transform: rotate(-45deg);
+}
+/* ✗ com duas barras cruzadas */
+.cellNo::before,
+.cellNo::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 1px;
+  width: 2px;
+  height: 16px;
+  background: var(--color-negative);
+  transform: rotate(45deg);
+}
+.cellNo::after { transform: rotate(-45deg); }
+.cellLink {
+  color: var(--color-accent-secondary-ink);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+.cellLink::after { content: " ↗"; }
+@media (max-width: 900px) {
+  /* No celular a tabela rola de lado; o nome do recurso fica preso à esquerda */
+  .table[data-compare] { min-width: 640px; }
+  .table[data-compare] tbody th,
+  .table[data-compare] thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--color-bg);
+    min-width: 150px;
+    box-shadow: 1px 0 0 var(--color-border-subtle);
+  }
+}
