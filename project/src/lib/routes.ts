@@ -20,7 +20,7 @@ export const pages = [
   { path: "/solucoes/por-setor", title: "Soluções por setor", description: "IA de voz para saúde, seguros, serviços financeiros, imobiliário e mais.", placeholder: false, updated: "2026-10-26" },
   { path: "/solucoes/por-funcao", title: "Soluções por função", description: "IA de voz para vendas, atendimento, cobrança e operações.", placeholder: false, updated: "2026-10-26" },
 
-  { path: "/clientes", title: "Clientes", description: "Empresas que automatizam ligações com a PitchYes.", placeholder: false, updated: "2026-10-26" },
+  { path: "/clientes", title: "Clientes", description: "Empresas que automatizam ligações com a PitchYes.", placeholder: false, updated: "2026-10-28" },
   { path: "/clientes/cases", title: "Cases", description: "Resultados reais de clientes que usam a IA de voz da PitchYes.", placeholder: false, updated: "2026-10-26" },
 
   // Era /precos até 25/10/2026; o endereço antigo redireciona com 301 (next.config.ts).

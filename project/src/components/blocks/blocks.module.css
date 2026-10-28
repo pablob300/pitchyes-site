@@ -132,7 +132,8 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  /* 5 colunas: a célula comporta o logo mais largo (Thomson Reuters) na mesma altura dos outros */
+  grid-template-columns: repeat(5, 1fr);
   border-top: 1px solid var(--color-border-subtle);
   border-left: 1px solid var(--color-border-subtle);
 }
@@ -152,10 +153,12 @@
   color: var(--color-text-muted);
 }
 /* Logo em cima do nome: cinza por padrão, colorida ao passar o mouse */
+/* Todos os logos na mesma altura; os arquivos são recortados rente ao desenho (sem margem interna) */
 .logoImage {
   width: auto;
   max-width: 100%;
-  height: 30px;
+  height: 28px;
+  object-fit: contain;
   filter: grayscale(1);
   opacity: 0.65;
   transition: filter var(--duration-normal) var(--ease), opacity var(--duration-normal) var(--ease);
@@ -163,6 +166,15 @@
 .logos li:hover .logoImage,
 .logos li:focus-within .logoImage { filter: grayscale(0); opacity: 1; }
 .logos li:hover { color: var(--color-text); }
+/* Último box da grade de clientes: "+400 empresas no Brasil" */
+.logos li.logosMore {
+  font-size: 18px;
+  font-weight: var(--text-stat-weight);
+  letter-spacing: var(--text-stat-ls);
+  line-height: 1.25;
+  text-align: center;
+  color: var(--color-accent-secondary-ink);
+}
 
 /* Pricing — mirrors System/components/cards-pricing.html */
 .plans {

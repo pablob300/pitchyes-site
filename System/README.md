@@ -88,7 +88,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 | Arquivo | Uso | Espelho React (`project/src/components/…`) |
 |---|---|---|
 | `agent-widget.html` | Hero: anel 3D de cards "Ouça nosso agente de…", orb de metal líquido que toca o MP3 do card da frente | `home/AgentWidget.tsx` |
-| `logo-wall.html` | Prova social: grade de logos (nomes tipográficos até chegarem os SVGs) | `home/ClientLogos.tsx` |
+| `logo-wall.html` | Prova social: grade de logos (nomes tipográficos até chegarem os SVGs). Todos os logos com a mesma altura (arquivo recortado rente ao desenho); a grade de clientes fecha com o box “+400 empresas no Brasil” | `home/ClientLogos.tsx`, `blocks/ContentPage.tsx` (`logos`) |
 | `platform-mocks.html` | Mocks estruturais dentro dos feature cards | `home/Platform.tsx` |
 | `bar-comparison.html` | Latência: barras proporcionais (variante do stat-comparison) | `home/Latency.tsx` |
 | `timeline.html` | Implantação em dias, último passo em destaque | `home/Rollout.tsx` |

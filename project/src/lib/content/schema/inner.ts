@@ -125,7 +125,11 @@ export function blockSection(block: Block, prefix: string, label: string): Secti
           ],
         };
       }
-      return { ...base, fields: [titleField, leadField], note: "Os logos ficam na seção “Clientes (logos)”, no fim desta gaveta — a mesma lista da home." };
+      return {
+        ...base,
+        fields: [titleField, leadField, f("moreLabel", "Texto do último box", "texto", { optional: true, max: 40, help: "Vazio = “+400 empresas no Brasil”." })],
+        note: "Os logos ficam na seção “Clientes (logos)”, no fim desta gaveta — a mesma lista da home.",
+      };
     case "pricing":
       return {
         ...base,

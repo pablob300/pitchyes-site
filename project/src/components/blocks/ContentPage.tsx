@@ -229,6 +229,11 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
                   <span>{item.name}</span>
                 </li>
               ))}
+              {block.source !== "proprio" && (
+                <li className={styles.logosMore} data-reveal {...e("moreLabel")}>
+                  {block.moreLabel || "+400 empresas no Brasil"}
+                </li>
+              )}
             </ul>
           </div>
         </section>

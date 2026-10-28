@@ -44,6 +44,8 @@ export type Block = (
        */
       source?: "clientes" | "proprio";
       items: { name: string; logo: string; width: number; height: number }[];
+      /** Só na lista de clientes: texto do último box da grade (padrão "+400 empresas no Brasil"). */
+      moreLabel?: string;
     }
   | {
       kind: "pricing";
