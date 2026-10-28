@@ -12,7 +12,7 @@ export const sobre: PageContent = {
   eyebrow: "Empresa",
   h1: "PitchYes, IA de voz brasileira: fale com todos, converse com cada um.",
   lead: "A PitchYes é uma empresa brasileira de tecnologia que desenvolve voz conversacional com inteligência artificial para contato, vendas, suporte e atendimento. Colocamos no telefone um agente que entende, decide e resolve — no volume de um discador e no cuidado de um bom atendente.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "prose",
@@ -138,7 +138,7 @@ export const sobre: PageContent = {
         { title: "Soluções", text: "O que o agente resolve em ligações ativas e receptivas.", href: "/solucoes" },
         { title: "Clientes", text: "Empresas que já colocaram a operação de voz no ar.", href: "/clientes" },
         { title: "Carreiras", text: "Como trabalhamos e o que procuramos em quem entra.", href: "/carreiras" },
-        { title: "Contato", text: "Agende uma demonstração com o time.", href: "/contato" },
+        { title: "Demonstração", text: "Agende uma demonstração com o time.", href: "/conteudo/cadastro" },
       ],
     },
   ],

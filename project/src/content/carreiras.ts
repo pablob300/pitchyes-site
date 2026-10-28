@@ -1,3 +1,4 @@
+import { CAREERS_HREF } from "@/lib/routes";
 import type { PageContent } from "./types";
 
 // TODO(RH): substituir por vagas reais quando houver processo aberto; hoje a página
@@ -9,7 +10,7 @@ export const carreiras: PageContent = {
   eyebrow: "Empresa",
   h1: "Construa a IA que atende milhões de ligações.",
   lead: "Trabalhar na PitchYes é lidar com produção desde o primeiro dia: agentes que falam com clientes reais, em operações que não podem parar. Quem entra aqui vê o efeito do próprio trabalho na mesma semana.",
-  cta: { label: "Enviar candidatura", href: "https://www.linkedin.com/company/pitchyes" },
+  cta: { label: "Enviar candidatura", href: CAREERS_HREF },
   blocks: [
     {
       kind: "features",
@@ -45,7 +46,7 @@ export const carreiras: PageContent = {
       title: "Continue por aqui.",
       items: [
         { title: "Sobre a PitchYes", text: "Por que escolhemos voz e como conduzimos as implantações.", href: "/sobre" },
-        { title: "Contato", text: "Fale com o time comercial da PitchYes.", href: "/contato" },
+        { title: "Contato", text: "Fale com o time da PitchYes.", href: "/contato" },
       ],
     },
   ],

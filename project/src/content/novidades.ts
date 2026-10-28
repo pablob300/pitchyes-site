@@ -10,7 +10,7 @@ export const novidades: PageContent = {
   eyebrow: "Recursos",
   h1: "Novidades da plataforma de IA de voz da PitchYes.",
   lead: "Esta página acompanha a evolução da PitchYes: o que chegou à plataforma, quando, e o que muda para quem está com uma operação no ar. As novidades aparecem da mais recente para a mais antiga.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "timeline",

@@ -25,7 +25,7 @@ export const pages = [
   { path: "/clientes/cases", title: "Cases", description: "Resultados reais de clientes que usam a IA de voz da PitchYes.", placeholder: false, updated: "2026-10-28" },
 
   // Era /precos até 25/10/2026; o endereço antigo redireciona com 301 (next.config.ts).
-  { path: "/planos", title: "Planos", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: false, updated: "2026-10-26" },
+  { path: "/planos", title: "Planos", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: false, updated: "2026-10-28" },
 
   { path: "/recursos/integracoes", title: "Integrações", description: "A PitchYes conecta com sua telefonia, CRM e agenda atuais.", placeholder: false, updated: "2026-10-26" },
   { path: "/recursos/novidades", title: "Novidades", description: "Lançamentos e atualizações da plataforma PitchYes.", placeholder: false, updated: "2026-10-28" },
@@ -49,18 +49,19 @@ export function getPage(path: string): SitePage | undefined {
   return pages.find((p) => p.path === path);
 }
 
-// Primary CTA target: the "talk to an agent" widget in the homepage hero.
-export const TALK_TO_AI_HREF = "/#fale-com-a-ia";
-
 /**
- * No blog, "Fale com nossa IA" leva ao contato: quem chega por um artigo veio buscar
- * informação e quer conversar com o time, não ouvir a amostra do player da home.
+ * Para onde vai cada intenção (regra comercial, out/2026):
+ * - "Fale com nossa IA", demonstração, orçamento, falar com vendas → landing page de cadastro
+ *   (TALK_TO_AI_HREF). Ela vive no banco (Landing Pages): desligar "Cadastro" no painel
+ *   quebra todos esses botões.
+ * - Cliente que quer falar com a empresa → /contato.
+ * - Quem procura emprego → LinkedIn (CAREERS_HREF), a partir de /carreiras.
  */
-export const BLOG_CTA_HREF = "/contato";
+export const TALK_TO_AI_HREF = "/conteudo/cadastro";
+export const CAREERS_HREF = "https://www.linkedin.com/company/pitchyes";
 
-export function talkToAiHref(pathname: string): string {
-  return pathname === "/blog" || pathname.startsWith("/blog/") ? BLOG_CTA_HREF : TALK_TO_AI_HREF;
-}
+/** Página de agradecimento de todas as landing pages (fora do sitemap, noindex). */
+export const THANK_YOU_HREF = "/conteudo/obrigado";
 
 export type NavLink = { label: string; href: PagePath };
 export type NavItem = NavLink | { label: string; children: NavLink[] };

@@ -200,10 +200,10 @@ export function blockSection(block: Block, prefix: string, label: string): Secti
               f("fee", "Linha abaixo do preço", "texto", { max: 90 }),
               f("features", "Itens do plano", "linhas"),
               f("cta.label", "Texto do botão", "texto", { max: 30 }),
-              f("cta.href", "Link do botão", "texto", { help: "Caminho do site, ex.: /contato" }),
+              f("cta.href", "Link do botão", "texto", { help: "Caminho do site, ex.: /conteudo/cadastro" }),
               f("highlight", "Plano em destaque", "booleano"),
             ],
-            { name: "Novo plano", audience: "Para quem", price: "R$ 0", fee: "Descrição", features: ["Item"], cta: { label: "Falar com vendas", href: "/contato" } },
+            { name: "Novo plano", audience: "Para quem", price: "R$ 0", fee: "Descrição", features: ["Item"], cta: { label: "Falar com vendas", href: "/conteudo/cadastro" } },
           ),
         ],
       };

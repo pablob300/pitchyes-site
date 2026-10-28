@@ -34,7 +34,7 @@ export const planos: PageContent = {
             "Reunião com CS avulsa: R$ 200/h",
             "A cada 1.000 minutos, 1 reunião de CS de brinde",
           ],
-          cta: { label: "Começar no pré-pago", href: "/contato" },
+          cta: { label: "Começar no pré-pago", href: "/conteudo/cadastro" },
         },
         {
           name: "Starter",
@@ -50,7 +50,7 @@ export const planos: PageContent = {
             "A cada 1.000 minutos, 1 reunião de CS de brinde",
             "Material de apoio · pagamento no cartão",
           ],
-          cta: { label: "Falar com vendas", href: "/contato" },
+          cta: { label: "Falar com vendas", href: "/conteudo/cadastro" },
         },
         {
           name: "Pro",
@@ -65,7 +65,7 @@ export const planos: PageContent = {
             "Integração por API aberta ou avulsa (R$ 250/h)",
             "Material de apoio · boleto ou cartão",
           ],
-          cta: { label: "Falar com vendas", href: "/contato" },
+          cta: { label: "Falar com vendas", href: "/conteudo/cadastro" },
           highlight: true,
         },
         {
@@ -81,7 +81,7 @@ export const planos: PageContent = {
             "Número dedicado com nome e logo",
             "Material de apoio · boleto ou cartão",
           ],
-          cta: { label: "Falar com vendas", href: "/contato" },
+          cta: { label: "Falar com vendas", href: "/conteudo/cadastro" },
         },
       ],
     },

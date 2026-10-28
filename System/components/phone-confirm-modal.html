@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Modal de confirmação do telefone — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); background: color-mix(in srgb, var(--color-bg-inverse) 60%, var(--color-bg)); font-family: var(--font-sans); }
+  .note { font-size: 12px; color: var(--color-text-inverse); margin: 0 0 var(--space-5); max-width: 980px; }
+  .row { display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: flex-start; }
+  .dialog { position: relative; width: min(480px, 100%); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); background: var(--color-bg); box-shadow: var(--shadow-lg); }
+  .close { position: absolute; top: 14px; right: 14px; border: 0; background: none; color: var(--color-text-secondary); font-size: 20px; }
+  .body { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); padding: var(--space-6) var(--space-6) var(--space-5); text-align: center; }
+  .body * { margin: 0; }
+  .icon { display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; }
+  .accent { color: var(--color-accent-primary-strong); background: color-mix(in srgb, var(--color-accent-primary) 16%, transparent); }
+  .warning { color: var(--color-warning); background: var(--color-warning-bg); }
+  h2 { font-size: 26px; line-height: 1.2; }
+  .text { font-size: 16px; line-height: 1.5; color: var(--color-text-secondary); }
+  .label { font-size: 15px; font-weight: 600; }
+  .number { font-size: 32px; font-weight: 700; color: var(--color-accent-primary-strong); }
+  .box { width: 100%; padding: var(--space-5) var(--space-4); border-radius: var(--radius-md); background: color-mix(in srgb, var(--color-accent-primary) 8%, transparent); }
+  .hint { font-size: 13px; color: var(--color-text-muted); }
+  .actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+  .stack { width: 100%; display: grid; gap: var(--space-3); }
+  .btn { font-family: var(--font-sans); font-size: 15px; font-weight: 500; padding: 12px 20px; border-radius: 8px; border: 1px solid var(--color-accent-primary-contrast); background: var(--color-accent-primary-strong); color: var(--color-accent-primary-contrast); }
+  .btn.outline { background: transparent; color: var(--color-text); border-color: var(--color-border-strong); }
+  .btn[disabled] { opacity: .45; }
+</style>
+</head>
+<body>
+  <p class="note">PitchYes · Modal do formulário das landing pages (&lt;dialog&gt; nativo, montado só depois do envio). Passo 1: confirma o telefone digitado — nada é gravado antes do "Sim". Passo 2: lead já gravado (evento "lead"); "Copiar número" copia o número da IA (company.aiCaller) e libera "Já salvei o contato" depois de 5 s, que dispara "LigarAgora" e leva a /conteudo/obrigado. React: project/src/components/forms/PhoneConfirmDialog.tsx</p>
+  <div class="row">
+    <div class="dialog">
+      <button class="close" aria-label="Fechar">×</button>
+      <div class="body">
+        <span class="icon accent">☏</span>
+        <h2>Confirme seu telefone</h2>
+        <p class="text">A IA vai ligar para o número abaixo. Confirme se está correto:</p>
+        <p class="number box">(11) 99999-8888</p>
+        <p class="hint">Se o número estiver errado, a ligação não será concluída.</p>
+        <div class="actions"><button class="btn outline">Corrigir número</button><button class="btn">Sim, está correto</button></div>
+      </div>
+    </div>
+    <div class="dialog">
+      <button class="close" aria-label="Fechar">×</button>
+      <div class="body">
+        <span class="icon warning">⚠</span>
+        <h2>Importante: desbloqueie seu telefone</h2>
+        <p class="text">Para receber a ligação da nossa IA, é fundamental que você:</p>
+        <p class="label">Adicione este número aos seus contatos:</p>
+        <p class="number">(62) 3142-2655</p>
+        <p class="text"><strong>Ou</strong> desbloqueie temporariamente chamadas de números desconhecidos.</p>
+        <p class="hint">Muitas pessoas perdem a demonstração por terem bloqueios ativos. Não deixe isso acontecer com você!</p>
+        <div class="stack"><button class="btn">Copiar número</button><button class="btn" disabled>Já salvei o contato, pode ligar (5s)</button></div>
+        <p class="hint">Copie o número e salve nos seus contatos para liberar a ligação.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

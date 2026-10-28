@@ -7,6 +7,7 @@ import {
   createLanding,
   getLandingById,
   landingPath,
+  RESERVED_SLUGS,
   SLUG_OK,
   slugTaken,
   updateLanding,
@@ -36,6 +37,8 @@ async function check(fields: Fields, exceptId?: string, partial = false): Promis
   if (has(fields.slug)) {
     if (slug.length < 2 || slug.length > 60 || !SLUG_OK.test(slug)) {
       errors.slug = "Use de 2 a 60 letras minúsculas, números e hífen (ex.: ia-de-voz-clinicas).";
+    } else if (RESERVED_SLUGS.includes(slug)) {
+      errors.slug = "Este endereço é reservado pelo site. Escolha outro.";
     } else if (await slugTaken(slug, exceptId)) {
       errors.slug = "Já existe uma landing page com este endereço.";
     }

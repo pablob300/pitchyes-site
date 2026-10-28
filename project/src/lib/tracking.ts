@@ -22,7 +22,19 @@ export function pushEvent(event: DataLayerEvent): void {
  * Vai só o que a pessoa preencheu entre nome, e-mail e telefone.
  * Quem chama decide se dispara: lead "Sem perfil" não dispara (lib/leads.ts, leadProfile).
  */
-export function pushLead(data: { nome?: string; email?: string; telefone?: string }): void {
-  const filled = Object.fromEntries(Object.entries(data).filter(([, value]) => value?.trim()));
-  pushEvent({ event: "lead", ...filled });
+export function pushLead(data: LeadIdentity): void {
+  pushEvent({ event: "lead", ...filled(data) });
 }
+
+/**
+ * Evento "LigarAgora", o último do cadastro das landing pages: a pessoa salvou o número da
+ * IA nos contatos e pediu a ligação (components/forms/PhoneConfirmDialog.tsx). Mesma regra
+ * do "lead": quem chama não dispara para lead "Sem perfil".
+ */
+export function pushCallNow(data: LeadIdentity): void {
+  pushEvent({ event: "LigarAgora", ...filled(data) });
+}
+
+type LeadIdentity = { nome?: string; email?: string; telefone?: string };
+
+const filled = (data: LeadIdentity) => Object.fromEntries(Object.entries(data).filter(([, value]) => value?.trim()));

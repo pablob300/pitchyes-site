@@ -9,7 +9,7 @@ export const solucoesAtivo: PageContent = {
   eyebrow: "Soluções",
   h1: "Ligações ativas com IA de voz que chegam antes do concorrente.",
   lead: "Lead que espera esfria. O agente da PitchYes liga minutos depois do cadastro, qualifica pelo seu critério e passa a conversa para o vendedor com o contexto pronto — em dezenas de ligações simultâneas.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "features",

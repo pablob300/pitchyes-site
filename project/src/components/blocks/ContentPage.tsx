@@ -564,6 +564,7 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
                 title={block.formTitle}
                 submitLabel={block.submitLabel}
                 pagina={slug}
+                confirmPhone
                 note={
                   <>
                     {block.formNote && <strong>{block.formNote} </strong>}

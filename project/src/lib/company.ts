@@ -8,6 +8,9 @@ export const company = {
   /** CNPJ público (já citado no /llms.txt); vai para `taxID` da Organization. */
   cnpj: "58.177.364/0001-21",
   phone: { display: "+55 (11) 5196-9381", tel: "+551151969381" },
+  /** Número de onde a IA liga para quem se cadastra numa landing page (o mesmo de converse.pitchyes.com.br).
+   * O modal pós-cadastro pede para a pessoa salvar este número nos contatos. */
+  aiCaller: { display: "(62) 3142-2655", copy: "+55 62 3142-2655" },
   email: "comercial@pitchyes.com.br",
   address: {
     /** Como aparece no site, no formato aprovado pela empresa (out/2026). */

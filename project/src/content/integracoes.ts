@@ -9,7 +9,7 @@ export const integracoes: PageContent = {
   eyebrow: "Recursos",
   h1: "Integrações da IA de voz: o agente trabalha dentro das suas ferramentas.",
   lead: "Uma ligação só resolve quando escreve no sistema certo: a agenda marcada, o lead atualizado, o chamado aberto. A PitchYes se conecta ao que já existe na sua empresa, em vez de pedir que você troque de ferramenta.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "features",

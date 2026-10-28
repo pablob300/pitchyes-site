@@ -1,0 +1,101 @@
+/* Modal de confirmação do telefone (landing pages). Mesma linguagem do cartão de formulário. */
+.dialog {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: 0;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+}
+.dialog::backdrop {
+  background: color-mix(in srgb, var(--color-bg-inverse) 60%, transparent);
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  padding: 6px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+.close:hover { background: var(--color-border-subtle); color: var(--color-text); }
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-6) var(--space-5);
+  text-align: center;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+}
+.icon[data-tone="accent"] {
+  color: var(--color-accent-primary-strong);
+  background: color-mix(in srgb, var(--color-accent-primary) 16%, transparent);
+}
+.icon[data-tone="warning"] {
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+}
+
+.title { font-size: 26px; line-height: 1.2; text-wrap: balance; }
+
+.text { font-size: 16px; line-height: 1.5; color: var(--color-text-secondary); }
+.text strong { color: var(--color-text); }
+
+.label { font-size: 15px; font-weight: 600; color: var(--color-text); }
+
+.number {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--color-accent-primary-strong);
+  font-variant-numeric: tabular-nums;
+}
+.number[data-box] {
+  width: 100%;
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-accent-primary) 8%, transparent);
+}
+
+.hint { font-size: 13px; line-height: 1.5; color: var(--color-text-muted); }
+.error { font-size: 14px; color: var(--color-danger); }
+
+.actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+.stack { width: 100%; display: grid; gap: var(--space-3); }
+.actions > button,
+.stack > button { width: 100%; white-space: normal; }
+
+.callNow[disabled] { opacity: 0.45; cursor: not-allowed; }
+.callNow[disabled]:hover { opacity: 0.45; }
+
+@media (max-width: 480px) {
+  .body { padding: var(--space-6) var(--space-4) var(--space-4); }
+  .title { font-size: 22px; }
+  .number { font-size: 28px; }
+  .actions { grid-template-columns: 1fr; }
+  .actions > button:first-child { order: 2; }
+}

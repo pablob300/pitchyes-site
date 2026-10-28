@@ -9,7 +9,7 @@ export const solucoesPorFuncao: PageContent = {
   eyebrow: "Soluções",
   h1: "IA de voz por função: cada área ganha de volta o tempo do telefone.",
   lead: "A ligação repetitiva é a mesma em quase toda empresa: confirmar, cobrar, agendar, avisar. Quando o agente assume esse volume, cada área passa a usar as pessoas no que exige julgamento.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "features",

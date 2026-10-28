@@ -10,7 +10,7 @@ export const solucoesOperacional: PageContent = {
   eyebrow: "Soluções",
   h1: "Ligações operacionais com IA de voz: a rotina que não pode parar.",
   lead: "Toda empresa tem ligações que precisam acontecer todos os dias: lembrar um vencimento, recuperar uma compra que ficou pelo caminho, dar boas-vindas a um cliente novo, ouvir quem acabou de ser atendido. O agente da PitchYes faz essa rotina inteira com voz natural, no volume que a operação pedir.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "features",

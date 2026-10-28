@@ -9,7 +9,7 @@ export const solucoes: PageContent = {
   eyebrow: "Soluções",
   h1: "Soluções de IA de voz: atendimento instantâneo e o fim do funil engessado.",
   lead: "Agentes de voz autônomos que executam o ciclo completo da chamada: resolução de 100% dos chamados na primeira tentativa, sem intervenção humana.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "features",

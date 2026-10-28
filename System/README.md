@@ -101,6 +101,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 | `blog.html` | Blog: listagens (blog, categoria, tag, autor) e card de artigo | `blog/BlogListing.tsx`, `blog/PostCard.tsx` |
 | `blog-article.html` | Blog: página do artigo (sumário, blocos de CTA/FAQ do editor, faixa final, autor) | `blog/ArticleView.tsx` |
 | `landing-page.html` | Landing page (/conteudo/&lt;slug&gt;): topo só com logo, âncoras e "Testar agora"; topo com formulário, tabela comparativa (coluna PitchYes em destaque, Sim/Não em ícones, links do Reclame Aqui), vídeo, casos de uso (mesma grade da home), depoimentos em texto, botão de chamada abaixo dos blocos e faixa final (mesmo fundo da `cta-band`) | `landing/LandingPage.tsx`, `blocks/ContentPage.tsx`, `blocks/VideoFacade.tsx` |
+| `phone-confirm-modal.html` | Modal do formulário das landing pages: confirma o telefone antes de gravar o lead e pede para salvar o número da IA nos contatos ("Copiar número" libera "Já salvei o contato, pode ligar" em 5 s) | `forms/PhoneConfirmDialog.tsx` |
 
 `navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Planos · Integrações · Blog · Contato, sem submenu desde 25/10/2026; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
 

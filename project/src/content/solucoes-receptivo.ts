@@ -9,7 +9,7 @@ export const solucoesReceptivo: PageContent = {
   eyebrow: "Soluções",
   h1: "Atendimento receptivo com IA de voz: ninguém mais espera na fila.",
   lead: "O agente da PitchYes atende toda chamada no primeiro toque, entende o pedido em linguagem natural, consulta seus sistemas e resolve — ou transfere para a pessoa certa com o histórico pronto.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "features",

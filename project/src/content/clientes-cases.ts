@@ -9,7 +9,7 @@ export const clientesCases: PageContent = {
   eyebrow: "Clientes",
   h1: "Cases de IA de voz: o que aconteceu depois que a IA assumiu o telefone.",
   lead: "Cada case segue a mesma estrutura: o problema da operação, a ligação que foi automatizada, como foi a implantação e o indicador acompanhado antes e depois.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       // Cases empilhados: para acrescentar um, adicione um item (pelo painel ou aqui).

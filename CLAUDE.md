@@ -38,7 +38,9 @@ Leia antes de qualquer alteração no site:
 | JSON-LD das páginas internas | `project/src/lib/content/jsonld.ts` (`innerPageGraph`) |
 | Landing pages (/conteudo/&lt;slug&gt;) | Painel `/admin/landing-pages`; modelo padrão em `project/src/content/landing/modelo.ts`; banco em `lib/landing-db.ts`; conteúdo em `lib/content/landing.ts`; página em `app/(lp)/conteudo/[slug]` |
 | Nome do site, logo, favicon, Google Tag Manager | Painel `/admin/configuracoes`; código em `project/src/lib/settings.ts` (tipos: `site-settings.ts`) |
-| Formulários: perfil comercial e evento `lead` do dataLayer | `project/src/lib/leads.ts` (`TEAM_OPTIONS`, `leadProfile`) e `lib/tracking.ts` (`pushLead`) |
+| Formulários: perfil comercial e eventos `lead`/`LigarAgora` do dataLayer | `project/src/lib/leads.ts` (`TEAM_OPTIONS`, `leadProfile`) e `lib/tracking.ts` (`pushLead`, `pushCallNow`) |
+| Modal das landing pages (confirma telefone, número da IA, contagem) e página `/conteudo/obrigado` | `components/forms/PhoneConfirmDialog.tsx` (número em `lib/company.ts`, `aiCaller`); `app/(site)/conteudo/obrigado/` |
+| Para onde vão os CTAs: comercial → `/conteudo/cadastro`, contato → `/contato`, vagas → LinkedIn | `project/src/lib/routes.ts` (`TALK_TO_AI_HREF`, `CAREERS_HREF`, `THANK_YOU_HREF`) |
 | Cores, tipografia, espaçamento, motion | `project/src/styles/tokens/` (espelham `System/tokens/`) |
 
 **Página nova com conteúdo real:** crie `project/src/app/<caminho>/page.tsx` (tem prioridade
@@ -85,9 +87,17 @@ qualquer uma muda as duas. Página com layout próprio: schema em `lib/content/s
   botões para `#formulario` (`cta`). Só a Política de Privacidade abre, em outra aba.
 - **Salvar em Configurações revalida o site inteiro.** No plano gratuito do Workers isso derruba
   com 500/503 por alguns minutos as páginas que ainda não se remontaram; evite salvar à toa.
+- **Destino dos botões:** "Fale com nossa IA", demonstração, orçamento e "Falar com vendas" levam à
+  landing page `/conteudo/cadastro` (desligá-la no painel quebra esses botões); quem quer falar com
+  a empresa vai para `/contato`; vagas, para o LinkedIn. Dentro das landing pages vale a regra delas
+  (tudo leva ao `#formulario`).
+- **Cadastro na landing page:** o envio abre um modal que confirma o telefone **antes** de gravar o
+  lead; depois do "Sim" grava e dispara `lead`, pede para salvar o número da IA nos contatos e, no
+  "Já salvei o contato" (liberado 5 s depois de copiar), dispara `LigarAgora` e leva a
+  `/conteudo/obrigado` (noindex, fora do sitemap; "obrigado" é slug reservado).
 - **Perfil comercial:** os formulários que perguntam o tamanho do time usam `TEAM_OPTIONS`.
   "Sem time comercial" e "1 vendedor" gravam o lead com a etiqueta "Sem perfil" e **não** disparam
-  o evento `lead`; as outras faixas, "Perfil comercial" e disparam. O evento só sai depois que o
+  os eventos `lead` e `LigarAgora`; as outras faixas, "Perfil comercial" e disparam. O evento só sai depois que o
   servidor aceita o envio.
 
 ### Rotina: todo conteúdo criado, alterado ou apagado passa pelo Page Editor

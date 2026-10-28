@@ -35,6 +35,8 @@ export const LANDING_CONTENT_PATH = /^\/_lp\/(lp_[a-f0-9]{24})$/;
 
 /** Slug: minúsculas, números e hífen, sem hífen nas pontas. */
 export const SLUG_OK = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+/** Endereços sob /conteudo/ que são páginas do código (app/(site)/conteudo/obrigado). */
+export const RESERVED_SLUGS = ["obrigado"];
 
 async function db(): Promise<D1Database | null> {
   try {

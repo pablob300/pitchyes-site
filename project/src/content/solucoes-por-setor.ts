@@ -10,7 +10,7 @@ export const solucoesPorSetor: PageContent = {
   eyebrow: "Soluções",
   h1: "IA de voz por setor: cada um tem uma ligação crítica. Começamos por ela.",
   lead: "A conversa que não pode dar errado muda conforme o negócio: uma confirmação de consulta, um aviso de sinistro, uma negociação de dívida. O agente é configurado para o vocabulário, as regras e os sistemas do seu setor.",
-  cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
+  cta: { label: "Fale com nossa IA", href: "/conteudo/cadastro" },
   blocks: [
     {
       kind: "features",
