@@ -8,6 +8,24 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-28: Ajustes em massa, etapa 1 — textos
+
+Commit `99dfe1b` · Cloudflare `9dbf0134`
+
+- **Formulários:** as faixas do tamanho do time passam a contar "pessoas" ("1 pessoa", "2 a 5
+  pessoas"… "Mais de 20 pessoas"). "Sem time comercial" e "1 pessoa" continuam "Sem perfil", sem
+  evento `lead`. Os leads antigos mantêm o texto com que foram gravados.
+- **Home › Como entra no ar:** "Descoberta" agora diz "Entendimento dos processos da sua empresa".
+- **Contato:** saíram os números 94% / 3x do box "Junte-se a 400+ empresas" e as duas últimas
+  perguntas da FAQ (atendimento fora do Brasil e como trabalhar na PitchYes).
+- **Sobre:** o bloco de números fica só com "400+ Empresas atendidas"; o `/llms.txt` também deixou
+  de citar 94% e 3x.
+- **Carreiras:** "Enviar candidatura" abre o LinkedIn da PitchYes em outra aba (botão do topo de
+  página interna com link externo ganha `target="_blank"`).
+- `updated` 2026-10-28 em `/`, `/sobre`, `/carreiras` e `/contato` (`routes.ts` e `page_meta`).
+- Auditoria: 92/93; a LP `/conteudo/cadastro` respondeu 503 logo após o deploy (remontagem do
+  cache) e tem título de 85 caracteres, que é revisado na etapa 6.
+
 ## 2026-10-27: Logos reais dos clientes
 
 Commit `7b7bc9e` · Cloudflare `f2d8770c`
