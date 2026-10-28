@@ -8,6 +8,50 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-28: Ajustes em massa, etapas 3 e 4 — hero, cases e página Operacional
+
+Commits `b141f09` e `b6a92f4` · Cloudflare `db3f6c18` (cases + Operacional) e `ea6e735b` (hero)
+
+- **Hero: a palavra e o card andam juntos.** O player passou a ter um card por palavra do título
+  (8 hoje, de "Clínicas" a "Telecomunicação"), com o rótulo "Ouça nosso agente para". Um relógio
+  só (`components/home/HeroSync.tsx`) troca os dois ao mesmo tempo. Passar o mouse sobre o player
+  ou tocar um áudio pausa a troca, e clicar ou arrastar um card leva a palavra junto. Na gaveta,
+  "Palavras do título" ganhou o campo "Áudio do card" e a lista "Cards de agente" saiu.
+  Testado com tempo real num Edge headless.
+  - **Pendente:** os MP3 continuam sendo a mesma locução de exemplo; várias palavras apontam para
+    `agente-pitchyes.mp3` até existir a amostra de cada setor (`TODO(produto)`).
+- **Cases empilhados** (bloco `caseStories`, `components/blocks/CaseStory.tsx`): cada case fica
+  num container com borda suave, com vídeo do YouTube (vence) ou foto 16:9 à esquerda e o texto à
+  direita. Sem mídia, o texto ocupa o container inteiro. Na gaveta de `/clientes/cases`, o bloco
+  1 é a lista "Cases": adicionar um item acrescenta um case embaixo do outro. O case da OPEN
+  Datacenter foi o primeiro convertido, com o vídeo `prSFv3IPWu8`.
+- **Home › Case OPEN Datacenter**: nova seção acima dos depoimentos (mesmo componente, sem botão),
+  editável na gaveta da home ("Case em destaque").
+- **Nova página `/solucoes/operacional`** (Ligações operacionais: cobrança, carrinho abandonado,
+  onboarding, pesquisa de satisfação, confirmações e avisos), com 6 blocos, FAQ, JSON-LD
+  `Service` e cartão social próprio (`/midia/social/solucoes-operacional.webp`). O card "Ligação
+  Operacional" de `/solucoes` agora leva a ela; a página entrou no rodapé, no sitemap, no
+  `/llms.txt`, no editor de conteúdo e no `page_meta`. Texto com `TODO(comercial)` para revisão.
+- `System/components/case-story.html` documenta o componente novo.
+- Auditoria: a única falha foi o título da Operacional (65 caracteres com o sufixo), encurtado
+  para "Ligações operacionais com IA: cobrança e avisos". No build do hero, duas leituras do D1
+  falharam por rede (ECONNRESET); todos os artigos do blog conferidos respondem 200.
+
+## 2026-10-28: Ajustes em massa, etapa 2 — logos dos clientes
+
+Commit `da36454` · Cloudflare `4c0273ad`
+
+- **Mesma altura para todos os logos:** a grade de clientes passa para 5 colunas e 28px de
+  altura. Em 6 colunas, a célula não comportava o Thomson Reuters, que encolhia.
+- **Arquivos corrigidos** (nome novo por causa do cache de 1 ano em `/logos/*`):
+  - `open-datacenter-v2.svg`: o arquivo declarava 32×32 com desenho 53×35 e ficava encaixotado.
+  - `prospecta-global-v2.webp`: o avatar azul do LinkedIn virou o símbolo em azul sobre fundo
+    transparente, recortado rente ao desenho.
+- **Box "+400 empresas no Brasil"** fecha a grade de clientes (`/clientes` e o bloco de clientes
+  das landing pages). O texto pode ser trocado na gaveta ("Texto do último box"); a faixa
+  rolante da home não muda.
+- Auditoria: tudo certo, exceto um 503 passageiro logo após o deploy (voltou com 200).
+
 ## 2026-10-28: Ajustes em massa, etapa 1 — textos
 
 Commit `99dfe1b` · Cloudflare `9dbf0134`
@@ -25,21 +69,6 @@ Commit `99dfe1b` · Cloudflare `9dbf0134`
 - `updated` 2026-10-28 em `/`, `/sobre`, `/carreiras` e `/contato` (`routes.ts` e `page_meta`).
 - Auditoria: 92/93; a LP `/conteudo/cadastro` respondeu 503 logo após o deploy (remontagem do
   cache; o "título de 85 caracteres" é o da página de erro) e voltou com 200.
-
-## 2026-10-28: Ajustes em massa, etapa 2 — logos dos clientes
-
-Commit `da36454` · Cloudflare `4c0273ad`
-
-- **Mesma altura para todos os logos:** a grade de clientes passa para 5 colunas e 28px de
-  altura. Em 6 colunas, a célula não comportava o Thomson Reuters, que encolhia.
-- **Arquivos corrigidos** (nome novo por causa do cache de 1 ano em `/logos/*`):
-  - `open-datacenter-v2.svg`: o arquivo declarava 32×32 com desenho 53×35 e ficava encaixotado.
-  - `prospecta-global-v2.webp`: o avatar azul do LinkedIn virou o símbolo em azul sobre fundo
-    transparente, recortado rente ao desenho.
-- **Box "+400 empresas no Brasil"** fecha a grade de clientes (`/clientes` e o bloco de clientes
-  das landing pages). O texto pode ser trocado na gaveta ("Texto do último box"); a faixa
-  rolante da home não muda.
-- Auditoria: tudo certo, exceto um 503 passageiro logo após o deploy (voltou com 200).
 
 ## 2026-10-27: Logos reais dos clientes
 
