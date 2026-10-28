@@ -19,7 +19,7 @@ export type Client = {
 
 export const clients: Client[] = [
   { name: "Senior Sistemas", logo: "/logos/clientes/senior-sistemas.svg", width: 151, height: 48 },
-  { name: "OPEN Datacenter", logo: "/logos/clientes/open-datacenter-v2.svg", width: 73, height: 48 },
+  { name: "OPEN Datacenter", logo: "/logos/clientes/open-datacenter-v3.webp", width: 280, height: 48 },
   { name: "Autoglass", logo: "/logos/clientes/autoglass.svg", width: 104, height: 48 },
   { name: "Tenda", logo: "/logos/clientes/tenda.webp", width: 200, height: 48 },
   { name: "Thomson Reuters", logo: "/logos/clientes/thomson-reuters.svg", width: 338, height: 48 },
