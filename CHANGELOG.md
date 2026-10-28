@@ -8,6 +8,35 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-28: CTAs comerciais para a landing page e modal de confirmação do telefone
+
+Commit `071b38f` · Cloudflare `b859f3a3`
+
+- **Destino dos botões** (`lib/routes.ts`): "Fale com nossa IA" (cabeçalho, hero, faixa final,
+  topo das páginas internas e CTA dos artigos do blog), "Falar com vendas" e "Começar no
+  pré-pago" (`/planos`) e o card "Demonstração" de `/sobre` levam a `/conteudo/cadastro`.
+  Quem quer falar com a empresa continua em `/contato` (menu, rodapé, privacidade, termos);
+  vagas, no LinkedIn (`/carreiras`, `CAREERS_HREF`). O `TalkToAiButton` saiu: não há mais
+  destino diferente no blog. Nenhum link estava sobrescrito no D1 (conferido em `page_content`
+  e no HTML dos 48 artigos).
+- **Modal das landing pages** (`forms/PhoneConfirmDialog.tsx`, vale para todas, inclusive o
+  modelo): o envio valida o formulário e abre "Confirme seu telefone" — **nada é gravado nem
+  disparado antes do "Sim, está correto"**; "Corrigir número" fecha e foca o campo. Depois do
+  "Sim" o lead é gravado, sai o evento `lead` e o modal vira "Importante: desbloqueie seu
+  telefone" com o número da IA, (62) 3142-2655 (`company.aiCaller`, o mesmo do
+  converse.pitchyes.com.br). "Copiar número" libera "Já salvei o contato, pode ligar" em 5 s;
+  esse botão dispara `LigarAgora` (mesma regra do `lead`: não sai para "Sem perfil") e leva a
+  `/conteudo/obrigado`. Fechar o segundo passo mostra o "Recebemos seu contato".
+- **`/conteudo/obrigado`**: agradecimento padrão, com cabeçalho, faixa final e rodapé do site,
+  "Solicitação enviada com sucesso!" + "A ligação iniciará dentro de 30 segundos." e a foto do
+  time (`images/landing/demonstracao.webp`). `noindex`, fora do sitemap; "obrigado" virou slug
+  reservado nas Landing Pages.
+- Testado online: `lead` só depois da confirmação, contagem de 5 s, `LigarAgora` e chegada em
+  `/conteudo/obrigado`. O lead de teste foi apagado do D1. `/` segue estática (revalidação 60 s),
+  `data-edit` na home: 0.
+- Auditoria: 91/94 na primeira passada (dois artigos ainda se remontando logo após o deploy,
+  200 em seguida). `/planos` com `updated` 2026-10-28 (código e `page_meta`).
+
 ## 2026-10-28: Logo da OPEN Datacenter em alta qualidade
 
 Commit `e002838` · Cloudflare `689c22f8`
