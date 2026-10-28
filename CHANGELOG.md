@@ -8,6 +8,30 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-28: Ajustes em massa, etapa 5 — novidades e setores
+
+Commit `f9f9e9f` · Cloudflare `cc40cb10`
+
+- **Novidades em cards** (bloco `timeline`): DATA › TÍTULO › resumo, sempre da mais recente para
+  a mais antiga (a ordem é feita na hora de mostrar). Pelo Page Editor dá para adicionar e remover
+  novidades (lista "Novidades", com campo de data).
+  - **5 novidades de MODELO** (datas e textos de exemplo, tirados de recursos que já existem),
+    como pedido. O bloco está marcado "Conteúdo de modelo": enquanto a marca estiver ligada, elas
+    ficam fora do `/llms-full.txt` (conferido). Ao trocar pelo conteúdo real, desligue a marca
+    na gaveta. `TODO(produto)` em `content/novidades.ts`.
+  - h1, linha de apoio e descrição da página reescritos para "novidades" (`page_meta` junto).
+- **Setores viraram uma lista global** (`content/sectors.ts`, em `/_site`, seção "Setores" do
+  painel), no mesmo modelo da lista de clientes. Qualquer bloco de cards com `source: "setores"`
+  mostra essa lista, em página interna ou em landing page, e a gaveta da página inclui a seção
+  "Setores". Publicar ali muda todas as páginas.
+  - `/solucoes/por-setor` passou a ler dela, com os 6 setores de antes mais **Automotivo**,
+    **Provedores de Internet** e o card de fechamento **"Mais 20 setores do mercado brasileiro"**,
+    em destaque (fundo escuro). Textos novos com `TODO(comercial)`.
+  - Descrição da página, `routes.ts`, `page_meta` e o `Service` do JSON-LD citam os novos setores.
+- Helper `withSiteLists()` (`lib/content/inner.ts`) substitui a troca de listas globais que
+  estava repetida em quatro rotas.
+- `System/components/news-cards.html` documenta os cards de novidades.
+
 ## 2026-10-28: Ajustes em massa, etapas 3 e 4 — hero, cases e página Operacional
 
 Commits `b141f09` e `b6a92f4` · Cloudflare `db3f6c18` (cases + Operacional) e `ea6e735b` (hero)
