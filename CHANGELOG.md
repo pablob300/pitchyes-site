@@ -8,6 +8,36 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-28: Ajustes em massa, etapa 6 — landing pages
+
+Commit `16bb73e` · Cloudflare `9c469162` e `8752812f` (correção da conferência da tabela)
+
+Valem para o modelo (`content/landing/modelo.ts`) **e** para a LP já criada ("Cadastro",
+`/conteudo/cadastro`), migrada no D1 (rascunho e publicado). O documento publicado anterior
+ficou guardado em `page_content_versions` ("Antes dos ajustes em massa (etapa 6)…").
+
+- **Tabela "Por que escolher a PitchYes?"** igual à do converse.pitchyes.com.br: colunas PitchYes
+  (em destaque), Prospct.ai, 3C e Viver de IA. Linhas: preço, reputação no Reclame Aqui (links),
+  velocidade para ROI ("Meses quando entregue", com link para a reclamação de cada uma) e seis
+  recursos com ✓/✗. O bloco `table` ganhou a opção "Tabela comparativa" (`compare`): "Sim" e
+  "Não" viram ícones, com a palavra mantida no HTML para leitor de tela e robôs, e
+  `[rótulo](https://…)` vira link externo (nova aba, `nofollow`). Também ganhou o cabeçalho da
+  primeira coluna (`rowHeader`) e grupo sem título. No celular, o nome do recurso fica preso à
+  esquerda enquanto a tabela rola.
+- **"Resultados esperados"** (funil + botão "Solicitar demonstração") e **"Resultados
+  comprovados"** saíram. "Eficiência da IA" continua.
+- **"Soluções que transformam vendas"** virou **"Como as empresas usam a PitchYes"**: o mesmo
+  visual e os mesmos 10 casos da home, sem links. É o bloco novo `useCases`, também na paleta
+  "Adicionar bloco". Mantém o item "Soluções" no menu de âncoras.
+- **Espaçamento:** mais respiro entre a linha de apoio e os marcadores do topo, entre os
+  marcadores e a linha de prova, e na faixa final. **Bug corrigido:** a linha de apoio da faixa
+  final estava escura sobre o fundo escuro (`.lead` sem `:global` no CSS module).
+- **Correção no caminho:** a conferência das LPs exigia título em todo grupo de tabela e
+  descartou a tabela nova até o segundo deploy (`8752812f`). Agora os grupos da tabela só passam
+  pela conferência própria.
+- Auditoria: 94/94 páginas sem problemas (um 503 passageiro no `robots.txt` logo após o deploy).
+  Sem estouro horizontal a 390px (medido por CDP).
+
 ## 2026-10-28: Ajustes em massa, etapa 5 — novidades e setores
 
 Commit `f9f9e9f` · Cloudflare `cc40cb10`
