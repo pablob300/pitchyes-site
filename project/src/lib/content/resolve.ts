@@ -88,13 +88,11 @@ export function resolveHome(override: unknown, report?: string[]): HomeContent {
         text(h.title) &&
         Array.isArray(h.titleWords) &&
         h.titleWords.length > 0 &&
-        h.titleWords.every((w) => text(w.text)) &&
+        // Cada palavra é também um card do player: precisa do próprio áudio.
+        h.titleWords.every((w) => text(w.text) && text(w.audio)) &&
         text(h.lead) &&
         text(h.cta) &&
-        text(h.stat?.value) &&
-        Array.isArray(h.widget?.agents) &&
-        h.widget.agents.length > 0 &&
-        h.widget.agents.every((a) => text(a.name) && text(a.audio)),
+        text(h.stat?.value),
       "hero",
       report,
     ),

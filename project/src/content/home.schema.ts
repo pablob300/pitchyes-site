@@ -25,15 +25,16 @@ export type Hero = {
   /**
    * Palavras que se revezam na linha de baixo do h1, coloridas (RotatingWords.tsx): cada
    * uma fica 2s, a última 5s, e o ciclo recomeça. Todas vão no HTML do servidor.
+   * Cada palavra também é um card do player ao lado (AgentWidget.tsx), com o próprio MP3:
+   * a palavra e o card trocam juntos (HeroSync.tsx).
    */
-  titleWords: { text: string }[];
+  titleWords: { text: string; audio: string }[];
   lead: string;
   /** Só o rótulo do botão: o endereço é TALK_TO_AI_HREF, de lib/routes.ts. */
   cta: string;
   stat: { value: string; label: string };
   widget: {
     eyebrow: string;
-    agents: Agent[];
     /** Texto abaixo do círculo enquanto nada está tocando. */
     hint: string;
   };

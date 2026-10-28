@@ -24,32 +24,25 @@ export const homeDefaults: HomeContent = {
 
   hero: {
     title: "IA de voz para:",
+    // Cada palavra é também um card do player, com a amostra do agente daquele setor.
+    // TODO(produto): os MP3 em /public/audio são a MESMA locução de exemplo, só para montar a
+    // estrutura. Gravar a amostra real de cada palavra e apontar o arquivo aqui (ou no painel).
     titleWords: [
-      { text: "Clínicas" },
-      { text: "Imobiliárias" },
-      { text: "Concessionárias" },
-      { text: "Seguradoras" },
-      { text: "Faculdades" },
-      { text: "Corretoras" },
-      { text: "Franquias" },
-      { text: "Telecomunicação" },
+      { text: "Clínicas", audio: "/audio/agente-saude.mp3" },
+      { text: "Imobiliárias", audio: "/audio/agente-imobiliario.mp3" },
+      { text: "Concessionárias", audio: "/audio/agente-pitchyes.mp3" },
+      { text: "Seguradoras", audio: "/audio/agente-seguros.mp3" },
+      { text: "Faculdades", audio: "/audio/agente-pitchyes.mp3" },
+      { text: "Corretoras", audio: "/audio/agente-financeiro.mp3" },
+      { text: "Franquias", audio: "/audio/agente-pitchyes.mp3" },
+      { text: "Telecomunicação", audio: "/audio/agente-pitchyes.mp3" },
     ],
     lead: "Atende, qualifica, agenda, transfere e liga.",
     cta: "Fale com nossa IA",
     stat: { value: "20.000.000+", label: "ligações realizadas até hoje" },
     widget: {
-      // Each card reads "OUÇA NOSSO AGENTE DE" + the agent name, so names complete that phrase.
-      eyebrow: "Ouça nosso agente de",
-      // TODO(produto): os cinco MP3 em /public/audio são a MESMA locução de exemplo, só para
-      // montar a estrutura. Substituir pela amostra real de cada setor, mesmo nome de arquivo.
-      // TODO(produto): confirmar os setores; "Atendimento" ocupa o lugar do antigo "PitchYes".
-      agents: [
-        { name: "Saúde", audio: "/audio/agente-saude.mp3" },
-        { name: "Seguros", audio: "/audio/agente-seguros.mp3" },
-        { name: "Finanças", audio: "/audio/agente-financeiro.mp3" },
-        { name: "Imóveis", audio: "/audio/agente-imobiliario.mp3" },
-        { name: "Atendimento", audio: "/audio/agente-pitchyes.mp3" },
-      ],
+      // Each card reads "OUÇA NOSSO AGENTE PARA" + the word of the h1 ("Clínicas").
+      eyebrow: "Ouça nosso agente para",
       hint: "Toque no card para ouvir o agente",
     },
   },

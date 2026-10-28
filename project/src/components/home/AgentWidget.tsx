@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
-import type { Hero } from "@/content/home.schema";
+import type { Agent, Hero } from "@/content/home.schema";
 import { editFn } from "@/lib/content/edit";
 import { gsap, motion, useGSAP } from "@/lib/gsap";
+import { useHeroSync } from "./HeroSync";
 import styles from "./AgentWidget.module.css";
 
 // Hero player: a circular 3D carousel of agent cards (pattern from bland.ai's home).
@@ -13,6 +14,10 @@ import styles from "./AgentWidget.module.css";
 // Every card is in the server HTML with its final text. The ring position is a single
 // float (`pos`) tweened by GSAP; each frame writes transform/opacity straight to the
 // cards, so React only re-renders when the front card changes.
+//
+// One card per word of the h1 (hero.titleWords): the front card follows the word that is
+// showing (HeroSync), and spinning the ring moves the word too. Mouse over the player or
+// audio playing pauses the rotation.
 
 /** Orb colors cycle through these; built only from the two brand accents and their tints. */
 const TONES = 4;
@@ -49,16 +54,18 @@ function place(o: number) {
 
 export function AgentWidget({
   content,
+  agents,
   editable,
 }: {
   content: Hero["widget"];
+  agents: Agent[];
   editable?: boolean;
 }) {
-  const { eyebrow, agents, hint } = content;
+  const { eyebrow, hint } = content;
   const n = agents.length;
   const edit = editFn(editable);
 
-  const [active, setActive] = useState(0);
+  const { index: active, setIndex, setPaused } = useHeroSync();
   const [playing, setPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -89,7 +96,7 @@ export function AgentWidget({
   const spinTo = useCallback(
     (target: number, velocity = 0) => {
       ring.current.target = target;
-      setActive(((target % n) + n) % n);
+      setIndex(((target % n) + n) % n);
       gsap.to(ring.current, {
         pos: target,
         duration: reduced.current ? 0 : Math.min(0.9, 0.55 + Math.abs(velocity) * 0.1),
@@ -98,8 +105,17 @@ export function AgentWidget({
         onUpdate: render,
       });
     },
-    [n, render],
+    [n, render, setIndex],
   );
+
+  // The shared clock moved on to the next word: follow it the short way around the ring.
+  useEffect(() => {
+    const at = ((Math.round(ring.current.target) % n) + n) % n;
+    if (n > 1 && at !== active) spinTo(ring.current.target + offsetOf(active, ring.current.target, n));
+  }, [active, n, spinTo]);
+
+  // While a sample plays, the words and the cards stay put.
+  useEffect(() => setPaused("audio", playing), [playing, setPaused]);
 
   const step = useCallback((dir: number) => spinTo(ring.current.target + dir), [spinTo]);
 
@@ -304,8 +320,11 @@ export function AgentWidget({
       aria-roledescription="carrossel"
       aria-label="Agentes de voz da PitchYes"
       onKeyDown={onKeyDown}
+      // Mouse over the player pauses the rotation (touch has no hover: a tap would leave it paused).
+      onPointerEnter={(e) => e.pointerType === "mouse" && setPaused("hover", true)}
+      onPointerLeave={(e) => e.pointerType === "mouse" && setPaused("hover", false)}
     >
-      <div ref={stageRef} className={styles.stage} {...edit("hero.widget.agents")}>
+      <div ref={stageRef} className={styles.stage} {...edit("hero.titleWords")}>
         {agents.map((item, i) => {
           const isFront = i === active;
           const p = place(offsetOf(i, 0, n));

@@ -27,7 +27,7 @@ export const homeSchema: PageSchema = {
         { pointer: "cta", label: "Botão", type: "texto", max: 30 },
         { pointer: "stat.value", label: "Número em destaque", type: "texto" },
         { pointer: "stat.label", label: "Legenda do número", type: "texto" },
-        { pointer: "widget.eyebrow", label: "Rótulo dos cards", type: "texto", max: 30, help: "Vem antes do nome de cada agente: “Ouça nosso agente de” + “Saúde”." },
+        { pointer: "widget.eyebrow", label: "Rótulo dos cards", type: "texto", max: 30, help: "Vem antes da palavra de cada card: “Ouça nosso agente para” + “Clínicas”." },
         { pointer: "widget.hint", label: "Dica abaixo dos cards", type: "texto", max: 60 },
       ],
       lists: [
@@ -36,28 +36,19 @@ export const homeSchema: PageSchema = {
           label: "Palavras do título",
           titleField: "text",
           min: 1,
-          template: { text: "nova palavra" },
+          template: { text: "nova palavra", audio: "/audio/agente-pitchyes.mp3" },
+          help: "Cada palavra é também um card do player ao lado: a palavra e o card trocam juntos, e passar o mouse sobre os cards pausa a troca.",
           fields: [
             {
               pointer: "text",
               label: "Palavra ou trecho",
               type: "texto",
               max: 24,
-              help: "Cada uma aparece 2 segundos na linha de baixo do título; a última fica 5.",
+              help: "Cada uma aparece 2 segundos na linha de baixo do título; a última fica 5. É também o nome do card.",
             },
-          ],
-        },
-        {
-          pointer: "hero.widget.agents",
-          label: "Cards de agente",
-          titleField: "name",
-          min: 1,
-          template: { name: "Novo agente", audio: "/audio/agente-pitchyes.mp3" },
-          fields: [
-            { pointer: "name", label: "Nome (completa o rótulo)", type: "texto", max: 20 },
             {
               pointer: "audio",
-              label: "Arquivo de áudio",
+              label: "Áudio do card",
               type: "texto",
               help: "Caminho do MP3 em /public/audio. O envio de áudio ainda não passa pelo painel.",
             },

@@ -4,6 +4,7 @@ import { editFn } from "@/lib/content/edit";
 import { rich } from "@/lib/content/richtext";
 import { TALK_TO_AI_HREF } from "@/lib/routes";
 import { AgentWidget } from "./AgentWidget";
+import { HeroSync } from "./HeroSync";
 import { RotatingWords } from "./RotatingWords";
 import styles from "./Hero.module.css";
 
@@ -14,6 +15,8 @@ export function Hero({ content, editable }: { content: HeroContent; editable?: b
   return (
     <section className={styles.hero}>
       <div className={`container ${styles.grid}`}>
+        {/* A palavra do h1 e o card do player trocam juntos (HeroSync não gera elemento). */}
+        <HeroSync count={content.titleWords.length}>
         <div className={styles.copy}>
           {/* Título, texto e botão do topo aparecem já pintados, sem `data-reveal`: o h1 é o
               maior elemento da primeira tela (LCP) e, escondido até o GSAP hidratar, atrasava
@@ -36,8 +39,13 @@ export function Hero({ content, editable }: { content: HeroContent; editable?: b
           </div>
         </div>
         <div data-reveal>
-          <AgentWidget content={content.widget} editable={editable} />
+          <AgentWidget
+            content={content.widget}
+            agents={content.titleWords.map((w) => ({ name: w.text, audio: w.audio }))}
+            editable={editable}
+          />
         </div>
+        </HeroSync>
       </div>
     </section>
   );
