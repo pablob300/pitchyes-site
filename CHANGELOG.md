@@ -8,6 +8,19 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-10-28: Logo da OPEN Datacenter em alta qualidade
+
+Commit `e002838` · Cloudflare `689c22f8`
+
+- O logo da OPEN Datacenter na lista de clientes (home, `/clientes` e landing pages) agora vem
+  do arquivo oficial (`docs/Logo corporativo OPEN Data Center.png`, 1700×925). O fundo branco
+  virou transparência, a margem foi cortada e o desenho, que era empilhado, foi montado na
+  horizontal: ícone da nuvem à esquerda e "OPEN DATACENTER" à direita. Assim ele fica legível
+  nos 28px de altura da grade, como os outros. O arquivo é `open-datacenter-v3.webp`: WebP sem
+  perdas, 932×160, cor da marca #0B71B3. O `open-datacenter-v2.svg` saiu.
+- A lista de clientes não tem sobreposição no D1, então a troca vale direto do código.
+- Auditoria: 94/94 páginas sem problemas.
+
 ## 2026-10-28: Ajustes em massa, etapa 6 — landing pages
 
 Commit `16bb73e` · Cloudflare `9c469162` e `8752812f` (correção da conferência da tabela)
