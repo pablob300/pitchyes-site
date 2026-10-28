@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { LandingPage } from "@/components/landing/LandingPage";
+import { withSiteLists } from "@/lib/content/inner";
 import { resolveLanding } from "@/lib/content/landing";
 import { getSiteContent } from "@/lib/content/resolve";
 import { toPlainText } from "@/lib/content/richtext";
@@ -50,9 +51,7 @@ export default async function Page({ params }: PageProps<"/conteudo/[slug]">) {
     getSiteSettings(),
   ]);
   // A parede de clientes é a lista global do site (/_site), a mesma da home.
-  const blocks = resolveLanding(data).map((item) =>
-    item.block.kind === "logos" && item.block.source !== "proprio" ? { ...item, block: { ...item.block, items: site.clients } } : item,
-  );
+  const blocks = resolveLanding(data).map((item) => ({ ...item, block: withSiteLists(item.block, site) }));
   const path = landingPath(page.slug);
   const faq = blocks.flatMap(({ block }) => (block.kind === "faq" ? block.items : []));
 

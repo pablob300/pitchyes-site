@@ -18,6 +18,13 @@ function percentOf(value: string): number | null {
   return Math.min(100, Math.max(0, Number(match[1].replace(",", "."))));
 }
 
+/** "2026-10-20" → "20 de outubro de 2026" (sem fuso: a data é do calendário, não um instante). */
+function longDate(date: string): string {
+  return new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
+    new Date(`${date}T00:00:00Z`),
+  );
+}
+
 /** Aviso de privacidade abaixo dos formulários. Na landing page abre em outra aba: a pessoa não sai da página. */
 function PrivacyNote({ newTab }: { newTab?: boolean }) {
   return (
@@ -64,9 +71,15 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
               <h2 {...e("title")}>{block.title}</h2>
               {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
             </div>
-            <ul className={styles.grid} data-columns={block.columns ?? 3}>
+            <ul className={styles.grid} data-columns={block.columns ?? 3} {...(block.source === "setores" ? e("@site.sectors") : {})}>
               {block.items.map((item, j) => (
-                <li key={item.title} className={styles.card} data-reveal {...e(`items.${j}`)}>
+                <li
+                  key={item.title}
+                  className={styles.card}
+                  data-highlight={item.highlight || undefined}
+                  data-reveal
+                  {...(block.source === "setores" ? {} : e(`items.${j}`))}
+                >
                   <h3>{item.href ? <Link href={item.href}>{item.title}</Link> : item.title}</h3>
                   <p>{item.text}</p>
                 </li>
@@ -198,6 +211,31 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
           </div>
         </section>
       );
+
+    case "timeline": {
+      // Mais recente primeiro, qualquer que seja a ordem cadastrada; `j` é a posição na lista
+      // (o ponteiro do editor), não a da tela.
+      const items = block.items.map((item, j) => ({ item, j })).sort((a, b) => b.item.date.localeCompare(a.item.date));
+      return (
+        <section className="section" id={block.id}>
+          <div className="container">
+            <div className="section-head" data-reveal>
+              <h2 {...e("title")}>{block.title}</h2>
+              {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
+            </div>
+            <ol className={styles.news} {...e("items")}>
+              {items.map(({ item, j }) => (
+                <li key={`${j}-${item.date}`} className={styles.newsCard} data-reveal {...e(`items.${j}`)}>
+                  <time dateTime={item.date}>{longDate(item.date)}</time>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      );
+    }
 
     case "caseStories":
       return (

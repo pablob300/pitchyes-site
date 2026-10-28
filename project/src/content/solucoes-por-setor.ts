@@ -1,3 +1,4 @@
+import { sectors } from "./sectors";
 import type { PageContent } from "./types";
 
 // Termos-alvo: "ia de voz para clínicas", "atendimento automatizado seguros",
@@ -5,7 +6,7 @@ import type { PageContent } from "./types";
 export const solucoesPorSetor: PageContent = {
   seoTitle: "IA de voz por setor: saúde, seguros e imóveis",
   seoDescription:
-    "Como a IA de voz da PitchYes atende saúde, seguros, serviços financeiros, imobiliário, energia e tecnologia, respeitando as regras de cada setor.",
+    "Como a IA de voz da PitchYes atende saúde, seguros, finanças, imóveis, automotivo, provedores de internet e mais 20 setores, com as regras de cada um.",
   eyebrow: "Soluções",
   h1: "IA de voz por setor: cada um tem uma ligação crítica. Começamos por ela.",
   lead: "A conversa que não pode dar errado muda conforme o negócio: uma confirmação de consulta, um aviso de sinistro, uma negociação de dívida. O agente é configurado para o vocabulário, as regras e os sistemas do seu setor.",
@@ -15,32 +16,9 @@ export const solucoesPorSetor: PageContent = {
       kind: "features",
       title: "Setores que atendemos.",
       lead: "Em todos eles, o agente conversa, consulta o sistema, executa a ação e registra a ligação para auditoria.",
-      items: [
-        {
-          title: "Saúde",
-          text: "Confirmação e remarcação de consultas, preparo de exames, triagem de pedidos e redução de faltas na agenda. Dados sensíveis tratados com os controles exigidos pelo setor.",
-        },
-        {
-          title: "Seguros",
-          text: "Cotação inicial, aviso de sinistro, atualização de status e renovação de apólice, com as declarações obrigatórias registradas na gravação.",
-        },
-        {
-          title: "Serviços financeiros",
-          text: "Cobrança e negociação dentro das condições aprovadas, confirmação de transações e atendimento de dúvidas, com confirmação de identidade antes de qualquer informação.",
-        },
-        {
-          title: "Imobiliário",
-          text: "Qualificação de interessados, agendamento de visitas, confirmação com o corretor e retomada de contatos antigos da carteira.",
-        },
-        {
-          title: "Energia e utilities",
-          text: "Segunda via, leitura, agendamento de visita técnica e comunicação de interrupções, absorvendo picos de volume sem fila.",
-        },
-        {
-          title: "Tecnologia e serviços B2B",
-          text: "Resposta imediata a leads, qualificação por critério e confirmação de reuniões para equipes comerciais com meta agressiva.",
-        },
-      ],
+      // Lista global de setores (painel, seção "Setores"); esta é a mesma do código.
+      source: "setores",
+      items: sectors,
     },
     {
       kind: "prose",

@@ -30,6 +30,9 @@ export default async function EditarLanding({ params }: PageProps<"/admin/landin
   // A parede de clientes é a lista global do site: aparece na gaveta quando a página a usa.
   const usesClients = Object.values(doc.blocos).some((b) => b?.kind === "logos" && b.source !== "proprio");
   if (usesClients) schema.sections.push(...homeSchema.sections.filter((s) => s.key === "clients"));
+  // Idem para a lista de setores, quando um bloco de cards está ligado a ela.
+  const usesSectors = Object.values(doc.blocos).some((b) => b?.kind === "features" && b.source === "setores");
+  if (usesSectors) schema.sections.push(...homeSchema.sections.filter((s) => s.key === "sectors"));
 
   const paleta = Object.keys(landingBlockTemplates).map((kind) => ({
     kind,

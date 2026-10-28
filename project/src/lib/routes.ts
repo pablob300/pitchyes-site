@@ -18,7 +18,7 @@ export const pages = [
   { path: "/solucoes/ativo", title: "Ligações ativas", description: "Prospecção, qualificação de leads, confirmação de reuniões e follow-up com IA de voz.", placeholder: false, updated: "2026-10-26" },
   { path: "/solucoes/receptivo", title: "Atendimento receptivo", description: "Todo cliente atendido, qualificado e direcionado, 24 horas por dia.", placeholder: false, updated: "2026-10-27" },
   { path: "/solucoes/operacional", title: "Ligações operacionais", description: "Cobrança, recuperação de carrinho, onboarding, avisos e pesquisas com IA de voz.", placeholder: false, updated: "2026-10-28" },
-  { path: "/solucoes/por-setor", title: "Soluções por setor", description: "IA de voz para saúde, seguros, serviços financeiros, imobiliário e mais.", placeholder: false, updated: "2026-10-26" },
+  { path: "/solucoes/por-setor", title: "Soluções por setor", description: "IA de voz para saúde, seguros, finanças, imóveis, automotivo, provedores de internet e mais.", placeholder: false, updated: "2026-10-28" },
   { path: "/solucoes/por-funcao", title: "Soluções por função", description: "IA de voz para vendas, atendimento, cobrança e operações.", placeholder: false, updated: "2026-10-26" },
 
   { path: "/clientes", title: "Clientes", description: "Empresas que automatizam ligações com a PitchYes.", placeholder: false, updated: "2026-10-28" },
@@ -28,7 +28,7 @@ export const pages = [
   { path: "/planos", title: "Planos", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: false, updated: "2026-10-26" },
 
   { path: "/recursos/integracoes", title: "Integrações", description: "A PitchYes conecta com sua telefonia, CRM e agenda atuais.", placeholder: false, updated: "2026-10-26" },
-  { path: "/recursos/novidades", title: "Novidades", description: "Lançamentos e atualizações da plataforma PitchYes.", placeholder: false, updated: "2026-10-26" },
+  { path: "/recursos/novidades", title: "Novidades", description: "Lançamentos e atualizações da plataforma PitchYes.", placeholder: false, updated: "2026-10-28" },
 
   // Blog próprio (D1, editado em /admin/blog). As URLs de artigos, categorias e tags vêm do
   // banco e entram em sitemap-blog.xml; aqui ficam só as duas páginas fixas.

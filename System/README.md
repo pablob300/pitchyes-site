@@ -95,6 +95,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 | `security-compliance.html` | Selos de certificação + controles | `home/Security.tsx` |
 | `cards-use-case.html` | Grade compacta de casos de uso | `home/UseCases.tsx` |
 | `case-story.html` | Cases empilhados: container com borda suave; vídeo do YouTube ou foto 16:9 à esquerda e texto à direita, ou só texto na largura toda | `blocks/CaseStory.tsx`, `home/CaseHighlight.tsx` |
+| `news-cards.html` | Novidades: cards datados (data › título › resumo), do mais recente para o mais antigo | `blocks/ContentPage.tsx` (`timeline`) |
 | `cta-band.html` | Faixa "Fale com nossa IA" antes do footer, **em todas as páginas**: fundo da marca (azul-marinho com os pontos violeta do logotipo, `textures/cta-fundo-pitchyes.svg`), título branco, botão violeta | `layout/FinalCta.tsx` |
 | `page-headline.html` | Topo das páginas internas | `PageHeadline.tsx` |
 | `blog.html` | Blog: listagens (blog, categoria, tag, autor) e card de artigo | `blog/BlogListing.tsx`, `blog/PostCard.tsx` |

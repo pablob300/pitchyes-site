@@ -322,6 +322,28 @@ export const homeSchema: PageSchema = {
       ],
     },
     {
+      key: "sectors",
+      label: "Setores",
+      scope: "site",
+      prefix: "",
+      note: "A mesma lista aparece em /solucoes/por-setor e em todo bloco de cards ligado aos setores. Publicar aqui muda todas.",
+      fields: [],
+      lists: [
+        {
+          pointer: "sectors",
+          label: "Setores",
+          titleField: "title",
+          min: 1,
+          template: { title: "Novo setor", text: "O que o agente resolve nesse setor." },
+          fields: [
+            { pointer: "title", label: "Setor", type: "texto", max: 60 },
+            { pointer: "text", label: "Texto", type: "paragrafo", max: 240 },
+            { pointer: "highlight", label: "Card de fechamento em destaque", type: "booleano", help: "Use no último card, ex.: “Mais 20 setores do mercado brasileiro”." },
+          ],
+        },
+      ],
+    },
+    {
       key: "clients",
       label: "Clientes (logos)",
       scope: "site",

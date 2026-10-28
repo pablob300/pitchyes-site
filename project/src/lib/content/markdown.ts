@@ -31,6 +31,16 @@ function block(b: Block): string {
           .map((i) => `- **${plain(i.company)}** (${plain(i.sector)}): ${plain(i.headline)}${i.quote ? ` — "${plain(i.quote)}"${i.person ? `, ${plain(i.person)}` : ""}` : ""}`)
           .join("\n"),
       ].join("\n\n");
+    case "timeline":
+      // Novidades de modelo (datas e textos ainda não reais) não vão para as IAs.
+      if (b.sample) return "";
+      return [
+        heading(b.title, b.lead),
+        [...b.items]
+          .sort((x, y) => y.date.localeCompare(x.date))
+          .map((i) => `- **${i.date} — ${plain(i.title)}**: ${plain(i.text)}`)
+          .join("\n"),
+      ].join("\n\n");
     case "caseStories":
       return [heading(b.title, b.lead), ...b.items.map((i) => [`#### ${plain(i.title)}`, ...i.paragraphs.map(plain)].join("\n\n"))]
         .filter(Boolean)

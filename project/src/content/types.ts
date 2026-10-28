@@ -27,7 +27,13 @@ export type Block = (
       title: string;
       lead?: string;
       columns?: 2 | 3;
-      items: { title: string; text: string; href?: string }[];
+      /**
+       * "setores": os cards são a lista global de setores (/_site, content/sectors.ts) — `items`
+       * fica só como reserva. "proprio" (padrão): os cards deste bloco.
+       */
+      source?: "setores" | "proprio";
+      /** `highlight`: card de fechamento em destaque (ex.: "Mais 20 setores…"). */
+      items: { title: string; text: string; href?: string; highlight?: boolean }[];
     }
   | { kind: "steps"; title: string; lead?: string; steps: { label: string; title: string; text: string }[] }
   | {
@@ -48,6 +54,18 @@ export type Block = (
       title: string;
       lead?: string;
       items: { company: string; sector: string; headline: string; quote?: string; person?: string; pending?: boolean }[];
+    }
+  | {
+      /**
+       * Novidades em cards: data, título e resumo, sempre da mais recente para a mais antiga
+       * (a ordem é feita na hora de mostrar, então a ordem da lista não importa).
+       */
+      kind: "timeline";
+      title: string;
+      lead?: string;
+      items: { date: string; title: string; text: string }[];
+      /** Conteúdo de modelo, ainda não real: fica fora do /llms-full.txt (SEO.md §1.5). */
+      sample?: boolean;
     }
   | {
       /** Cases empilhados, um container com borda suave para cada (components/blocks/CaseStory.tsx). */

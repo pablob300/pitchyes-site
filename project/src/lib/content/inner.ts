@@ -1,5 +1,6 @@
 import "server-only";
 import { innerPageDefaults } from "@/content/registry";
+import type { SiteContent } from "@/content/site";
 import type { Block, PageContent } from "@/content/types";
 import { getPageContentData, type ContentStatus } from "@/lib/page-content";
 import { mergeContent, parseOverride } from "./merge";
@@ -17,6 +18,17 @@ import { getSiteContent } from "./resolve";
 // A estrutura (quais blocos existem, a ordem e o tipo de cada um) continua no código.
 
 const blockKey = (index: number) => `b${index}`;
+
+/**
+ * Blocos que mostram uma lista global do site (/_site) em vez da própria: a parede de
+ * clientes nos logos e os setores nos cards com `source: "setores"`. Vale para páginas
+ * internas e landing pages, no site e no editor.
+ */
+export function withSiteLists(block: Block, site: SiteContent): Block {
+  if (block.kind === "logos" && block.source !== "proprio") return { ...block, items: site.clients };
+  if (block.kind === "features" && block.source === "setores") return { ...block, items: site.sectors };
+  return block;
+}
 
 const text = (value: unknown): value is string => typeof value === "string" && value.trim() !== "";
 
@@ -38,6 +50,7 @@ const REQUIRED: Partial<Record<Block["kind"], string[]>> = {
   funnel: ["title"],
   testimonials: ["title"],
   ctaFinal: ["title", "button"],
+  timeline: ["title"],
 };
 
 /** Listas de cada bloco que precisam ter itens (e itens com os campos de texto do molde). */
@@ -58,6 +71,7 @@ const LISTS: Partial<Record<Block["kind"], string[]>> = {
   funnel: ["steps"],
   testimonials: ["items"],
   ctaFinal: ["items"],
+  timeline: ["items"],
 };
 
 /**
@@ -87,6 +101,8 @@ export function validBlock(block: Block, fallback: Block): boolean {
       }
     }
   }
+  // Novidades: toda data no formato AAAA-MM-DD, que é o que ordena e vira <time>.
+  if (block.kind === "timeline" && !block.items.every((i) => /^\d{4}-\d{2}-\d{2}$/.test(i.date))) return false;
   // Tabela: cada linha com um valor por coluna.
   if (block.kind === "table") {
     const columns = block.columns.length;
@@ -166,6 +182,6 @@ export async function getInnerPageContent(path: string, status: ContentStatus = 
   if (!defaults) throw new Error(`Página interna sem conteúdo registrado: ${path}`);
   const [data, site] = await Promise.all([getPageContentData(path, status), getSiteContent(status)]);
   const content = resolveInnerPage(defaults, parseOverride(data));
-  // Bloco de logos mostra a parede de logos do site (editável no painel), não a lista do código.
-  return { ...content, blocks: content.blocks.map((b) => (b.kind === "logos" ? { ...b, items: site.clients } : b)) };
+  // Logos e setores mostram as listas globais do site (editáveis no painel), não as do código.
+  return { ...content, blocks: content.blocks.map((b) => withSiteLists(b, site)) };
 }

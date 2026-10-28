@@ -233,6 +233,13 @@ export function resolveSite(override: unknown, report?: string[]): SiteContent {
       "clients",
       report,
     ),
+    sectors: keep(
+      merged.sectors,
+      siteDefaults.sectors,
+      (list) => Array.isArray(list) && list.length > 0 && list.every((s) => text(s.title) && text(s.text)),
+      "sectors",
+      report,
+    ),
   };
 }
 

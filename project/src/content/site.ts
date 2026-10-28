@@ -1,4 +1,5 @@
 import { clients, type Client } from "./clients";
+import { sectors, type Sector } from "./sectors";
 
 // Conteúdo que NÃO é de uma página só: aparece em todas elas.
 //
@@ -16,6 +17,8 @@ export type FinalCta = {
 export type SiteContent = {
   finalCta: FinalCta;
   clients: Client[];
+  /** Setores atendidos (content/sectors.ts): /solucoes/por-setor e blocos com source "setores". */
+  sectors: Sector[];
 };
 
 /** Caminho reservado do conteúdo global no banco e no editor. */
@@ -27,4 +30,5 @@ export const siteDefaults: SiteContent = {
     cta: "Fale com nossa IA",
   },
   clients,
+  sectors,
 };

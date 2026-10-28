@@ -56,6 +56,7 @@ const SECTION_LABELS: Record<string, string> = {
   faq: "Perguntas frequentes",
   finalCta: "Faixa de CTA",
   clients: "Clientes (logos)",
+  sectors: "Setores",
 };
 
 function label(section: string, path = ""): string {

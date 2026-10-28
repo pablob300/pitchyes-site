@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { LandingPage } from "@/components/landing/LandingPage";
+import { withSiteLists } from "@/lib/content/inner";
 import { resolveLanding } from "@/lib/content/landing";
 import { getSiteContent } from "@/lib/content/resolve";
 import { getLandingById, getLandingContent } from "@/lib/landing-db";
@@ -20,8 +21,6 @@ export default async function LandingPreview({ params }: PageProps<"/editor/cont
     getSiteContent("rascunho"),
     getSiteSettings(),
   ]);
-  const blocks = resolveLanding(data).map((item) =>
-    item.block.kind === "logos" && item.block.source !== "proprio" ? { ...item, block: { ...item.block, items: site.clients } } : item,
-  );
+  const blocks = resolveLanding(data).map((item) => ({ ...item, block: withSiteLists(item.block, site) }));
   return <LandingPage blocks={blocks} slug={page.slug} logo={settings.logo} editable />;
 }

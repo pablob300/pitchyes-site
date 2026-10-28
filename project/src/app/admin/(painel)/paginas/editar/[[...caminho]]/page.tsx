@@ -47,9 +47,12 @@ export default async function EditarConteudo({
     : homeSchema;
   if (defaults) {
     const hasLogos = defaults.blocks.some((b) => b.kind === "logos");
+    const hasSectors = defaults.blocks.some((b) => b.kind === "features" && b.source === "setores");
     schema.sections = [
       ...schema.sections,
-      ...homeSchema.sections.filter((s) => s.scope === "site" && (s.key !== "clients" || hasLogos)),
+      ...homeSchema.sections.filter(
+        (s) => s.scope === "site" && (s.key !== "clients" || hasLogos) && (s.key !== "sectors" || hasSectors),
+      ),
     ];
   }
   const resolvedPage = defaults

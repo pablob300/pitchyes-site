@@ -13,6 +13,7 @@ const KIND_LABEL: Record<Block["kind"], string> = {
   checklist: "Checklist",
   cases: "Cases",
   caseStories: "Cases",
+  timeline: "Novidades",
   logos: "Logos",
   pricing: "Planos",
   table: "Tabela",
@@ -59,6 +60,9 @@ export function blockSection(block: Block, prefix: string, label: string): Secti
         fields: [eyebrowField, { ...titleField, optional: true }, f("paragraphs", "Parágrafos", "linhas")],
       };
     case "features":
+      if (block.source === "setores") {
+        return { ...base, fields: [eyebrowField, titleField, leadField], note: "Os cards são a lista de setores do site: edite em “Setores”, no fim desta gaveta. Publicar ali muda todas as páginas que mostram os setores." };
+      }
       return {
         ...base,
         fields: [eyebrowField, titleField, leadField],
@@ -106,6 +110,25 @@ export function blockSection(block: Block, prefix: string, label: string): Secti
             { company: "Empresa", sector: "Setor", headline: "O que mudou." },
           ),
         ],
+      };
+    case "timeline":
+      return {
+        ...base,
+        fields: [
+          titleField,
+          leadField,
+          f("sample", "Conteúdo de modelo (ainda não real)", "booleano", { help: "Ligado, as novidades ficam fora do /llms-full.txt. Desligue quando as datas e os textos forem reais." }),
+        ],
+        lists: [
+          list(
+            p("items"),
+            "Novidades",
+            "title",
+            [f("date", "Data", "data"), f("title", "Título", "texto", { max: 80 }), f("text", "Resumo", "multilinha", { max: 280 })],
+            { date: "2026-01-01", title: "Nova novidade", text: "O que mudou e para quem." },
+          ),
+        ],
+        note: "Os cards aparecem sempre da data mais recente para a mais antiga, qualquer que seja a ordem da lista.",
       };
     case "caseStories":
       return {
