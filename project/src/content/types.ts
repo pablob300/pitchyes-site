@@ -2,6 +2,22 @@
 // (components/blocks/ContentPage.tsx), so copy stays reviewable in one place.
 // SEO rules for new pages: ../../SEO.md
 
+/**
+ * Um case: título e parágrafos à direita, com vídeo do YouTube ou foto à esquerda. Sem
+ * vídeo nem foto, o texto ocupa a largura toda do container. O vídeo vence a foto.
+ */
+export type CaseStoryItem = {
+  eyebrow?: string;
+  title: string;
+  paragraphs: string[];
+  /** Link ou id do vídeo do YouTube (horizontal, 16:9). */
+  videoId?: string;
+  /** Foto 16:9, usada quando não há vídeo. */
+  image?: string;
+  /** Texto alternativo da foto ou da capa do vídeo. */
+  alt?: string;
+};
+
 /** `id` opcional vira âncora da seção (ex. botão "#clientes" no topo da página). */
 export type Block = (
   | { kind: "prose"; title?: string; eyebrow?: string; paragraphs: string[] }
@@ -32,6 +48,13 @@ export type Block = (
       title: string;
       lead?: string;
       items: { company: string; sector: string; headline: string; quote?: string; person?: string; pending?: boolean }[];
+    }
+  | {
+      /** Cases empilhados, um container com borda suave para cada (components/blocks/CaseStory.tsx). */
+      kind: "caseStories";
+      title?: string;
+      lead?: string;
+      items: CaseStoryItem[];
     }
   | {
       /** Parede de logos: a imagem da marca em cima, o nome embaixo. */

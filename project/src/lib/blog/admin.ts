@@ -668,6 +668,7 @@ export async function suggestLinks(postId: string | null, html: string): Promise
   const commercial: { href: string; phrases: string[] }[] = [
     { href: "/solucoes/ativo", phrases: ["ligações ativas", "prospecção ativa", "ligação ativa", "prospecção"] },
     { href: "/solucoes/receptivo", phrases: ["atendimento receptivo", "substituir a URA", "URA"] },
+    { href: "/solucoes/operacional", phrases: ["ligações operacionais", "cobrança automatizada", "carrinho abandonado", "pesquisa de satisfação"] },
     { href: "/solucoes", phrases: ["agentes de voz", "IA de voz", "agente de voz"] },
     { href: "/recursos/integracoes", phrases: ["integração com CRM", "integrações", "CRM"] },
     { href: "/planos", phrases: ["custo por minuto", "planos"] },

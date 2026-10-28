@@ -14,6 +14,7 @@ export const homeDefaults: HomeContent = {
     { key: "clientLogos" },
     { key: "platform" },
     { key: "latency" },
+    { key: "caseHighlight" },
     { key: "testimonials" },
     { key: "rollout" },
     { key: "security" },
@@ -51,6 +52,19 @@ export const homeDefaults: HomeContent = {
       ],
       hint: "Toque no card para ouvir o agente",
     },
+  },
+
+  // Mesmo case de /clientes/cases (content/clientes-cases.ts), sem número novo.
+  caseHighlight: {
+    eyebrow: "Case OPEN Datacenter",
+    title: "O trabalho de horas de 40 vendedores, feito em minutos.",
+    videoId: "prSFv3IPWu8",
+    alt: "Vídeo do case OPEN Datacenter, no canal da PitchYes no YouTube",
+    paragraphs: [
+      "A OPEN Datacenter tinha uma equipe comercial de mais de 40 vendedores e um gargalo conhecido: o tempo gasto em tentativas de contato que não viravam conversa.",
+      "A PitchYes assumiu a primeira camada dessas ligações. O agente faz as tentativas, conversa com quem atende e entrega ao time apenas as conversas que avançaram, com o contexto registrado.",
+      "Nas palavras do CEO, Leandro Vasconcelos: “A IA da PitchYes fez o que levava horas, em minutos.”",
+    ],
   },
 
   clientLogos: {

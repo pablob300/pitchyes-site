@@ -136,6 +136,21 @@ export const homeSchema: PageSchema = {
       ],
     },
     {
+      key: "caseHighlight",
+      label: "Case em destaque",
+      scope: "pagina",
+      prefix: "caseHighlight",
+      note: "Fica acima dos depoimentos, sem botão. Vídeo vence a foto; sem os dois, o texto ocupa a largura toda.",
+      fields: [
+        { pointer: "eyebrow", label: "Rótulo", type: "texto", optional: true, max: 40 },
+        { pointer: "title", label: "Título", type: "texto", max: 90 },
+        { pointer: "paragraphs", label: "Parágrafos", type: "linhas" },
+        { pointer: "videoId", label: "Vídeo do YouTube (opcional)", type: "texto", optional: true, help: "Cole o link do vídeo horizontal." },
+        { pointer: "image", label: "Foto (opcional)", type: "imagem", optional: true, aspect: 16 / 9, help: "Imagem 16:9, usada quando não há vídeo." },
+        { pointer: "alt", label: "Descrição do vídeo ou da foto", type: "texto", optional: true, max: 140, help: "O que a imagem mostra (SEO.md §1.7). Obrigatório quando há vídeo ou foto." },
+      ],
+    },
+    {
       key: "testimonials",
       label: "Depoimentos em vídeo",
       scope: "pagina",

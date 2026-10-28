@@ -9,6 +9,7 @@ import { privacidade } from "@/content/privacidade";
 import { sobre } from "@/content/sobre";
 import { solucoes } from "@/content/solucoes";
 import { solucoesAtivo } from "@/content/solucoes-ativo";
+import { solucoesOperacional } from "@/content/solucoes-operacional";
 import { solucoesPorFuncao } from "@/content/solucoes-por-funcao";
 import { solucoesPorSetor } from "@/content/solucoes-por-setor";
 import { solucoesReceptivo } from "@/content/solucoes-receptivo";
@@ -31,6 +32,7 @@ const byPath: Record<string, PageDefault> = {
   "/solucoes": { title: solucoes.seoTitle, description: solucoes.seoDescription },
   "/solucoes/ativo": { title: solucoesAtivo.seoTitle, description: solucoesAtivo.seoDescription },
   "/solucoes/receptivo": { title: solucoesReceptivo.seoTitle, description: solucoesReceptivo.seoDescription },
+  "/solucoes/operacional": { title: solucoesOperacional.seoTitle, description: solucoesOperacional.seoDescription },
   "/solucoes/por-setor": { title: solucoesPorSetor.seoTitle, description: solucoesPorSetor.seoDescription },
   "/solucoes/por-funcao": { title: solucoesPorFuncao.seoTitle, description: solucoesPorFuncao.seoDescription },
   "/clientes": { title: clientes.seoTitle, description: clientes.seoDescription },

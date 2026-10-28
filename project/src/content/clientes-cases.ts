@@ -12,13 +12,20 @@ export const clientesCases: PageContent = {
   cta: { label: "Fale com nossa IA", href: "/#fale-com-a-ia" },
   blocks: [
     {
-      kind: "prose",
-      eyebrow: "Case em destaque",
-      title: "OPEN Datacenter: o trabalho de horas de 40 vendedores, em minutos.",
-      paragraphs: [
-        "A OPEN Datacenter tinha uma equipe comercial de mais de 40 vendedores e um gargalo conhecido: o tempo gasto em tentativas de contato que não viravam conversa. O volume dependia de quantas pessoas estavam discando.",
-        "A PitchYes assumiu a primeira camada dessas ligações. O agente faz as tentativas, conversa com quem atende e entrega ao vendedor apenas as conversas que avançaram, com o contexto registrado.",
-        "Nas palavras do CEO, Leandro Vasconcelos: “Equipe de mais de 40 vendedores. A IA da PitchYes fez o que levava horas, em minutos.”",
+      // Cases empilhados: para acrescentar um, adicione um item (pelo painel ou aqui).
+      kind: "caseStories",
+      items: [
+        {
+          eyebrow: "Case em destaque",
+          title: "OPEN Datacenter: o trabalho de horas de 40 vendedores, em minutos.",
+          videoId: "prSFv3IPWu8",
+          alt: "Vídeo do case OPEN Datacenter, no canal da PitchYes no YouTube",
+          paragraphs: [
+            "A OPEN Datacenter tinha uma equipe comercial de mais de 40 vendedores e um gargalo conhecido: o tempo gasto em tentativas de contato que não viravam conversa. O volume dependia de quantas pessoas estavam discando.",
+            "A PitchYes assumiu a primeira camada dessas ligações. O agente faz as tentativas, conversa com quem atende e entrega ao vendedor apenas as conversas que avançaram, com o contexto registrado.",
+            "Nas palavras do CEO, Leandro Vasconcelos: “Equipe de mais de 40 vendedores. A IA da PitchYes fez o que levava horas, em minutos.”",
+          ],
+        },
       ],
     },
     {

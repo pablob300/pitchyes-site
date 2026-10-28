@@ -48,6 +48,7 @@ const SECTION_LABELS: Record<string, string> = {
   clientLogos: "Logos de clientes",
   platform: "Plataforma",
   latency: "Latência",
+  caseHighlight: "Case em destaque",
   testimonials: "Depoimentos",
   rollout: "Implantação",
   security: "Segurança",

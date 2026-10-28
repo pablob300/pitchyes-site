@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Case story — Design System</title>
+<link rel="stylesheet" href="../tokens/tokens.css" />
+<style>
+  body { margin: 0; padding: var(--space-8) var(--margin); }
+  .note { font-size: 12px; color: var(--color-text-muted); margin: 0 0 var(--space-5); }
+  .list { display: grid; gap: var(--space-6); }
+  .case { display: grid; gap: var(--space-7); align-items: center; padding: var(--space-6); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); }
+  .case[data-media] { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+  .media { aspect-ratio: 16 / 9; border-radius: var(--radius-md); background: var(--color-bg-inverse); }
+  .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin: 0 0 var(--space-2); }
+  h3 { font-size: 24px; line-height: 1.25; margin: 0 0 var(--space-4); }
+  p { color: var(--color-text-secondary); line-height: 1.6; margin: var(--space-4) 0 0; }
+  @media (max-width: 900px) { .case[data-media] { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <p class="note">PitchYes · Cases empilhados. React: blocks/CaseStory.tsx (bloco "caseStories" de /clientes/cases e "Case em destaque" da home). Container com borda suave por case; vídeo do YouTube (vence) ou foto 16:9 à esquerda, texto à direita; sem mídia, o texto ocupa o container inteiro. Empilha no celular.</p>
+  <div class="list">
+    <article class="case" data-media>
+      <div class="media" role="img" aria-label="Capa do vídeo"></div>
+      <div>
+        <p class="eyebrow">Case em destaque</p>
+        <h3>OPEN Datacenter: o trabalho de horas de 40 vendedores, em minutos.</h3>
+        <p>A PitchYes assumiu a primeira camada das ligações e entrega ao time só as conversas que avançaram.</p>
+      </div>
+    </article>
+    <article class="case">
+      <div>
+        <p class="eyebrow">Serviços</p>
+        <h3>Case só com texto: ocupa a largura toda.</h3>
+        <p>Sem vídeo e sem foto, o texto se estende pelo container inteiro.</p>
+      </div>
+    </article>
+  </div>
+</body>
+</html>

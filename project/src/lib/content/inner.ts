@@ -48,6 +48,7 @@ const LISTS: Partial<Record<Block["kind"], string[]>> = {
   stats: ["items"],
   checklist: ["items"],
   cases: ["items"],
+  caseStories: ["items"],
   pricing: ["plans"],
   table: ["columns", "groups"],
   contact: ["channels"],
@@ -77,7 +78,7 @@ export function validBlock(block: Block, fallback: Block): boolean {
     } else if (template && typeof template === "object") {
       // Campos de texto que o molde preenche são obrigatórios nos itens (título, pergunta…),
       // menos os que nascem opcionais no tipo (quote, person, hint, href, priceUnit…).
-      const optional = new Set(["quote", "person", "hint", "href", "priceUnit", "text", "lead", "eyebrow"]);
+      const optional = new Set(["quote", "person", "hint", "href", "priceUnit", "text", "lead", "eyebrow", "videoId", "image", "alt"]);
       const required = Object.entries(template as Record<string, unknown>)
         .filter(([k, v]) => typeof v === "string" && v.trim() !== "" && !optional.has(k))
         .map(([k]) => k);

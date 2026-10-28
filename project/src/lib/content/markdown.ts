@@ -31,6 +31,10 @@ function block(b: Block): string {
           .map((i) => `- **${plain(i.company)}** (${plain(i.sector)}): ${plain(i.headline)}${i.quote ? ` — "${plain(i.quote)}"${i.person ? `, ${plain(i.person)}` : ""}` : ""}`)
           .join("\n"),
       ].join("\n\n");
+    case "caseStories":
+      return [heading(b.title, b.lead), ...b.items.map((i) => [`#### ${plain(i.title)}`, ...i.paragraphs.map(plain)].join("\n\n"))]
+        .filter(Boolean)
+        .join("\n\n");
     case "logos":
       return [heading(b.title, b.lead), b.items.map((i) => i.name).join(", ") + "."].join("\n\n");
     case "pricing":

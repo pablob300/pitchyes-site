@@ -650,3 +650,36 @@
   .barRow { grid-template-columns: 1fr; gap: var(--space-2); }
   .barTrack { height: 40px; }
 }
+
+/* Cases empilhados — mirrors System/components/case-story.html */
+.caseList { display: grid; gap: var(--space-6); }
+.caseStory {
+  display: grid;
+  gap: var(--space-7);
+  align-items: center;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+}
+/* Com vídeo ou foto: mídia à esquerda, texto à direita. Sem mídia, o texto ocupa tudo. */
+.caseStory[data-media] { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+.caseMedia { min-width: 0; }
+.caseImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+.caseText > * + * { margin-top: var(--space-4); }
+.caseText :global(.eyebrow) + h2,
+.caseText :global(.eyebrow) + h3 { margin-top: var(--space-2); }
+.caseText h3 { font-size: 24px; line-height: 1.25; }
+.caseText p:not(:global(.eyebrow)) { color: var(--color-text-secondary); line-height: 1.6; max-width: 72ch; }
+
+@media (max-width: 900px) {
+  .caseStory[data-media] { grid-template-columns: 1fr; gap: var(--space-5); }
+  .caseStory { padding: var(--space-5); }
+}

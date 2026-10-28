@@ -23,6 +23,7 @@ const SECTION_KEYS: SectionKey[] = [
   "clientLogos",
   "platform",
   "latency",
+  "caseHighlight",
   "testimonials",
   "rollout",
   "security",
@@ -124,6 +125,20 @@ export function resolveHome(override: unknown, report?: string[]): HomeContent {
         l.rows.length > 0 &&
         l.rows.every((r) => text(r.label) && positive(r.value) && positive(r.duration)),
       "latency",
+      report,
+    ),
+
+    caseHighlight: keep(
+      merged.caseHighlight,
+      d.caseHighlight,
+      (c) =>
+        text(c.title) &&
+        Array.isArray(c.paragraphs) &&
+        c.paragraphs.length > 0 &&
+        c.paragraphs.every(text) &&
+        // Vídeo ou foto pedem descrição (SEO.md §1.7).
+        (!(text(c.videoId) || text(c.image)) || text(c.alt)),
+      "caseHighlight",
       report,
     ),
 

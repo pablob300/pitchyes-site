@@ -29,9 +29,9 @@ export const solucoes: PageContent = {
           href: "/solucoes/receptivo",
         },
         {
-          // Sem página própria ainda: quando existir (ex. /solucoes/operacional), ganha href.
           title: "Ligação Operacional",
           text: "Da recuperação de inadimplentes e carrinhos abandonados ao onboarding e pesquisas de satisfação: se a sua estratégia exige ligar para milhares de clientes, nossa IA automatiza a jornada inteira com voz natural e sem esforço humano.",
+          href: "/solucoes/operacional",
         },
       ],
     },

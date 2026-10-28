@@ -1,3 +1,5 @@
+import type { CaseStoryItem } from "./types";
+
 // Formato do conteúdo da página inicial.
 //
 // Os tipos moram aqui, e não em components/home/content.ts, porque agora existem duas
@@ -69,6 +71,12 @@ export type Latency = {
   unit: string;
   rows: LatencyRow[];
 };
+
+/**
+ * Case em destaque acima dos depoimentos: vídeo (ou foto) à esquerda, texto à direita, sem
+ * botão — logo depois vêm os depoimentos em vídeo. Mesmo formato dos cases de /clientes/cases.
+ */
+export type CaseHighlight = CaseStoryItem;
 
 export type Testimonial = {
   /** Empresa que aparece no depoimento — é o título do vídeo no canal da PitchYes. */
@@ -147,6 +155,7 @@ export type SectionKey =
   | "clientLogos"
   | "platform"
   | "latency"
+  | "caseHighlight"
   | "testimonials"
   | "rollout"
   | "security"
@@ -171,6 +180,7 @@ export type HomeContent = {
   clientLogos: ClientLogos;
   platform: Platform;
   latency: Latency;
+  caseHighlight: CaseHighlight;
   testimonials: Testimonials;
   rollout: Rollout;
   security: Security;

@@ -12,6 +12,7 @@ const KIND_LABEL: Record<Block["kind"], string> = {
   stats: "Números",
   checklist: "Checklist",
   cases: "Cases",
+  caseStories: "Cases",
   logos: "Logos",
   pricing: "Planos",
   table: "Tabela",
@@ -105,6 +106,28 @@ export function blockSection(block: Block, prefix: string, label: string): Secti
             { company: "Empresa", sector: "Setor", headline: "O que mudou." },
           ),
         ],
+      };
+    case "caseStories":
+      return {
+        ...base,
+        fields: [{ ...titleField, optional: true }, leadField],
+        lists: [
+          list(
+            p("items"),
+            "Cases",
+            "title",
+            [
+              eyebrowField,
+              f("title", "Título", "texto", { max: 90 }),
+              f("paragraphs", "Parágrafos", "linhas"),
+              f("videoId", "Vídeo do YouTube (opcional)", "texto", { optional: true, help: "Cole o link do vídeo horizontal. Vazio = usa a foto, se houver." }),
+              f("image", "Foto (opcional)", "imagem", { optional: true, aspect: 16 / 9, help: "Imagem 16:9, usada quando não há vídeo. Sem vídeo e sem foto, o texto ocupa a largura toda." }),
+              f("alt", "Descrição do vídeo ou da foto", "texto", { optional: true, max: 140, help: "O que a imagem mostra (SEO.md §1.7). Obrigatório quando há vídeo ou foto." }),
+            ],
+            { title: "Novo case", paragraphs: ["Contexto, o que foi automatizado e o que mudou."] },
+          ),
+        ],
+        note: "Cada case aparece num container com borda, um embaixo do outro, na ordem da lista.",
       };
     case "logos":
       if (block.source === "proprio") {

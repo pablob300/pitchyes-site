@@ -8,6 +8,7 @@ import { editFn, scoped, type EditFn } from "@/lib/content/edit";
 import { youtubeId } from "@/lib/content/landing";
 import { getLeadForm, landingForm } from "@/lib/leads";
 import styles from "./blocks.module.css";
+import { CaseStory } from "./CaseStory";
 import { VideoFacade } from "./VideoFacade";
 
 /** "92%" ou "94,7 %" → 92 / 94.7 (entre 0 e 100); o que não for percentual → null. */
@@ -194,6 +195,26 @@ export function ContentBlock({ block, e, slug }: { block: Block; e: EditFn; slug
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+      );
+
+    case "caseStories":
+      return (
+        <section className="section" id={block.id}>
+          <div className="container">
+            {block.title && (
+              <div className="section-head" data-reveal>
+                <h2 {...e("title")}>{block.title}</h2>
+                {block.lead && <p className="lead" {...e("lead")}>{block.lead}</p>}
+              </div>
+            )}
+            <div className={styles.caseList} {...e("items")}>
+              {block.items.map((item, j) => (
+                // Sem título no bloco, o título de cada case é o h2 da seção.
+                <CaseStory key={`${j}-${item.title}`} item={item} e={scoped(e, `items.${j}`)} heading={block.title ? "h3" : "h2"} />
+              ))}
+            </div>
           </div>
         </section>
       );

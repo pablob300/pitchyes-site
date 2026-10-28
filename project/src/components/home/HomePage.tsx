@@ -1,5 +1,6 @@
 import type { Client } from "@/content/clients";
 import { FIXED_FIRST_SECTION, type HomeContent, type SectionKey } from "@/content/home.schema";
+import { CaseHighlight } from "./CaseHighlight";
 import { ClientLogos } from "./ClientLogos";
 import { CustomerVideos } from "./CustomerVideos";
 import { Faq } from "./Faq";
@@ -44,6 +45,8 @@ export function HomePage({
         return <Platform key={key} content={content.platform} editable={editable} />;
       case "latency":
         return <Latency key={key} content={content.latency} editable={editable} />;
+      case "caseHighlight":
+        return <CaseHighlight key={key} content={content.caseHighlight} editable={editable} />;
       case "testimonials":
         // O carrossel é "use client": só viajam os campos que ele desenha. `seconds` e
         // `published` ficam no servidor, onde alimentam o VideoObject do JSON-LD.

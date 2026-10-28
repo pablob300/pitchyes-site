@@ -9,6 +9,7 @@ import { privacidade } from "./privacidade";
 import { sobre } from "./sobre";
 import { solucoes } from "./solucoes";
 import { solucoesAtivo } from "./solucoes-ativo";
+import { solucoesOperacional } from "./solucoes-operacional";
 import { solucoesPorFuncao } from "./solucoes-por-funcao";
 import { solucoesPorSetor } from "./solucoes-por-setor";
 import { solucoesReceptivo } from "./solucoes-receptivo";
@@ -25,6 +26,7 @@ export const innerPages: Record<string, PageContent> = {
   "/solucoes": solucoes,
   "/solucoes/ativo": solucoesAtivo,
   "/solucoes/receptivo": solucoesReceptivo,
+  "/solucoes/operacional": solucoesOperacional,
   "/solucoes/por-setor": solucoesPorSetor,
   "/solucoes/por-funcao": solucoesPorFuncao,
   "/clientes": clientes,

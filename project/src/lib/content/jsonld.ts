@@ -26,6 +26,7 @@ const SERVICE_TYPE: Record<string, string> = {
   "/solucoes": "Agentes de voz com IA para ligações ativas, receptivas e operacionais",
   "/solucoes/ativo": "Ligações ativas com IA de voz: prospecção, qualificação de leads, confirmação e cobrança",
   "/solucoes/receptivo": "Atendimento receptivo com IA de voz e substituição de URA",
+  "/solucoes/operacional": "Ligações operacionais com IA de voz: cobrança, recuperação de carrinho, onboarding, avisos e pesquisas",
   "/solucoes/por-setor": "IA de voz para saúde, seguros, serviços financeiros, imobiliário, energia e tecnologia",
   "/solucoes/por-funcao": "IA de voz para vendas, atendimento, cobrança, agendamento e operações",
 };
