@@ -43,7 +43,7 @@ const blocks: [string, Block][] = [
       ],
       proof: "25Mi+ ligações · 400+ empresas · 85% de eficiência",
       formTitle: "Fale com a PitchYes",
-      submitLabel: "Quero conhecer",
+      submitLabel: "Ligar agora em 10s",
       formNote: "Sem compromisso. Resposta em até 2 horas úteis.",
     },
   ],

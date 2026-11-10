@@ -36,7 +36,7 @@ export const homeSchema: PageSchema = {
           label: "Palavras do título",
           titleField: "text",
           min: 1,
-          template: { text: "nova palavra", audio: "/audio/agente-pitchyes.mp3" },
+          template: { text: "nova palavra", audio: "/audio/agente-clinicas.mp3" },
           help: "Cada palavra é também um card do player ao lado: a palavra e o card trocam juntos, e passar o mouse sobre os cards pausa a troca.",
           fields: [
             {

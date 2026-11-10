@@ -18,7 +18,7 @@ export const clientesCases: PageContent = {
         {
           eyebrow: "Case em destaque",
           title: "OPEN Datacenter: o trabalho de horas de 40 vendedores, em minutos.",
-          videoId: "prSFv3IPWu8",
+          videoId: "OIsLPx-ouTw",
           alt: "Vídeo do case OPEN Datacenter, no canal da PitchYes no YouTube",
           paragraphs: [
             "A OPEN Datacenter tinha uma equipe comercial de mais de 40 vendedores e um gargalo conhecido: o tempo gasto em tentativas de contato que não viravam conversa. O volume dependia de quantas pessoas estavam discando.",

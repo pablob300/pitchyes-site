@@ -12,7 +12,7 @@ export type SitePage = {
 };
 
 export const pages = [
-  { path: "/", title: "Início", description: "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.", placeholder: false, updated: "2026-10-28" },
+  { path: "/", title: "Início", description: "IA de voz para setores que exigem segurança e confiança: saúde, seguros, serviços financeiros e mais.", placeholder: false, updated: "2026-11-09" },
 
   { path: "/solucoes", title: "Soluções", description: "Como a IA de voz da PitchYes atende ligações ativas e receptivas em escala.", placeholder: false, updated: "2026-10-28" },
   { path: "/solucoes/ativo", title: "Ligações ativas", description: "Prospecção, qualificação de leads, confirmação de reuniões e follow-up com IA de voz.", placeholder: false, updated: "2026-10-26" },
@@ -22,7 +22,7 @@ export const pages = [
   { path: "/solucoes/por-funcao", title: "Soluções por função", description: "IA de voz para vendas, atendimento, cobrança e operações.", placeholder: false, updated: "2026-10-26" },
 
   { path: "/clientes", title: "Clientes", description: "Empresas que automatizam ligações com a PitchYes.", placeholder: false, updated: "2026-10-28" },
-  { path: "/clientes/cases", title: "Cases", description: "Resultados reais de clientes que usam a IA de voz da PitchYes.", placeholder: false, updated: "2026-10-28" },
+  { path: "/clientes/cases", title: "Cases", description: "Resultados reais de clientes que usam a IA de voz da PitchYes.", placeholder: false, updated: "2026-11-09" },
 
   // Era /precos até 25/10/2026; o endereço antigo redireciona com 301 (next.config.ts).
   { path: "/planos", title: "Planos", description: "Planos e valores da PitchYes: uma tarifa por minuto, sem cobranças escondidas.", placeholder: false, updated: "2026-10-28" },

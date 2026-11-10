@@ -24,7 +24,7 @@ import { isIndexable } from "@/lib/site";
 // bastante para estourar o limite de CPU por pedido do Worker.
 export const revalidate = 300;
 
-/** "20.000.000+ ligações realizadas até hoje" a partir do número em destaque do topo. */
+/** "25.000.000+ ligações realizadas até hoje" a partir do número em destaque do topo. */
 function callsFact(stat: { value: string; label: string }): string {
   return `- ${stat.value} ${stat.label}.`;
 }

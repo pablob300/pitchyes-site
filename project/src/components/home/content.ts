@@ -25,21 +25,20 @@ export const homeDefaults: HomeContent = {
   hero: {
     title: "IA de voz para:",
     // Cada palavra é também um card do player, com a amostra do agente daquele setor.
-    // TODO(produto): os MP3 em /public/audio são a MESMA locução de exemplo, só para montar a
-    // estrutura. Gravar a amostra real de cada palavra e apontar o arquivo aqui (ou no painel).
+    // Amostras reais por setor, todas em MP3 mono 44,1 kHz 96 kbps com volume nivelado (-16 LUFS).
     titleWords: [
-      { text: "Clínicas", audio: "/audio/agente-saude.mp3" },
-      { text: "Imobiliárias", audio: "/audio/agente-imobiliario.mp3" },
-      { text: "Concessionárias", audio: "/audio/agente-pitchyes.mp3" },
-      { text: "Seguradoras", audio: "/audio/agente-seguros.mp3" },
-      { text: "Faculdades", audio: "/audio/agente-pitchyes.mp3" },
-      { text: "Corretoras", audio: "/audio/agente-financeiro.mp3" },
-      { text: "Franquias", audio: "/audio/agente-pitchyes.mp3" },
-      { text: "Telecomunicação", audio: "/audio/agente-pitchyes.mp3" },
+      { text: "Clínicas", audio: "/audio/agente-clinicas.mp3" },
+      { text: "Imobiliárias", audio: "/audio/agente-imobiliarias.mp3" },
+      { text: "Concessionárias", audio: "/audio/agente-concessionarias.mp3" },
+      { text: "Seguradoras", audio: "/audio/agente-seguradoras.mp3" },
+      { text: "Faculdades", audio: "/audio/agente-faculdades.mp3" },
+      { text: "Corretoras", audio: "/audio/agente-corretoras.mp3" },
+      { text: "Franquias", audio: "/audio/agente-franquias.mp3" },
+      { text: "Telecomunicação", audio: "/audio/agente-telecomunicacao.mp3" },
     ],
     lead: "Atende, qualifica, agenda, transfere e liga.",
     cta: "Fale com nossa IA",
-    stat: { value: "20.000.000+", label: "ligações realizadas até hoje" },
+    stat: { value: "25.000.000+", label: "ligações realizadas até hoje" },
     widget: {
       // Each card reads "OUÇA NOSSO AGENTE PARA" + the word of the h1 ("Clínicas").
       eyebrow: "Ouça nosso agente para",
@@ -51,7 +50,7 @@ export const homeDefaults: HomeContent = {
   caseHighlight: {
     eyebrow: "Case OPEN Datacenter",
     title: "O trabalho de horas de 40 vendedores, feito em minutos.",
-    videoId: "prSFv3IPWu8",
+    videoId: "OIsLPx-ouTw",
     alt: "Vídeo do case OPEN Datacenter, no canal da PitchYes no YouTube",
     paragraphs: [
       "A OPEN Datacenter tinha uma equipe comercial de mais de 40 vendedores e um gargalo conhecido: o tempo gasto em tentativas de contato que não viravam conversa.",

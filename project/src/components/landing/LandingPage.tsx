@@ -61,7 +61,7 @@ export function LandingPage({
             </nav>
           )}
           <a href={`#${FORM_ANCHOR}`} className={buttonClass("solid", "md", styles.headerCta)}>
-            Testar agora
+            Testar agora em 10s
           </a>
         </div>
       </header>
