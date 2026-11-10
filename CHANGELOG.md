@@ -8,6 +8,28 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-11-09: Áudio real por setor no player do hero, 25 milhões de ligações e vídeo do case OPEN
+
+Commit `35b1821` · Cloudflare `0bf6a6ae`
+
+- **Player do hero** (`home/content.ts`, `hero.titleWords`): cada card toca a amostra do seu
+  setor: `public/audio/agente-{clinicas,imobiliarias,concessionarias,seguradoras,faculdades,
+  corretoras,franquias,telecomunicacao}.mp3`. Os originais (6 MP3 e 2 OGG/Opus, em
+  `Downloads/Marketing`) foram padronizados em **MP3 mono 44,1 kHz 96 kbps** (toca em todo
+  navegador, inclusive iOS antigo) com volume nivelado por `loudnorm` (alvo −16 LUFS; antes
+  iam de −26,6 a −30,7, agora −16,6 a −18,5). 580–710 KB cada, ainda com `preload="none"`.
+  A locução de exemplo (5 arquivos) saiu. Pausa da rolagem enquanto toca e retomada no fim ou
+  na pausa: comportamento que já existia (`HeroSync`, motivo `"audio"`).
+- **Número do topo:** 25.000.000+ ligações realizadas (também no `/llms.txt`, que lê o mesmo campo).
+- **Vídeo do case OPEN Datacenter:** `OIsLPx-ouTw` ("Case Open Datacenter") na home e em
+  `/clientes/cases`. O anterior, `prSFv3IPWu8`, era "Construindo Cidades inteligentes".
+- **Landing pages:** botão do cabeçalho "Testar agora em 10s"; botão do formulário "Ligar agora
+  em 10s" no modelo e na `/conteudo/cadastro` (D1, as duas linhas de `page_content`; versão
+  anterior guardada em `page_content_versions`).
+- D1: nenhuma das chaves mudadas na home estava sobrescrita. `updated` 2026-11-09 em `/` e
+  `/clientes/cases` (código e `page_meta`). `/` segue estática (revalidação 1 min), `data-edit`: 0.
+- Auditoria: 94/94 páginas sem problemas; `/llms.txt` e `/llms-full.txt` ok.
+
 ## 2026-10-28: CTAs comerciais para a landing page e modal de confirmação do telefone
 
 Commit `071b38f` · Cloudflare `b859f3a3`
