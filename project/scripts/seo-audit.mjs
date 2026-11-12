@@ -8,7 +8,7 @@
 // imagens e volume de texto. Nos artigos do blog, também BlogPosting e link interno no texto.
 // Só olha o HTML do servidor — é exatamente o que o robô lê.
 
-const base = (process.argv[2] ?? "https://pitchyes-site.borges-filho.workers.dev").replace(/\/$/, "");
+const base = (process.argv[2] ?? "https://pitchyes-site.matheus-arantes.workers.dev").replace(/\/$/, "");
 
 const staging = /workers\.dev$/.test(new URL(base).hostname);
 

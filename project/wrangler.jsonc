@@ -2,6 +2,9 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"main": ".open-next/worker.js",
 	"name": "pitchyes-site",
+	// Conta Cloudflare do Matheus (migrada da conta do Borges em 2026-11-12). Fixar a conta aqui
+	// impede que o deploy vá para outra conta quando o login enxerga mais de uma.
+	"account_id": "a4549f771a9c29c3db10fdc325f8c99b",
 	"compatibility_date": "2026-09-17",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"assets": {
@@ -24,9 +27,9 @@
 	// banco — blog, metadados do Page Editor — já saem do build com o conteúdo publicado, em
 	// vez de vazias até a primeira revalidação. Atenção: o next dev local grava em produção.
 	"d1_databases": [
-		{ "binding": "LEADS_DB", "database_name": "pitchyes-leads", "database_id": "6ba46baf-df22-49c6-8012-dd31c9ec6619", "remote": true },
+		{ "binding": "LEADS_DB", "database_name": "pitchyes-leads", "database_id": "63c7fe8f-bd2e-407e-babd-da95e5ec9a4d", "remote": true },
 		// Cache de tags do OpenNext (revalidatePath): mesma base, tabela própria `revalidations`.
-		{ "binding": "NEXT_TAG_CACHE_D1", "database_name": "pitchyes-leads", "database_id": "6ba46baf-df22-49c6-8012-dd31c9ec6619", "remote": true }
+		{ "binding": "NEXT_TAG_CACHE_D1", "database_name": "pitchyes-leads", "database_id": "63c7fe8f-bd2e-407e-babd-da95e5ec9a4d", "remote": true }
 	],
 	// ADMIN_AUTH_MODE: "session" (login por e-mail e senha) ou "basic" (senha única
 	// antiga, ADMIN_PASSWORD) — válvula de escape se o login novo falhar.
@@ -58,8 +61,8 @@
 			"images": { "binding": "IMAGES" },
 			// Same leads database as production — the preview worker is only used for smoke tests.
 			"d1_databases": [
-				{ "binding": "LEADS_DB", "database_name": "pitchyes-leads", "database_id": "6ba46baf-df22-49c6-8012-dd31c9ec6619" },
-				{ "binding": "NEXT_TAG_CACHE_D1", "database_name": "pitchyes-leads", "database_id": "6ba46baf-df22-49c6-8012-dd31c9ec6619" }
+				{ "binding": "LEADS_DB", "database_name": "pitchyes-leads", "database_id": "63c7fe8f-bd2e-407e-babd-da95e5ec9a4d" },
+				{ "binding": "NEXT_TAG_CACHE_D1", "database_name": "pitchyes-leads", "database_id": "63c7fe8f-bd2e-407e-babd-da95e5ec9a4d" }
 			],
 			"vars": { "SITE_ENV": "preview", "ADMIN_AUTH_MODE": "session", "ADMIN_MAIL_MODE": "console" }
 		}

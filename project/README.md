@@ -41,7 +41,7 @@ Editado no painel em **Blog › Novo Artigo / Artigos / Categorias / Tags** (edi
 ## Domínio
 
 O domínio público vem da variável `SITE_URL` (ver `src/lib/site.ts`). Sem ela, o site usa
-`https://pitchyes-site.borges-filho.workers.dev`.
+`https://pitchyes-site.matheus-arantes.workers.dev`.
 
 A indexação por buscadores só é liberada quando `SITE_ENV=production` **e** o domínio não é
 `*.workers.dev` — antes disso, `robots.txt` e as meta tags bloqueiam tudo.
