@@ -1,12 +1,35 @@
 # Changelog: site PitchYes
 
 Histórico do site institucional da PitchYes (Next.js 16 no Cloudflare Workers).
-Ambiente de homologação: https://pitchyes-site.borges-filho.workers.dev
+Ambiente de homologação: https://pitchyes-site.matheus-arantes.workers.dev (conta Cloudflare do Matheus
+desde 2026-11-12; até então, `pitchyes-site.borges-filho.workers.dev`, na conta do Borges)
 
 Cada entrada traz o commit e a versão publicada no Cloudflare (`Version ID`, visível em
 Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
+
+## 2026-11-12: Site migrado para a conta Cloudflare do Matheus
+
+Commit `880276f` · Cloudflare `f70b07f4` (conta `a4549f771a9c29c3db10fdc325f8c99b`)
+
+- **Nova casa:** Worker `pitchyes-site` na conta do Matheus, em
+  https://pitchyes-site.matheus-arantes.workers.dev. A conta do Borges (`d76f9cec…`) segue no ar,
+  sem mudanças, até a validação; depois os recursos dela são apagados.
+- **D1 `pitchyes-leads`** recriado (`63c7fe8f-bd2e-407e-babd-da95e5ec9a4d`) a partir de `d1 export`;
+  as 25 tabelas conferidas linha a linha por contagem. **R2:** `pitchyes-site-midia` com os 65
+  arquivos do painel (`image/webp`), mais os dois buckets de cache do OpenNext, vazios.
+- **Segredos novos:** `RESEND_API_KEY`, `PAGESPEED_API_KEY`, `ADMIN_PASSWORD` e `ADMIN_SESSION_SECRET`
+  (quem estava logado no painel entra de novo).
+- **Deploy fixo na conta:** `account_id` no `wrangler.jsonc`. O passo do OpenNext que popula o cache
+  no R2 ignorava esse campo e perguntava a conta; `npm run deploy` agora roda
+  `scripts/cf.mjs`, que exporta `CLOUDFLARE_ACCOUNT_ID` a partir do `wrangler.jsonc`.
+- **Plano Workers Paid** na conta nova: no gratuito, o limite de 10 ms de CPU derrubava ~10% das
+  montagens (`exceededCpu`, 500 "ComponentMod.handler is not a function").
+- Endereço padrão trocado em `lib/site.ts`, `scripts/seo-audit.mjs`, `CLAUDE.md` e READMEs.
+- Testes no site novo: texto de `/`, `/clientes/cases`, `/conteudo/cadastro` e `/blog` idêntico ao
+  da conta antiga; 3 passadas pelos 97 endereços dos sitemaps (fresca e vencida) sem erro;
+  `/robots.txt` 40/40; lead de teste gravado só no D1 novo (e apagado). Auditoria: 94/94.
 
 ## 2026-11-09: Áudio real por setor no player do hero, 25 milhões de ligações e vídeo do case OPEN
 
