@@ -4,6 +4,7 @@ import { editablePaths, resetPageMeta, savePageMeta } from "@/lib/admin/pages";
 import { assertSameOrigin, jsonError, jsonOk, readJson } from "@/lib/admin/request";
 import { requireApiSession } from "@/lib/admin/session";
 import { can } from "@/lib/admin/users";
+import { recordChange } from "@/lib/admin/search-console/changes";
 
 // Salva (ou zera) os metadados de uma página.
 // O caminho é conferido contra a lista de rotas do site: a API não escreve
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
     // próximo acesso, sem esperar a revalidação de um minuto.
     revalidatePath(path);
     revalidatePath("/llms.txt"); // a lista de páginas de lá usa esta descrição
+    await recordChange([{ path, kind: "update", sitemap: path.startsWith("/blog") ? "blog" : "paginas" }], actor.email);
     await audit({
       action: "pagina.meta.editada",
       actorId: actor.id,
@@ -95,6 +97,12 @@ export async function POST(request: Request) {
   // O que foi salvo entra na página publicada imediatamente.
   revalidatePath(path);
   revalidatePath("/llms.txt"); // a lista de páginas de lá usa esta descrição
+  // Título, descrição e noindex mudam o que o Google mostra (e o noindex tira ou põe a URL
+  // no sitemap): avisa os buscadores.
+  await recordChange(
+    [{ path, kind: body.noindex ? "delete" : "update", sitemap: path.startsWith("/blog") ? "blog" : "paginas" }],
+    actor.email,
+  );
 
   await audit({
     action: "pagina.meta.editada",

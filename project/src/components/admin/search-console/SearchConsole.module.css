@@ -1,0 +1,66 @@
+/* Análise > Search Console: conexão, ações em massa e a tabela de páginas com o selo de
+   indexação (verde = indexada depois da última alteração; vermelho = desatualizada ou fora
+   do índice; cinza = não verificada). Reaproveita a tabela do PageSpeed. */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+.toolbarStatus { flex-basis: 100%; font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
+.toolbarStatus[data-tipo="erro"] { color: var(--color-danger); }
+
+.summary { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-4) 0; font-size: 13px; }
+.filter { display: inline-flex; align-items: center; gap: var(--space-2); font-size: 13px; margin-left: auto; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-muted);
+  background: var(--color-bg-subtle);
+}
+.badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.badge[data-tom="ok"] { color: var(--color-positive); background: var(--color-positive-bg); border-color: var(--color-positive-border); }
+.badge[data-tom="stale"],
+.badge[data-tom="missing"] { color: var(--color-danger); background: var(--color-danger-bg); border-color: var(--color-danger-border); }
+
+.reason { display: block; font-size: 12px; color: var(--color-text-muted); margin-top: 2px; white-space: normal; }
+.url { font-weight: 500; color: var(--color-text); }
+.date { font-variant-numeric: tabular-nums; font-size: 13px; }
+.actions { display: inline-flex; gap: var(--space-2); }
+.mini {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.mini:hover:not(:disabled) { color: var(--color-text); border-color: var(--color-border); }
+.mini:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 1px; }
+.mini:disabled { opacity: 0.55; cursor: progress; }
+
+.groupTitle { font-size: 15px; font-weight: 600; margin: var(--space-6) 0 var(--space-3); }
+.groupCount { font-weight: 400; color: var(--color-text-muted); }
+
+.pings { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); font-size: 13px; }
+.pings li { display: flex; flex-wrap: wrap; gap: var(--space-2); color: var(--color-text-secondary); }
+.pingOk { color: var(--color-positive); font-weight: 600; }
+.pingErr { color: var(--color-danger); font-weight: 600; }
+.pingTarget { color: var(--color-text-muted); overflow-wrap: anywhere; }

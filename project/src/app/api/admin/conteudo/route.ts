@@ -27,6 +27,7 @@ import { parseOverride } from "@/lib/content/merge";
 import { isWritableContentPath, landingIdOf } from "@/lib/admin/content-paths";
 import { invalidLandingSections } from "@/lib/content/landing";
 import { getLandingById, landingPath, touchLanding } from "@/lib/landing-db";
+import { recordChange, type Change } from "@/lib/admin/search-console/changes";
 
 // Salva, publica, descarta e restaura o conteúdo de uma página.
 //
@@ -89,6 +90,22 @@ async function revalidate(path: string): Promise<void> {
   // Os arquivos para IA saem do mesmo conteúdo publicado (FAQ da home, texto das páginas).
   revalidatePath("/llms.txt");
   revalidatePath("/llms-full.txt");
+}
+
+/**
+ * URLs públicas que mudam ao publicar este conteúdo (rotina de indexação). O conteúdo
+ * global (/_site) traz a lista de clientes, que aparece na home e em /clientes.
+ */
+async function publishedChanges(path: string): Promise<Change[]> {
+  const landingId = landingIdOf(path);
+  if (landingId) {
+    const page = await getLandingById(landingId);
+    return page && page.active === 1 && page.noindex === 0
+      ? [{ path: landingPath(page.slug), kind: "update", sitemap: "conteudo" }]
+      : [];
+  }
+  const paths = path === SITE_CONTENT_PATH ? ["/", "/clientes"] : [path];
+  return paths.map((item) => ({ path: item, kind: "update", sitemap: "paginas" }));
 }
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -209,6 +226,7 @@ export async function POST(request: Request) {
       }
 
       await revalidate(path);
+      await recordChange(await publishedChanges(path), actor.email);
       await done("conteudo.publicado", {});
       return jsonOk({ message: "Conteúdo publicado." });
     }

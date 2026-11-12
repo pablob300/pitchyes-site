@@ -47,6 +47,7 @@ export const adminNav: AdminNavEntry[] = [
     group: "topo",
     children: [
       { href: "/admin/analise/pagespeed", label: "PageSpeed", match: "prefix" },
+      { href: "/admin/analise/search-console", label: "Search Console", match: "prefix" },
       // { href: "/admin/analise/seo", label: "SEO", match: "prefix" },
     ],
   },

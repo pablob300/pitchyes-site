@@ -126,7 +126,14 @@ não conta como erro; no domínio definitivo, conta.
 **Rode antes e depois de qualquer mudança grande** e registre o resultado no `CHANGELOG.md`.
 Ela olha só o HTML do servidor — é exatamente o que o robô lê. Peso, LCP e CLS são medidos
 no painel, em **Análise › PageSpeed** (`/admin/analise/pagespeed`): notas mobile e desktop do
-Google, histórico por página e plano de ação do que corrigir.
+Google, histórico por página e plano de ação do que corrigir. A indexação de cada URL fica em
+**Análise › Search Console** (`/admin/analise/search-console`): verde = o Google rastreou depois da
+última alteração; vermelho = rastreamento antigo ou fora do índice.
+
+**Aviso automático:** toda URL criada, alterada ou apagada pelo painel (ou no deploy) reenvia o
+sitemap dela ao Google e avisa o IndexNow (Bing e os buscadores de IA que usam o índice dele). O
+`<lastmod>` do sitemap de páginas usa a mudança mais recente registrada: **não marque página como
+alterada sem mudança real** — `lastmod` falso faz o Google desconfiar do sitemap inteiro.
 
 ## 9. Erros que já aconteceram neste site
 

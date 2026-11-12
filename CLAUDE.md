@@ -34,6 +34,7 @@ Leia antes de qualquer alteração no site:
 | Domínio e regra de indexação | `project/src/lib/site.ts` (`SITE_URL`, `SITE_ENV`) |
 | Menu do painel (seções e submenus) | `project/src/lib/admin/nav.ts` |
 | PageSpeed no painel (chamada ao Google, relatório, textos em português) | `project/src/lib/admin/pagespeed/` (`guide.ts` traduz cada auditoria) |
+| Search Console no painel, aviso de indexação (sitemap ao Google + IndexNow) a cada mudança | `project/src/lib/admin/search-console/` (`changes.ts` → `recordChange()`); URLs dos sitemaps em `lib/sitemap-entries.ts` |
 | Blog (artigos, categorias, tags, autores) | Painel `/admin/blog`; código em `project/src/lib/blog.ts` e `project/src/lib/blog/` |
 | Resumo do site para IAs | `project/src/app/llms.txt/route.ts` (texto completo: `llms-full.txt/route.ts`; afirmações ainda sem prova que ficam fora deles: `lib/content/claims.ts`) |
 | JSON-LD das páginas internas | `project/src/lib/content/jsonld.ts` (`innerPageGraph`) |
@@ -117,7 +118,10 @@ Antes de publicar qualquer mudança de texto, seção, lista ou página, confira
    gaveta de metadados), linha de `page_meta` (mover o `path` quando a URL muda, apagar quando
    a página some) e redirecionamento 301 em `next.config.ts`.
 4. **Data de revisão:** `updated` em `routes.ts` **e** em `page_meta` (a do banco vence no sitemap).
-5. Depois do deploy, abra `/admin/paginas` e a gaveta/editor da página mudada e confira que
+5. **Indexação:** rota nova do painel que cria, altera ou apaga uma URL pública chama
+   `recordChange()` (`lib/admin/search-console/changes.ts`), que reenvia o sitemap e avisa o IndexNow.
+   Mudança no código é avisada pelo próprio `npm run deploy`.
+6. Depois do deploy, abra `/admin/paginas` e a gaveta/editor da página mudada e confira que
    ela mostra o texto novo.
 
 ## Fluxo de trabalho

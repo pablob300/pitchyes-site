@@ -72,3 +72,33 @@ neste projeto para cada auditoria. O relatório sai na tela e em Markdown ("Copi
   uma entrada lá.
 - **Menu:** `src/lib/admin/nav.ts` aceita seções com submenu (`children`); Análise › SEO entra
   como mais um filho de "Análise".
+
+## Painel: Análise › Search Console e aviso automático de indexação
+
+`/admin/analise/search-console` lista todas as URLs dos três sitemaps com o status no Google
+(Inspeção de URL), o último rastreamento e a última alteração do site. **Verde** = indexada e
+rastreada depois da última alteração; **vermelho** = rastreamento anterior à alteração ou fora do
+índice (com o motivo do Google); **cinza** = ainda não verificada. Código em
+`src/lib/admin/search-console/`; tabelas `site_changes`, `gsc_inspections`, `gsc_pings` e
+`gsc_route_dates` (migração `0010`).
+
+- **Rotina automática:** publicar conteúdo, salvar metadados, salvar ou apagar artigo e mudar uma
+  landing page chamam `recordChange()` (`changes.ts`). Ela grava a mudança e, em segundo plano,
+  reenvia ao Google **só o sitemap daquela URL** e avisa o **IndexNow** (Bing, Yandex, Seznam, Naver;
+  o índice do Bing alimenta ChatGPT Search e Copilot). O mesmo sitemap não é reenviado duas vezes
+  em 60 s. Mudança no código: `npm run deploy` termina com `scripts/search-console-ping.mjs`, que
+  compara o `updated` de `routes.ts` com o deploy anterior e avisa o que mudou.
+- **"Indexar agora":** o Google não tem API para pedir indexação de página comum (a Indexing API é só
+  para vagas e transmissões ao vivo). O botão reenvia o sitemap, avisa o IndexNow e abre a página na
+  Inspeção de URL do Search Console, onde "Solicitar indexação" faz o pedido manual.
+- **Cota:** Inspeção de URL = 2.000 por dia e 600 por minuto por propriedade.
+- **Configuração (uma vez):**
+  1. Google Cloud (mesmo projeto do PageSpeed): ative a **Google Search Console API**; em *IAM › Contas
+     de serviço* crie uma conta e baixe uma chave **JSON**.
+  2. Search Console › propriedade `https://pitchyes.com.br/` › Configurações › Usuários e permissões:
+     adicione o e-mail da conta de serviço (`…@….iam.gserviceaccount.com`) como **Proprietário**.
+  3. `npx wrangler secret put GSC_SERVICE_ACCOUNT_JSON` e cole o JSON inteiro. (A chave de API do Google
+     não serve aqui: o Search Console exige um usuário da propriedade.)
+  4. Já gravados: `INDEXNOW_KEY` (publicada em `/indexnow-key.txt`) e `DEPLOY_PING_TOKEN` (também no
+     `.dev.vars` local, lido pelo script de deploy). `GSC_SITE_URL` troca a propriedade, se precisar.
+  5. Bing Webmaster Tools: importe o site pelo Search Console.

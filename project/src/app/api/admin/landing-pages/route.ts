@@ -3,6 +3,7 @@ import { audit } from "@/lib/admin/audit";
 import { assertSameOrigin, jsonError, jsonOk, readJson } from "@/lib/admin/request";
 import { requireApiSession } from "@/lib/admin/session";
 import { can } from "@/lib/admin/users";
+import { recordChange, type Change } from "@/lib/admin/search-console/changes";
 import {
   createLanding,
   getLandingById,
@@ -128,6 +129,19 @@ export async function PATCH(request: Request) {
   // O endereço antigo passa a responder 301 e o novo, a página: os dois saem do cache.
   revalidatePath(landingPath(current.slug));
   if (page.slug !== current.slug) revalidatePath(landingPath(page.slug));
+
+  // Rotina de indexação: só interessa o que está (ou estava) no ar e no Google.
+  const wasListed = current.active === 1 && current.noindex === 0;
+  const isListed = page.active === 1 && page.noindex === 0;
+  const changes: Change[] = [];
+  if (wasListed && (!isListed || page.slug !== current.slug)) {
+    changes.push({ path: landingPath(current.slug), kind: "delete", sitemap: "conteudo" });
+  }
+  if (isListed) {
+    const same = wasListed && page.slug === current.slug;
+    changes.push({ path: landingPath(page.slug), kind: same ? "update" : "create", sitemap: "conteudo" });
+  }
+  await recordChange(changes, session.user.email);
 
   await audit({
     action: "landing.editada",

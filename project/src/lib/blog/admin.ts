@@ -1,6 +1,7 @@
 import "server-only";
 import { revalidatePath } from "next/cache";
 import { getDb, MINUTE, newId, nowIso } from "@/lib/admin/db";
+import { recordChange, type Change } from "@/lib/admin/search-console/changes";
 import { blogPaths } from "@/lib/blog";
 import { pages as sitePages } from "@/lib/routes";
 import { blockingErrors, runChecks } from "./checks";
@@ -353,6 +354,15 @@ export async function savePost(id: string | null, input: PostInput, actor: Actor
   if (status !== "rascunho" || note) await saveVersion(postId, actor, note ?? (existing ? "Atualizado" : "Publicado"));
 
   if (status !== "rascunho" || (existing && existing.status !== "rascunho")) revalidateBlog();
+
+  // Rotina de indexação: só o que está (ou estava) no ar interessa ao Google.
+  const wasLive = existing ? isLive(existing.status, existing.published_at) : false;
+  const nowLive = isLive(status, publishedAt);
+  const changes: Change[] = [];
+  if (wasLive && (!nowLive || existing!.slug !== slug)) changes.push({ path: blogPaths.post(existing!.slug), kind: "delete", sitemap: "blog" });
+  if (nowLive) changes.push({ path: blogPaths.post(slug), kind: wasLive && existing!.slug === slug ? "update" : "create", sitemap: "blog" });
+  await recordChange(changes, actor.email);
+
   return { ok: true, id: postId, slug, status, publishedAt };
 }
 
@@ -385,16 +395,22 @@ export async function getVersion(postId: string, versionId: string): Promise<Pos
   return row ? (JSON.parse(row.data) as PostInput) : null;
 }
 
-export async function deletePost(id: string): Promise<{ slug: string } | null> {
+export async function deletePost(id: string, actorEmail: string | null = null): Promise<{ slug: string } | null> {
   const db = await getDb();
-  const post = await db.prepare("SELECT slug, status FROM blog_posts WHERE id = ?").bind(id).first<{ slug: string; status: PostStatus }>();
+  const post = await db
+    .prepare("SELECT slug, status, published_at FROM blog_posts WHERE id = ?")
+    .bind(id)
+    .first<{ slug: string; status: PostStatus; published_at: string | null }>();
   if (!post) return null;
   await db.batch([
     db.prepare("DELETE FROM blog_post_tags WHERE post_id = ?").bind(id),
     db.prepare("DELETE FROM blog_posts WHERE id = ?").bind(id),
   ]);
   if (post.status !== "rascunho") revalidateBlog();
-  return post;
+  if (isLive(post.status, post.published_at)) {
+    await recordChange([{ path: blogPaths.post(post.slug), kind: "delete", sitemap: "blog" }], actorEmail);
+  }
+  return { slug: post.slug };
 }
 
 /** Trinco consultivo: quem abriu o editor por último. Expira em 2 minutos sem sinal. */

@@ -49,7 +49,7 @@ export async function DELETE(request: Request, { params }: Ctx) {
   const auth = await blogAuth(request, { write: true });
   if ("response" in auth) return auth.response;
   const { id } = await params;
-  const deleted = await deletePost(id);
+  const deleted = await deletePost(id, auth.actor.email);
   if (!deleted) return jsonError("Artigo não encontrado.", 404);
   await audit({
     action: "blog.artigo.excluido",

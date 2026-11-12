@@ -37,7 +37,8 @@ export type AuditAction =
   | "blog.autor.salvo"
   | "configuracoes.salvas"
   | "landing.criada"
-  | "landing.editada";
+  | "landing.editada"
+  | "searchconsole.indexar";
 
 export async function audit({
   action,

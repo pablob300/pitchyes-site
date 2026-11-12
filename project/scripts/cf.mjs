@@ -25,3 +25,8 @@ const env = { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId, ...(siteEnv && {
 for (const command of process.argv.slice(2)) {
   execFileSync(process.execPath, [cli, command], { stdio: "inherit", env });
 }
+
+// Produção publicada: reenvia os sitemaps ao Google e avisa o IndexNow do que mudou no código.
+if (process.argv.includes("deploy") && siteEnv === "production") {
+  execFileSync(process.execPath, [fileURLToPath(new URL("./search-console-ping.mjs", import.meta.url))], { stdio: "inherit", env });
+}

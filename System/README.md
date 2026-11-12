@@ -105,7 +105,7 @@ Navegação (com dropdown), 3 variantes de botão, hero split, feature cards em 
 
 `navigation.html`, `footer.html` e `accordion-faq.html` foram atualizados para a estrutura PitchYes (menu Soluções · Clientes · Planos · Integrações · Blog · Contato, sem submenu desde 25/10/2026; rodapé em 6 colunas; FAQ com ícone +/− e uma resposta aberta por vez).
 
-**Painel (`/admin`):** as telas internas não têm `.html` de referência, mas só usam tokens daqui. O PageSpeed (`project/src/components/admin/pagespeed/`) mapeia as faixas do Google para os tokens de estado: 90–100 `--color-positive`, 50–89 `--color-warning`, 0–49 `--color-danger` (com os `-bg` de cada um).
+**Painel (`/admin`):** as telas internas não têm `.html` de referência, mas só usam tokens daqui. O PageSpeed (`project/src/components/admin/pagespeed/`) mapeia as faixas do Google para os tokens de estado: 90–100 `--color-positive`, 50–89 `--color-warning`, 0–49 `--color-danger` (com os `-bg` de cada um). O Search Console (`project/src/components/admin/search-console/`) usa o mesmo par para o selo de indexação: `--color-positive` (indexada e atualizada), `--color-danger` (desatualizada ou fora do índice) e `--color-bg-subtle` (não verificada).
 
 **Contraste (PageSpeed, 25/10/2026):** `--color-text-muted` foi de 50% para 62% de opacidade e `--color-text-dim` de 55% para 66% (mínimo de 4,5:1 sobre branco e creme). Botão sólido violeta usa `--color-accent-primary-strong` (`#6961d1`, texto branco a 5,0:1); o `--color-accent-primary` (`#776eed`) continua nos marcadores, barras e foco.
 

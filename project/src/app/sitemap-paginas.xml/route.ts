@@ -1,19 +1,11 @@
-import { getAllPageMeta } from "@/lib/page-meta";
-import { pages } from "@/lib/routes";
 import { urlsetResponse } from "@/lib/sitemap";
+import { pageEntries } from "@/lib/sitemap-entries";
 
 export const dynamic = "force-dynamic";
 
 // Placeholder pages are noindex and stay out until they get real content.
-// Blog URLs live in sitemap-blog.xml.
-// A página marcada como noindex no Page Editor também sai daqui, e a data de
-// revisão editada lá vira o <lastmod>.
+// Blog URLs live in sitemap-blog.xml. As regras (noindex do Page Editor, <lastmod>) ficam
+// em lib/sitemap-entries.ts, que a tela Análise > Search Console também lê.
 export async function GET() {
-  const overrides = await getAllPageMeta();
-  return urlsetResponse(
-    pages
-      .filter((p) => !p.placeholder && !p.path.startsWith("/blog"))
-      .filter((p) => overrides.get(p.path)?.noindex !== 1)
-      .map((p) => ({ path: p.path, lastModified: overrides.get(p.path)?.updated || p.updated })),
-  );
+  return urlsetResponse(await pageEntries());
 }
