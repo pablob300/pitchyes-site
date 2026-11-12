@@ -1,13 +1,34 @@
 # Changelog: site PitchYes
 
 Histórico do site institucional da PitchYes (Next.js 16 no Cloudflare Workers).
-Ambiente de homologação: https://pitchyes-site.matheus-arantes.workers.dev (conta Cloudflare do Matheus
-desde 2026-11-12; até então, `pitchyes-site.borges-filho.workers.dev`, na conta do Borges)
+No ar em https://pitchyes.com.br desde 2026-11-12 (conta Cloudflare do Matheus). Endereço técnico:
+https://pitchyes-site.matheus-arantes.workers.dev. Até 2026-11-12, `pitchyes-site.borges-filho.workers.dev`, na conta do Borges.
 
 Cada entrada traz o commit e a versão publicada no Cloudflare (`Version ID`, visível em
 Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
+
+## 2026-11-12: pitchyes.com.br passa a ser servido pelo Worker
+
+Commit `d9fcc45` · Cloudflare `e2f0bc89`
+
+- **Domínio:** `pitchyes.com.br` e `www.pitchyes.com.br` ligados como Custom Domain (`routes` no
+  `wrangler.jsonc`); o `www` redireciona em 301 para o mesmo caminho sem `www` (`next.config.ts`).
+  Antes, os dois apontavam (registro A, sem proxy) para uma cópia do site em `next start` no servidor
+  `177.39.20.31`, sem D1 nem R2: o sitemap do blog tinha 1 endereço (agora 76) e `/midia` dava 404.
+  Só esses dois registros saíram; os outros 89 da zona (api, app, e-mail…) não mudaram. Backup da zona
+  guardado antes da troca.
+- **Indexação de verdade:** `DEFAULT_SITE_URL` = `https://pitchyes.com.br`. O build não enxergava o
+  `SITE_ENV` (só existe em execução, no `vars`), e as páginas estáticas saíam com `noindex` no domínio;
+  `scripts/cf.mjs` agora o repassa ao build.
+- **workers.dev** segue ligado (`workers_dev: true`, que o wrangler desliga quando há `routes`) com
+  `X-Robots-Tag: noindex, nofollow`. O ambiente `preview` tem `routes: []` para não disputar o domínio.
+- Testes: HTTPS, canonical e `index, follow` no domínio; `www` → 301; blog, `/midia`, 404 e `/admin`
+  ok. Auditoria contra `https://pitchyes.com.br`: 94/94.
+- **Pendente na zona (painel, fora do código):** "Block AI bots" devolve 403 ao GPTBot e ao ClaudeBot, e o
+  robots.txt gerenciado da Cloudflare põe `Disallow` para os robôs de IA na frente do nosso (contraria
+  o SEO.md §3); "Always Use HTTPS" desligado (`http://` abre sem redirecionar).
 
 ## 2026-11-12: Site migrado para a conta Cloudflare do Matheus
 
@@ -1322,7 +1343,20 @@ Commit `c25ca10`
 
 ---
 
-## Pendências antes de ir para o domínio definitivo
+## Pendências
+
+O domínio foi ligado em 2026-11-12 com os itens abaixo ainda abertos: o site já está indexável,
+então os números sem fonte (SEO.md §1.5) são os primeiros da fila.
+
+**Migração de conta e domínio (2026-11-12):**
+
+- [ ] Zona `pitchyes.com.br`: desligar "Block AI bots" e o robots.txt gerenciado da Cloudflare, e ligar "Always Use HTTPS".
+- [ ] Trocar `ADMIN_MAIL_FROM` para `nao-responda@pitchyes.com.br` se a Resend mostrar o domínio verificado.
+- [ ] Desligar a cópia do site no servidor `177.39.20.31` (o mesmo servidor tem api, app, gateway… que ficam).
+- [ ] Comparar os leads do D1 do Borges com o do Matheus e, com OK explícito, apagar da conta do Borges os Workers `pitchyes-site` e `pitchyes-site-preview`, os 3 buckets R2 e o D1; revogar as chaves antigas da Resend e do PageSpeed.
+
+**Conteúdo e site:**
+
 
 - [ ] Validar com o jurídico as certificações (SOC 2, HIPAA, PCI DSS, FedRAMP) e a menção à LGPD.
 - [ ] Revisar as respostas adaptadas do FAQ: prazo de implantação e "mais de 40 idiomas".
@@ -1344,7 +1378,6 @@ Commit `c25ca10`
 - [ ] Integrações: voz no widget "Fale com um agente" e cadastro da newsletter.
 - [ ] Licença da fonte Söhne (hoje o site usa Inter temporariamente).
 - [ ] Conteúdo das páginas internas, uma a uma.
-- [ ] Blog: ligar a API do WordPress headless.
-- [ ] Cadastrar no Google Search Console e no Bing Webmaster Tools e enviar o sitemap (após o domínio).
+- [ ] Cadastrar `https://pitchyes.com.br` no Google Search Console e no Bing Webmaster Tools e enviar o `/sitemap.xml`.
 - [ ] Perfis sociais (LinkedIn, X) para o campo `sameAs` dos dados estruturados.
-- [ ] Último passo: apontar `pitchyes.com.br` e definir `SITE_URL` (ver `project/README.md` e a seção 6 do `SEO.md`).
+- [x] Apontar `pitchyes.com.br` para o Worker (2026-11-12, commit `d9fcc45`).
