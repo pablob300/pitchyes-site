@@ -2,8 +2,8 @@
 
 Site da PitchYes (IA de voz para empresas), em Next.js 16, publicado no Cloudflare Workers.
 
-- **Homologação:** https://pitchyes-site.matheus-arantes.workers.dev (bloqueado para buscadores)
-- **Domínio definitivo:** `pitchyes.com.br` (último passo, via variável `SITE_URL`)
+- **No ar:** https://pitchyes.com.br (o `www` redireciona para ele)
+- **Endereço técnico:** https://pitchyes-site.matheus-arantes.workers.dev (mesmo site, `X-Robots-Tag: noindex`)
 - **Histórico de versões e pendências:** [CHANGELOG.md](CHANGELOG.md)
 - **Regras de SEO e indexação (ler antes de qualquer mudança):** [SEO.md](SEO.md)
 

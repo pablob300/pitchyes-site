@@ -1,6 +1,6 @@
 // Public URL of the site. Set SITE_URL in the Cloudflare dashboard to switch domains
-// (e.g. https://pitchyes.com.br); until then we serve from the workers.dev address.
-const DEFAULT_SITE_URL = "https://pitchyes-site.matheus-arantes.workers.dev";
+// (e.g. a staging host); the default is the production domain.
+const DEFAULT_SITE_URL = "https://pitchyes.com.br";
 
 export function getSiteUrl(): URL {
   const raw = process.env.SITE_URL?.trim();

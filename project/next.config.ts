@@ -16,9 +16,28 @@ const nextConfig: NextConfig = {
   // URL que mudou ganha 301 para sempre (SEO.md §1.8): backlinks e buscadores seguem.
   async redirects() {
     return [
+      // Um endereço só: www.pitchyes.com.br leva ao domínio sem www, no mesmo caminho.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.pitchyes.com.br" }],
+        destination: "https://pitchyes.com.br/:path*",
+        statusCode: 301,
+      },
       { source: "/precos", destination: "/planos", statusCode: 301 },
       // Usuários virou uma aba de Configurações no painel.
       { source: "/admin/usuarios", destination: "/admin/configuracoes/usuarios", statusCode: 301 },
+    ];
+  },
+  // O Worker continua respondendo também no *.workers.dev (acesso técnico). Com SITE_URL no
+  // domínio definitivo, as páginas de lá sairiam indexáveis: o cabeçalho tira esse endereço
+  // dos buscadores sem tocar no HTML (que é o mesmo, estático, nos dois endereços).
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "(?<host>.*)\\.workers\\.dev" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };

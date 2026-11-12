@@ -1,7 +1,8 @@
 # Regras do projeto PitchYes
 
 Site institucional em Next.js 16 servido pelo Cloudflare Workers (OpenNext).
-Homologação: <https://pitchyes-site.matheus-arantes.workers.dev> — domínio definitivo ainda não ligado.
+No ar em <https://pitchyes.com.br> (Worker `pitchyes-site`, conta Cloudflare do Matheus). O endereço
+técnico <https://pitchyes-site.matheus-arantes.workers.dev> responde o mesmo site, fora dos buscadores.
 
 Leia antes de qualquer alteração no site:
 

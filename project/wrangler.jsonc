@@ -47,10 +47,19 @@
 	// SITE_URL (the public domain) is managed in the Cloudflare dashboard, not here;
 	// keep_vars stops deploys from wiping dashboard-set variables.
 	"keep_vars": true,
+	// Domínio definitivo (zona pitchyes.com.br na mesma conta). O www redireciona (next.config.ts).
+	// Com "routes" o wrangler desliga o workers.dev por padrão; ele continua ligado para acesso técnico
+	// (o next.config.ts manda X-Robots-Tag: noindex nesse endereço).
+	"workers_dev": true,
+	"routes": [
+		{ "pattern": "pitchyes.com.br", "custom_domain": true },
+		{ "pattern": "www.pitchyes.com.br", "custom_domain": true }
+	],
 
 	"env": {
 		"preview": {
 			"name": "pitchyes-site-preview",
+			"routes": [],
 			"services": [
 				{ "binding": "WORKER_SELF_REFERENCE", "service": "pitchyes-site-preview" }
 			],

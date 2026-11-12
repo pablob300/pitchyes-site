@@ -40,18 +40,20 @@ Editado no painel em **Blog › Novo Artigo / Artigos / Categorias / Tags** (edi
 
 ## Domínio
 
-O domínio público vem da variável `SITE_URL` (ver `src/lib/site.ts`). Sem ela, o site usa
-`https://pitchyes-site.matheus-arantes.workers.dev`.
+O site responde em `https://pitchyes.com.br`, ligado como Custom Domain no `wrangler.jsonc`
+(`routes`, com `www.pitchyes.com.br` redirecionando em 301 pelo `next.config.ts`). A zona
+`pitchyes.com.br` fica na mesma conta do Matheus e também abriga os outros serviços da empresa
+(`api`, `app` e outros), então **mexa só nos registros do domínio raiz e do `www`**.
 
-A indexação por buscadores só é liberada quando `SITE_ENV=production` **e** o domínio não é
-`*.workers.dev` — antes disso, `robots.txt` e as meta tags bloqueiam tudo.
-
-Para trocar para o domínio definitivo (ex.: `pitchyes.com.br`):
-
-1. Workers & Pages → `pitchyes-site` → **Settings → Domains & Routes** → adicionar Custom Domain.
-2. **Settings → Variables and Secrets** → `SITE_URL = https://pitchyes.com.br` (vale na hora para `robots.txt`).
-3. **Settings → Build → Variables** → mesma `SITE_URL`, e disparar um novo build (as meta tags e
-   URLs canônicas das páginas estáticas são geradas no build).
+- **Endereço público:** `DEFAULT_SITE_URL` em `src/lib/site.ts`, que a variável `SITE_URL` pode
+  sobrepor (por exemplo, num ambiente de teste).
+- **Indexação:** liberada quando `SITE_ENV=production` **e** o endereço não é `*.workers.dev`.
+  O `SITE_ENV` vem do `vars` do `wrangler.jsonc`, e o `scripts/cf.mjs` o repassa também ao build:
+  sem isso, as páginas estáticas saíam com `noindex` mesmo no domínio.
+- **workers.dev:** continua ligado (`workers_dev: true`) para acesso técnico, com
+  `X-Robots-Tag: noindex, nofollow` (`next.config.ts`).
+- **Deploy:** `npm run deploy` roda `scripts/cf.mjs`, que fixa a conta pelo `account_id` do
+  `wrangler.jsonc`. O build é local; não há build no painel da Cloudflare.
 
 `keep_vars: true` no `wrangler.jsonc` garante que o deploy não apague variáveis definidas no painel.
 
