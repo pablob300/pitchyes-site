@@ -9,6 +9,30 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-11-12: Search Console no painel e aviso automático de indexação
+
+Commit `55d80c4` · Cloudflare `bdcb2f4c`
+
+- **Análise › Search Console** (`/admin/analise/search-console`): todas as URLs dos três sitemaps,
+  com o status no Google (Inspeção de URL), o último rastreamento, a última alteração do site e os
+  botões "Atualizar status", "Indexar agora", "Indexar todas" e "Reenviar sitemaps". Verde = rastreada
+  depois da alteração; vermelho = rastreamento antigo ou fora do índice; cinza = não verificada.
+- **Rotina automática:** publicar conteúdo, salvar metadados, salvar ou apagar artigo e mudar uma
+  landing page reenviam ao Google o sitemap daquela URL e avisam o **IndexNow** (Bing, Yandex, Seznam,
+  Naver; via Bing, ChatGPT Search e Copilot). O `npm run deploy` termina avisando o que mudou no código
+  (`scripts/search-console-ping.mjs` → `/api/search-console/deploy`).
+- O Google não tem API para pedir indexação de página comum: "Indexar agora" reenvia o sitemap, avisa o
+  IndexNow e abre a página na Inspeção de URL do Search Console (botão "Solicitar indexação").
+- `lib/sitemap-entries.ts` passa a ser a fonte das URLs dos sitemaps (as rotas e a tela leem dali).
+  O `<lastmod>` de páginas usa a mudança mais recente registrada pelo painel.
+- D1: migração `0010` (`site_changes`, `gsc_inspections`, `gsc_pings`, `gsc_route_dates`). Segredos novos:
+  `INDEXNOW_KEY` (em `/indexnow-key.txt`) e `DEPLOY_PING_TOKEN`.
+- Testes: IndexNow 202; rotas novas 401 sem sessão/token; `/` continua estática com revalidação;
+  auditoria contra `https://pitchyes.com.br`: 94/94.
+- **Pendente:** criar a conta de serviço do Google, dar a ela o papel de Proprietário na propriedade
+  `https://pitchyes.com.br/` e gravar `GSC_SERVICE_ACCOUNT_JSON` (passo a passo em `project/README.md`).
+  Até lá a tela mostra o aviso e os reenvios ao Google ficam registrados como "não configurado".
+
 ## 2026-11-12: pitchyes.com.br passa a ser servido pelo Worker
 
 Commit `d9fcc45` · Cloudflare `e2f0bc89`
