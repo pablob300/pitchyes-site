@@ -1,9 +1,10 @@
+import { notifyLeadWebhook } from "@/lib/lead-webhook";
 import { getLeadForm, validateLead, type LeadValues } from "@/lib/leads";
 import { saveLead } from "@/lib/leads-db";
 import { saveSubscriber } from "@/lib/newsletter-db";
 
-// Recebe os formulários do site. Hoje o envio só grava o lead (visível em /admin/leads);
-// o encaminhamento para CRM/e-mail entra aqui depois, sem mexer no front.
+// Recebe os formulários do site. O envio grava o lead (visível em /admin/leads) e, quando
+// tem telefone, dispara o webhook que gera a ligação da IA (lib/lead-webhook.ts).
 // Nunca é cacheado: é sempre uma escrita.
 export const dynamic = "force-dynamic";
 
@@ -50,7 +51,8 @@ export async function POST(request: Request) {
     if (form.storage === "newsletter") {
       await saveSubscriber({ email: result.values[form.identity.email], sourceUrl, userAgent });
     } else {
-      await saveLead({ form, values: result.values, sourceUrl, userAgent });
+      const lead = await saveLead({ form, values: result.values, sourceUrl, userAgent });
+      notifyLeadWebhook(lead);
     }
   } catch (error) {
     console.error("[leads] falha ao gravar", error);

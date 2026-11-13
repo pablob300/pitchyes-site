@@ -11,3 +11,6 @@ ADMIN_AUTH_MODE=session
 ADMIN_MAIL_MODE=console
 # ADMIN_MAIL_FROM=nao-responda@pitchyes.com.br
 # RESEND_API_KEY=
+
+# Webhook que dispara a ligação da IA para todo lead com telefone (contato e landing pages).
+# LEAD_WEBHOOK_TOKEN=
