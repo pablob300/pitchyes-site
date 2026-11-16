@@ -9,6 +9,31 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-11-16: Número da IA atualizado e build mais estável contra o D1 remoto
+
+Commit `59a6397` · Cloudflare `924ecb6d`
+
+- **Número da IA** (`lib/company.ts`, `aiCaller`): de `(62) 3142-2655` para `(62) 91000-9595`.
+  É o número que o modal pós-cadastro das landing pages pede para salvar nos contatos.
+- **Build mais estável:** `next.config.ts` limita a geração estática a 1 página por vez
+  (`experimental.staticGenerationMaxConcurrency`) — o túnel do D1 remoto só aguenta uma
+  página por vez durante o build; com a concorrência padrão, dezenas de páginas disputavam
+  o mesmo túnel e estouravam os 60s, derrubando o build inteiro.
+- Testado localmente pelo usuário antes do deploy. Auditoria contra `https://pitchyes.com.br`: 94/94.
+
+## 2026-11-16: Todo lead com telefone dispara a ligação da IA
+
+Commit `2ab336f` · Cloudflare `931d4835`
+
+- **Webhook da ligação da IA:** todo envio de formulário com telefone (contato e todas as
+  landing pages, inclusive `/conteudo/cadastro`) agora chama
+  `https://apiv4.pitchyes.com.br/webhook/entrada-lead-atualizado` (`lib/lead-webhook.ts`),
+  disparado em segundo plano (`waitUntil`) a partir de `/api/leads` — nunca atrasa nem
+  derruba o envio do formulário; falha só fica no log. Autenticado com `Authorization: Bearer`
+  (segredo `LEAD_WEBHOOK_TOKEN`, no Worker via `wrangler secret put` e em `.dev.vars` local).
+  Antes, nenhum lead disparava a ligação.
+- Auditoria contra `https://pitchyes.com.br`: 94/94.
+
 ## 2026-11-12: Search Console no painel e aviso automático de indexação
 
 Commit `55d80c4` · Cloudflare `bdcb2f4c`
