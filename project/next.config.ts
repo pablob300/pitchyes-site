@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // D1 remoto (wrangler.jsonc, "remote": true): o túnel aguenta só 1 página por vez durante o
+  // build. Com a concorrência padrão, dezenas de páginas disputam o mesmo túnel e estouram os
+  // 60s, derrubando o build inteiro.
+  experimental: { staticGenerationMaxConcurrency: 1 },
   // Sem experimental.inlineCss: testado em 25/10/2026, ele repete o CSS dentro dos dados do
   // React e a home vai de 23 KB para 71 KB (gzip); o PageSpeed piorou (98 contra 99 no celular).
   images: {
