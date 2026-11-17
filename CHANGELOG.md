@@ -9,6 +9,24 @@ Workers & Pages → `pitchyes-site` → Deployments).
 
 ---
 
+## 2026-11-17: Verificação do Search Console e GTM novo com o evento Lead do Meta
+
+Commits `a387e36` e o deste registro · Cloudflare `fc50b916` (antes, `aa83470b` só com o arquivo)
+
+- **Arquivo de verificação do Google Search Console** em `public/google8c71e891f1db44a1.html`,
+  respondendo 200 em `https://pitchyes.com.br/google8c71e891f1db44a1.html`.
+- **`wrangler.jsonc`: `assets.html_handling: "none"`.** Por padrão, o Workers redirecionava
+  (307) qualquer `.html` para o endereço sem extensão, e a verificação do Google precisa do
+  endereço exato.
+- **GTM trocado de `GTM-5RJVHV3F` para `GTM-TFXCLBP7`** (Configurações › Configuração geral; é
+  dado do banco, não código). O contêiner antigo disparava a tag do Meta no evento `lead`
+  com o tipo `PageView`, então o Meta Ads nunca recebia `Lead`. O novo (versão 15), no evento
+  `lead`, dispara: Meta pixel `Lead` (com nome, e-mail e telefone para correspondência), GA4
+  `Lead`, conversão do Google Ads e conversão do LinkedIn. Testado em `/conteudo/cadastro` com
+  um `lead` simulado e os envios interceptados no navegador (nenhuma conversão falsa enviada).
+  As 18 URLs dos sitemaps servem o ID novo.
+- Auditoria contra `https://pitchyes.com.br`: 94/94.
+
 ## 2026-11-16: Número da IA atualizado e build mais estável contra o D1 remoto
 
 Commit `59a6397` · Cloudflare `924ecb6d`
@@ -1415,8 +1433,8 @@ então os números sem fonte (SEO.md §1.5) são os primeiros da fila.
 - [ ] Landing page "Cadastro": dar fonte ou retirar os números do modelo (25Mi+ ligações, 400+, 85%, 98%, 94,7%, funil, 300%/70%, 4.9/5, 99,9%), validar com o jurídico o
       comparativo com concorrentes citados pelo nome e confirmar o depoimento "Marina Rodriguez,
       GrowthCore" — `TODO` em `content/landing/modelo.ts`.
-- [ ] Criar no GTM (`GTM-5RJVHV3F`, cadastrado em Configurações em 2026-10-27) a tag de conversão
-      do evento `lead`.
+- [x] Tag de conversão do evento `lead`: feita no contêiner `GTM-TFXCLBP7` (em Configurações desde
+      2026-11-17). Falta confirmar um cadastro real chegando como `Lead` no Events Manager do Meta.
 - [ ] Validar os valores dos planos na página de Preços (hoje são referência, não tabela aprovada).
 - [ ] Publicar e-mail, telefone/WhatsApp e endereço na página de Contato.
 - [ ] Confirmar a lista de integrações nativas.

@@ -9,7 +9,10 @@
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"assets": {
 		"directory": ".open-next/assets",
-		"binding": "ASSETS"
+		"binding": "ASSETS",
+		// Serve .html files as-is (no 307 to the extensionless URL): the Google Search Console
+		// verification file must answer 200 at its exact /google<id>.html address.
+		"html_handling": "none"
 	},
 	"observability": { "enabled": true },
 	"services": [
