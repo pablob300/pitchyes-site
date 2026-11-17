@@ -26,6 +26,12 @@ Commits `a387e36` e o deste registro · Cloudflare `fc50b916` (antes, `aa83470b`
   um `lead` simulado e os envios interceptados no navegador (nenhuma conversão falsa enviada).
   As 18 URLs dos sitemaps servem o ID novo.
 - Auditoria contra `https://pitchyes.com.br`: 94/94.
+- **Search Console ligado:** propriedade `https://pitchyes.com.br/` (prefixo do URL, sem www)
+  verificada pelo arquivo acima, com a conta de serviço
+  `pitchyes-searchconsole@gen-lang-client-0972689501.iam.gserviceaccount.com` como proprietária.
+  JSON dela no segredo `GSC_SERVICE_ACCOUNT_JSON` do Worker (`wrangler secret put`). Os três
+  sitemaps foram reenviados com sucesso, e a inspeção da home responde "Submitted and indexed".
+  A propriedade com www também existe, mas não é usada: o site responde sem www.
 
 ## 2026-11-16: Número da IA atualizado e build mais estável contra o D1 remoto
 
